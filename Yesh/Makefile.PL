@@ -1,0 +1,26 @@
+#!/usr/bin/env perl
+# IMPORTANT: if you delete this file your app will not work as
+# expected.  You have been warned.
+use inc::Module::Install;
+
+name 'Yesh';
+all_from 'lib/Yesh.pm';
+
+requires 'Catalyst::Runtime' => '5.80007';
+requires 'Catalyst::Plugin::ConfigLoader';
+requires 'Catalyst::Plugin::Static::Simple';
+requires 'Catalyst::Action::RenderView';
+requires 'parent';
+requires 'Config::General'; # This should reflect the config file format you've chosen
+                 # See Catalyst::Plugin::ConfigLoader for supported formats
+catalyst;
+
+if ( $Module::Install::AUTHOR )
+{
+    system("pod2text lib/Yesh.pm > README") == 0
+        or die "Couldn't update the README";
+}
+
+install_script glob('script/*.pl');
+auto_install;
+WriteAll;

@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+perl Makefile.PL
+make
+TEST_POD=1 make test
