@@ -13,7 +13,7 @@ use Catalyst qw(
               );
 
 our $AUTHORITY = 'cpan:ASHLEY';
-our $VERSION = '2.9001';
+our $VERSION = '2.9002';
 
 __PACKAGE__->config
     ( name => "Yesh/$VERSION",

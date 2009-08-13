@@ -1,7 +1,7 @@
 ---
 Model::DBIC:
   connect_info:
-    - dbi:SQLite:./etc//yesh.sqlite
+    - dbi:SQLite:./etc/yesh.sqlite
     - ~
     - ~
     - RaiseError: 1

@@ -5,14 +5,12 @@ use strict;
 use warnings;
 use Test::More "no_plan";
 use HTTP::Request::Common qw( GET POST PUT );
-use File::Temp "tempfile";
 
 use Catalyst::Test 'Yesh';
 
 my ( $res, $c ) = ctx_request("/");
 is( $res->code, 200, "/");
 
-my ( $fh, $filename ) = tempfile();
 eval {
     my @connection = @{ $c->config->{"Model::DBIC"}->{connect_info} };
     my ( $file ) = $connection[0] =~ /SQLite:(.+)/;
@@ -101,5 +99,5 @@ is( request("/login")->code, 200, "/login" );
 }
 
 like( request("/user")->decoded_content,
-      qr//,
+      qr/ashley/,
       "User content looks good" );
