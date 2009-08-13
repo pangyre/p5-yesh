@@ -8,25 +8,29 @@ use parent qw(
 use Email::Valid;
 
 __PACKAGE__->config(
-    #'stash_key' => 'rest',
+    'stash_key' => "rest",
     'map'       => {
-        'text/html' => [ 'View', 'Alloy' ],
+        'text/html'  => [ 'View', 'Alloy' ],
         'text/xhtml' => [ 'View', 'Alloy' ],
-        'text/xml'           => 'XML::Simple',
-        'text/x-yaml'        => 'YAML',
-        'application/json'   => 'JSON',
+        'text/xml'         => 'XML::Simple',
+        'text/x-yaml'      => 'YAML',
+        'application/json' => 'JSON',
     },
     default => 'text/html',
     );
 
-sub user : Path Args(0) ActionClass('REST') FormConfig {}
+sub index : Path Args(0) ActionClass('REST') FormConfig {}
 
-sub user_GET {
+sub index_GET {
     my ( $self, $c ) = @_;
-    $c->response->body('Matched Yesh::Controller::User in User.');
+    $self->status_ok($c,
+                     entity => {
+                         users => $c->model("DBIC::User")->search_rs,
+                     }
+        );
 }
 
-sub user_POST {
+sub index_POST {
     my ( $self, $c ) = @_;
     $c->go("register");
 }

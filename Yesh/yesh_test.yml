@@ -1,0 +1,9 @@
+---
+Model::DBIC:
+  connect_info:
+    - dbi:SQLite:./etc//yesh.sqlite
+    - ~
+    - ~
+    - RaiseError: 1
+      AutoCommit: 1
+      ChopBlanks: 1

@@ -1,19 +1,36 @@
+BEGIN {
+    $ENV{YESH_CONFIG_LOCAL_SUFFIX} = "test";
+}
 use strict;
 use warnings;
 use Test::More "no_plan";
 use HTTP::Request::Common qw( GET POST PUT );
+use File::Temp "tempfile";
 
 use Catalyst::Test 'Yesh';
 
-is( request("/")->code, 200, "/");
+my ( $res, $c ) = ctx_request("/");
+is( $res->code, 200, "/");
+
+my ( $fh, $filename ) = tempfile();
+eval {
+    my @connection = @{ $c->config->{"Model::DBIC"}->{connect_info} };
+    my ( $file ) = $connection[0] =~ /SQLite:(.+)/;
+    unlink $file;
+    my $schema = $c->model("DBIC")->schema;
+    $schema->deploy();
+    1;
+} || die $@;
+
 is( request("/no-such-resource")->code, 404, "A known 404");
 
 is( request("/article")->code, 200, "/article" );
 
 is( request("/user")->code, 200, "/user" );
+
 like( request("/user")->decoded_content,
-      qr/Matched Yesh::Controller::User in User/,
-      "User content looks good" );
+      qr/No users/i,
+      "No users to display" );
 
 is( request("/tag")->code, 200, "/tag" );
 
@@ -82,3 +99,7 @@ is( request("/login")->code, 200, "/login" );
           qr/created an account/i,
           "Created an account" );
 }
+
+like( request("/user")->decoded_content,
+      qr//,
+      "User content looks good" );

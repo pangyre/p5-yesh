@@ -1,0 +1,9 @@
+[% IF ( users = rest.users.all() ) %]
+<ul>
+[% FOR user IN users %]
+<li>[% user.username %]</li>
+[% END %]
+</ul>
+[% ELSE %]
+No users yet. <a href="[% yesh.uri_for("/user/register") %]">Be the first</a>.
+[% END %]
