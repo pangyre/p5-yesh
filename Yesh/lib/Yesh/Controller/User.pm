@@ -1,8 +1,57 @@
 package Yesh::Controller::User;
-
 use strict;
 use warnings;
-use parent 'Catalyst::Controller';
+use parent qw(
+                 Catalyst::Controller::HTML::FormFu
+                 Catalyst::Controller::REST
+            );
+use Email::Valid;
+
+__PACKAGE__->config(
+    #'stash_key' => 'rest',
+    'map'       => {
+        'text/html' => [ 'View', 'Alloy' ],
+        'text/xhtml' => [ 'View', 'Alloy' ],
+        'text/xml'           => 'XML::Simple',
+        'text/x-yaml'        => 'YAML',
+        'application/json'   => 'JSON',
+    },
+    default => 'text/html',
+    );
+
+sub user : Path Args(0) ActionClass('REST') FormConfig {}
+
+sub user_GET {
+    my ( $self, $c ) = @_;
+    $c->response->body('Matched Yesh::Controller::User in User.');
+}
+
+sub user_POST {
+    my ( $self, $c ) = @_;
+    $c->go("register");
+}
+
+sub register : Local Args(0) Form {
+    my ( $self, $c ) = @_;
+    my $form = $self->form();
+    $form->load_config_filestem("user/register");
+    $form->process;
+    if ( $form->submitted_and_valid )
+    {
+        my $user = $c->model('DBIC::User')->new_result({});
+        $form->model->update($user);
+        $c->response->body('created an account');
+    }
+    else
+    {
+
+    }
+    $c->stash( form => $form );
+}
+
+1;
+
+__END__
 
 =head1 NAME
 
@@ -14,29 +63,6 @@ Catalyst Controller.
 
 =head1 METHODS
 
-=cut
-
-
 =head2 index
 
 =cut
-
-sub index :Path :Args(0) {
-    my ( $self, $c ) = @_;
-
-    $c->response->body('Matched Yesh::Controller::User in User.');
-}
-
-
-=head1 AUTHOR
-
-apv
-
-=head1 LICENSE
-
-This library is free software. You can redistribute it and/or modify
-it under the same terms as Perl itself.
-
-=cut
-
-1;

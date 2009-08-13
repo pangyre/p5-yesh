@@ -10,6 +10,7 @@ requires 'Catalyst::Plugin::Static::Simple';
 requires 'Catalyst::Action::RenderView';
 requires 'parent';
 requires 'YAML';
+requires 'Catalyst::Controller::REST';
 
 test_requires 'HTTP::Request::Common';
 

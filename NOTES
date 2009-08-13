@@ -6,3 +6,5 @@
   git commit -m 'first commit'
   git remote add origin git@github.com:pangyre/p5-yesh.git
   git push origin master
+
+perl -Ilib -MYesh::Schema -le '$s = Yesh::Schema->connect("dbi:SQLite:etc/db.sqlite"); $s->deploy; print $s'

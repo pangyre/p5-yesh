@@ -1,11 +1,23 @@
 ---
+# APPLICATION --------------------------------------------
 default_view: Alloy
 
+# CONTROLLERS --------------------------------------------
+Controller::User:
+  model_stash:
+    schema: DBIC
 
-# Controllers --------------------------------------------
-# Models -------------------------------------------------
+# MODELS -------------------------------------------------
+Model::DBIC:
+  connect_info:
+    - dbi:SQLite:__path_to(etc/db.sqlite)__
+    - ~
+    - ~
+    - RaiseError: 1
+      AutoCommit: 1
+      ChopBlanks: 1
 
-# Views --------------------------------------------------
+# VIEWS --------------------------------------------------
 View::Alloy:
   INCLUDE_PATH:
     - __path_to(root/alloy/src)__
