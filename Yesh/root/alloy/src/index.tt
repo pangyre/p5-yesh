@@ -1,0 +1,11 @@
+<p>
+<pre>
+/user
+/user/<id>
+/login
+   openid
+   local accounts
+   anything else that makes sense to support
+</pre>
+
+</p>

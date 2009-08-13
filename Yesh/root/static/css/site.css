@@ -1,0 +1,117 @@
+/* http://www.alistapart.com/articles/fluidgrids */
+
+body {
+ font: normal 16px/16px "Gill Sans", "Helvetica Neue", Helvettica, Arial, sans-serif;
+}
+div {
+ border-collapse: collapse;
+ margin: 0;
+ padding: 0;
+}
+#page {
+ font: normal 100%/115% "Gill Sans", "Helvetica Neue", Helvettica, Arial, sans-serif;
+ margin: 10px auto;
+ padding: 0;
+ max-width: 56.25em;      /* 900px / 16px = 56.25em */
+}
+
+div.article h3.title {
+  color: #374;
+}
+div.article + div.article {
+  margin-top: 1em;
+  border-top: 1px solid #cccfcc;
+}
+div.article div.meta {
+ text-align: right;
+ font-size: .725em;
+}
+/* .license | .author are beneath */
+
+form div textarea {
+  width: 85%;
+}
+form div textarea[name="body"] {
+  height: 21em;
+}
+form div textarea[name="note"] {
+  height: 3em;
+}
+
+form div {
+ padding: 0;
+ float: left;
+ clear: left;
+ width: 100%;
+ margin: 2px auto;
+}
+
+form div.select label,
+form div.textarea label,
+form div.text label {
+ display: block;
+ padding: 0;
+ float: left;
+ width: 12%;
+ text-align: right;
+ margin: 0 1% 0 0;
+}
+
+.error label {
+ color: #a00;
+}
+
+span.error_message {
+ float: right;
+ font-size: 80%;
+ color: #a00;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: helvetica;
+  font-weight: normal;
+  padding: 0;
+  margin: .3em 0;
+}
+
+a {
+ text-decoration: none;
+}
+
+/* THEME/SKIN SECTION: move out when you have a scheme for that. */
+
+#header {
+}
+
+#header h1 {
+ font-size: 2em;
+ float: left;
+ margin: 0;
+ padding: 0;
+}
+
+#primary_nav {
+ font-size: .75em; /* 12/16=0.75 */
+ float:right;
+ border: 1px dotted #ddd;
+}
+
+#content {
+ width: 100%;
+ float: left;
+ clear: both;
+}
+
+#secondary_nav {
+
+}
+
+#footer {
+ font-size: .75em; /* 12/16=0.75 */
+ border-top: 1px solid #cdc;
+ clear: both;
+ float: left;
+ text-align: center;
+ width: 100%;
+ height: 30px;
+}

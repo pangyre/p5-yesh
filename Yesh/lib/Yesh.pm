@@ -7,9 +7,13 @@ use Catalyst qw(
                 Unicode
                 ConfigLoader
                 Static::Simple
+                Session
+                Session::Store::FastMmap
+                Session::State::Cookie
               );
-our $AUTHOR = "ASHLEY";
-our $VERSION = '2.9000';
+
+our $AUTHORITY = 'cpan:ASHLEY';
+our $VERSION = '2.9001';
 
 __PACKAGE__->config
     ( name => "Yesh/$VERSION",

@@ -1,0 +1,17 @@
+---
+default_view: Alloy
+
+
+# Controllers --------------------------------------------
+# Models -------------------------------------------------
+
+# Views --------------------------------------------------
+View::Alloy:
+  INCLUDE_PATH:
+    - __path_to(root/alloy/src)__
+    - __path_to(root/alloy/lib)__
+  TEMPLATE_EXTENSION: .tt
+  CATALYST_VAR: yesh
+  WRAPPER: base_page.tt
+  TRIM: 1
+  COLLAPSE: 1

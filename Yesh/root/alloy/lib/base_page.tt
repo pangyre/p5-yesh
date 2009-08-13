@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>[% PROCESS title %]</title>
+<link rel="stylesheet" media="screen" type="text/css" href="[% yesh.uri_for("/css/universal.css") %]" />
+<link rel="stylesheet" media="screen" type="text/css" href="[% yesh.uri_for("/css/site.css") %]" />
+<style type="text/css" media="screen">
+/* test space */
+</style>
+<script type="text/javascript">//<![CDATA[
+//]]> </script>
+</head>
+
+<body>
+<div id="page">
+  <div id="header">
+<h1>&lt;me/&gt;</h1>
+  </div>
+  <div id="primary_nav">
+primary navigation
+  </div>
+  <div id="content">
+<h1 id="pageTitle">[% title | html %]</h1>
+[% PROCESS blurbs IF yesh.blurb %]
+[% content %]
+    <div id="content_footer">
+    </div>
+  </div>
+  <div id="sidebar">
+  </div>
+  <div id="secondary_nav">
+  </div>
+  <div id="footer">
+[% PROCESS footer %]
+  </div>
+</div>
+</body>
+</html>
+
