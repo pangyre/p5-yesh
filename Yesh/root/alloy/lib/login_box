@@ -1,0 +1,16 @@
+<form method="post" name="login" action="[% yesh.uri_for("/login") %]" enctype="multipart/form-data">
+   <fieldset>
+     <legend>Sign in</legend>
+     <p>
+        <label>Username</label>
+        <input name="username" value="" />
+     </p>
+     <p>
+        <label>Password</label>
+        <input type="password" name="password" value="" />
+     </p>
+     <p>
+        <input type="submit" value="Sign in" />
+     </p>
+    </fieldset>
+</form>

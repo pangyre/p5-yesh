@@ -16,3 +16,11 @@ is( request("/tag")->code, 200, "/tag" );
 
 is( request("/login")->code, 200, "/login" );
 
+{
+    my $response = request POST '/user',
+        [
+         bar => 'baz',
+         something => 'else'
+        ];
+
+}

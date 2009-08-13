@@ -1,0 +1,5 @@
+[% IF c.user_exists %]
+OH HAI!
+[% ELSE %]
+<a href="[% yesh.uri_for("/login") %]">login</a>
+[% END %]

@@ -20,7 +20,7 @@
 <h1>&lt;me/&gt;</h1>
   </div>
   <div id="primary_nav">
-primary navigation
+[% PROCESS primary_nav %]
   </div>
   <div id="content">
 <h1 id="pageTitle">[% title | html %]</h1>
