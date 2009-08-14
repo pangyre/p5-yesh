@@ -44,8 +44,6 @@ sub register : Local Args(0) Form {
     {
         my $user = $c->model('DBIC::User')->new_result({});
         $form->model->update($user);
-        $user->password($user->password);
-        $user->update();
         $c->response->body('created an account' . "\n" . $user->password);
     }
     else

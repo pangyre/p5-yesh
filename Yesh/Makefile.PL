@@ -13,6 +13,7 @@ requires "YAML";
 requires "Catalyst::Controller::REST";
 requires "DBIx::Class";
 requires "DBIx::Class::EncodedColumn";
+# requires "Catalyst::Authentication::Realm::SimpleDB";
 
 test_requires "HTTP::Request::Common";
 

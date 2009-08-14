@@ -2,6 +2,14 @@
 # APPLICATION --------------------------------------------
 default_view: Alloy
 
+
+# PLUGINS ------------------------------------------------
+Plugin::Authentication:
+  default:
+    class: SimpleDB
+    user_model: DBIC::User
+    password_type: clear
+
 # CONTROLLERS --------------------------------------------
 Controller::User:
   model_stash:

@@ -10,7 +10,9 @@ use Catalyst qw(
                 Session
                 Session::Store::FastMmap
                 Session::State::Cookie
+                Authentication
               );
+#                Authorization::Roles
 
 our $AUTHORITY = 'cpan:ASHLEY';
 our $VERSION = '2.9002';
