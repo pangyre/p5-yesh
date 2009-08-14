@@ -124,7 +124,7 @@ is( request("/login")->code, 200, "/login" );
          password => "S00p3rs3Kr37",
         ];
     like( $response->decoded_content,
-          qr/successful/i,
+          qr/oh hai, ashley/i,
           "Login via POST succeeds" )
 }
 
