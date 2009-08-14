@@ -32,8 +32,6 @@ like( request("/user")->decoded_content,
 
 is( request("/tag")->code, 200, "/tag" );
 
-is( request("/login")->code, 200, "/login" );
-
 {
     my $response = request POST '/user',
         [
@@ -101,3 +99,32 @@ is( request("/login")->code, 200, "/login" );
 like( request("/user")->decoded_content,
       qr/ashley/,
       "User content looks good" );
+
+unlike( request("/")->decoded_content,
+        qr/\bashley\b/,
+        "User is mentioned on home page" );
+
+is( request("/login")->code, 200, "/login" );
+
+{
+    my $response = request GET '/login',
+        [
+         username => "ashley",
+         password => "S00p3rs3Kr37",
+        ];
+    unlike( $response->decoded_content,
+            qr/successful/i,
+            "Login via GET fails" )
+}
+
+{
+    my $response = request POST '/login',
+        [
+         username => "ashley",
+         password => "S00p3rs3Kr37",
+        ];
+    like( $response->decoded_content,
+          qr/successful/i,
+          "Login via POST succeeds" )
+}
+

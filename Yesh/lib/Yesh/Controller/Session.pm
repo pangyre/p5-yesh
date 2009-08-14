@@ -10,6 +10,7 @@ sub index :Path :Args(0) {
 }
 
 sub login :Global {
+    my ( $self, $c ) = @_;
 
 }
 

@@ -78,6 +78,14 @@ __PACKAGE__->has_many(
 # Created by DBIx::Class::Schema::Loader v0.04999_06 @ 2009-03-14 13:01:40
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:FNP0mllDvCCRpvt/fJsMeQ
 
+BEGIN { use base "DBIx::Class";
+        __PACKAGE__->load_components("EncodedColumn",
+                                     "Yesh::Default",
+                                     "UTF8Columns",
+                                     "InflateColumn::DateTime",
+                                     "Core"
+            ) }
+
 __PACKAGE__->many_to_many(site_roles => 'user_site_roles', 'site_role');
 __PACKAGE__->many_to_many(article_roles => 'user_article_roles', 'article_role');
 __PACKAGE__->utf8_columns( __PACKAGE__->columns );
@@ -86,6 +94,19 @@ __PACKAGE__->add_columns(
                          created => { data_type => 'datetime' },
                          updated => { data_type => 'datetime' },
                          );
+
+__PACKAGE__->add_columns(
+    password => {
+        encode_column => 1,
+        encoded_column => 1,
+        data_type => "VARCHAR",
+        is_nullable => 1,
+        size        => 60,
+        encode_class  => "Crypt::Eksblowfish::Bcrypt",
+        encode_args   => { key_nul => 0,
+                           cost => 8 },
+        encode_check_method => "check_password",
+    }); 
 
 sub can_preview_article {
     my $self = shift;
@@ -96,3 +117,6 @@ sub can_preview_article {
 }
 
 1;
+
+__END__
+

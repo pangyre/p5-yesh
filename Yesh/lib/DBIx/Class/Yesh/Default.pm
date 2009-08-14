@@ -26,8 +26,9 @@ sub insert {
         if $self->has_column("updated") and not $self->updated;
 
     # Nothing gets inserted without a password!
-    $self->password(Digest::SHA1::sha1_hex(Encode::encode("utf-8",$self->password)))
-        if $self->can("password");
+#    $self->password($self->password) if $self->can("password");
+#    $self->password(Digest::SHA1::sha1_hex(Encode::encode("utf-8",$self->password)))
+#        if $self->can("password");
 
     for my $col ( $self->columns )
     {
