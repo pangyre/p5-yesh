@@ -126,6 +126,9 @@ $mech->content_like(
 
 is($mech->uri->path, "/", "Redirected to /");
 
+$mech->content_like(qr/(?:sign|log).out/i,
+                    "Sign-out link is present");
+
 $mech->get_ok("/logout", "/logout");
 
 $mech->content_unlike(
