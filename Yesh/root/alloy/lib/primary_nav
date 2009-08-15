@@ -1,5 +1,5 @@
 [% IF yesh.user_exists %]
 OH HAI, [% yesh.user.username | html %]
 [% ELSE %]
-<a href="[% yesh.uri_for("/login") %]">login</a>
+<a href="[% yesh.uri_for("/login") %]">Sign-in</a>
 [% END %]

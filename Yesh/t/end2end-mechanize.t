@@ -54,11 +54,10 @@ $mech->post_ok("/user",
                 email => 'fluffy@sedition.com',
                 email2 => 'fluffy@sedition.com',
                ]);
+
 $mech->content_like(
       qr/This field is required/i,
       "No username gets 'This field is required'" );
-
-
 
 $mech->post_ok("/user",
                [
@@ -66,11 +65,10 @@ $mech->post_ok("/user",
                 email => 'fluffy@sedition.com',
                 email2 => 'fluffy@sedition.com',
                ]);
+
 $mech->content_like(
       qr/This field is required/i,
       "No password gets 'This field is required'" );
-
-
 
 $mech->post_ok("/user",
                [
@@ -97,15 +95,18 @@ $mech->content_like(
       "Created an account" );
 
 
-like( request("/user")->decoded_content,
-      qr/ashley/,
-      "User content looks good" );
+$mech->get("/user");
+$mech->content_like( qr/\bashley\b/,
+                     "/user content looks good" );
 
-unlike( request("/")->decoded_content,
-        qr/\bashley\b/,
-        "User is mentioned on home page" );
+$mech->get("/");
+$mech->content_unlike( qr/\bashley\b/,
+                       "User is not mentioned on home page" );
 
-$mech->get_ok("/login", "/login" );
+$mech->follow_link_ok({ text_regex => qr/sign.in/i },
+                        "Following sign-in link" );
+
+is( $mech->uri->path, "/login", "Landed on /login" );
 
 $mech->get("/login?username=ashley;password=S00p3rs3Kr37");
 
@@ -128,7 +129,7 @@ is($mech->uri->path, "/", "Redirected to /");
 $mech->get_ok("/logout", "/logout");
 
 $mech->content_unlike(
-                      qr/ashley/i,
+                      qr/\bashley\b/i,
                       "Logout succeeds" );
 
 is($mech->uri->path, "/", "Redirected to /");
