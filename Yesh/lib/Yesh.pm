@@ -15,7 +15,7 @@ use Catalyst qw(
 #                Authorization::Roles
 
 our $AUTHORITY = 'cpan:ASHLEY';
-our $VERSION = '2.9002';
+our $VERSION = '2.9003';
 
 __PACKAGE__->config
     ( name => "Yesh/$VERSION",

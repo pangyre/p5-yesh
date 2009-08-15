@@ -109,11 +109,8 @@ $mech->get_ok("/login", "/login" );
 
 $mech->get("/login?username=ashley;password=S00p3rs3Kr37");
 
-$mech->content_like(
-                    qr/successful/i,
-                    "Login via GET fails" );
-
-
+$mech->content_unlike( qr/successful/i,
+                       "Login via GET fails" );
 
 $mech->post_ok("/login",
                [
@@ -130,10 +127,9 @@ is($mech->uri->path, "/", "Redirected to /");
 
 $mech->get_ok("/logout", "/logout");
 
-$mech->content_like(
-      qr/signed out/i,
-      "Logout succeeds" );
-#    like( $response->uri->path, "/",
+$mech->content_unlike(
+                      qr/ashley/i,
+                      "Logout succeeds" );
 
 is($mech->uri->path, "/", "Redirected to /");
 
