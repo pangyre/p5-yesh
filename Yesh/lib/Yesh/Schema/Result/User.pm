@@ -80,11 +80,9 @@ __PACKAGE__->has_many(
 
 BEGIN { use base "DBIx::Class";
         __PACKAGE__->load_components("EncodedColumn",
-                                     "Yesh::Default",
-                                     "UTF8Columns",
                                      "InflateColumn::DateTime",
-                                     "Core"
-            ) }
+                                    );
+             }
 
 __PACKAGE__->many_to_many(site_roles => 'user_site_roles', 'site_role');
 __PACKAGE__->many_to_many(article_roles => 'user_article_roles', 'article_role');

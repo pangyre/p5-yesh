@@ -3,7 +3,7 @@ BEGIN {
 }
 use strict;
 use warnings;
-use Test::More "no_plan";
+use Test::More skip_all => "These tests are better done with Mech saving them in case they can be repurpsed or ctx checks are needed";
 use HTTP::Request::Common qw( GET POST PUT );
 
 use Catalyst::Test 'Yesh';
@@ -114,7 +114,7 @@ is( request("/login")->code, 200, "/login" );
         ];
     unlike( $response->decoded_content,
             qr/successful/i,
-            "Login via GET fails" )
+            "Login via GET fails" );
 }
 
 {
@@ -123,8 +123,52 @@ is( request("/login")->code, 200, "/login" );
          username => "ashley",
          password => "S00p3rs3Kr37",
         ];
+    is( $response->code, 302,
+        "Login redirects" );
+
+    $response = request('/');
+
     like( $response->decoded_content,
           qr/oh hai, ashley/i,
-          "Login via POST succeeds" )
+          "Login succeeded" );
+#    like( $response->base->path, "/",
+#          "Landed on / after login" );
 }
 
+{
+    my $response = request('/logout');
+    like( $response->decoded_content,
+          qr/signed out/i,
+          "Logout succeeds" );
+#    like( $response->uri->path, "/",
+#          "Landed on / after logout" );
+}
+
+{
+    my $response = request POST '/user',
+        [
+         username => "ashley",
+         password => "S00p3rs3Kr37",
+         password2 => "S00p3rs3Kr37",
+         email => 'nope@sedition.com',
+         email2 => 'nope@sedition.com',
+        ];
+    like( $response->decoded_content,
+          qr/username is already in use/i,
+          "Duplicate username registration fails" );
+}
+
+
+{
+    my $response = request POST '/user',
+        [
+         username => "smashley",
+         password => "S00p3rs3Kr37",
+         password2 => "S00p3rs3Kr37",
+         email => 'fluffy@sedition.com',
+         email2 => 'fluffy@sedition.com',
+        ];
+    like( $response->decoded_content,
+          qr/email address is registered .+? already/i,
+          "Duplicate email registration fails" );
+}

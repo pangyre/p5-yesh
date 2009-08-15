@@ -1,5 +1,4 @@
 package Yesh::Controller::Session;
-
 use strict;
 use warnings;
 use parent 'Catalyst::Controller';
@@ -10,7 +9,8 @@ sub index :Path :Args(0) {
 }
 
 sub login :Global {
-    my ( $self, $c ) = @_;
+    my ( $self, $c, @args ) = @_;
+    my $destination = join("/", @args); # 321 not sure about this approach.
     my $username = $c->req->param("username");
     my $password = $c->req->param("password") if $c->req->method eq "POST";
 
@@ -18,13 +18,24 @@ sub login :Global {
 
     if ( $username and $password )
     {
-        my $user = $c->model("DBIC::User")->find( username => $username );
+        my $user = $c->model("DBIC::User")->search( username => $username )->single;
         
         if ( $user and $user->check_password($password) )
         {
             $c->authenticate({ username => $username, password => $user->password }) or die;
+            $c->response->redirect( $c->uri_for("/") );
+            $c->detach;
         }
     }
 }
+
+sub logout :Global Args(0) {
+    my ( $self, $c ) = @_;
+    $c->delete_session("User manually signed-out");
+    $c->logout();
+    $c->response->redirect( $c->uri_for("/") );
+    #$c->blurb("logout/success");
+}
+
 
 1;

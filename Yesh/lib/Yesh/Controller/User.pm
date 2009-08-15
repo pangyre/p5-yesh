@@ -1,6 +1,7 @@
 package Yesh::Controller::User;
 use strict;
 use warnings;
+no warnings "uninitialized";
 use parent qw(
                  Catalyst::Controller::HTML::FormFu
                  Catalyst::Controller::REST
@@ -40,17 +41,33 @@ sub register : Local Args(0) Form {
     my $form = $self->form();
     $form->load_config_filestem("user/register");
     $form->process;
+    $c->stash( form => $form );
     if ( $form->submitted_and_valid )
     {
         my $user = $c->model('DBIC::User')->new_result({});
-        $form->model->update($user);
-        $c->response->body('created an account' . "\n" . $user->password);
+        eval { $form->model->update($user) };
+        # Just guessing on the first(MySQL) report.
+        if ( $@ =~ /duplicate entry .+? for key (\w+)|column (\w+) is not unique/i )
+        {
+            my ( $key, $col ) = ( $1, $2 );
+            $col ||= [ $user->columns ]->[$key-1] if $key;
+            $col || die "Could not determine which column failed constraint";
+            $form->get_field($col)
+                ->get_constraint({ type => 'Callback' })
+                ->force_errors(1);
+            $form->process();
+            return;
+        }
+        elsif ( $@ )
+        {
+            die $@;
+        }
+        $c->response->body('Created an account' . "\n" . $user->password);
     }
     else
     {
 
     }
-    $c->stash( form => $form );
 }
 
 1;

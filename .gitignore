@@ -10,4 +10,5 @@ inc/
 .DS_Store
 *~
 *#
+#*
 yesh_local.yml

@@ -1,7 +1,8 @@
 ---
+is_test_config: 1
 Model::DBIC:
   connect_info:
-    - dbi:SQLite:./etc/yesh.sqlite
+    - dbi:SQLite:./etc/testyesh.sqlite
     - ~
     - ~
     - RaiseError: 1

@@ -11,7 +11,7 @@ elements:
         min: 1
         max: 80
       - type: Callback
-        message: Sorry, that nickname is already in use
+        message: Sorry, that username is already in use
   - type: Text
     name: email
     label: Email
