@@ -144,13 +144,12 @@ $mech->post_ok("/user",
                 password2 => "S00p3rs3Kr37",
                 email => 'nope@sedition.com',
                 email2 => 'nope@sedition.com',
-               ]);
+               ],
+              "Post duplicate username to /user");
+
 $mech->content_like(
       qr/username is already in use/i,
       "Duplicate username registration fails" );
-
-
-
 
 $mech->post_ok("/user",
                [
@@ -159,9 +158,26 @@ $mech->post_ok("/user",
                 password2 => "S00p3rs3Kr37",
                 email => 'fluffy@sedition.com',
                 email2 => 'fluffy@sedition.com',
-               ]);
+               ],
+              "Post duplicate email to /user");
 
 $mech->content_like(
-      qr/email address is registered .+? already/i,
-      "Duplicate email registration fails" );
+                    qr/email address is registered .+? already/i,
+                    "Duplicate email registration fails" );
+
+{
+    $mech->post_ok("/user", [ x => 1 ],
+                   "Nothing filled out in POST to /user");
+    my $slash_user = $mech->content;
+
+    $mech->post_ok("/user/register", [ x => 1 ],
+                   "Nothing filled out in POST to /user/register");
+    my $slash_user_register = $mech->content;
+
+    $mech->content_like(qr/field is required/i,
+                        "Missing fields feedback");
+    diag($mech->content);
+    is( $slash_user, $slash_user_register,
+        "POST results to /user and /user/register are equivalent");
+}
 
