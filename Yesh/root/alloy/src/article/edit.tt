@@ -1,0 +1,30 @@
+<div class="status">
+[% IF article.is_live %]
+  <p class="pulse alert">This article is live on the site.</p>
+[% ELSE %]
+<p>This article is a draft.</p>
+[% END %]
+</div>
+
+[% form %]
+
+<script type="text/javascript">//<![CDATA[
+var license = [% license.encode_json || "{}" %];
+$(function() {
+  $("select[name='license']").parent().append('<div class="center tiny" id="license_uri"/>');
+  $("select[name='license']").change(function(){
+     var myL = license[ $(this).val() ];
+     var link = $("<a/>");
+     link.text(myL.title).hide();
+     link.attr({href:myL.uri});
+     $("#license_uri").empty().append(link);
+     link.fadeIn();
+  });
+});
+//]]> </script>
+
+[% RETURN %]
+[% PROCESS article/article_form
+   form_name = "edit"
+   form_legend = "You are editing ${article_link(article)}"
+ %]

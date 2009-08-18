@@ -1,0 +1,5 @@
+<h3>Article index</h3>
+
+[% FOR article IN articles.all %]
+  [% PROCESS article/view.tt %]
+[% END %]

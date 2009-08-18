@@ -1,0 +1,86 @@
+<form method="post" name="article" action="/[% yesh.request.path %]" enctype="multipart/form-data">
+   <fieldset>
+     <legend>[% form_legend %]</legend>
+     <p class="text">
+        <label>parent</label>
+        <input type="text" name="parent" value="[% article.parent %]" />
+     </p>
+     <p class="text">
+        <label>Title</label>
+        <input type="text" name="title" value="[% article.title %]" />
+     </p>
+     <p class="text">
+        <label>UUID</label>
+        <input type="text" name="uuid" value="[% article.uuid %]" readonly="readonly"/>
+     </p>
+     <p class="text">
+        <label>Template</label>
+        <input type="text" name="template" value="[% article.template %]" />
+     </p>
+     <p class="text">
+        <label>Add display group</label>
+        <input type="text" name="display_group" value="[% article.display_group %]" />
+     </p>
+     <p class="text">
+        <label>License</label>
+<select name="license">
+[% FOR l IN license.all %]
+        <option[% ' selected="selected"' IF article.license eq l.id %] value="[% l.id %]">[% l.title %]</option>
+[% END %]
+<script type="text/javascript">//<![CDATA[
+var license = [% license.encode_json %];
+$(function() {
+  $("select[name='license']").change(function(){
+     var myL = license[ $(this).val() ];
+     var link = $("<a/>");
+     link.text(myL.title);
+     link.attr({href:myL.uri});
+     $("#license_uri").empty().append(link);
+  });
+});
+//]]> </script>
+</select>
+     </p>
+<p id="license_uri"></p>
+     <p class="textarea">
+        <label>Body</label>
+        <textarea name="body">[% article.body | html %]</textarea>
+     </p>
+     <p class="text">
+        <label>Note</label>
+        <textarea name="note">[% article.note | html %]</textarea>
+     </p>
+     <p class="radio">
+[% DEFAULT article.display_type = "page" %]
+[% FOR type IN display_types %]
+        <label><input type="radio"[% ' checked="checked"' IF article.display_type == type %] name="display_type" value="[% type %]">[% type %]</label>
+[% END %]
+     </p>
+     <p class="text">
+[% DEFAULT article.status = status_default %]
+[% FOR status IN stati %]
+        <label><input type="radio"[% ' checked="checked"' IF article.status == status %] name="status" value="[% status %]">[% status %]</label>
+[% END %]
+     </p>
+     <p class="text">
+[% DEFAULT article.comment_flag = default_comment_flag %]
+[% FOR flag IN comment_flags %]
+        <label><input type="radio"[% ' checked="checked"' IF article.comment_flag == flag %] name="comment_flag" value="[% flag %]">[% flag %]</label>
+[% END %]
+     </p>
+     <p class="text">
+        <label>Go live date</label>
+        <input type="text" name="golive" class="date" value="[% article.golive %]" />
+     </p>
+     <p class="text">
+        <label>Take down date</label>
+        <input type="text" name="takedown" class="date" value="[% article.takedown %]" />
+     </p>
+     <p class="text">
+        <input type="hidden" name="token" value="[% article.token || "NOPE" %]" />
+        <input type="submit" value="Create" />
+        <input type="submit" value="Edit" />
+     </p>
+    </fieldset>
+</form>
+

@@ -1,0 +1,3 @@
+[% PROCESS article/article_form
+   form_name = "create"
+   form_legend = "Create a new article" %]

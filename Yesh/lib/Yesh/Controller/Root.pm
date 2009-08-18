@@ -6,8 +6,8 @@ use parent 'Catalyst::Controller';
 __PACKAGE__->config->{namespace} = '';
 
 sub index :Path Args(0) {
-#    my ( $self, $c ) = @_;
-#    $c->response->body("OH HAI, " . $c->config->{name});
+    my ( $self, $c ) = @_;
+    $c->go("Article", "index");
 }
 
 sub default :Path {

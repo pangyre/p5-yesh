@@ -176,7 +176,7 @@ $mech->content_like(
 
     $mech->content_like(qr/field is required/i,
                         "Missing fields feedback");
-    diag($mech->content);
+    # diag($mech->content);
     is( $slash_user, $slash_user_register,
         "POST results to /user and /user/register are equivalent");
 }

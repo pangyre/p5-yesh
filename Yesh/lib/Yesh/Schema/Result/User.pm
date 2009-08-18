@@ -98,11 +98,11 @@ __PACKAGE__->add_columns(
         encode_column => 1,
         encoded_column => 1,
         data_type => "VARCHAR",
-        is_nullable => 1,
+        is_nullable => 0,
         size        => 60,
         encode_class  => "Crypt::Eksblowfish::Bcrypt",
-        encode_args   => { key_nul => 0,
-                           cost => 8 },
+        encode_args   => { key_nul => 1,
+                           cost => 10 },
         encode_check_method => "check_password",
     }); 
 

@@ -1,0 +1,23 @@
+<div class="article" id="article_[% article.id %]">
+[% IF articles.count %]
+  <h3 class="title">[% article_link(article) %]</h3>
+[% ELSE %]
+  <h3 class="title">[% article.title %]</h3>
+[% END %]
+  <div class="body">
+[% article.body %]
+  </div>
+  <div class="meta">
+    <div class="author">
+[% article.user.username %]
+    </div>
+    <div class="license">
+[% article.license.display || article.license.title %]
+    </div>
+[% IF yesh.user.id == article.user.id %]
+    <div class="edit">
+[% article.token %] &middot; [% edit_article_button(article) %]
+    </div>
+[% END %]
+  </div>
+</div>
