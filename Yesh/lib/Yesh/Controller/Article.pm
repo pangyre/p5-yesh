@@ -39,8 +39,7 @@ sub create :Local {
 
     unless ( $c->check_user_roles("author") )
     {
-        $c->forward("Login","index"); # response->redirect($c->action_uri("Login","index"));
-        $c->blurb("article/created");
+        $c->response->redirect($c->uri_for("/login"));
         $c->detach();
     }
 

@@ -11,6 +11,7 @@ use Catalyst qw(
                 Session::Store::FastMmap
                 Session::State::Cookie
                 Authentication
+                Authorization::Roles
               );
 #                Authorization::Roles
 
