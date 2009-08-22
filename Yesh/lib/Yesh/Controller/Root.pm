@@ -7,12 +7,9 @@ __PACKAGE__->config->{namespace} = '';
 
 sub auto :Private {
     my ( $self, $c ) = @_;
-    $c->detach("setup/index") and return 0 unless $c->config->{moo};
+    $c->detach("setup/index") and return 0
+        unless $c->config->{configured};
     1;
-}
-
-sub no :Private {
-    die "NOPERS";
 }
 
 sub index :Path Args(0) {
