@@ -2,7 +2,6 @@
 # APPLICATION --------------------------------------------
 default_view: Alloy
 
-
 # PLUGINS ------------------------------------------------
 Plugin::Authentication:
   default:

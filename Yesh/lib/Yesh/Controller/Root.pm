@@ -5,6 +5,16 @@ use parent 'Catalyst::Controller';
 
 __PACKAGE__->config->{namespace} = '';
 
+sub auto :Private {
+    my ( $self, $c ) = @_;
+    $c->detach("setup/index") and return 0 unless $c->config->{moo};
+    1;
+}
+
+sub no :Private {
+    die "NOPERS";
+}
+
 sub index :Path Args(0) {
     my ( $self, $c ) = @_;
     $c->go("Article", "index");

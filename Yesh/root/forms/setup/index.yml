@@ -1,0 +1,41 @@
+---
+auto_fieldset:
+  legend: Configure the database for your site
+elements:
+  - type: Text
+    name: db_name
+    label: Database name
+    constraints: 
+      - Required
+      - type: Length
+        min: 1
+        max: 50
+  - type: Text
+    name: user
+    label: Database user
+    constraints: 
+      - Required
+      - Email
+      - type: Equal
+        others: email2
+      - type: Callback
+        message: That email address is registered with an account already
+  - type: Text
+    name: password
+    label: Password
+    constraints: 
+      - Required
+  - type: Text
+    name: host
+    label: Database Host
+  - type: Select
+    label: Database type
+    name: dbd
+    options:
+      - [ '', 'Select your DB engine' ]
+      - [ 'Pg', 'PostgreSQL' ]
+      - [ 'mysql', 'MySQL' ]
+      - [ 'SQLite', 'SQLite' ]
+  - type: Submit
+    name: x
+    value: Set-up the configuration
