@@ -1,10 +1,26 @@
+<script type="text/javascript">//<![CDATA[
+jQuery(function($){
+    $(".option").toggle();
+    $(".option1").click(function(){ $("#option1").slideToggle("slow")});
+    $(".option2").click(function(){ $("#option2").slideToggle("slow")});
+    $(".option3").click(function(){ $("#option3").slideToggle("slow")});
+});
+//]]> </script>
+
 NONE OF THIS IS WORKING YET.
 
 <p>Your site is not configured. Ain’t nothing gonna work till it is. You have three choices now. Pick <b>one</b>.</p>
 
+<ol style="display:none;" class="option" id="options">
+<li><b><a class="option1" href="#">Simplistic</a></b>. Uses SQLite. Easy, not necessarily recommended.</a></li>
+<li><b><a class="option2" href="#">Your database</a></b>. Uses whatever DB and settings you choose. Probably the best option. Easy if you have good information about your database.</a></li>
+<li><b><a class="option3" href="#">Advanced</a></b>. You write the configuration file yourself. Requires knowledge of <acronym title="YAML Ain’t Markup Language"><a href="http://www.yaml.org/">YAML</a></acronym>, and <a href="http://search.cpan.org/perldoc?DBIx::Class::Schema">DBIx::Class::Schema</a></li>
+</ol>
+
 <p>Note, your application is being run by <b>[% user | html %]</b>. This user [% can_auto ? "has" : "<b>does not</b> have" %] permissions to edit files in the directory [% yesh.path_to("/") %], so it looks like [% can_auto ? "you should have no problems using" : "you may <b>not</b> be able to use" %] option #1 or #2.</p>
 
 <div>
+<div class="box option" id="option1" style="background-color:#f6fff6">
 <h2>1. Automatic set-up</h2>
 
 <p>
@@ -18,22 +34,36 @@ Are you feeling lucky, punk? This will deploy your database to <a href"http://ww
 </form>
 </div>
 
-<div>
+<div class="box option" id="option2" style="background-color:#fafffc">
 <h2>2. Configure here</h2>
 
 [% form %]
 
 </div>
 
-<div>
+<div class="box option" id="option3" style="background-color:#faf9f3">
 <h2>3. Advanced set-up</h2>
 
-<p>If you know <a href="http://www.catalystframework.org/">Catalyst</a>, are a competent programmer, or someone with a couple dozen hours to lose, you can edit the following configuration file directly.</p>
+<p>If you know <a href="http://www.catalystframework.org/">Catalyst</a>, are a competent programmer, or someone with some spare hours to spend learning some really great stuff, you can edit the following configuration file directly.</p>
 
-<blockquote>[% yesh.path_to("yesh_local.yml") %]</blockquote>
+<blockquote><code>[% yesh.path_to("yesh_local.yml") %]</code></blockquote>
+
+<p>That configuration file is specific to <i>your</i> changes and will override things in the main configuration file: [% yesh.path_to("yesh.yml") %]
+</p>
 
 <p>
 You will need to know <acronym title="YAML Ain’t Markup Language"><a href="http://www.yaml.org/">YAML</a></acronym> and exactly how to set-up a database connection for <a href="http://search.cpan.org/perldoc?DBI">DBI</a> via <a href="http://search.cpan.org/perldoc?DBIx::Class::Schema">DBIx::Class::Schema</a>.
 </p>
+
+
+<h3>Database documents</h3>
+<ul>
+  <li>Database driver for <a href="http://search.cpan.org/perldoc?DBD::SQLite">SQLite</a>.</li>
+  <li>Database driver for <a href="http://search.cpan.org/perldoc?DBD::Pg">PostgreSQL</a>.</li>
+  <li>Database driver for <a href="http://search.cpan.org/perldoc?DBD::mysql">MySQL</a>.</li>
+</ul>
+
+
+</div>
 
 </div>
