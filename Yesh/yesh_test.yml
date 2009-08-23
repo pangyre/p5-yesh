@@ -1,4 +1,6 @@
 ---
+# perl -MYesh::Schema -le '$s = Yesh::Schema->connect("dbi:SQLite:./etc/testyesh.sqlite");'
+configured: 1
 is_test_config: 1
 Model::DBIC:
   connect_info:
@@ -8,3 +10,4 @@ Model::DBIC:
     - RaiseError: 1
       AutoCommit: 1
       ChopBlanks: 1
+

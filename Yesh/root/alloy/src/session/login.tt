@@ -1,1 +1,1 @@
-[% PROCESS login_box %]
+[% PROCESS login_box.tt %]

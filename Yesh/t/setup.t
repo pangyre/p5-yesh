@@ -1,28 +1,28 @@
-BEGIN {
-    $ENV{YESH_CONFIG_LOCAL_SUFFIX} = "test";
-}
+#BEGIN {
+#    $ENV{YESH_CONFIG_LOCAL_SUFFIX} = "test_setup";
+#}
 use strict;
 use warnings;
 use Test::More "no_plan";
 use Test::WWW::Mechanize::Catalyst;
 use Catalyst::Test "Yesh"; # <-- to reset test DB.
 
-my ( $res, $c ) = ctx_request("/");
-is( $res->code, 200, "ctx_request /");
-
-eval {
-    $c->config->{is_test_config} or BAIL_OUT("This does not appear to be the test configuration!");
-    my @connection = @{ $c->config->{"Model::DBIC"}->{connect_info} };
-    my ( $file ) = $connection[0] =~ /SQLite:(.+)/;
-#    unlink $file;
-#    my $schema = $c->model("DBIC")->schema;
-#    $schema->deploy();
-    1;
-} || die $@;
-
 my $mech = Test::WWW::Mechanize::Catalyst->new(catalyst_app => "Yesh");
 
 $mech->get_ok("/", "Get /");
+
+$mech->content_contains("Your site is not configured");
+
+$mech->submit_form_ok({ with_fields => {
+                                        auto => 1,
+                                       }
+                      },
+                     "Submitting auto-deploy option");
+
+
+
+__END__
+
 is( $mech->get("/no-such-resource")->code, 404,
     "A known 404");
 
