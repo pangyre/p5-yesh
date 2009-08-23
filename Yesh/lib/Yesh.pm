@@ -13,10 +13,10 @@ use Catalyst qw(
                 Authentication
                 Authorization::Roles
               );
-#                Authorization::Roles
+use Moose;
 
 our $AUTHORITY = 'cpan:ASHLEY';
-our $VERSION = '2.9003';
+our $VERSION = '2.9004';
 
 __PACKAGE__->config
     ( name => "Yesh/$VERSION",
@@ -32,7 +32,24 @@ __PACKAGE__->config
       },
     );
 
+sub name : method {
+    my $c = shift;
+    $c->{name} ||= $c->config->{name};
+}
+
+sub version : method {
+    my $c = shift;
+    $VERSION;
+}
+
+has "repository" => 
+    is => "ro",
+    isa => "Str",
+    default => "http://github.com/pangyre/p5-yesh";
+
 __PACKAGE__->setup();
+
+__PACKAGE__->meta->make_immutable( replace_constructor => 1 );
 
 13;
 

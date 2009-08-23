@@ -1,0 +1,9 @@
+Download <a href="[% yesh.repository %]">Yesh on Github</a> 
+·
+Yesh is a <a href="http://pangyresoft.com">PangyreSoft</a> project
+·
+License: <a href="http://www.perlfoundation.org/artistic_license_2_0">Artistic 2.0</a>
+
+<br />
+
+&lt;yesh version="[% yesh.version %]"/&gt;

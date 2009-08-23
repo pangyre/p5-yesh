@@ -1,9 +1,10 @@
 package Yesh::Controller::Setup;
 use strict;
 use warnings;
-use parent 'Catalyst::Controller::HTML::FormFu';
+use parent "Catalyst::Controller::HTML::FormFu";
+use YAML qw( LoadFile DumpFile );
 
-sub index :Path Args(0) FormConfig {
+sub index : Path Args(0) FormConfig {
     my ( $self, $c ) = @_;
     my $can_auto = -w $c->path_to("/") ? 1 : 0;
     $c->stash( template => "setup/index.tt",
@@ -13,9 +14,26 @@ sub index :Path Args(0) FormConfig {
 
 }
 
+sub deploy_db : Private {
+    my ( $self, $c ) = @_;
+}
+
+sub create_administrator : Private {
+    my ( $self, $c ) = @_;
+}
+
+sub _deploy_sqlite : method {
+    my ( $self, $c ) = @_;
+
+    
+}
+
 1;
 
 __END__
+
+
+
 
 
     $c->response->body(<<"");

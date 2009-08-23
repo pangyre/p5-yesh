@@ -118,6 +118,6 @@ a {
 
 div.box {
  border:1px solid #9ac;
- padding: 1ex;
+ padding: 1ex .5ex 1ex 1.2ex;
  margin: 1ex auto;
 }

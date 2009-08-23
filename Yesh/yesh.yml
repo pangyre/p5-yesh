@@ -7,6 +7,7 @@ Plugin::Authentication:
   default:
     class: SimpleDB
     user_model: DBIC::User
+# This not actually "clear." It’s bcrypted in the DB and compared on the fly with a new bcrypt. This is not the way it’s supposed to work but I haven’t solved the proble
     password_type: clear
 
 # CONTROLLERS --------------------------------------------
@@ -17,12 +18,13 @@ Controller::User:
 # MODELS -------------------------------------------------
 Model::DBIC:
   connect_info:
-    - dbi:SQLite:__path_to(etc/db.sqlite)__
-    - ~
-    - ~
-    - RaiseError: 1
-      AutoCommit: 1
-      ChopBlanks: 1
+     - Connection information should be provided in __path_to(yesh_local.yml)__
+#    - dbi:SQLite:__path_to(etc/db.sqlite)__
+#    - ~
+#    - ~
+#    - RaiseError: 1
+#      AutoCommit: 1
+#      ChopBlanks: 1
 
 # VIEWS --------------------------------------------------
 View::Alloy:

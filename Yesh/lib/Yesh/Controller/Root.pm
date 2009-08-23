@@ -7,11 +7,20 @@ __PACKAGE__->config->{namespace} = '';
 
 sub auto :Private {
     my ( $self, $c ) = @_;
-    $c->detach("setup/index") and return 0
-        unless $c->config->{configured};
-    1;
+    unless ( $c->config->{configured} )
+    {
+        if ( $c->request->path eq "" )
+        {
+            $c->detach("setup/index");
+        }
+        else
+        {
+            $c->response->redirect("/");
+        }
+        return 0;
+    }
+    return 1;
 }
-
 sub index :Path Args(0) {
     my ( $self, $c ) = @_;
     $c->go("Article", "index");
