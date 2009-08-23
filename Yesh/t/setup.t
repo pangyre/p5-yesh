@@ -17,11 +17,16 @@ $mech->submit_form_ok({ with_fields => {
                                         auto => 1,
                                        }
                       },
-                     "Submitting auto-deploy option");
-
-
+                      "Submitting auto-deploy option");
 
 __END__
+
+is( 200, $mech->status,
+    "..." );
+
+
+is( my $mech->uri->path, "/
+    "Form redirects" );
 
 is( $mech->get("/no-such-resource")->code, 404,
     "A known 404");

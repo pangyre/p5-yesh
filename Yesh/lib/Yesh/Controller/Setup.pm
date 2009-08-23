@@ -4,6 +4,9 @@ use warnings;
 use parent "Catalyst::Controller::HTML::FormFu";
 use YAML qw( LoadFile DumpFile );
 
+# MUST NOT BE ACCESSIBLE IF IT'S DONE ALREADY?
+# sub auto : Private {
+
 sub index : Path Args(0) FormConfig {
     my ( $self, $c ) = @_;
     my $can_auto = -w $c->path_to("/") ? 1 : 0;
@@ -11,7 +14,10 @@ sub index : Path Args(0) FormConfig {
                user => scalar getpwuid($> || $<),
                can_auto => $can_auto,
              );
-
+    if ( $c->request->param("auto") )
+    {
+        $c->detach("_deploy_sqlite");
+    }
 }
 
 sub deploy_db : Private {
@@ -22,10 +28,32 @@ sub create_administrator : Private {
     my ( $self, $c ) = @_;
 }
 
-sub _deploy_sqlite : method {
+sub _deploy_sqlite : Private {
+    my ( $self, $c ) = @_;
+    # Ensure uniqueness?
+    my $db = $c->path_to("dummy.sqlite");
+
+    my $schema = $c->model("DBIC")
+        ->schema
+        ->connect("dbi:SQLite:$db");
+
+    eval { $schema->deploy(); };
+
+    # Update config file here.
+
+    $c->response->redirect($c->uri_for_action("setup/admin"));
+}
+
+sub _write_local_yaml : Private {
+    my ( $self, $c ) = @_;
+    my $config_file = $c->path_to("yesh_local.yml");
+    my $config = LoadFile("$config_file");
+
+}
+
+sub admin : Local {
     my ( $self, $c ) = @_;
 
-    
 }
 
 1;

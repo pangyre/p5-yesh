@@ -1,26 +1,21 @@
 package Yesh::Controller::Root;
 use strict;
 use warnings;
-use parent 'Catalyst::Controller';
+use parent "Catalyst::Controller";
 
-__PACKAGE__->config->{namespace} = '';
+__PACKAGE__->config->{namespace} = "";
 
 sub auto :Private {
     my ( $self, $c ) = @_;
-    unless ( $c->config->{configured} )
+    unless ( $c->config->{configured}
+             or $c->action =~ m,\Asetup/, )
     {
-        if ( $c->request->path eq "" )
-        {
-            $c->detach("setup/index");
-        }
-        else
-        {
-            $c->response->redirect("/");
-        }
+        $c->response->redirect($c->uri_for_action("setup/index"));
         return 0;
     }
     return 1;
 }
+
 sub index :Path Args(0) {
     my ( $self, $c ) = @_;
     $c->go("Article", "index");
@@ -28,11 +23,11 @@ sub index :Path Args(0) {
 
 sub default :Path {
     my ( $self, $c ) = @_;
-    $c->response->body('Not found');
+    $c->response->body("Not found");
     $c->response->status(404);
 }
 
-sub end : ActionClass('RenderView') {}
+sub end : ActionClass("RenderView") {}
 
 1;
 
