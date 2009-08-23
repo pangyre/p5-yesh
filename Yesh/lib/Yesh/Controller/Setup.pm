@@ -32,36 +32,40 @@ sub _deploy_sqlite : Private {
     my ( $self, $c ) = @_;
     # Ensure uniqueness?
     my $db = $c->path_to("dummy.sqlite");
-
+    my $dns = "dbi:SQLite:$db";
     my $schema = $c->model("DBIC")
         ->schema
-        ->connect("dbi:SQLite:$db");
+        ->connect($dns);
 
     eval { $schema->deploy(); };
 
     # Update config file here.
-
+    #my $model_config = $c->model("DBIC")->config;
+    my $model_config = $c->config->{"Model::DBIC"};
+    $model_config->{connect_info}->[0] = $dns;
+    $self->_write_local_yaml($c, { "Model::DBIC" => $model_config });
     $c->response->redirect($c->uri_for_action("setup/admin"));
 }
 
 sub _write_local_yaml : Private {
-    my ( $self, $c ) = @_;
+    my ( $self, $c, $data ) = @_;
     my $config_file = $c->path_to("yesh_local.yml");
-    my $config = LoadFile("$config_file");
-
+    my $config = LoadFile("$config_file") if -f $config_file;
+    $config ||= {};
+    require Hash::Merge;
+    $config = Hash::Merge::merge( $config, $data );
+    DumpFile($config_file, $config)
+        or die "Couldn't update $config_file";
 }
 
-sub admin : Local {
+sub admin : Local Args(0) FormConfig {
     my ( $self, $c ) = @_;
-
+    
 }
 
 1;
 
 __END__
-
-
-
 
 
     $c->response->body(<<"");

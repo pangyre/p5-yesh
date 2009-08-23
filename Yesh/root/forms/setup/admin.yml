@@ -1,0 +1,49 @@
+---
+auto_fieldset:
+  legend: Create your administrator account
+elements:
+  - type: Text
+    name: username
+    label: Username
+    constraints: 
+      - Required
+      - type: Length
+        min: 1
+        max: 80
+      - type: Callback
+        message: Sorry, that username is already in use
+  - type: Text
+    name: email
+    label: Email
+    constraints: 
+      - Required
+      - Email
+      - type: Equal
+        others: email2
+      - type: Callback
+        message: That email address is registered with an account already
+  - type: Text
+    name: email2
+    label: Verify email
+    constraints: 
+      - Required
+  - type: Password
+    name: password
+    label: Password
+    render_value: 1
+    constraints:
+      - Required
+      - type: Length
+        min: 8
+        max: 40
+      - type: Equal
+        others: password2
+  - type: Password
+    name: password2
+    label: Re-type password
+    render_value: 1
+    constraints:
+      - Required
+  - type: Submit
+    name: x
+    value: Create the Account

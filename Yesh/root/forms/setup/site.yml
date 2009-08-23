@@ -1,0 +1,23 @@
+---
+auto_fieldset:
+  legend: Set some meta-information about the site
+elements:
+  - type: Text
+    name: site_name
+    label: Site name
+    constraints: 
+      - Required
+      - type: Length
+        min: 1
+        max: 255
+  - type: Text
+    name: site_name
+    label: Site name
+    constraints: 
+      - Required
+      - type: Length
+        min: 1
+        max: 255
+  - type: Submit
+    name: x
+    value: Create the Account
