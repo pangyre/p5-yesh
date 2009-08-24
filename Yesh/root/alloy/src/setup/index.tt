@@ -2,12 +2,12 @@
 jQuery(function($){
     $(".option").toggle();
     $(".option1").click(function(){ $("#option1").slideToggle("slow"); });
-    $(".option2").click(function(){ $("#option2").slideToggle("slow"); return false;});
-    $(".option3").click(function(){ $("#option3").slideToggle("slow"); return false;});
+    $(".option2").click(function(){ $("#option2").slideToggle("slow"); });
+    $(".option3").click(function(){ $("#option3").slideToggle("slow"); });
 });
 //]]> </script>
 
-NONE OF THIS IS WORKING YET.
+<h3>Most of this is not functional</h3>
 
 <p>Your site is not configured. Don’t panic but ain’t nothing gonna work till it is. You have three choices now. Pick <b>one</b>.</p>
 
