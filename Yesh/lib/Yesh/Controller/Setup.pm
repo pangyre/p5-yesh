@@ -31,18 +31,20 @@ sub create_administrator : Private {
 sub _deploy_sqlite : Private {
     my ( $self, $c ) = @_;
     # Ensure uniqueness?
-    my $db = $c->path_to("dummy.sqlite");
-    my $dns = "dbi:SQLite:$db";
+    my $db_name = "dummy.sqlite";
+    my $db = $c->path_to($db_name);
+    my $dsn_config = "dbi:SQLite:__path_to($db_name)__";
+    my $dsn_real = "dbi:SQLite:$db";
     my $schema = $c->model("DBIC")
         ->schema
-        ->connect($dns);
+        ->connect($dsn_real);
 
     eval { $schema->deploy(); };
-
+    die $@ if $@;
     # Update config file here.
     #my $model_config = $c->model("DBIC")->config;
     my $model_config = $c->config->{"Model::DBIC"};
-    $model_config->{connect_info}->[0] = $dns;
+    $model_config->{connect_info}->[0] = $dsn_config;
     $self->_write_local_yaml($c, { "Model::DBIC" => $model_config });
     $c->response->redirect($c->uri_for_action("setup/admin"));
 }
@@ -50,11 +52,12 @@ sub _deploy_sqlite : Private {
 sub _write_local_yaml : Private {
     my ( $self, $c, $data ) = @_;
     my $config_file = $c->path_to("yesh_local.yml");
-    my $config = LoadFile("$config_file") if -f $config_file;
-    $config ||= {};
-    require Hash::Merge;
-    $config = Hash::Merge::merge( $config, $data );
-    DumpFile($config_file, $config)
+    $c->log->info("Creating $config_file");
+#    my $config = LoadFile("$config_file") if -f $config_file;
+#    $config ||= {};
+#    require Hash::Merge;
+#    $config = Hash::Merge::merge( $config, $data );
+    DumpFile($config_file, $data)
         or die "Couldn't update $config_file";
 }
 
@@ -73,7 +76,7 @@ No admin user? Create one.
 <br />
 Lost admin user? Must provide token or email or something to prevent nuissance.
 
-my $dns = join(":",
+my $dsn = join(":",
                "dbi",
                $c->request->body_params->{dbd},
                $c->request->body_params->{db_name},

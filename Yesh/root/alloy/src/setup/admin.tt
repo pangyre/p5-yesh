@@ -1,6 +1,5 @@
-Wowzers. You did something right.
 
-Time to create your account. You will be the administrator...
-
+<p>Your database is set up. Time to establish the site administrator
+account.</p>
 
 [% form %]
