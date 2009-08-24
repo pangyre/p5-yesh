@@ -35,6 +35,7 @@ sub _deploy_sqlite : Private {
     my $db = $c->path_to($db_name);
     my $dsn_config = "dbi:SQLite:__path_to($db_name)__";
     my $dsn_real = "dbi:SQLite:$db";
+    $db->remove;
     my $schema = $c->model("DBIC")
         ->schema
         ->connect($dsn_real);
@@ -61,10 +62,20 @@ sub _write_local_yaml : Private {
         or die "Couldn't update $config_file";
 }
 
-sub admin : Local Args(0) FormConfig {
+sub admin : Local Args(0) {
     my ( $self, $c ) = @_;
-    
+    $c->forward("/user/register");
+    if ( $c->stash->{form}->submitted_and_valid )
+    {
+        # Give the new user admin roles.
+        $c->response->redirect($c->uri_for_action("setup/done"));
+    }
 }
+
+sub done : Local Args(0) {
+    my ( $self, $c ) = @_;
+}
+
 
 1;
 

@@ -62,7 +62,12 @@ sub register : Local Args(0) Form {
         {
             die $@;
         }
-        $c->response->body('Created an account' . "\n" . $user->password);
+        else
+        {
+            $c->authenticate({ username => $user->username,
+                               password => $user->password }) or die "Could not auto-sign-in";
+            $c->response->redirect($c->uri_for("/"));
+        }
     }
     else
     {
