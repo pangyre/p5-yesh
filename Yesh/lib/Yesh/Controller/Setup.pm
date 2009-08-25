@@ -33,19 +33,24 @@ sub _deploy_sqlite : Private {
     # Ensure uniqueness?
     my $db_name = "dummy.sqlite";
     my $db = $c->path_to($db_name);
+    $db->remove and $c->log->info("Removed sqlite db: $db");
+
     my $dsn_config = "dbi:SQLite:__path_to($db_name)__";
     my $dsn_real = "dbi:SQLite:$db";
-    $db->remove;
     my $schema = $c->model("DBIC")
         ->schema
         ->connect($dsn_real);
 
+    $c->model("DBIC")->schema($schema);
+
     eval { $schema->deploy(); };
-    die $@ if $@;
+    die "Caught error in schema deployment: $@" if $@;
     # Update config file here.
-    #my $model_config = $c->model("DBIC")->config;
     my $model_config = $c->config->{"Model::DBIC"};
     $model_config->{connect_info}->[0] = $dsn_config;
+    # $c->config->{"Model::DBIC"} = $model_config;
+    # $c->model("DBIC")->schema->connect_info( @{ $model_config->{connect_info} } );
+    $self->_load_baseline($c, $schema);
     $self->_write_local_yaml($c, { "Model::DBIC" => $model_config });
     $c->response->redirect($c->uri_for_action("setup/admin"));
 }
@@ -54,11 +59,12 @@ sub _write_local_yaml : Private {
     my ( $self, $c, $data ) = @_;
     my $config_file = $c->path_to("yesh_local.yml");
     $c->log->info("Creating $config_file");
-#    my $config = LoadFile("$config_file") if -f $config_file;
-#    $config ||= {};
-#    require Hash::Merge;
-#    $config = Hash::Merge::merge( $config, $data );
-    DumpFile($config_file, $data)
+    my $config = LoadFile("$config_file") if -f $config_file;
+    $config ||= {};
+    require Hash::Merge;
+    $config = Hash::Merge::merge($config, $data);
+    $c->log->info("Creating $config_file");
+    DumpFile($config_file, $config)
         or die "Couldn't update $config_file";
 }
 
@@ -68,6 +74,15 @@ sub admin : Local Args(0) {
     if ( $c->stash->{form}->submitted_and_valid )
     {
         # Give the new user admin roles.
+        my $admin = $c->user;
+        my $admin_role = $c->model("DBIC::SiteRole")->find({ name => "admin" });
+        $admin->add_to_site_roles($admin_role);
+        $self->_write_local_yaml($c,
+                                 { configured => join(" ",
+                                                      $admin->created->ymd,
+                                                      $admin->created->hms,
+                                       )
+                                 });
         $c->response->redirect($c->uri_for_action("setup/done"));
     }
 }
@@ -76,11 +91,27 @@ sub done : Local Args(0) {
     my ( $self, $c ) = @_;
 }
 
+sub _load_baseline {
+    my ( $self, $c ) = @_;
+    my $baseline_file = $c->path_to("etc/baseline.yml");
+    my $baseline = LoadFile("$baseline_file");
+#        or die "Baseline data file '$baseline_file' is missing or broken";
+    for my $result_class ( keys %{$baseline} )
+    {
+        my $rs = $c->model("DBIC::$result_class");
+        for my $row ( @{ $baseline->{$result_class} } )
+        {
+            $rs->create($row)->update;
+        }
+    }
+}
+
 
 1;
 
 __END__
 
+Robert'); DROP TABLE Users; --
 
     $c->response->body(<<"");
 No admin user? Create one.

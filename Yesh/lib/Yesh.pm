@@ -20,7 +20,7 @@ our $VERSION = '2.9004';
 
 __PACKAGE__->config
     ( name => "Yesh/$VERSION",
-      setup_components => { except => qr/[.\#]/ },
+      # setup_components => { except => qr/[.\#]|yesh_local.yml/ },
       session => {
           verify_address => 1,
           rewrite => 0,

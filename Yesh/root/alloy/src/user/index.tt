@@ -1,7 +1,13 @@
 [% IF ( users = rest.users.all() ) %]
 <ul>
 [% FOR user IN users %]
-<li>[% user.username %]</li>
+<li>[% user.username | html %]
+  <ul>
+    [% FOR role IN user.site_roles %]
+      <li>[% role.name | html %]</li>
+    [% END %]
+  </ul>
+</li>
 [% END %]
 </ul>
 [% ELSE %]
