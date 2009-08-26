@@ -16,7 +16,7 @@ use Catalyst qw(
 use Moose;
 
 our $AUTHORITY = 'cpan:ASHLEY';
-our $VERSION = '2.9004';
+our $VERSION = '2.9005';
 
 __PACKAGE__->config
     ( name => "Yesh/$VERSION",
@@ -38,7 +38,6 @@ sub name : method {
 }
 
 sub version : method {
-    my $c = shift;
     $VERSION;
 }
 

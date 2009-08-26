@@ -1,5 +1,5 @@
 BEGIN {
-    $ENV{YESH_CONFIG_LOCAL_SUFFIX} = "test";
+    $ENV{YESH_CONFIG_LOCAL_SUFFIX} = "sqlite_test";
 }
 use strict;
 use warnings;
@@ -8,7 +8,7 @@ use Test::WWW::Mechanize::Catalyst;
 use Catalyst::Test "Yesh"; # <-- to get info to reset test DB.
 
 my ( $res, $c ) = ctx_request("/");
-is( $res->code, 200, "ctx_request /");
+is( $res->code, 302, "ctx_request / redirects");
 
 eval {
     $c->config->{is_test_config} or BAIL_OUT("This does not appear to be the test configuration!");
@@ -21,6 +21,13 @@ eval {
 } || BAIL_OUT($@);
 
 my $mech = Test::WWW::Mechanize::Catalyst->new(catalyst_app => "Yesh");
+
+$mech->get_ok("/", "Get /");
+
+is($mech->uri->path, "/setup",
+   "Redirected to /setup");
+
+__END__
 
 $mech->get_ok("/", "Get /");
 is( $mech->get("/no-such-resource")->code, 404,
