@@ -58,11 +58,12 @@ sub _deploy_sqlite : Private {
 sub _write_local_yaml : Private {
     my ( $self, $c, $data ) = @_;
     my $config_file = $c->path_to("yesh_local.yml");
-    $c->log->info("Creating $config_file");
     my $config = LoadFile("$config_file") if -f $config_file;
-    $config ||= {};
-    require Hash::Merge;
-    $config = Hash::Merge::merge($config, $data);
+#    require Hash::Merge;
+#    $config = Hash::Merge::merge($config, $data);
+    # Overwrite merge is what we really want.
+    $config = { %{$config||{}}, %{$data} };
+
     $c->log->info("Creating $config_file");
     DumpFile($config_file, $config)
         or die "Couldn't update $config_file";

@@ -28,7 +28,7 @@ jQuery(function($){
 Are you feeling lucky? This will deploy your site database to <a href"http://www.sqlite.org/">SQLite</a>. It is simple, fast, and robust but not as strict about data as other database engines.
 </p>
 
-<form method="post" style="text-align:center">
+<form name="auto" method="post" action="[% yesh.request.uri.path %]" enctype="multipart/form-data" style="text-align:center">
 <p>
   <input type="submit" name="auto" value="Set it up with SQLite!" /> 
 </p>

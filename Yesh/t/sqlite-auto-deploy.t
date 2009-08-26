@@ -24,8 +24,19 @@ my $mech = Test::WWW::Mechanize::Catalyst->new(catalyst_app => "Yesh");
 
 $mech->get_ok("/", "Get /");
 
-is($mech->uri->path, "/setup",
-   "Redirected to /setup");
+is($mech->uri->path, "/setup", "Redirected to /setup");
+
+$mech->content_contains("Your site is not configured");
+
+$mech->content_contains("Simplistic set-up");
+
+diag("Submitting auto deployment form") if $ENV{TEST_VERBOSE};
+
+$mech->click_button(name => "auto");
+
+is($mech->uri->path, "/setup/admin", "Redirected to /setup/admin");
+
+$mech->content_contains("Your database is set up.");
 
 __END__
 
@@ -188,3 +199,9 @@ $mech->content_like(
         "POST results to /user and /user/register are equivalent");
 }
 
+
+
+$mech->submit_form( fields => {
+                                    auto => "Set it up with SQLite!",
+                                   }
+                  );
