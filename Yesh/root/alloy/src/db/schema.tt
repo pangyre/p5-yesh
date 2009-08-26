@@ -1,21 +1,19 @@
 
 [% FOR source IN schema.sources %]
-<div class="source">
+<div class="source" style="clear:left">
 <h3>[% source %]</h3>
 
   [% FOR column IN schema.source(source).columns %]
-<div class="column">
-<b>[% column %]</b>
-  <div style="display:none; float: left; clear:left; font-size:90%">
-  [% FOR column IN schema.source(source).columns %]
-    [% info = schema.source(source).column_info(column) %]
-    [% FOR key IN info.keys %]
-      <span style="width:24%; display:block; text-align:right;
+<div class="column" style="width:100%">
+<b style="float:left; clear:left; width:100%">[% column %]</b>
+  <div class="info" style="display:none; float: left; clear:left; font-size:90%; width:100%">
+  [% info = schema.source(source).column_info(column) %]
+  [% FOR key IN info.keys %]
+      <span style="width:15%; color:#778; display:block; text-align:right;
       padding-right: 1%;
       float:left; font-weight: bold;">[% key %]</span>
-      <span style="width:24%; display:block; text-align:left;
-      padding-left; 1%; float:left;">[% info.$key || "n/a" %]</span>
-    [% END %]
+      <span style="width:17%; display:block; text-align:left;
+      float:left;">[% info.$key || "n/a" %]</span>
   [% END %]
   </div>
 </div>
@@ -26,4 +24,5 @@
 
 <script type="text/javascript">//<![CDATA[
   $(".column b").css({cursor:"pointer"}).click(function(){ $(this).siblings().slideToggle(); return false });
+  $("h3").bind("click", function(){ $(this).parent().children().find(".info").toggle() });
 //]]> </script>

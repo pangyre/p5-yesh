@@ -1,6 +1,8 @@
 [% IF yesh.user_exists %]
 OH HAI, <a href="[% yesh.uri_for("/user/id", yesh.user.id)%]">[% yesh.user.username | html %]</a>
 ·
+<a href="[% yesh.uri_for("/db/schema") %]">Schema</a>
+·
 <a href="[% yesh.uri_for("/article") %]">Article</a>
 ·
 <a href="[% yesh.uri_for("/article/create") %]">New article</a>
