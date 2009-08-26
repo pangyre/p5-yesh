@@ -7,6 +7,17 @@ jQuery(function($){
 });
 //]]> </script>
 
+
+[% IF warning %]
+<div class="alert">
+<h2>Warning!</h2>
+
+<p>Your configuration is already set-up. You can keep going since you
+are an admin user but you are probably making a huge mistake.
+</p>
+</div>
+[% END %]
+
 <h3>Most of this is not functional</h3>
 
 <p>Your site is not configured. Don’t panic but ain’t nothing gonna work till it is. You have three choices now. Pick <b>one</b>.</p>

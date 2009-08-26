@@ -5,7 +5,27 @@ use parent "Catalyst::Controller::HTML::FormFu";
 use YAML qw( LoadFile DumpFile );
 
 # MUST NOT BE ACCESSIBLE IF IT'S DONE ALREADY?
-# sub auto : Private {
+sub auto : Private {
+    my ( $self, $c ) = @_;
+
+    if ( $c->config->{configured}
+         and
+         $c->user_exists
+         and
+         $c->check_user_roles("admin")
+        )
+    {
+        #$c->stash( blurb ...
+        $c->stash( warning => 1 );
+    }
+    elsif ( $c->config->{configured}
+            and
+            eval { $c->model("DBIC::User")->search->count == 0 } )
+    {
+        die "Your site has a serious problem. Try deleting ", $c->path_to("yesh_local.yml"), " and then /setup again";
+    }
+    return 1;
+}
 
 sub index : Path Args(0) FormConfig {
     my ( $self, $c ) = @_;
@@ -76,8 +96,10 @@ sub admin : Local Args(0) {
     {
         # Give the new user admin roles.
         my $admin = $c->user;
-        my $admin_role = $c->model("DBIC::SiteRole")->find({ name => "admin" });
+        my $admin_role = $c->model("DBIC::SiteRole")->search({ name => "admin" })->single;
         $admin->add_to_site_roles($admin_role);
+        my $author_role = $c->model("DBIC::SiteRole")->search({ name => "author" })->single;
+        $admin->add_to_site_roles($author_role);
         $self->_write_local_yaml($c,
                                  { configured => join(" ",
                                                       $admin->created->ymd,
@@ -136,3 +158,10 @@ my $dsn = join(":",
 
 There is no standard for the text following the driver name. Each driver is free to use whatever syntax it wants. The only requirement the DBI makes is that all the information is supplied in a single string. You must consult the documentation for the drivers you are using for a description of the syntax they require.
 
+
+    if ( 
+         and not $c->check_user_roles("admin") )
+    {
+        die "Already configured, cowboy";
+    }
+    
