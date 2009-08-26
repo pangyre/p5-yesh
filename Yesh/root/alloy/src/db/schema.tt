@@ -1,0 +1,19 @@
+[% FOR source IN schema.sources %]
+<div class="source">
+<h3>[% source %]</h3>
+
+  [% FOR column IN schema.source(source).columns %]
+<div class="column">
+<b>[% column %]</b>
+  [% FOR column IN schema.source(source).columns %]
+    [% info = schema.source(source).column_info(column) %]
+    [% FOR key IN info.keys %]
+      [% key %]
+      [% info.$key %]
+    [% END %]
+  [% END %]
+</div>
+  [% END %]
+
+[% END %]
+</div>
