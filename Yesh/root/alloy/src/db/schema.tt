@@ -1,3 +1,4 @@
+
 [% FOR source IN schema.sources %]
 <div class="source">
 <h3>[% source %]</h3>
@@ -5,15 +6,24 @@
   [% FOR column IN schema.source(source).columns %]
 <div class="column">
 <b>[% column %]</b>
+  <div style="display:none; float: left; clear:left; font-size:90%">
   [% FOR column IN schema.source(source).columns %]
     [% info = schema.source(source).column_info(column) %]
     [% FOR key IN info.keys %]
-      [% key %]
-      [% info.$key %]
+      <span style="width:24%; display:block; text-align:right;
+      padding-right: 1%;
+      float:left; font-weight: bold;">[% key %]</span>
+      <span style="width:24%; display:block; text-align:left;
+      padding-left; 1%; float:left;">[% info.$key || "n/a" %]</span>
     [% END %]
   [% END %]
+  </div>
 </div>
   [% END %]
 
 [% END %]
 </div>
+
+<script type="text/javascript">//<![CDATA[
+  $(".column b").css({cursor:"pointer"}).click(function(){ $(this).siblings().slideToggle(); return false });
+//]]> </script>
