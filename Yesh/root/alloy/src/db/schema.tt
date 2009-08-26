@@ -1,6 +1,6 @@
 
 [% FOR source IN schema.sources %]
-<div class="source" style="clear:left">
+<div class="source" style="clear:left; margin-top: 1ex; float:left;width:100%">
 <h3 style="clear:left">[% source %]</h3>
 
   [% FOR column IN schema.source(source).columns %]
