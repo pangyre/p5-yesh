@@ -1,7 +1,7 @@
 
 [% FOR source IN schema.sources %]
 <div class="source" style="clear:left">
-<h3>[% source %]</h3>
+<h3 style="clear:left">[% source %]</h3>
 
   [% FOR column IN schema.source(source).columns %]
 <div class="column" style="width:100%">
@@ -18,9 +18,8 @@
   </div>
 </div>
   [% END %]
-
-[% END %]
 </div>
+[% END %]
 
 <script type="text/javascript">//<![CDATA[
   $(".column b").css({cursor:"pointer"}).click(function(){ $(this).siblings().slideToggle(); return false });
