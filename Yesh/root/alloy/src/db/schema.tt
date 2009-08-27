@@ -23,5 +23,5 @@
 
 <script type="text/javascript">//<![CDATA[
   $(".column b").css({cursor:"pointer"}).click(function(){ $(this).siblings().slideToggle(); return false });
-  $("h3").bind("click", function(){ $(this).parent().children().find(".info").slideToggle() });
+  $("h3").css({cursor:"pointer"}).bind("click", function(){ $(this).parent().children().find(".info").slideToggle() });
 //]]> </script>

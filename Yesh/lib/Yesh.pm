@@ -12,7 +12,8 @@ use Catalyst qw(
                 Session::State::Cookie
                 Authentication
                 Authorization::Roles
-              );
+                +CatalystX::Plugin::Blurb
+             );
 use Moose;
 
 our $AUTHORITY = 'cpan:ASHLEY';
