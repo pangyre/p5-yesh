@@ -8,8 +8,6 @@ sub index :Path Args(0) {
     $c->stash( articles => $c->model("DBIC::Article")->live_rs({},
                                                                { prefetch => [qw( license )],
                                                                  order_by => "golive DESC" }) );
-#    die $c->stash->{articles}->count;
-#use YAML;    die Dump $c->model("DBIC");;
 }
 
 sub load :Chained("/") PathPart("a") CaptureArgs(1) {
@@ -17,6 +15,7 @@ sub load :Chained("/") PathPart("a") CaptureArgs(1) {
     $id ||= $c->request->arguments->[0]; # for forwards
     $c->stash->{article} = $c->model("DBIC::Article")->find($id)
         or die "RC_404: No such article";
+# forward to search with it?
 }
 
 sub view :PathPart("") Chained("load") Args(0) {
@@ -40,6 +39,7 @@ sub create :Local {
     unless ( $c->check_user_roles("author") )
     {
         $c->response->redirect($c->uri_for("/login"));
+        # set the blurb
         $c->detach();
     }
 
@@ -63,7 +63,7 @@ sub create :Local {
             $article->update;
             $c->flash_blurb(1);
             $c->blurb("article/created");
-            $c->response->redirect( $c->action_uri("Article","edit",[$article->id]) );
+            $c->response->redirect( $c->uri_for_action("/article/edit",[$article->id]) );
             $c->detach();
         }
         else

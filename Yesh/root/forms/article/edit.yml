@@ -1,0 +1,57 @@
+---
+auto_fieldset:
+  legend: You are editing...
+element:
+  - type: Text
+    name: title
+    label: Title
+    constraints:
+      - Required
+  - type: Text
+    name: parent
+    label: Parent
+  - type: Text
+    name: uuid
+    label: UUID
+    add_attributes:
+      readonly: readonly
+  - type: Select
+    name: template
+    label: Template
+    model_config:
+      resultset: Template
+  - type: Checkboxgroup
+    label: Display Groups
+    name: display_groups
+    model_config:
+      resultset: DisplayGroup
+  - type: Select
+    name: license
+    label: License
+    model_config:
+      resultset: License
+    constraints:
+      - Required
+  - type: Textarea
+    name: body
+    label: Article
+  - type: Textarea
+    name: note
+    label: Notes
+  - type: Text
+    name: golive
+    label: Go Live Date
+    add_attributes:
+      class: date
+    constraints:
+      - Required
+  - type: Text
+    name: takedown
+    label: Take Down Date
+    add_attributes:
+      class: date
+    constraints:
+      - Required
+  - type: Submit
+    name: x
+    value: Update Article

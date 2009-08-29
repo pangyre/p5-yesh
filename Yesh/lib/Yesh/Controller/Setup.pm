@@ -22,7 +22,9 @@ sub auto : Private {
             and
             eval { $c->model("DBIC::User")->search->count == 0 } )
     {
-        die "Your site has a serious problem. Try deleting ", $c->path_to("yesh_local.yml"), " and then /setup again";
+        my $config = $c->path_to("yesh_local.yml");
+        $config->remove or
+            die "Your site has a serious problem. Try deleting $config and then visiting /setup again";
     }
     return 1;
 }

@@ -11,4 +11,12 @@ inc/
 *~
 *#
 #*
+.#*
 yesh_local.yml
+Makefile.old
+bin/
+dummy.sqlite
+etc/baseline.perl
+etc/testyesh.sqlite
+yesh.yml.hold
+commit-push

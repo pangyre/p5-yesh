@@ -1,0 +1,3 @@
+<blockquote class="alert">
+[% blurb.content | html | html_para %]
+</blockquote>

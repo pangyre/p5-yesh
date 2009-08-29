@@ -1,0 +1,43 @@
+<h3>Your site DB needs some attention before we can do anything else</h3>
+
+<h4>Here are some troubleshooting suggestions</h3>
+
+<ul>
+  <li>
+Examine <b>carefully</b> the <span class="alert">error message</span> above. It probably contains the key to fixing whatever is going wrong.
+  </li>
+
+  <li>
+Related documents which might help you troubleshoot DBI connections in Perl include <a href="http://search.cpan.org/perldoc?DBI">DBI</a>, <a href="http://dbi.perl.org/support/">DBI support resources</a>. <i>Try</i> to solve your problem yourself before writing to a list.
+  </li>
+
+  <li>
+Try using another DB client to connect to your DB.
+     <ul>
+        <li>Verify the DB exists.</li>
+        <li>
+           Make sure the connection parameters are the same. This is the current connection string (DSN) for your [% yesh.config.name %] installation.
+           <ul>
+              <li><pre>[% dsn | html %]</pre></li>
+           </ul>
+        </li>
+     </ul>
+  </li>
+
+  <li>
+If your DB exists, make sure this application has permission to talk with it. Websites often run code as a special user. That user might not have permission to read configuration files or connect to your DB.
+  </li>
+
+  <li>
+If you want to attempt to manually install the database and tables, you can try applying the raw SQL from one of the schemas yourself.
+<ul> [% FOR dir IN ddl_dir.children; "<li>${dir}</li>"; END %]</ul>
+Currently [% yesh.config.name %] is not tested on PostgreSQL.
+  </li>
+
+</ul>
+
+[%#
+     <ul>
+        <li></li>
+     </ul>
+%]
