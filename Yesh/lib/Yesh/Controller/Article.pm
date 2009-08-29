@@ -47,6 +47,7 @@ sub create :Local Args(0) FormConfig {
     $form->render;
 
     if ( $form->submitted_and_valid ) {
+        $form->add_valid(user => $c->user->id);
         my $article = $form->model->create({resultset => 'Article'});
         $c->flash_blurb(1);
         $c->blurb("article/created");
