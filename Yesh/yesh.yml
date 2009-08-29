@@ -53,6 +53,8 @@ View::Alloy:
   INCLUDE_PATH:
     - __path_to(root/alloy/src)__
     - __path_to(root/alloy/lib)__
+  PRE_PROCESS:
+    - macros.tt
   TEMPLATE_EXTENSION: .tt
   CATALYST_VAR: yesh
   WRAPPER: base_page.tt
