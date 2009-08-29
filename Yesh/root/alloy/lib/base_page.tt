@@ -7,26 +7,36 @@
 <title>[% PROCESS title.tt %]</title>
 <link rel="stylesheet" media="screen" type="text/css" href="[% yesh.uri_for("/css/universal.css") %]" />
 <link rel="stylesheet" media="screen" type="text/css" href="[% yesh.uri_for("/css/site.css") %]" />
-<script type="text/javascript" src="[% yesh.uri_for("/js/jquery.min.js") %]"> </script>
-<script type="text/javascript" src="[% yesh.uri_for("/js/jquery-ui.min.js") %]"> </script>
+<link rel="stylesheet" media="screen" type="text/css" href="[% yesh.uri_for("/css/jquery/smoothness/ui.all.css") %]" />
 <style type="text/css" media="screen">
 /* test space */
 </style>
+<script type="text/javascript" src="/js/jquery/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="/js/jquery/ui/jquery-ui-1.7.custom.js"></script>
+<script type="text/javascript" src="/js/jquery/ui/ui.dialog.js"></script>
+<script type="text/javascript" src="/js/jquery/ui/ui.datepicker.js"></script>
 <script type="text/javascript">//<![CDATA[
+jQuery(function($) {
+   $("#blurbs .alert").dialog({ dialogClass: "alert", title: "Notice" });
+   var dateVars = { changeYear: true, dateFormat: 'yy-mm-dd', constrainInput: false };
+   $('input[name="takedown"]').datepicker(dateVars); //{ defaultDate: "+1y" });
+   $("input.date").datepicker(dateVars);
+   $(".pulse").effect("pulsate");
+});
 //]]> </script>
 </head>
 
 <body>
 <div id="page">
   <div id="header">
-<h3>[% PROCESS title.tt UNLESS title %]</h3>
+<h1>&lt;me/&gt;</h1>
   </div>
   <div id="primary_nav">
 [% PROCESS primary_nav.tt %]
   </div>
   <div id="content">
-<h1 id="pageTitle">[% ( title || "No title…" ) | html %]</h1>
-[% PROCESS blurbs IF yesh.blurb %]
+<h1 id="pageTitle">[% title | html %]</h1>
+[% PROCESS blurbs.tt IF yesh.blurb %]
 [% content %]
     <div id="content_footer">
     </div>
@@ -41,4 +51,3 @@
 </div>
 </body>
 </html>
-

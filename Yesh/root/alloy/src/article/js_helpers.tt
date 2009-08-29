@@ -1,0 +1,14 @@
+<script type="text/javascript">//<![CDATA[
+var license = [% license.encode_json || "{}" %];
+$(function() {
+  $("select[name='license']").parent().append('<div class="center tiny" id="license_uri"/>');
+  $("select[name='license']").change(function(){
+     var myL = license[ $(this).val() ];
+     var link = $("<a/>");
+     link.text(myL.title).hide();
+     link.attr({href:myL.uri});
+     $("#license_uri").empty().append(link);
+     link.fadeIn();
+  });
+});
+//]]> </script>

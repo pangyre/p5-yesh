@@ -1,0 +1,34 @@
+[%-MACRO edit_article_button(a,class) BLOCK-%]
+<a title="Edit: [% a.title | truncate(50,"…") | html %]"
+class="[% class || "button" %]" href="[% article_uri(a).replace('/preview\z',"") %]/edit">edit</a>
+[%-END-%]
+
+[%-MACRO article_uri(a) BLOCK-%]
+[% yesh.uri_for_action("/article/view", [a.id]) %][% "/preview" UNLESS a.is_live %]
+[%-END-%]
+
+[%-MACRO article_link(a) BLOCK-%]
+<a href="[% article_uri(a) %]" title="[% a.title | html %]">[% a.title %]</a>
+[%-END-%]
+
+
+[%-MACRO real_list_dirs(file_dir) BLOCK-%]
+[% root ||= file_dir %]
+[% IF file_dir.is_dir %]
+[% NEXT IF file_dir.stringify.match('\.') %]
+  <li>[% file_dir.relative(root) == "." ? file_dir.relative(root.parent) : file_dir.relative(root) %]
+    <ul>[% FOR item IN file_dir.children %]
+      [% real_list_dirs(item,root) %]
+    [% END %]</ul>
+</li>
+  [% ELSE %]
+<li>
+  <a href="[% yesh.uri_for("",file_dir.relative(root)) %]">[% file_dir.basename %]</a>
+</li>
+  [% END %]
+[%-END-%]
+
+[%-MACRO list_dirs(file_dir) BLOCK-%]
+  <ul>[% real_list_dirs(file_dir) %]</ul>
+[%-END-%]
+
