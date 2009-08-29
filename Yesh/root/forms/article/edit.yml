@@ -1,6 +1,13 @@
 ---
 auto_fieldset:
   legend: You are editing...
+auto_id: %f_%n
+default_args:
+  elements:
+    Radiogroup:
+      auto_id: $f_%n_%c
+    Checkboxgroup:
+      auto_id: %f_%n_%c
 element:
   - type: Text
     name: title
@@ -15,16 +22,28 @@ element:
     label: UUID
     add_attributes:
       readonly: readonly
+    model_config:
+      read_only: 1
   - type: Select
     name: template
     label: Template
     model_config:
       resultset: Template
-  - type: Checkboxgroup
+  - type: Radiogroup
     label: Display Groups
     name: display_groups
     model_config:
       resultset: DisplayGroup
+
+  - type: Checkboxgroup
+    label: Status
+    name: status
+    options:
+      - [ "draft", "Draft" ]
+      - [ 'publish', "Published" ]
+      - [ 'manual', "Manual" ]
+      - [ 'deleted', "Deleted" ]
+
   - type: Select
     name: license
     label: License
@@ -35,6 +54,9 @@ element:
   - type: Textarea
     name: body
     label: Article
+    constraints:
+      - Required
+
   - type: Textarea
     name: note
     label: Notes

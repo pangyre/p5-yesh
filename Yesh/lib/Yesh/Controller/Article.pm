@@ -33,9 +33,8 @@ sub preview :Chained("load") Args(0) {
     }
 }
 
-sub create :Local {
+sub create :Local Args(0) FormConfig {
     my ( $self, $c ) = @_;
-
     unless ( $c->check_user_roles("author") )
     {
         $c->response->redirect($c->uri_for("/login"));
@@ -43,35 +42,18 @@ sub create :Local {
         $c->detach();
     }
 
-    if ( $c->request->method eq 'POST' )
-    {
-        my %data = ( user => $c->user->id );
-        for my $col ( qw( parent title template license body note status comment_flag ) )
-        {
-            $data{$col} = $c->request->param($col)
-                if $c->request->param($col);
-        }
+    my $form = $c->stash->{form};
+    $form->constraints_from_dbic($c->model("DBIC::Article"));
+    $form->render;
 
-        my $article = eval { $c->model("DBIC")->schema
-                                 ->txn_do(sub{
-                                     $c->model("DBIC::Article")->create(\%data)
-                                     })
-                             };
-
-        if ( $article and $article->in_storage )
-        {
-            $article->update;
-            $c->flash_blurb(1);
-            $c->blurb("article/created");
-            $c->response->redirect( $c->uri_for_action("/article/edit",[$article->id]) );
-            $c->detach();
-        }
-        else
-        {
-            die $@;
-        }
-        $c->stash( article => $article || \%data );
+    if ( $form->submitted_and_valid ) {
+        my $article = $form->model->create({resultset => 'Article'});
+        $c->flash_blurb(1);
+        $c->blurb("article/created");
+        $c->response->redirect( $c->uri_for_action("/article/edit",[$article->id]) );
+        $c->detach;
     }
+
     $self->_load_related_form_data($c);
 }
 
@@ -80,14 +62,18 @@ sub edit :Chained("load") Args(0) FormConfig {
     my $article = $c->stash->{article};
 
     my $form = $c->stash->{form};
-    $form->model->default_values( $article );
+    $form->constraints_from_dbic($c->model("DBIC::Article"));
+    $form->render;
 
     if ( $form->submitted_and_valid ) {
         $form->save_to_model($article);
-#        $article->update();
-        #        $c->flash->{status_msg} = 'Article created';
+        # flash blurb here
         $c->response->redirect($c->request->uri);
         $c->detach;
+    }
+    elsif ( not $form->submitted )
+    {
+        $form->model->default_values( $article );
     }
     $self->_load_related_form_data($c);
 }
@@ -146,3 +132,45 @@ sub _load_related_form_data {
 1;
 
 __END__
+
+sub create :Local {
+    my ( $self, $c ) = @_;
+
+    unless ( $c->check_user_roles("author") )
+    {
+        $c->response->redirect($c->uri_for("/login"));
+        # set the blurb
+        $c->detach();
+    }
+
+    if ( $c->request->method eq 'POST' )
+    {
+        my %data = ( user => $c->user->id );
+        for my $col ( qw( parent title template license body note status comment_flag ) )
+        {
+            $data{$col} = $c->request->param($col)
+                if $c->request->param($col);
+        }
+
+        my $article = eval { $c->model("DBIC")->schema
+                                 ->txn_do(sub{
+                                     $c->model("DBIC::Article")->create(\%data)
+                                     })
+                             };
+
+        if ( $article and $article->in_storage )
+        {
+            $article->update;
+            $c->flash_blurb(1);
+            $c->blurb("article/created");
+            $c->response->redirect( $c->uri_for_action("/article/edit",[$article->id]) );
+            $c->detach();
+        }
+        else
+        {
+            die $@;
+        }
+        $c->stash( article => $article || \%data );
+    }
+    $self->_load_related_form_data($c);
+}

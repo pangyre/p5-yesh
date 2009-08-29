@@ -16,7 +16,7 @@ Plugin::Authentication:
       user_class: DBIC::User
       role_relation: site_roles
       role_field: name
-    moo:
+    openid:
       credential:
         user_model: DBIC::User
         password_type: self_check
@@ -31,6 +31,12 @@ Plugin::Authentication:
 Controller::User:
   model_stash:
     schema: DBIC
+
+Controller::HTML::FormFu:
+  default_action_use_path: 1
+  model_stash:
+    schema: DBIC
+
 
 # MODELS -------------------------------------------------
 Model::DBIC:

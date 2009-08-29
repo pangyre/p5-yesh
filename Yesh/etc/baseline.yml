@@ -21,6 +21,9 @@ License:
   - display: ''
     title: Creative Commons http://creativecommons.org/licenses/by-nc-sa/3.0/
     uri: http://creativecommons.org/licenses/by-sa/3.0/
+  - display: '(cc0)'
+    title: CC0 1.0 Universal
+    uri: http://creativecommons.org/publicdomain/zero/1.0/
   - display: ''
     title: ' Artistic License 2.0'
     uri: http://www.perlfoundation.org/artistic_license_2_0
