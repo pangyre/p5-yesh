@@ -1,5 +1,5 @@
 <h3>Resource [% yesh.request.uri %]</h3>
-[% IF yesh.check_any_user_role("admin","owner","editor") %]
+[%-IF yesh.debug OR yesh.check_any_user_role("admin","owner","editor") %]
 <blockquote class="alert">
 [% error | html | html_para %]
 </blockquote>

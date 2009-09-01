@@ -7,20 +7,23 @@ use YAML;
 
 # To deal with known/expected/conditional exceptions; array because
 # they must be run in order.
-my @Exceptions = ( store_change => {
-                                    match => qr/Store claimed to have a restorable user/,
-                                   },
-                   no_db => {
-                             match => qr/DBI Connection failed: DBI connect\([^)]+\) failed: (.+)/,
-#                             match => qr/Table '[^.]+.user' doesn't exist/, DB WENT AWAY...?
-                            },
-                   no_template => { match => qr/file error - ([^:]+): not found/,
-                                    action => "no_template",
-                                  },
-                   generic => { match => qr/RC_(\d\d\d)(?::\s*(.+)\")?/,
-                                },
-                   unknown => { match => qr/\A/ },
-                   );
+my @Exceptions = (
+    store_change => {
+        rx => qr/Store claimed to have a restorable user/,
+    },
+    no_db => {
+        rx => [
+            qr/(DBI Exception.+) at .+/,
+            qr/(no such table\S*\s+\S+)/,
+            ],
+        #rx => qr/DBI connect\([^)]+\) failed: (.+)|DBI Exception:?\s+(.+)/,
+    },
+    no_template => { rx => qr/file error - ([^:]+): not found/,
+                     action => "no_template",
+    },
+    generic => { rx => qr/RC_(\d\d\d)(?::\s*(.+)\")?/,
+    },
+    );
 
 sub process :Private {
     my ( $self, $c ) = @_;
@@ -37,32 +40,39 @@ sub process :Private {
     my @tmp_ex = @Exceptions;
     while ( my ( $action, $exception ) = splice(@tmp_ex,0,2) )
     {
-        if ( @{$exception->{matches}} = $error =~ $exception->{match} )
+        my @rxes = ref($exception->{rx}) eq "ARRAY" ?
+            @{$exception->{rx}} : $exception->{rx};
+      RX:
+        for my $rx ( @rxes )
         {
-            $action = $exception->{action} if $exception->{action};
-            $exception->{error} = $error;
-            $c->clear_errors;
-            $c->forward($action,[$exception]);
-            return 1;
+            if ( @{$exception->{matches}} = $error =~ $rx )
+            {
+                $action = $exception->{action} if $exception->{action};
+                $exception->{error} = $error;
+                $c->clear_errors;
+                $c->forward($action,[$exception]);
+                return 1;
+            }
         }
     }
+    $c->clear_errors;
+    $c->forward("generic",
+                [
+                 { matches => [ 500,
+                                ref($error) ? YAML::Dump($error) : $error ]
+                 }
+                ]);
 }
 
 sub generic :Private {
     my ( $self, $c, $exception ) = @_;
     my ( $status, $message ) = @{$exception->{matches}};
-#    $message ||= $status ? HTTP::Status::status_message($status) : "Unknown error";
     $status ||= 500;
     $c->stash( error => $message,
-               title => HTTP::Status::status_message($status));
+               status => $status,
+               title => join(" \x{b7} ", $status, HTTP::Status::status_message($status) ),
+        );
     $c->response->status( $status );
-}
-
-sub unknown :Private {
-    my ( $self, $c, $error ) = @_;
-    $error = YAML::Dump($error) if ref($error);
-    $c->stash( error => "$error" || "Don't ask me, I just work here." );
-    $c->response->status(500);
 }
 
 sub no_template :Private {
@@ -73,11 +83,13 @@ sub no_template :Private {
 
 sub no_db :Private {
     my ( $self, $c, $exception ) = @_;
-    my ( $message ) = @{$exception->{matches}};
+    my ( @message ) = @{$exception->{matches}};
     $c->delete_session("DB is gone!");
-    $c->stash( error => $message,
+    $c->stash( error => join(", ", @message),
                template => "error/no_db.tt",
-               title => HTTP::Status::status_message(503) );
+               status => 503,
+               title => join(" ", 503, HTTP::Status::status_message(503) ),
+        );
 }
 
 sub store_change :Private {
@@ -92,23 +104,3 @@ sub store_change :Private {
 1;
 
 __END__
-
-sub index :Path :Args(0) {
-    my ( $self, $c ) = @_;
-
-    $c->response->body('Matched Yesh::Controller::Error in Error.');
-}
-
-
-=head1 AUTHOR
-
-jinx
-
-=head1 LICENSE
-
-This library is free software, you can redistribute it and/or modify
-it under the same terms as Perl itself.
-
-=cut
-
-1;

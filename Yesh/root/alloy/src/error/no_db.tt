@@ -1,0 +1,11 @@
+[% PROCESS error.tt %]
+
+[% FILTER html_para %]
+The database is [% message %]
+
+It appears that you have not set-up your database. It is also possible you have and it got deleted but let us be positive!
+
+If you want to give it a shot, you could try to set things up. This
+might be a terrible mistake. Is the web not fun! <b><a href="[%
+yesh.uri_for("/setup") %]">Set-up</a></b>.
+[% END %]
