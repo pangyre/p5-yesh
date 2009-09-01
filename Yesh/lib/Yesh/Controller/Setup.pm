@@ -26,6 +26,10 @@ sub auto : Private {
         $config->remove or
             die "Your site has a serious problem. Try deleting $config and then visiting /setup again";
     }
+    elsif ( $c->config->{configured} )
+    {
+        die "RC_404";
+    }
     return 1;
 }
 

@@ -17,6 +17,8 @@ requires "Crypt::Eksblowfish::Bcrypt";
 
 # requires "Catalyst::Authentication::Realm::SimpleDB";
 
+requires "CatalystX::Plugin::Blurb";
+
 test_requires "HTTP::Request::Common";
 
 catalyst;

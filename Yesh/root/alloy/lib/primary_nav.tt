@@ -1,5 +1,5 @@
 [% IF yesh.user_exists %]
-OH HAI, <a href="[% yesh.uri_for("/user/id", yesh.user.id)%]">[% yesh.user.username | html %]</a>
+OH HAI, <a href="[% yesh.uri_for("/user", yesh.user.id)%]">[% yesh.user.username | html %]</a>
 
 [% UNLESS yesh.action == 'db/schema' %]· <a href="[% yesh.uri_for("/db/schema") %]">Schema</a>[% END %]
 ·
