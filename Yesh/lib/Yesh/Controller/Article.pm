@@ -35,11 +35,17 @@ sub preview :Chained("load") Args(0) {
 
 sub create :Local Args(0) FormConfig {
     my ( $self, $c ) = @_;
-    unless ( $c->check_user_roles("author") )
+    unless ( $c->user_exists )
     {
         $c->response->redirect($c->uri_for("/login"));
+        $c->flash( return_to => $c->request->uri->as_string );
         # set the blurb
         $c->detach();
+    }
+    unless ( $c->check_user_roles("author") )
+    {
+        $c->blurb("article/author_to_create");
+        die "RC_403";
     }
 
     my $form = $c->stash->{form};

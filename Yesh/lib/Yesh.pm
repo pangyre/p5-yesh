@@ -23,7 +23,7 @@ __PACKAGE__->config
     ( name => "Yesh/$VERSION",
       # setup_components => { except => qr/[.\#]|yesh_local.yml/ },
       session => {
-          verify_address => 1,
+          # verify_address => 1,
           rewrite => 0,
           storage => __PACKAGE__->path_to("tmp/session-$<.fmp")->stringify,
       },
