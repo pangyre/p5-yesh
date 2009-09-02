@@ -1,1 +1,6 @@
-[% PROCESS login_box.tt %]
+[%# PROCESS login_box.tt %]
+[% form %]
+<p>
+  If you are a new user, you may <a href="[%
+  yesh.uri_for("/user/register") %]">register here</a>.
+</p>

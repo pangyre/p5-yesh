@@ -1,7 +1,7 @@
 package Yesh::Controller::Session;
 use strict;
 use warnings;
-use parent 'Catalyst::Controller';
+use parent 'Catalyst::Controller::HTML::FormFu';
 use URI;
 
 #sub index :Path :Args(0) {
@@ -9,7 +9,7 @@ use URI;
 #    $c->go("login");
 #}
 
-sub login :Global {
+sub login :Global FormConfig {
     my ( $self, $c, @args ) = @_;
 
     my $return_to = $c->flash->{return_to};
@@ -23,24 +23,32 @@ sub login :Global {
     $c->flash( return_to => $return_to );
     $c->keep_flash("return_to");
 
-    my $username = $c->req->param("username");
-    my $password = $c->req->param("password") if $c->req->method eq "POST";
-
-    #$c->log->debug( $user->check_password($password) ? "YES!!!!!" : "nope :(" );
-
-    if ( $username and $password )
+    my $form = $c->stash->{form};
+    $c->log->debug("return to: $return_to");
+    if ( $form->submitted_and_valid )
     {
+        my $username = $form->param_value("username");
+        my $password = $form->param_value("password");
         my $user = $c->model("DBIC::User")->search( username => $username )->single;
-        
         if ( $user and $user->check_password($password) )
         {
-            $c->authenticate({ username => $username, password => $user->password }) or die;
             $c->clear_flash;
+            $c->authenticate({ username => $username, password => $user->password }) or die;
             $c->response->redirect( $return_to );
             $c->detach;
         }
+        else
+        {
+            $form->get_field("password")
+                ->get_constraint({ type => 'Callback' })
+                ->force_errors(1);
+            $form->get_field("username")
+                ->get_constraint({ type => 'Callback' })
+                ->force_errors(1);
+            $form->process();
+            return;
+        }
     }
-    $c->log->debug("return to: $return_to");
 }
 
 sub logout :Global Args(0) {
@@ -52,3 +60,11 @@ sub logout :Global Args(0) {
 }
 
 1;
+
+__END__
+
+    my $username = $c->req->param("username");
+    my $password = $c->req->param("password") if $c->req->method eq "POST";
+
+    #$c->log->debug( $user->check_password($password) ? "YES!!!!!" : "nope :(" );
+
