@@ -1,0 +1,23 @@
+---
+auto_fieldset:
+  legend: Sign-in
+method: post
+element:
+  - type: Text
+    name: username
+    label: Username
+    constraints:
+      - Required
+      - type: Callback
+        message: Password and username do not match.
+  - type: Password
+    name: password
+    label: Password
+#    render_value: 1
+    constraints:
+      - Required
+      - type: Callback
+        message: " "
+  - type: Submit
+    name: x
+    value: Sign-in
