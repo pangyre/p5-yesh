@@ -8,29 +8,30 @@ jQuery(function($){
 });
 //]]> </script>
 
-
 [% IF warning %]
-<div class="alert">
-<h2>Warning!</h2>
+<div>
+<h2 class="alert">Warning!</h2>
 
-<p>Your configuration is already set-up. You can keep going since you
-are an admin user but <b>you are probably making a huge mistake</b>.
+<p>Your configuration is already set up. You can keep going since you
+are an admin user but <b class="alert">you are probably making a huge mistake</b>.
 </p>
 
 [%-IF ( tables = yesh.model("DBIC").storage.dbh.tables() ) %]
 <p><b>For example, the following tables are already set up and usable in the
 currently designated database ([% yesh.model("DBIC").connect_info.dsn %]):</b>
-[% tables.serial() %]. <b>If they contain data you might erase them
-<i>permanently</i> by going through the set up steps again.</b>
+[% tables.serial() %]. <b class="alert">If they contain data you might erase them
+<i class="alert">permanently</i> by going through the set up steps again.</b>
 </p>
 [%-END %]
 
-</div>
-[% END %]
+<p>Pick <b>one</b> of the following set up choices.</p>
 
-<h3>Most of this is not functional</h3>
+</div>
+[%-ELSE %]
 
 <p>Your site is not configured. Don’t panic but ain’t nothing gonna work till it is. You have three choices now. Pick <b>one</b>.</p>
+
+[%-END %]
 
 <ol style="display:none;" class="option" id="options">
     <li><b><a class="option1" href="#option1">Simplistic</a></b>. Uses SQLite. Easy, not necessarily recommended.</a></li>
@@ -66,7 +67,7 @@ Are you feeling lucky? This will deploy your site database to <a href"http://www
 </div>
 
 <div class="box option" id="option3" style="background-color:#faf9f3">
-<h2><a name="option3">3. Advanced set-up</a></h2>
+<h2><a name="option3">3. Advanced set up</a></h2>
 
 <p>If you know <a href="http://www.catalystframework.org/">Catalyst</a>, are a competent programmer, or someone with some spare hours to spend learning some really great stuff, you can edit the following <acronym title="YAML Ain’t Markup Language">YAML</acronym> configuration file directly.</p>
 
@@ -76,7 +77,8 @@ Are you feeling lucky? This will deploy your site database to <a href"http://www
 </p>
 
 <p>
-You will need to know <acronym title="YAML Ain’t Markup Language"><a href="http://www.yaml.org/">YAML</a></acronym> and exactly how to set-up a database connection for [%perldoc_link("DBI")%] via [%perldoc_link("DBIx::Class::Schema")%].
+You will need to know <acronym title="YAML Ain’t Markup Language"><a
+href="http://www.yaml.org/">YAML</a></acronym> and exactly how to set up a database connection for [%perldoc_link("DBI")%] via [%perldoc_link("DBIx::Class::Schema")%].
 </p>
 
 <h3>Database documents</h3>

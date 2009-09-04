@@ -46,6 +46,8 @@ sub index : Path Args(0) FormConfig {
              );
     if ( $c->request->param("auto") )
     {
+        $c->delete_session("Deploying DB");
+        $c->config->{configured} = undef;
         $c->detach("_deploy_sqlite");
     }
 }
@@ -116,6 +118,7 @@ sub admin : Local Args(0) {
                                                       $admin->created->hms,
                                        )
                                  });
+        $c->config->{configured} = "*** LIVE *** (restart to pick-up configured date/time stamp)";
         $c->response->redirect($c->uri_for_action("setup/done"));
     }
 }
