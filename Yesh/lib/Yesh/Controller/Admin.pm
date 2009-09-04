@@ -5,8 +5,26 @@ use parent 'Catalyst::Controller';
 
 use List::MoreUtils qw( natatime );
 
+sub auto : Private {
+    my ( $self, $c ) = @_;
+    $c->assert_any_user_role(qw( admin owner ));
+}
+
 sub index :Path :Args(0) {
 #    my ( $self, $c ) = @_;
+}
+
+sub config : Local {
+}
+
+sub env : Local {}
+
+sub inc : Local {
+    my ( $self, $c ) = @_;
+    my @module = grep { /^\w/ }
+        map { s/\.\w+\z// and s,/,::,g; $_ } keys %INC;
+    %{ $c->stash->{versions} } = map { $_ => $_->VERSION } sort @module;
+    $c->stash( inc => { %INC } );
 }
 
 sub dependencies : Local {

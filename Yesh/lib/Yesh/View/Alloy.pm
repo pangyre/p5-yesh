@@ -16,7 +16,14 @@ __PACKAGE__->config
              return scalar reverse $text;
          },
      },
-     );
+     DUMP => {
+         handler => sub {
+             require YAML;
+             YAML::Dump(shift);
+#             # return _yesh_dumper(+shift);
+         },
+     }
+    );
 
 Template::Alloy->define_vmethod
     (
@@ -49,8 +56,30 @@ Template::Alloy->define_vmethod
          JSON::XS::encode_json({ map { $_->{id} => $_ } $rs->all });
      });
 
-1;
+sub _yesh_dumper {
+    my $thing = shift;
+    if ( ref($thing) eq 'HASH' )
+    {
+        for my $key ( sort keys %$thing )
+        {
+            return $key, _yesh_dumper($thing->{$key});
+        }
+    }
+    elsif (  ref($thing) eq 'ARRAY' )
+    {
 
+    }
+    elsif (  ref($thing) eq 'SCALAR' )
+    {
+
+    }
+    else
+    {
+        return $thing;
+    }
+}
+
+1;
 
 __END__
 

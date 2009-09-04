@@ -1,0 +1,26 @@
+[%-META title = "%INC" %]
+
+<ul>
+[%-FOR name IN inc.keys().sort() %]
+[%-SET mod = name.replace('\.\w+\z','').replace("/","::") %]
+[%-NEXT IF mod.match('\A::') %]
+<li class="package"><a href="http://search.cpan.org/perldoc?[% mod | html %]">[% mod %]</a>
+   <ul class="info">
+      [%-IF versions.$mod %]<li>[% versions.$mod %]</li>[% END %]
+      <li>[% inc.$name %]</li>
+   </ul>
+</li>
+[%-END %]
+
+</ul>
+
+<script type="text/javascript">//<![CDATA[
+  $(".package .info").hide();
+  $(".package").hover(function(){ $(".info:not(:animated)", this).slideDown() },
+                      function(){ $(".info", this).animate({opacity:1},2222,"", function(){$(this).slideUp()})} );
+//]]> </script>
+
+[% DUMP inc IF yesh.debug %]
+
+  $(".info").css({cursor:"pointer"}).click(function(){ $(this).siblings().slideToggle(); return false });
+  $("h3").css({cursor:"pointer"}).bind("click", function(){ $(this).parent().children().find(".info").slideToggle() });

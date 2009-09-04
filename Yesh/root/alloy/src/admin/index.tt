@@ -1,0 +1,12 @@
+[% META title = "Site Administration" %]
+
+<ul>
+  <li><a href="[% yesh.uri_for_action("admin/dependencies") %]">Makefile Dependencies</a></li>
+  <li><a href="[% yesh.uri_for_action("admin/config") %]">Configuration</a></li>
+  <li><a href="[% yesh.uri_for_action("admin/env") %]">%ENV</a></li>
+  <li><a href="[% yesh.uri_for_action("admin/inc") %]">%INC</a></li>
+</ul>
+
+[% RETURN %]
+   <li><a href="[% yesh.uri_for_action("") %]"></a></li>
+
