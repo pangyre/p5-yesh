@@ -1,16 +1,29 @@
+[% META title = "Dependencies" %]
+<p>
+ Known dependencies from the Makefile: [% dependencies.size() || "none" %].
+</p>
+
+[%-IF broken %]
+<p class="alert">
+ Problems found in <i>[% broken.serial() %]</i>. See below.
+</p>
+[%-ELSE %]
+<p>Everything looks good!</p>
+[%-END %]
+
 <ol>
 [% FOR dep IN dependencies %]
 <li style="color:[% dep.result == "OK" ? "#071" : "#a00" %]">
  <a href="[% dep.uri %]">[% dep.module | html %]</a>
    <ul>
      [%-IF dep.version %]
-     <li>Version: [% dep.version %]</li>
+     <li>Version: [% dep.version | html %]</li>
      [%-END %]
      [%-IF dep.inc r%]
-     <li>INC: [% dep.inc %]</li>
+     <li>INC: [% dep.inc | html %]</li>
      [%-END %]
      [%-IF dep.result != "OK" %]
-     <li>[% dep.result %]</li>
+     <li>[% dep.result | html %]</li>
      [%-END %]
    </ul>
 </li>

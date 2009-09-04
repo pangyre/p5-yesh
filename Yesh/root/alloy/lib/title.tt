@@ -1,3 +1,4 @@
+[%-title ||= template.title %]
 [%-FILTER trim-%]
   [%-FILTER collapse-%]
     [%-FILTER html -%]

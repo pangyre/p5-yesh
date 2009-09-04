@@ -158,6 +158,10 @@ sub dependencies : Local {
             $plain_name .= ".pm";
             $info->{inc} = $INC{$plain_name};
         }
+        else
+        {
+            push @{$c->stash->{broken}}, $module;
+        }
         push @{$c->stash->{dependencies}}, $info;
         $c->log->debug("$usage --> " . ( $@ || "fine!" ));
     }
