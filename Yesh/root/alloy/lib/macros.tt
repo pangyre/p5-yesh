@@ -32,3 +32,8 @@ class="[% class || "button" %]" href="[% article_uri(a).replace('/preview\z',"")
   <ul>[% real_list_dirs(file_dir) %]</ul>
 [%-END-%]
 
+
+[%-MACRO perldoc_link(module,text) BLOCK-%][% text ||= module %]
+<a href="http://search.cpan.org/perldoc?[% module | html | uri %]" title="[% module | html %]">[% text | html %]</a>
+[%-END-%]
+

@@ -4,7 +4,7 @@
 [%-FOR name IN inc.keys().sort() %]
 [%-SET mod = name.replace('\.\w+\z','').replace("/","::") %]
 [%-NEXT IF mod.match('\A::') %]
-<li class="package"><a href="http://search.cpan.org/perldoc?[% mod | html %]">[% mod %]</a>
+<li class="package">[% perldoc_link(mod) %]
    <ul class="info">
       [%-IF versions.$mod %]<li>[% versions.$mod %]</li>[% END %]
       <li>[% inc.$name %]</li>

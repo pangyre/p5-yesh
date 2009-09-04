@@ -4,6 +4,7 @@ use warnings;
 use parent 'Catalyst::Controller';
 
 use List::MoreUtils qw( natatime );
+use Scalar::Util qw( blessed );
 
 sub auto : Private {
     my ( $self, $c ) = @_;
@@ -17,7 +18,12 @@ sub index :Path :Args(0) {
 sub config : Local {
 }
 
-sub env : Local {}
+sub env : Local {
+    my ( $self, $c ) = @_;
+    $c->stash( env => $c->engine->env,
+               engine => blessed($c->engine),
+        );
+}
 
 sub inc : Local {
     my ( $self, $c ) = @_;
@@ -41,7 +47,6 @@ sub dependencies : Local {
             module => $module,
             version => $version || $module->VERSION,
             result => $@ || "OK",
-            uri => join("?", "http://search.cpan.org/perldoc", $module),
         };
         unless ( $@ )
         {

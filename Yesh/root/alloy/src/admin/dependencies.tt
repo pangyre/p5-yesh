@@ -14,7 +14,7 @@
 <ol>
 [% FOR dep IN dependencies %]
 <li style="color:[% dep.result == "OK" ? "#071" : "#a00" %]">
- <a href="[% dep.uri %]">[% dep.module | html %]</a>
+ [% perldoc_link(dep.module) %]
    <ul>
      [%-IF dep.version %]
      <li>Version: [% dep.version | html %]</li>
