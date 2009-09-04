@@ -56,7 +56,7 @@ sub register : Local Args(0) Form {
     }
     else
     {
-        die "why are you here...?"
+        # die "why are you here...?"
     }
 }
 

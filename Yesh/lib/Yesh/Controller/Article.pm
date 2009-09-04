@@ -3,11 +3,18 @@ use strict;
 use warnings;
 use parent 'Catalyst::Controller::HTML::FormFu';
 
+__PACKAGE__->config( articles_per_page => 25 );
+
 sub index :Path Args(0) {
     my ( $self, $c ) = @_;
-    $c->stash( articles => $c->model("DBIC::Article")->live_rs({},
-                                                               { prefetch => [qw( license )],
-                                                                 order_by => "golive DESC" }) );
+    $c->stash( articles => $c->model("DBIC::Article")
+               ->live_rs({},
+                         { prefetch => [qw( license )],
+                           order_by => "golive DESC",
+                           page => 1,
+                           rows => $self->{articles_per_page},
+                         })
+        );
 }
 
 sub load :Chained("/") PathPart("a/id") CaptureArgs(1) {

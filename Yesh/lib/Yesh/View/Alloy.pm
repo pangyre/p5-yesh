@@ -5,12 +5,14 @@ no warnings "uninitialized";
 use parent "Catalyst::View::TT::Alloy";
 use Scalar::Util "blessed";
 use JSON::XS ();
+use Number::Format;
 
 __PACKAGE__->config
     (
      ENCODING => 'UTF-8',
      FILTERS => {
          commify => sub {
+             return Number::Format::format_number(shift);
              my $text = reverse $_[0];
              $text =~ s/(\d\d\d)(?=\d)(?!\d*\.)/$1,/g;
              return scalar reverse $text;
