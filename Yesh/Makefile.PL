@@ -18,6 +18,7 @@ requires "Crypt::Eksblowfish::Bcrypt";
 # requires "Catalyst::Authentication::Realm::SimpleDB";
 
 requires "CatalystX::Plugin::Blurb";
+requires "DateTime::Format::SQLite";
 
 test_requires "HTTP::Request::Common";
 

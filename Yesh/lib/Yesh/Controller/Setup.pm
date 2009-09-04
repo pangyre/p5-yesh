@@ -7,7 +7,7 @@ use YAML qw( LoadFile DumpFile );
 # MUST NOT BE ACCESSIBLE IF IT'S DONE ALREADY?
 sub auto : Private {
     my ( $self, $c ) = @_;
-
+    return 1;
     if ( $c->config->{configured}
          and
          $c->user_exists
@@ -133,6 +133,13 @@ sub _load_baseline {
             $rs->create($row)->update;
         }
     }
+}
+
+sub dependencies : Local {
+    my ( $self, $c ) = @_;
+    my $makefile = $c->path_to("Makefile.PL");
+    my @deps = grep { /requires\s+(\S+)/ } scalar $makefile->slurp;
+    $c->res->body(join("+",@deps));
 }
 
 
