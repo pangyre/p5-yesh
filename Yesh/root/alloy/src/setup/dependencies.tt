@@ -19,7 +19,7 @@
      [%-IF dep.version %]
      <li>Version: [% dep.version | html %]</li>
      [%-END %]
-     [%-IF dep.inc r%]
+     [%-IF dep.inc %]
      <li>INC: [% dep.inc | html %]</li>
      [%-END %]
      [%-IF dep.result != "OK" %]
