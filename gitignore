@@ -20,3 +20,5 @@ etc/baseline.perl
 etc/testyesh.sqlite
 yesh.yml.hold
 commit-push
+
+inc/

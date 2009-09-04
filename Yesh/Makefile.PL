@@ -8,14 +8,12 @@ requires "Catalyst::Runtime" => "5.80007";
 requires "Catalyst::Plugin::ConfigLoader";
 requires "Catalyst::Plugin::Static::Simple";
 requires "Catalyst::Action::RenderView";
+requires "Catalyst::Controller::REST";
 requires "parent";
 requires "YAML";
-requires "Catalyst::Controller::REST";
-requires "DBIx::Class";
+requires "DBIx::Class" => 0.081;
 requires "DBIx::Class::EncodedColumn";
 requires "Crypt::Eksblowfish::Bcrypt";
-
-# requires "Catalyst::Authentication::Realm::SimpleDB";
 
 requires "CatalystX::Plugin::Blurb";
 requires "DateTime::Format::SQLite";
@@ -33,3 +31,7 @@ if ( $Module::Install::AUTHOR )
 install_script glob("script/*.pl");
 auto_install;
 WriteAll;
+
+__END__
+
+# requires "Catalyst::Authentication::Realm::SimpleDB";

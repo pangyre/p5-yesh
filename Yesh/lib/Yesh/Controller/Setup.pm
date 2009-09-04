@@ -3,7 +3,10 @@ use strict;
 use warnings;
 use parent "Catalyst::Controller::HTML::FormFu";
 use YAML qw( LoadFile DumpFile );
-use List::MoreUtils qw( natatime );
+
+# There should be a page block to make sure the user/admin has read
+# and understood that setting up after the config is already there is
+# dangerous.
 
 # MUST NOT BE ACCESSIBLE IF IT'S DONE ALREADY?
 sub auto : Private {
@@ -29,7 +32,7 @@ sub auto : Private {
     }
     elsif ( $c->config->{configured} )
     {
-        die "RC_404";
+        die "RC_403: Site is configured already";
     }
     return 1;
 }
@@ -70,7 +73,7 @@ sub _deploy_sqlite : Private {
 
     $c->model("DBIC")->schema($schema);
 
-    eval { $schema->deploy(); die "asdf"};
+    eval { $schema->deploy() };
     die "Caught error in schema deployment: $@" if $@;
     # Update config file here.
     my $model_config = $c->config->{"Model::DBIC"};
@@ -134,38 +137,6 @@ sub _load_baseline {
             $rs->create($row)->update;
         }
     }
-}
-
-sub dependencies : Local {
-    my ( $self, $c ) = @_;
-    my $makefile = $c->path_to("Makefile.PL")->slurp;
-    my @deps = $makefile =~ /\nrequires\s+['"](\S+?)['"][^\w;]*(?:([\d.]+)|;)/g;
-    my $it = natatime 2, @deps;
-    while ( my ( $module, $version ) = $it->() )
-    {
-        my $usage = "use $module";
-        $usage .= " $version" if $version;
-        eval $usage;
-        my $info = {
-            module => $module,
-            version => $version || $module->VERSION,
-            result => $@ || "OK",
-            uri => join("?", "http://search.cpan.org/perldoc", $module),
-        };
-        unless ( $@ )
-        {
-            ( my $plain_name = $module ) =~ s,::,/,g;
-            $plain_name .= ".pm";
-            $info->{inc} = $INC{$plain_name};
-        }
-        else
-        {
-            push @{$c->stash->{broken}}, $module;
-        }
-        push @{$c->stash->{dependencies}}, $info;
-        $c->log->debug("$usage --> " . ( $@ || "fine!" ));
-    }
-
 }
 
 # sub end :ActionClass("RenderView") {}

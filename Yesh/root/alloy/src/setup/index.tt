@@ -13,8 +13,17 @@ jQuery(function($){
 <h2>Warning!</h2>
 
 <p>Your configuration is already set-up. You can keep going since you
-are an admin user but you are probably making a huge mistake.
+are an admin user but <b>you are probably making a huge mistake</b>.
 </p>
+
+[%-IF ( tables = yesh.model("DBIC").storage.dbh.tables() ) %]
+<p><b>For example, the following tables are already set up and usable in the
+database:</b>
+[% tables.serial() %]. <b>If they contain data you might erase them
+<i>permanently</i> by going through the set up steps again.</b>
+</p>
+[%-END %]
+
 </div>
 [% END %]
 
