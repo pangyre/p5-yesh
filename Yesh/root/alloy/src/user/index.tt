@@ -1,7 +1,7 @@
 [% IF ( users = users.all() ) %]
 <ul>
 [% FOR user IN users %]
-<li>[% user.username | html %]
+<li>[% user_link(user) %]
   <ul>
     [% FOR role IN user.site_roles %]
       <li>[% role.name | html %]</li>

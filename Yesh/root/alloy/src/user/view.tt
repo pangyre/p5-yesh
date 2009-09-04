@@ -1,8 +1,23 @@
-<h3>Articles</h3>
-[%-IF user.articles() %]
-[%-FOR article IN user.articles() %]
-[% article_link(article) %]
+<h3>Site Roles</h3>
+
+[%-IF user.site_roles() %]
+<ul>
+[%-FOR role IN user.site_roles() %]
+<li>[% role.name %]</li>
 [% END %]
+</ul>
+[% ELSE %]
+<p>None.</p>
+[% END %]
+
+<h3>Articles</h3>
+
+[%-IF user.articles() %]
+<ul>
+[%-FOR article IN user.articles() %]
+<li>[% article_link(article) %]</li>
+[% END %]
+</ul>
 [% ELSE %]
 Nopers...
 [% END %]

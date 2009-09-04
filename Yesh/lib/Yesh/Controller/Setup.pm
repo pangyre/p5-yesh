@@ -32,7 +32,7 @@ sub auto : Private {
     }
     elsif ( $c->config->{configured} )
     {
-        die "RC_403: Site is configured already";
+        die "RC_403: Site is configured already.\n";
     }
     return 1;
 }
