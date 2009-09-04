@@ -13,5 +13,7 @@
         <input type="submit" value="Sign in" />
      </p>
     </fieldset>
-<p>If you are a new user, you may <a href="[% yesh.uri_for("/user/register") %]">register here</a>.</p>
+<p>
+  If you are a new user, you may <a href="[% yesh.uri_for("/user/register") %]">register here</a>.
+</p>
 </form>
