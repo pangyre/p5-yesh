@@ -27,12 +27,7 @@ sub render :ActionClass("RenderView") {}
 
 sub end :Private {
     my ( $self, $c ) = @_;
-#    $c->forward("render");
-    #    $c->res->header( 'Cache-Control' => 'no-store, no-cache, must-revalidate,'.
-    #                     'post-check=0, pre-check=0, max-age=0'
-    #                     );
-    #    $c->res->header( 'Pragma' => 'no-cache' );
-
+    $c->forward("render") unless @{$c->error};
     # If there was an error in the render above, process it and re-render.
     $c->forward("Error") and $c->forward("render") if @{$c->error};
 
@@ -43,6 +38,11 @@ sub end :Private {
 1;
 
 __END__
+    #    $c->res->header( 'Cache-Control' => 'no-store, no-cache, must-revalidate,'.
+    #                     'post-check=0, pre-check=0, max-age=0'
+    #                     );
+    #    $c->res->header( 'Pragma' => 'no-cache' );
+
 
 =head1 NAME
 

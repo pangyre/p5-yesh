@@ -1,0 +1,18 @@
+<ol>
+[% FOR dep IN dependencies %]
+<li style="color:[% dep.result == "OK" ? "#071" : "#a00" %]">
+ <a href="[% dep.uri %]">[% dep.module | html %]</a>
+   <ul>
+     [%-IF dep.version %]
+     <li>Version: [% dep.version %]</li>
+     [%-END %]
+     [%-IF dep.inc r%]
+     <li>INC: [% dep.inc %]</li>
+     [%-END %]
+     [%-IF dep.result != "OK" %]
+     <li>[% dep.result %]</li>
+     [%-END %]
+   </ul>
+</li>
+[% END %]
+</ol>

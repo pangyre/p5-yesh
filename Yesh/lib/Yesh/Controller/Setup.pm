@@ -3,6 +3,7 @@ use strict;
 use warnings;
 use parent "Catalyst::Controller::HTML::FormFu";
 use YAML qw( LoadFile DumpFile );
+use List::MoreUtils qw( natatime );
 
 # MUST NOT BE ACCESSIBLE IF IT'S DONE ALREADY?
 sub auto : Private {
@@ -69,7 +70,7 @@ sub _deploy_sqlite : Private {
 
     $c->model("DBIC")->schema($schema);
 
-    eval { $schema->deploy(); };
+    eval { $schema->deploy(); die "asdf"};
     die "Caught error in schema deployment: $@" if $@;
     # Update config file here.
     my $model_config = $c->config->{"Model::DBIC"};
@@ -138,8 +139,29 @@ sub _load_baseline {
 sub dependencies : Local {
     my ( $self, $c ) = @_;
     my $makefile = $c->path_to("Makefile.PL")->slurp;
-    my %deps = $makefile =~ /\nrequires\s+['"](\S+?)['"][^\w;]*(?:([\d.]+)|;)/g;
-    $c->res->body("<pre>" . YAML::Dump(\%deps) . $makefile);
+    my @deps = $makefile =~ /\nrequires\s+['"](\S+?)['"][^\w;]*(?:([\d.]+)|;)/g;
+    my $it = natatime 2, @deps;
+    while ( my ( $module, $version ) = $it->() )
+    {
+        my $usage = "use $module";
+        $usage .= " $version" if $version;
+        eval $usage;
+        my $info = {
+            module => $module,
+            version => $version || $module->VERSION,
+            result => $@ || "OK",
+            uri => join("?", "http://search.cpan.org/perldoc", $module),
+        };
+        unless ( $@ )
+        {
+            ( my $plain_name = $module ) =~ s,::,/,g;
+            $plain_name .= ".pm";
+            $info->{inc} = $INC{$plain_name};
+        }
+        push @{$c->stash->{dependencies}}, $info;
+        $c->log->debug("$usage --> " . ( $@ || "fine!" ));
+    }
+
 }
 
 # sub end :ActionClass("RenderView") {}
