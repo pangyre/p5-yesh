@@ -1,7 +1,22 @@
-<h3>Article index</h3>
-[% articles.pager.total_entries | commify %]
+[% META title = "Articles" %]
 
+<p class="center">
+This is page [% articles.pager.current_page | commify %]
+ of
+ [% articles.pager.last_page | commify %] page[%-"s" UNLESS articles.pager.last_page == 1 %].
 
-[% FOR article IN articles.all %]
+ [% articles.pager.total_entries | commify %]
+ article[%-"s" UNLESS articles.pager.total_entries == 1 %] total.
+<br />
+[%-IF articles.pager.previous_page %]
+<a href="[%-yesh.req.uri_with(page => articles.pager.previous_page) %]">«–Previous</a>
+[%-END %]
+[%-IF articles.pager.next_page AND articles.pager.previous_page %] · [% END %]
+[%-IF articles.pager.next_page %]
+<a href="[%-yesh.req.uri_with(page => articles.pager.next_page) %]">Next–»</a>
+[%-END %]
+</p>
+
+[%-FOR article IN articles.all %]
   [% PROCESS article/view.tt %]
-[% END %]
+[%-END %]

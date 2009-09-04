@@ -7,11 +7,14 @@ __PACKAGE__->config( articles_per_page => 25 );
 
 sub index :Path Args(0) {
     my ( $self, $c ) = @_;
+    my $page = $c->req->param("page");
+    $page =~ s/\D+//g;
+    $page = 1 unless $page > 1;
     $c->stash( articles => $c->model("DBIC::Article")
                ->live_rs({},
                          { prefetch => [qw( license )],
                            order_by => "golive DESC",
-                           page => 1,
+                           page => $page,
                            rows => $self->{articles_per_page},
                          })
         );
