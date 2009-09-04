@@ -9,7 +9,7 @@
   </div>
   <div class="meta">
     <div class="author">
-[% article.user.username %]
+[% user_link(article.user) %]
     </div>
     <div class="license">
 [% article.license.display || article.license.title %]

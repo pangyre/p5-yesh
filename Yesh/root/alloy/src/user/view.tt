@@ -1,0 +1,8 @@
+<h3>Articles</h3>
+[%-IF user.articles() %]
+[%-FOR article IN user.articles() %]
+[% article_link(article) %]
+[% END %]
+[% ELSE %]
+Nopers...
+[% END %]

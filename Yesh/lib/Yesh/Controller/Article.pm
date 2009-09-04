@@ -10,7 +10,7 @@ sub index :Path Args(0) {
                                                                  order_by => "golive DESC" }) );
 }
 
-sub load :Chained("/") PathPart("a") CaptureArgs(1) {
+sub load :Chained("/") PathPart("a/id") CaptureArgs(1) {
     my ( $self, $c, $id ) = @_;
     $id ||= $c->request->arguments->[0]; # for forwards
     $c->stash->{article} = $c->model("DBIC::Article")->find($id)

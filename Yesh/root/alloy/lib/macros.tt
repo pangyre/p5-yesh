@@ -1,3 +1,15 @@
+[%-MACRO obj_uri(thing) BLOCK-%]
+[%# yesh.uri_for_action( thing, "view", [thing.id]) %]
+[%-END-%]
+
+[%-MACRO user_uri(u) BLOCK-%]
+[% yesh.uri_for_action("user/view", [u.id]) %]
+[%-END-%]
+
+[%-MACRO user_link(u) BLOCK-%]
+<a href="[% user_uri(u) %]" title="[% u.name | html %]">[% u.username | html %]</a>
+[%-END-%]
+
 [%-MACRO edit_article_button(a,class) BLOCK-%]
 <a title="Edit: [% a.title | truncate(50,"…") | html %]"
 class="[% class || "button" %]" href="[% article_uri(a).replace('/preview\z',"") %]/edit">edit</a>
