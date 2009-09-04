@@ -7,7 +7,7 @@ use YAML qw( LoadFile DumpFile );
 # MUST NOT BE ACCESSIBLE IF IT'S DONE ALREADY?
 sub auto : Private {
     my ( $self, $c ) = @_;
-    return 1;
+
     if ( $c->config->{configured}
          and
          $c->user_exists
@@ -137,11 +137,12 @@ sub _load_baseline {
 
 sub dependencies : Local {
     my ( $self, $c ) = @_;
-    my $makefile = $c->path_to("Makefile.PL");
-    my @deps = grep { /requires\s+(\S+)/ } scalar $makefile->slurp;
-    $c->res->body(join("+",@deps));
+    my $makefile = $c->path_to("Makefile.PL")->slurp;
+    my %deps = $makefile =~ /\nrequires\s+['"](\S+?)['"][^\w;]*(?:([\d.]+)|;)/g;
+    $c->res->body("<pre>" . YAML::Dump(\%deps) . $makefile);
 }
 
+# sub end :ActionClass("RenderView") {}
 
 1;
 
