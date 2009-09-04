@@ -1,3 +1,4 @@
+[% META title = "Set up" %]
 <script type="text/javascript">//<![CDATA[
 jQuery(function($){
     $(".option").toggle();
@@ -18,7 +19,7 @@ are an admin user but <b>you are probably making a huge mistake</b>.
 
 [%-IF ( tables = yesh.model("DBIC").storage.dbh.tables() ) %]
 <p><b>For example, the following tables are already set up and usable in the
-database:</b>
+currently designated database ([% yesh.model("DBIC").connect_info.dsn %]):</b>
 [% tables.serial() %]. <b>If they contain data you might erase them
 <i>permanently</i> by going through the set up steps again.</b>
 </p>
@@ -42,7 +43,7 @@ database:</b>
 <div>
 
 <div class="box option" id="option1" style="background-color:#f6fff6">
-<h2><a name="option1">1. Simplistic set-up</a></h2>
+<h2><a name="option1">1. Simplistic set up</a></h2>
 
 <p>
 Are you feeling lucky? This will deploy your site database to <a href"http://www.sqlite.org/">SQLite</a>. It is simple, fast, and robust but not as strict about data as other database engines.

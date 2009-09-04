@@ -6,8 +6,7 @@ use parent 'Catalyst::Controller';
 use List::MoreUtils qw( natatime );
 
 sub index :Path :Args(0) {
-    my ( $self, $c ) = @_;
-    $c->response->body('Matched Yesh::Controller::Admin in Admin.');
+#    my ( $self, $c ) = @_;
 }
 
 sub dependencies : Local {
