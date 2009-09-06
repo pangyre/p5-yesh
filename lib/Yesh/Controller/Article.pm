@@ -7,7 +7,7 @@ __PACKAGE__->config( articles_per_page => 25 );
 
 sub index :Path Args(0) {
     my ( $self, $c ) = @_;
-    my $page = $c->req->param("page");
+    my $page = $c->req->param("page") || 1;
     $page =~ s/\D+//g;
     $page = 1 unless $page > 1;
     $c->stash->{articles} =
