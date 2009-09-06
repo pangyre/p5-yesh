@@ -10,14 +10,15 @@ sub index :Path Args(0) {
     my $page = $c->req->param("page");
     $page =~ s/\D+//g;
     $page = 1 unless $page > 1;
-    $c->stash( articles => $c->model("DBIC::Article")
-               ->live_rs({},
-                         { prefetch => [qw( license )],
-                           order_by => "golive DESC",
-                           page => $page,
-                           rows => $self->{articles_per_page},
-                         })
-        );
+    $c->stash->{articles} =
+        $c->model("DBIC::Article")
+            ->live_rs({},
+                      {
+                       prefetch => [qw( license user )],
+                       order_by => "golive DESC",
+                       page => $page,
+                       rows => $self->{articles_per_page}
+                      });
 }
 
 sub load :Chained("/") PathPart("a/id") CaptureArgs(1) {
