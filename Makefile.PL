@@ -9,6 +9,21 @@ requires "Catalyst::Plugin::ConfigLoader";
 requires "Catalyst::Plugin::Static::Simple";
 requires "Catalyst::Action::RenderView";
 requires "Catalyst::Controller::REST";
+requires "Catalyst::Plugin::Authorization::Roles";
+
+requires "Catalyst::Plugin::Authentication";
+requires "Catalyst::Plugin::Session::State::Cookie";
+requires "Catalyst::Plugin::Session";
+requires "Catalyst::Authentication::Realm::SimpleDB"; # I think this is a BUG!
+requires "Catalyst::View::TT::Alloy";
+
+requires "Number::Format";
+requires "HTML::FormFu";
+requires "Catalyst::Controller::HTML::FormFu";
+
+requires "Data::UUID";
+requires "DBIx::Class::EncodedColumn";
+
 requires "Class::MOP" => 0.92;
 requires "Moose" => 0.89;
 requires "parent";
@@ -21,7 +36,8 @@ requires "XML::LibXML";
 requires "URI";
 requires "CatalystX::Plugin::Blurb";
 requires "DateTime::Format::SQLite";
-requires "Catalyst::Plugin::Authorization::Roles";
+
+
 
 # requires "URI::QueryParam";
 
