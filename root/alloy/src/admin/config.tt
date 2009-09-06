@@ -1,2 +1,2 @@
 [% META title = "Application Configuration" %]
-[% DUMP yesh.config %]
+<pre>[% DUMP yesh.config %]</pre>
