@@ -7,6 +7,10 @@
 <p class="alert">
  Problems found in <i>[% broken.serial() %]</i>. See below.
 </p>
+<p class="alert">
+ You may need to restart your [% yesh.name %] application after
+ installing any missing dependencies.
+<p>
 [%-ELSE %]
 <p>Everything looks good!</p>
 [%-END %]

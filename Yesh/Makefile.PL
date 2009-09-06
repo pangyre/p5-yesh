@@ -14,9 +14,13 @@ requires "YAML";
 requires "DBIx::Class" => 0.081;
 requires "DBIx::Class::EncodedColumn";
 requires "Crypt::Eksblowfish::Bcrypt";
-
+requires "JSON::XS";
+requires "XML::LibXML";
+requires "URI";
 requires "CatalystX::Plugin::Blurb";
 requires "DateTime::Format::SQLite";
+
+# requires "URI::QueryParam";
 
 test_requires "HTTP::Request::Common";
 
