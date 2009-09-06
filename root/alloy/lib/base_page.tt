@@ -5,16 +5,16 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <title>[% PROCESS title.tt %]</title>
-<link rel="stylesheet" media="screen" type="text/css" href="[% yesh.uri_for("/css/universal.css") %]" />
+<link rel="stylesheet" media="screen" type="text/css" href="[% yesh.uri_for("/css/universal.css").path %]" />
 <link rel="stylesheet" media="screen" type="text/css" href="[% yesh.uri_for("/css/site.css") %]" />
 <link rel="stylesheet" media="screen" type="text/css" href="[% yesh.uri_for("/css/jquery/smoothness/ui.all.css") %]" />
 <style type="text/css" media="screen">
 /* test space */
 </style>
-<script type="text/javascript" src="/js/jquery.min.js"></script>
-<script type="text/javascript" src="/js/jquery/jquery-ui.min.js"></script>
-<script type="text/javascript" src="/js/jquery/ui/dialog.js"></script>
-<script type="text/javascript" src="/js/jquery/ui/datepicker.js"></script>
+<script type="text/javascript" src="[% yesh.uri_for("/js/jquery.min.js") %]"></script>
+<script type="text/javascript" src="[% yesh.uri_for("/js/jquery/jquery-ui.min.js") %]"></script>
+<script type="text/javascript" src="[% yesh.uri_for("/js/jquery/ui/dialog.js") %]"></script>
+<script type="text/javascript" src="[% yesh.uri_for("/js/jquery/ui/datepicker.js") %]"></script>
 <script type="text/javascript">//<![CDATA[
 jQuery(function($) {
    $("#blurbs .alert").dialog({ dialogClass: "alert", title: "Notice" });

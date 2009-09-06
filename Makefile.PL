@@ -17,6 +17,7 @@ requires "Catalyst::Plugin::Session";
 requires "Catalyst::Authentication::Realm::SimpleDB"; # I think this is a BUG!
 requires "Catalyst::View::TT::Alloy";
 requires "HTML::FormFu::Model::DBIC";
+requires "FCGI::ProcManager";
 
 requires "Number::Format";
 requires "HTML::FormFu";
