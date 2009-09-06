@@ -9,6 +9,8 @@ requires "Catalyst::Plugin::ConfigLoader";
 requires "Catalyst::Plugin::Static::Simple";
 requires "Catalyst::Action::RenderView";
 requires "Catalyst::Controller::REST";
+requires "Class::MOP" => 0.92;
+requires "Moose" => 0.89;
 requires "parent";
 requires "YAML";
 requires "DBIx::Class" => 0.081;
