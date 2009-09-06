@@ -21,6 +21,7 @@ requires "XML::LibXML";
 requires "URI";
 requires "CatalystX::Plugin::Blurb";
 requires "DateTime::Format::SQLite";
+requires "Catalyst::Plugin::Authorization::Roles";
 
 # requires "URI::QueryParam";
 
