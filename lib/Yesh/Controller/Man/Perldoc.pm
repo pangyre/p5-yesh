@@ -63,7 +63,7 @@ sub index : Path Args(0) {
 
 BEGIN {
     package Yesh::Pod::POM::View::HTML;
-    use parent "Pod::POM::View::HTML";
+    eval 'use parent "Pod::POM::View::HTML"';
 
     sub view_seq_link_transform_path {
         my ( $self, $page ) = @_;
