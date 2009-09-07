@@ -29,7 +29,11 @@ jQuery(function($) {
 <body>
 <div id="page">
   <div id="header">
-<h1>&lt;me/&gt;</h1>
+[%-IF yesh.request.path == "" %]
+<h1>[% site.name || "&lt;yesh/&gt;" %]</h1>
+[% ELSE %]
+<h1><a href="[% yesh.uri_for("/") %]">[% site.name || "&lt;yesh/&gt;" %]</a></h1>
+[% END %]
   </div>
   <div id="primary_nav">
 [% PROCESS primary_nav.tt IF yesh.config.configured %]

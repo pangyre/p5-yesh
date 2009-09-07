@@ -79,6 +79,10 @@ a {
  text-decoration: none;
 }
 
+a:hover {
+  text-decoration:underline;
+}
+
 /* THEME/SKIN SECTION: move out when you have a scheme for that. */
 
 #header {
@@ -122,4 +126,10 @@ div.box {
  border:1px solid #9ac;
  padding: 1ex .5ex 1ex 1.2ex;
  margin: 1ex auto;
+}
+
+/* THIS MUST BE IN A THEME SO IT CAN BE DYNAMIC (and cached) */
+a[rel="external"] {
+  background:transparent url(/img/icon/external-link.jpg) no-repeat scroll 99% 50%;
+  padding-right:15px;
 }

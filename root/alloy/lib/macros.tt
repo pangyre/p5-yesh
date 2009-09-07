@@ -46,6 +46,7 @@ class="[% class || "button" %]" href="[% article_uri(a).replace('/preview\z',"")
 
 
 [%-MACRO perldoc_link(module,text) BLOCK-%][% text ||= module %]
-<a href="http://search.cpan.org/perldoc?[% module | html | uri %]" title="[% module | html %]">[% text | html %]</a>
+<a rel="external" href="http://search.cpan.org/perldoc?[% module | html | uri %]" title="[% module | html %] on search.cpan.org">[% text | html %]</a>
 [%-END-%]
 
+[% site = yesh.config.site %]

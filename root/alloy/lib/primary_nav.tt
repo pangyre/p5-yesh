@@ -17,6 +17,8 @@ Oh hai, [% user_link(yesh.user.obj) %]
 <br />
 <a href="[% yesh.uri_for("/admin") %]">Admin</a>
 ·
+Path: [% yesh.request.path %]
+·
 Action: [% yesh.action %]
   [%-END %]
 
