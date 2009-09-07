@@ -8,7 +8,7 @@ use Scalar::Util qw( blessed );
 
 sub auto : Private {
     my ( $self, $c ) = @_;
-    $c->assert_any_user_role(qw( admin owner )) if $c->config->{configured};
+    return $c->check_any_user_role(qw( admin owner )) if $c->config->{configured};
     return 1;
 }
 

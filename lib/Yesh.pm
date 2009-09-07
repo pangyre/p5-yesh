@@ -21,9 +21,10 @@ our $VERSION = '2.9007';
 
 __PACKAGE__->config
     ( name => "Yesh/$VERSION",
-      # setup_components => { except => qr/[.\#]|yesh_local.yml/ },
+      #setup_components => { except => qr/[.\#]/ },
+      #"Model::DBIC" => { connect_info => 1 },
       session => {
-          # verify_address => 1,
+          verify_address => 1,
           rewrite => 0,
           storage => __PACKAGE__->path_to("tmp/session-$<.fmp")->stringify,
       },
