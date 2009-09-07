@@ -50,6 +50,13 @@ sub register : Local Args(0) Form {
         }
         else
         {
+
+            my $author_role = $c->model("DBIC::SiteRole")
+                ->search({ name => "author" })->single;
+
+            $user->add_to_site_roles($author_role)
+                if $self->{new_users_get_author_role};
+
             $c->authenticate({ username => $user->username,
                                password => $user->password }) or die "Could not auto-sign-in";
             $c->response->redirect($c->uri_for("/"));

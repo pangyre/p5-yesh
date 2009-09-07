@@ -36,6 +36,7 @@ Plugin::Authentication:
 Controller::User:
   model_stash:
     schema: DBIC
+  new_users_get_author_role: 1
 
 Controller::HTML::FormFu:
   default_action_use_path: 1

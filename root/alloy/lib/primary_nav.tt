@@ -23,5 +23,8 @@ Action: [% yesh.action %]
   [%-END %]
 
 [% ELSE %]
+[% IF yesh.action != "user/register" %]
+<a href="[% yesh.uri_for_action("/user/register") %]">Register</a>
+· [% END %]
 <a href="[% yesh.uri_for("/login") %]">Sign-in</a>
 [% END %]
