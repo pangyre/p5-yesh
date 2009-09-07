@@ -5,7 +5,7 @@ use parent 'Catalyst::Controller';
 
 sub auto : Private {
     my ( $self, $c ) = @_;
-    unless ( eval { require Pod::POM } )
+    unless ( eval { require Pod::POM; require Pod::POM::View::HTML } )
     {
         $c->blurb("dependency/pod_pom");
         die "Pod::POM is not installed :( No perldocs for you: $@\n";
@@ -19,12 +19,30 @@ sub index : Path Args(0) {
     $item =~ s,::,/,g;
     my $parser = Pod::POM->new({});
 
+    my ( $pom );
     for my $try ( qw( .pm .pod .pl ), "" )
     {
         my $inc_key = $item . $try;
-        next unless -r $INC{$inc_key};
-        $c->stash( pom => $parser->parse_file( $INC{$inc_key} ) );
+        if ( -r $INC{$inc_key} )
+        {
+            $pom = $parser->parse_file( $INC{$inc_key} );
+            last;
+        }
+        else
+        {
+            for my $path ( @INC )
+            {
+                if ( -r "$path/$inc_key" )
+                {
+                    $pom = $parser->parse_file( "$path/$inc_key" );
+                    last;
+                }
+            }
+        }
     }
+    $c->stash( pom => $pom,
+               pod => Pod::POM::View::HTML->print($pom),
+        );
 }
 
 1;

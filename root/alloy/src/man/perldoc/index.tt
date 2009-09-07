@@ -1,5 +1,6 @@
 [% IF pom %]
-  [%-INCLUDE man/perldoc/view_pom.tt %]
+[% pod %]
+  [%#-INCLUDE man/perldoc/view_pom.tt %]
 [% ELSE %]
 NOPE!
 [% END %]
