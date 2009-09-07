@@ -52,8 +52,9 @@ sub index : Path Args(0) {
         $pom = $parser->parse_file($path) if $path;
     }
 
-    $c->stash( pom => $pom,
-               title => "Pod viewer: $name",
+    my $title = "$pom" ? $name : "Pod Viewer";
+    $c->stash( pom => "$pom" ? $pom : "",
+               title => $title,
                name => $name,
                pod => Yesh::Pod::POM::View::HTML->print($pom),
         );

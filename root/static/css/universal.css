@@ -7,14 +7,6 @@ body {
  line-height:1.125em; /* 16 font-size:0.75em; */
 }
 
-#content p, #content ul, #content ol {
-  font-size:0.875em;
-}
-
-pre, code, tt {
- font-size:.8em;
-}
-
 #content_footer,
 #footer,
 #main_nav,

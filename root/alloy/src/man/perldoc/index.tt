@@ -1,7 +1,22 @@
 [% IF pom %]
 [% pod %]
   [%#-INCLUDE man/perldoc/view_pom.tt %]
+[% ELSIF name %]
+<p>
+No Pod found for [% name | html %].
+ [% UNLESS name.match("Yesh") %]
+   Try [% perldoc_link(name) %] instead.
+ [% END %]
+</p>
 [% ELSE %]
-Not found or not installed locally. Try [% perldoc_link(name) %] instead.
+<h3>Internal Documentation</h3>
+
+<p>
+<a href="?Yesh::Manual">Yesh::Manual</a> and <a href="?Yesh">Yesh</a> are probably all you really want.
+</p>
+
+[% PROCESS man/perldoc/list_docs.tt %]
+
 [% END %]
+
 
