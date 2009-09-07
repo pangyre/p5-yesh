@@ -14,9 +14,6 @@ __PACKAGE__->config
      FILTERS => {
          commify => sub {
              return Number::Format::format_number(shift);
-             my $text = reverse $_[0];
-             $text =~ s/(\d\d\d)(?=\d)(?!\d*\.)/$1,/g;
-             return scalar reverse $text;
          },
      },
      DUMP => {
@@ -88,11 +85,37 @@ __END__
 
 =head1 NAME
 
-Yesh::View::Alloy
+Yesh::View::Alloy - TT2 emulation view layer for L<Yesh>.
 
-=head1 SEE ALSO
+=head1 FILTERS
 
-L<http://search.cpan.org/perldoc?Catalyst::View::TT::Alloy>, L<http://search.cpan.org/perldoc?Templat
-e::Alloy>.
+=over 4
+
+=item commify
+
+Calls L<format_number|Number::Format> in L<Number::Format>.
+
+=back
+
+=head1 VMETHODS
+
+=over 4
+
+=item serial
+
+Serial comma join on a list.
+
+  [% [ "one", "two", "three" ].serial() %]
+  one, two, and three.
+
+=item encode_json
+
+Encodes hash or array references into JSON. Uses L<JSON::XS>.
+
+=back
+
+=head1 LICENSE, AUTHOR, COPYRIGHT, SEE ALSO
+
+L<Yesh::Manual>.
 
 =cut

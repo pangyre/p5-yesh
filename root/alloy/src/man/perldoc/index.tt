@@ -1,6 +1,5 @@
-[% IF pom %]
+[% IF pod %]
 [% pod %]
-  [%#-INCLUDE man/perldoc/view_pom.tt %]
 [% ELSIF name %]
 <p>
 No Pod found for [% name | html %].
@@ -12,7 +11,9 @@ No Pod found for [% name | html %].
 <h3>Internal Documentation</h3>
 
 <p>
-<a href="?Yesh::Manual">Yesh::Manual</a> and <a href="?Yesh">Yesh</a> are probably all you really want.
+<a href="?Yesh::Manual">Yesh::Manual</a> and <a href="?Yesh">Yesh</a>
+are probably all you really want. You can browse any application
+documents below.
 </p>
 
 [% PROCESS man/perldoc/list_docs.tt %]

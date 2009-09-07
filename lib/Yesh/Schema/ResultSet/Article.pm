@@ -25,8 +25,7 @@ __END__
 
 =head1 NAME
 
-Yesh::Schema::ResultSet::Article - extensions to using L< Yesh::Schema::Result::Article>.
-
+Yesh::Schema::ResultSet::Article - extensions to using L<Yesh::Schema::Result::Article>.
 
 =head1 METHODS
 

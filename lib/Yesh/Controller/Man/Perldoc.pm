@@ -3,6 +3,7 @@ use strict;
 use warnings;
 no warnings "uninitialized";
 use parent 'Catalyst::Controller';
+use Encode;
 
 my $All_Good = eval <<'';
     require Pod::POM;
@@ -56,7 +57,7 @@ sub index : Path Args(0) {
     $c->stash( pom => "$pom" ? $pom : "",
                title => $title,
                name => $name,
-               pod => Yesh::Pod::POM::View::HTML->print($pom),
+               pod => Encode::decode_utf8(Yesh::Pod::POM::View::HTML->print($pom)),
         );
 }
 
