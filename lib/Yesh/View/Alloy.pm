@@ -114,6 +114,33 @@ Encodes hash or array references into JSON. Uses L<JSON::XS>.
 
 =back
 
+=head1 MACROS
+
+=over 4
+
+=item perldoc_link
+
+Takes a module name and optional desired link text. Returns a search.cpan.org/perldoc?Module::Name style anchor tag.
+
+ [% perldoc_link("DBD::Pg","PostgreSQL") %]
+ <a href="http://search.cpan.org/perldoc?DBD::Pg" title="PostgreSQL">PostgreSQL</a>
+
+=item user_uri
+
+Takes a L<Yesh::Schema::Result::User> object. Returns a URI to view the user.
+
+=item user_link
+
+Creates an anchor tag with the C<user_uri> and the user's name.
+
+=item edit_article_button(a,class)
+
+=item article_uri(a)
+
+=item article_link(a) 
+
+=back
+
 =head1 LICENSE, AUTHOR, COPYRIGHT, SEE ALSO
 
 L<Yesh::Manual>.
