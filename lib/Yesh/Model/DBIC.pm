@@ -1,33 +1,21 @@
 package Yesh::Model::DBIC;
-
 use strict;
-use base 'Catalyst::Model::DBIC::Schema';
+use parent 'Catalyst::Model::DBIC::Schema';
 
 __PACKAGE__->config(
     schema_class => 'Yesh::Schema',
-    
-);
+    );
+
+1;
+
+__END__
 
 =head1 NAME
 
-Yesh::Model::DBIC - Catalyst DBIC Schema Model
-=head1 SYNOPSIS
+Yesh::Model::DBIC - Catalyst DBIC Schema Model using L<Yesh::Schema> as its C<schema_class>.
 
-See L<Yesh>
+=head1 REFER TO
 
-=head1 DESCRIPTION
-
-L<Catalyst::Model::DBIC::Schema> Model using schema L<Yesh::Schema>
-
-=head1 AUTHOR
-
-apv
-
-=head1 LICENSE
-
-This library is free software, you can redistribute it and/or modify
-it under the same terms as Perl itself.
+L<Yesh::Manual> and L<Yesh>.
 
 =cut
-
-1;

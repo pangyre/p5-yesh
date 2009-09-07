@@ -10,6 +10,7 @@ use Number::Format;
 __PACKAGE__->config
     (
      ENCODING => 'UTF-8',
+     RECURSION => 1,
      FILTERS => {
          commify => sub {
              return Number::Format::format_number(shift);

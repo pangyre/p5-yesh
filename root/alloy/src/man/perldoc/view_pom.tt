@@ -1,0 +1,37 @@
+[% FOR part IN pom.content %]
+[% loop.count %]: [% part.type %]<br/>
+  [% IF part.type == "head1" %]
+  <h1>[% part.title %]</h1>
+  [% ELSIF part.type == "head2" %]
+  <h2>[% part.title %]</h2>
+  [% ELSIF part.type == "head3" %]
+  <h3>[% part.title %]</h3>
+  [% ELSIF part.type == "head4" %]
+  <h4>[% part.title %]</h4>
+  [% ELSIF part.type == "over" %]
+  [% ELSIF part.type == "back" %]
+  [% ELSIF part.type == "item" %]
+  [% part.content | html %]
+  [% ELSIF part.type == "begin" %]
+  [% ELSIF part.type == "end" %]
+  [% ELSIF part.type == "verbatim" %]
+
+  [% ELSIF part.type == "text" %]
+
+  [% part.text | html %]
+  [% ELSIF part.type == "code" %]
+ASDFA
+  [% ELSIF part.type == "321" %]
+  [% ELSIF part.type == "321" %]
+  [% ELSIF part.type == "321" %]
+  [% ELSIF part.type == "321" %]
+  [% END %]
+
+  [% IF part.content.size > 1 %]
+  [% INCLUDE man/perldoc/view_pom.tt pom = part %]
+  [% ELSE %]
+<h4 class="alert">unhandled content</h4>
+  [% part.content | html %]
+  [% END %]
+
+[% END %]

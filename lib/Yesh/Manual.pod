@@ -1,0 +1,61 @@
+=head1 YESH, THE MANUAL
+
+=head1 INSTALLATION
+
+
+=head1 WEB-BASED SET UP
+
+=head1 USER CONFIGURATION
+
+=head2 LOCAL CONFIGURATION FILE
+
+There are two configuration files used by Yesh while a site is running live (in production). They are C<yesh.yml> and C<yesh_local.yml>. This is a L<Catalyst> convention for setting up sites with L<Catalyst::Plugin::ConfigLoader>.
+
+=over 4                                                                                              
+=item yesh.yml
+
+B<DO NOT> edit, remove, or otherwise molest this file. Your site will break unless you know exactly what you are doing and it is part of Yesh's revision control so your changes will break or get overwritten when you upgrade. Never fear because you can change every single setting in the file by editing-
+
+=item yesh_local.yml
+
+This is the local, customized configuration. It will contain information like your real database settings, themed template paths, site name, security settings, and so on.
+
+You are welcome to edit this file but if you don't know what you're doing, you are almost guaranteed to break your site. Refer to L<YAML> and L<Catalyst::Manual>.
+
+=back
+
+=Head2 CONFIGURATION SETTINGS
+
+=over 4
+
+=item configured
+
+This is automatically set to the date and time of the set up if using the web based set up. B<DO NOT> change it. You will probably break your application.
+
+=item Model::DBIC
+
+This is the configuration for the site's main database. If you want to edit it manually, you will need to know L<DBIx::Class> and L<DBIx::Class::Schema>. You are configuring a Catalyst model--L<Catalyst::Model::DBIC::Schema>--to use the site's schema--L<Yesh::Schema>.
+
+=item 321
+
+=item 321
+
+=item 321
+
+=item 321
+
+=item 321
+
+=item 321
+
+=item 321
+
+=back
+
+=head1 SUGGESTED READING
+
+=head1 LICENSE, COPYRIGHT, AUTHOR
+
+See L<Yesh>.
+
+=cut

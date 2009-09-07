@@ -1,0 +1,8 @@
+<p>
+  [% perldoc_link("Pod::POM") %] is not installed. You will have to
+  install it, or view your site documentation from the command line or
+  on another site. From the command line–
+</p>
+
+<pre>perldoc Yesh::Manual</pre>
+

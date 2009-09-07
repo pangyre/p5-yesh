@@ -66,13 +66,17 @@ Yesh - yet another CMS.
 
 =head1 DESCRIPTION
 
-[enter the description here for me... or something]
+This is the technical and license doc. Normal end-users will want to read L<Yesh::Manual> instead.
 
-=head1 TODO
+=head1 TO DO
 
-The lot.
+Support for setting L<Catalyst::Plugin::RequireSSL> on login and article edits?
 
-=head1 REPO
+Pod viewer.
+
+Move C<config-E<gt>{configured}> to a third config file to separate it from direct user interaction?
+
+=head1 CODE REPOSITORY
 
 L<http://github.com/pangyre/p5-yesh>.
 

@@ -39,6 +39,9 @@ requires "URI";
 requires "CatalystX::Plugin::Blurb";
 requires "DateTime::Format::SQLite";
 
+recommends "Pod::POM";
+#recommends "LWPx::ParanoidAgent";
+#recommends "Catalyst::Plugin::Authentication::Credential::OpenID";
 
 
 # requires "URI::QueryParam";
