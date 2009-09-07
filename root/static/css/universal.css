@@ -34,3 +34,15 @@ pre, code, tt {
   margin-right:auto;
   text-align:center;
 }
+
+/* super/subscripts that don't break line height */
+sup, sub {
+ height: 0;
+ line-height: 1;
+ vertical-align: baseline;
+ _vertical-align: bottom;
+ position: relative;
+ font-size:75%;
+}
+sup { bottom: .8ex; }
+sub { top: .4ex; }
