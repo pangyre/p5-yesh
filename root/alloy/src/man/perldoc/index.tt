@@ -2,6 +2,6 @@
 [% pod %]
   [%#-INCLUDE man/perldoc/view_pom.tt %]
 [% ELSE %]
-NOPE!
+Not found or not installed locally. Try [% perldoc_link(title) %] instead.
 [% END %]
 
