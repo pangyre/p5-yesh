@@ -9,13 +9,17 @@ Oh hai, [% user_link(yesh.user.obj) %]
 ·
 <a href="[% yesh.uri_for("/user") %]">User</a>
 ·
+<a href="[% yesh.uri_for("/man/perldoc") %]">Docs</a>
+·
 <a href="[% yesh.uri_for("/logout") %]">Sign-out</a>
+
   [%-IF yesh.check_any_user_role("admin","owner") %]
 <br />
 <a href="[% yesh.uri_for("/admin") %]">Admin</a>
 ·
 Action: [% yesh.action %]
   [%-END %]
+
 [% ELSE %]
 <a href="[% yesh.uri_for("/login") %]">Sign-in</a>
 [% END %]

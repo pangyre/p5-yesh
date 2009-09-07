@@ -13,6 +13,7 @@ sub load :Chained("/") PathPart("user/id") CaptureArgs(1) {
     $id ||= $c->request->arguments->[0]; # for forwards
     $c->stash->{user} = $c->model("DBIC::User")->find($id)
         or die "RC_404: No such user";
+
 # forward to search with it?
 }
 

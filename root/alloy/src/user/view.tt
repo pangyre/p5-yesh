@@ -12,7 +12,14 @@
 
 <h3>Articles</h3>
 
-[%-IF user.articles() %]
+[% article_count = user.search_related_rs("articles").live_rs.count %]
+<p>
+User has written [% ( article_count | commify ) || "no" %] article[% "s" UNLESS article_count == 1 %].
+</p>
+
+[% RETURN %]
+
+[% IF user.articles() %]
 <ul>
 [%-FOR article IN user.articles() %]
 <li>[% article_link(article) %]</li>
