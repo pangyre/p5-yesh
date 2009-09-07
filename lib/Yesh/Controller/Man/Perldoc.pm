@@ -32,7 +32,7 @@ sub index : Path Args(0) {
         if ( -r $INC{$inc_key} )
         {
             $pom = $parser->parse_file( $INC{$inc_key} );
-            last;
+            last if "$pom";
         }
         else
         {
@@ -41,7 +41,7 @@ sub index : Path Args(0) {
                 if ( -r "$path/$inc_key" )
                 {
                     $pom = $parser->parse_file( "$path/$inc_key" );
-                    last;
+                    last if "$pom";
                 }
             }
         }
