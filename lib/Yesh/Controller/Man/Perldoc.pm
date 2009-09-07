@@ -5,13 +5,8 @@ no warnings "uninitialized";
 use parent 'Catalyst::Controller';
 
 my $All_Good = eval <<'';
-use Pod::POM;
-use Pod::POM::View::HTML;
-sub Pod::POM::View::HTML::view_seq_link_transform_path {
-    my ( $self, $page ) = @_;
-    return "?$page";
-}
-1;
+    require Pod::POM;
+    1;
 
 sub auto : Private {
     my ( $self, $c ) = @_;
@@ -58,12 +53,56 @@ sub index : Path Args(0) {
     }
 
     $c->stash( pom => $pom,
-               title => $name,
+               title => "Pod viewer: $name",
                name => $name,
-               pod => Pod::POM::View::HTML->print($pom),
+               pod => Yesh::Pod::POM::View::HTML->print($pom),
         );
 }
 
+BEGIN {
+    package Yesh::Pod::POM::View::HTML;
+    use parent "Pod::POM::View::HTML";
+
+    sub view_seq_link_transform_path {
+        my ( $self, $page ) = @_;
+        return "?$page";
+    }
+    sub view_head1 {
+        my ($self, $head1) = @_;
+        my $title = $head1->title->present($self);
+        return "<h2>$title</h2>\n\n"
+            . $head1->content->present($self);
+    }
+
+    sub view_head2 {
+        my ($self, $head2) = @_;
+        my $title = $head2->title->present($self);
+        return "<h3>$title</h3>\n"
+            . $head2->content->present($self);
+    }
+
+    sub view_head3 {
+        my ($self, $head3) = @_;
+        my $title = $head3->title->present($self);
+        return "<h4>$title</h4>\n"
+            . $head3->content->present($self);
+    }
+
+    sub view_head4 {
+        my ($self, $head4) = @_;
+        my $title = $head4->title->present($self);
+        return "<h5>$title</h5>\n"
+            . $head4->content->present($self);
+    }
+
+    sub view_pod {
+        my ($self, $pod) = @_;
+        return join("\n",
+                    '<div class="pod">',
+                    $pod->content->present($self),
+                    '</div>');
+    }
+}
 
 1;
 
