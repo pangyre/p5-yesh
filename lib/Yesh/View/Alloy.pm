@@ -85,7 +85,7 @@ __END__
 
 =head1 NAME
 
-Yesh::View::Alloy - TT2 emulation view layer for L<Yesh>.
+Yesh::View::Alloy - L<Template::Alloy> based TT2 emulation view layer for L<Yesh>.
 
 =head1 FILTERS
 

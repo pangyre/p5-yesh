@@ -47,7 +47,7 @@ sub index : Path Args(0) {
         }
     }
 
-    unless ( $pom ) # Try the shell.
+    unless ( "$pom" ) # Try the shell.
     {
         my $path = qx{ perldoc -l $name };
         $pom = $parser->parse_file($path) if $path;
