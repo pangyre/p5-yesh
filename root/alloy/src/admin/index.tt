@@ -5,6 +5,7 @@
   <li><a href="[% yesh.uri_for_action("admin/config") %]">Configuration</a></li>
   <li><a href="[% yesh.uri_for_action("admin/env") %]">%ENV</a></li>
   <li><a href="[% yesh.uri_for_action("admin/inc") %]">%INC</a></li>
+  <li><a href="[% yesh.uri_for_action("man/perldoc/index") %]">Documentation</a></li>
 </ul>
 
 [% RETURN %]

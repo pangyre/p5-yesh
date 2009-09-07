@@ -1,4 +1,7 @@
-[% IF pod %]
+[% IF pom %]
+<div style="float:right">
+[% perldoc_link( name ) %]
+</div>
 [% pod %]
 [% ELSIF name %]
 <p>

@@ -8,7 +8,11 @@ use Scalar::Util qw( blessed );
 
 sub auto : Private {
     my ( $self, $c ) = @_;
-    return $c->check_any_user_role(qw( admin owner )) if $c->config->{configured};
+    if ( $c->config->{configured} )
+    {
+        $c->check_any_user_role(qw( admin owner ))
+            or die "RC_403";
+    }
     return 1;
 }
 
