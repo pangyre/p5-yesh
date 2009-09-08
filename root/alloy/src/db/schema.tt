@@ -13,7 +13,7 @@
       padding-right: 1%;
       float:left; font-weight: bold;">[% key %]</span>
       <span style="width:17%; display:block; text-align:left;
-      float:left;">[% info.$key || "n/a" %]</span>
+      float:left;">[% info.${key} || "n/a" %]</span>
   [% END %]
   </div>
 </div>

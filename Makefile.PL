@@ -39,6 +39,8 @@ requires "URI";
 requires "CatalystX::Plugin::Blurb";
 requires "DateTime::Format::SQLite";
 
+requires "Catalyst::Plugin::RequireSSL";
+
 recommends "Pod::POM";
 #recommends "LWPx::ParanoidAgent";
 #recommends "Catalyst::Plugin::Authentication::Credential::OpenID";

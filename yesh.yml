@@ -3,7 +3,6 @@
 site:
   name: <yesh/>
 
-
 # APPLICATION --------------------------------------------
 default_view: Alloy
 
@@ -33,6 +32,9 @@ Plugin::Authentication:
 
 
 # CONTROLLERS --------------------------------------------
+Controller::Session:
+  secure_login_only: 1
+
 Controller::User:
   model_stash:
     schema: DBIC

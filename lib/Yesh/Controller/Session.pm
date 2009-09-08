@@ -23,6 +23,8 @@ sub login :Global FormConfig {
     $c->flash( return_to => $return_to );
     $c->keep_flash("return_to");
 
+    $c->require_ssl if $self->{secure_login_only};
+
     my $form = $c->stash->{form};
     $c->log->debug("return to: $return_to");
     if ( $form->submitted_and_valid )

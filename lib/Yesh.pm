@@ -13,6 +13,8 @@ use Catalyst qw(
                 Authentication
                 Authorization::Roles
                 +CatalystX::Plugin::Blurb
+
+                RequireSSL
              );
 use Moose;
 
