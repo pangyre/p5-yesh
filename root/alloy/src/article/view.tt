@@ -5,6 +5,9 @@
 [% ELSE %]
   <h3 class="title">[% article.title %]</h3>
 [% END %]
+  <div class="datetime">
+[% article.golive.ymd() %]
+  </div>
   <div class="body">
 [% article.body %]
   </div>

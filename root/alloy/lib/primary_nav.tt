@@ -1,8 +1,11 @@
 [% IF yesh.user_exists %]
-Oh hai, [% user_link(yesh.user.obj) %]
+[% IF yesh.uri_for_action("user/view", [user.id] ).as_string != yesh.request.uri.as_string %]
+<b>[% user_link(yesh.user.obj) %]</b> · 
+[% END %]
 
-[% UNLESS yesh.action == 'db/schema' %]· <a href="[% yesh.uri_for("/db/schema") %]">Schema</a>[% END %]
-·
+[% UNLESS yesh.action == 'db/schema' %]
+  <a href="[% yesh.uri_for("/db/schema") %]">Schema</a> · 
+[% END %]
 <a href="[% yesh.uri_for("/article") %]">Article</a>
 ·
 <a href="[% yesh.uri_for("/article/create") %]">New article</a>

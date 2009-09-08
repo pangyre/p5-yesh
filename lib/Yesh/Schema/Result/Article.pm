@@ -191,17 +191,16 @@ __PACKAGE__->utf8_columns( __PACKAGE__->columns );
 sub is_live {
     my $self = shift;
     return unless ref $self;
-    #my $now = sprintf "%4d-%02d-%02d %02d:%02d:%02d", Date::Calc::Today_and_Now();
     my $now = DateTime->now();
 
     for my $check ( $self, $self->parents )
     {
         return unless
-            ( $check->status eq 'publish' )
-            &&
-            ( $check->golive lt $now )
-            &&
-            ( $check->takedown gt $now );
+            $check->status eq 'publish'
+            and
+            $check->golive lt $now
+            and
+            $check->takedown gt $now;
     }
     1;
 }
