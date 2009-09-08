@@ -24,6 +24,7 @@ sub view :PathPart("") Chained("load") Args(0) {
 
 sub register : Local Args(0) Form {
     my ( $self, $c ) = @_;
+    $c->require_ssl if $self->{secure_registration};
     my $form = $self->form();
     $form->load_config_filestem("user/register");
     $form->process;

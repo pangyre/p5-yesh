@@ -33,9 +33,10 @@ Plugin::Authentication:
 
 # CONTROLLERS --------------------------------------------
 Controller::Session:
-  secure_login_only: 1
+  secure_login: 1
 
 Controller::User:
+  secure_registration: 1
   model_stash:
     schema: DBIC
   new_users_get_author_role: 1
