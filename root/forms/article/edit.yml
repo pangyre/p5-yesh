@@ -9,6 +9,8 @@ default_args:
     Checkboxgroup:
       auto_id: %f_%n_%c
 element:
+  - type: Hidden
+    name: digest
   - type: Text
     name: title
     label: Title
@@ -67,6 +69,11 @@ element:
       class: date
     constraints:
       - Required
+      - type: DateTime
+        parser:
+          regex: !!perl/regexp '^(\d+)\D*(\d+)\D*(\d+)\D*(\d+)\D*(\d+)\D*(\d+)$'
+          params: [ year, month, day, hour, minute, second ]
+        message: "Invalid date, use this format: YYYY-MM-DDTHH:MM:SS"
   - type: Text
     name: takedown
     label: Take Down Date
@@ -74,6 +81,11 @@ element:
       class: date
     constraints:
       - Required
+      - type: DateTime
+        parser:
+          regex: !!perl/regexp '^(\d+)\D*(\d+)\D*(\d+)\D*(\d+)\D*(\d+)\D*(\d+)$'
+          params: [ year, month, day, hour, minute, second ]
+        message: "Invalid date, use this format: YYYY-MM-DDTHH:MM:SS"
   - type: Submit
     name: x
     value: Update Article

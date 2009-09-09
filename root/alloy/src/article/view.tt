@@ -9,7 +9,7 @@
 [% article.golive.ymd() %]
   </div>
   <div class="body">
-[% article.body %]
+[% article.rendered || article.body %]
   </div>
   <div class="meta">
     <div class="author">
@@ -25,3 +25,4 @@
 [% END %]
   </div>
 </div>
+

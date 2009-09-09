@@ -1,7 +1,7 @@
 ---
 # SITE SPECIFIC ------------------------------------------
 site:
-  name: <yesh/>
+  name: <yesh />
 
 # APPLICATION --------------------------------------------
 default_view: Alloy

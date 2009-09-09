@@ -56,7 +56,7 @@ sub update {
     return $self->next::method(@_);
 }
 
-sub token {
+sub digest {
     Digest::SHA1::sha1_hex(Encode::encode("utf-8",
                                           join("", +shift->get_columns)
                                           )

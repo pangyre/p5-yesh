@@ -83,7 +83,14 @@ sub edit :Chained("load") Args(0) FormConfig {
     $form->constraints_from_dbic($c->model("DBIC::Article"));
     $form->render;
 
-    if ( $form->submitted_and_valid ) {
+    if ( $form->submitted_and_valid )
+    {
+        if ( $article->digest ne $c->request->param("digest") )
+        {
+            $c->blurb({ id => "error",
+                        content => "Nope! This article was updated elsewhere since you loaded this page!" });
+            $c->detach;
+        }
         $form->save_to_model($article);
         # flash blurb here
         $c->response->redirect($c->request->uri);
@@ -91,6 +98,7 @@ sub edit :Chained("load") Args(0) FormConfig {
     }
     elsif ( not $form->submitted )
     {
+        $form->default_values({ digest => $article->digest });
         $form->model->default_values( $article );
     }
     $self->_load_related_form_data($c);
@@ -103,7 +111,7 @@ sub xedit :Chained("load") Args(0) {
 #    $c->stash( article => { $article->get_columns } );
     if ( $c->request->method eq "POST" )
     {
-        if ( $article->token ne $c->request->param("token") )
+        if ( $article->digest ne $c->request->param("digest") )
         {
             $c->blurb({ id => "error",
                         content => "Nope! This article was updated elsewhere since you loaded this page!" });

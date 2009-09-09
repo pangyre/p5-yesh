@@ -1,0 +1,33 @@
+End to end test plan.
+
+* Site runs (without optional dependencies).
+* Can initialize from /setup.
+** Can initialize site in spite of doing it wrong.
+** Can initialize site given all supported methods.
+*** SQLite.
+*** PostgreSQL.
+*** MySQL.
+* User registration.
+* Admin can set role "author" for new user.
+* User can write article.
+** Bad input does not break article.
+** Bad date.
+** Bad HTML.
+** Bad input in all fields.
+
+* Article can receive comments.
+* Comment can receive replies.
+* Article groups.
+* Article tags.
+* Display by tags.
+* Article creator can add another author.
+
+* Roles.
+* Editor can edit any author's article?
+* Chief editor can edit any article.
+
+* DB dump to JSON.
+* DB dump to SQL.
+* Load DB from JSON.
+* Load DB from SQL.
+
