@@ -23,7 +23,7 @@ This is page [% articles.pager.current_page | commify %]
   [% CATCH %]
 <div class="error">
 <h3>Error processing article</h3>
-  [% error | html %]
+  [% error %]
 </div>
   [% END %]
 [%-END %]
