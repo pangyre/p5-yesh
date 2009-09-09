@@ -23,7 +23,12 @@ This is page [% articles.pager.current_page | commify %]
   [% CATCH %]
 <div class="error">
 <h3>Error processing article</h3>
-  [% FILTER html %][% error %][% END %]
+<p><b>Type</b>:  [% error.type %]</p>
+<pre>
+[% FILTER html %]
+[% error.info %]
+[% END %]
+</pre>
 </div>
   [% END %]
 [%-END %]
