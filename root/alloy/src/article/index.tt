@@ -24,11 +24,11 @@ This is page [% articles.pager.current_page | commify %]
 <div class="error">
 <h3>Error processing article</h3>
 <p><b>Type</b>:  [% error.type %]</p>
-<pre>
+<p>
 [% FILTER html %]
 [% error.info %]
 [% END %]
-</pre>
+</p>
 </div>
   [% END %]
 [%-END %]
