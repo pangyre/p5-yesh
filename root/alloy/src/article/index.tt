@@ -18,5 +18,9 @@ This is page [% articles.pager.current_page | commify %]
 </p>
 
 [%-FOR article IN articles.all %]
+  [% TRY %]
   [% PROCESS article/view.tt %]
+  [% CATCH %]
+  [% error %]
+  [% END %]
 [%-END %]
