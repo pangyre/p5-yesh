@@ -18,10 +18,12 @@ my @Exceptions = (
             ],
         #rx => qr/DBI connect\([^)]+\) failed: (.+)|DBI Exception:?\s+(.+)/,
     },
-    no_template => { rx => qr/file error - ([^:]+): not found/,
-                     action => "no_template",
+    no_template => {
+        rx => qr/file error - ([^:]+): not found/,
+        action => "no_template",
     },
-    generic => { rx => qr/RC_(\d\d\d)(?::\s*(.+)\")?/,
+    generic => {
+        rx => qr/\bRC_(\d\d\d)(?::?\s*(.+)?")\z/s,
     },
     );
 
@@ -68,7 +70,7 @@ sub generic :Private {
     my ( $self, $c, $exception ) = @_;
     my ( $status, $message ) = @{$exception->{matches}};
     $status ||= 500;
-    $c->stash( error => $message,
+    $c->stash( error => $message || "[No error message captured.]",
                status => $status,
                title => join(" \x{b7} ", $status, HTTP::Status::status_message($status) ),
         );

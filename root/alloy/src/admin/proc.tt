@@ -1,0 +1,16 @@
+
+<table>
+ <tr>
+[% FOR field IN process_table.fields.reverse %]
+  <th>[% field %]</th>
+[% END %]
+ </tr>
+
+[% FOR entry IN process_table.table %]
+<tr>
+  [% FOR field IN process_table.fields.reverse %]
+<td style="border:1px solid gray">[% entry.$field %]</td>
+  [% END %]
+</tr>
+[% END %]
+</table>

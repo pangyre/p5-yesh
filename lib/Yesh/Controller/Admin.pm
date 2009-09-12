@@ -66,10 +66,18 @@ sub dependencies : Local {
         push @{$c->stash->{dependencies}}, $info;
         $c->log->debug("$usage --> " . ( $@ || "fine!" ));
     }
-
 }
 
+sub proc : Local {
+    my ( $self, $c ) = @_;
+    eval "use Proc::ProcessTable; 1"
+        or die "RC_503: Proc::ProcessTable is not available: $@";
+    $c->stash(process_table => Proc::ProcessTable->new( enable_ttys => 0 ) );
+}
 
+sub at : Local {
+
+}
 
 1;
 

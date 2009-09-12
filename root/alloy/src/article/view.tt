@@ -20,7 +20,7 @@
     </div>
 [% IF yesh.user.id == article.user.id %]
     <div class="edit">
-[% article.token %] &middot; [% edit_article_button(article) %]
+[% article.digest %] &middot; [% edit_article_button(article) %]
     </div>
 [% END %]
   </div>

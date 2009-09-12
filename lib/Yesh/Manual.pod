@@ -5,6 +5,12 @@
 
 =head1 WEB-BASED SET UP
 
+=begin html
+
+<a href="../../setup">Set up</a>. Use JS to hide this?
+
+=end html
+
 =head1 USER CONFIGURATION
 
 =head2 THEMES
@@ -12,6 +18,7 @@
 =head2 PLUGINS AND EXTENSIONS
 
 =head2 LOCAL CONFIGURATION FILE
+
 
 There are two configuration files used by Yesh while a site is running live (in production). They are C<yesh.yml> and C<yesh_local.yml>. This is a L<Catalyst> convention for setting up sites with L<Catalyst::Plugin::ConfigLoader>.
 
