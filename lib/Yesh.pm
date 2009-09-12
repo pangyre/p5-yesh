@@ -67,7 +67,7 @@ Yesh - YACMS: multi-author, secure, modern, flexible, friendly, Catalyst-based.
 
 =head1 DESCRIPTION
 
-This is the technical and license doc. Normal end-users will want to read L<Yesh::Manual> instead.
+This is the technical and license doc. Normal end-users will want to read B<L<Yesh::Manual>> instead.
 
 =head1 TO DO
 
