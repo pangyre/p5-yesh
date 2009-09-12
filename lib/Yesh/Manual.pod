@@ -94,7 +94,7 @@ Configured from exec/yesh in your webserverE<ndash>
 
 Private paths, like C</default>, which cannot be called only internally, not by users via browsers, are listed in [brackets].
 
-=head3 Yesh::Controller::Root
+=head3 L<Yesh::Controller::Root>
 
 =over 4
 
@@ -108,7 +108,7 @@ Any requested URI which does not match a controllerE<mdash>e.g., C</this/is/not/
 
 =back
 
-=head3 Yesh::Controller::User
+=head3 L<Yesh::Controller::User>
 
 =over 4
 
@@ -126,7 +126,7 @@ The feed for the user. Yesh will only support Atom feeds.
 
 =back
 
-=head3 Yesh::Controller::Session
+=head3 L<Yesh::Controller::Session>
 
 =over 4
 
@@ -136,7 +136,7 @@ Sign-in. Can be forced to B<https> with L<configuration settings|/CONFIGURATION>
 
 =back
 
-=head3 Yesh::Controller::Article
+=head3 L<Yesh::Controller::Article>
 
 =over 4
 
@@ -144,7 +144,7 @@ Sign-in. Can be forced to B<https> with L<configuration settings|/CONFIGURATION>
 
 =back
 
-=head3 Yesh::Controller::Admin
+=head3 L<Yesh::Controller::Admin>
 
 =over 4
 
@@ -152,7 +152,7 @@ Sign-in. Can be forced to B<https> with L<configuration settings|/CONFIGURATION>
 
 =back
 
-=head3 Yesh::Controller::Error
+=head3 L<Yesh::Controller::Error>
 
 =over 4
 
@@ -160,7 +160,7 @@ Sign-in. Can be forced to B<https> with L<configuration settings|/CONFIGURATION>
 
 =back
 
-=head3 Yesh::Controller::Man
+=head3 L<Yesh::Controller::Man>
 
 =over 4
 
@@ -168,7 +168,7 @@ Sign-in. Can be forced to B<https> with L<configuration settings|/CONFIGURATION>
 
 =back
 
-=head3 Yesh::Controller::Search
+=head3 L<Yesh::Controller::Search>
 
 =over 4
 
@@ -176,7 +176,7 @@ Sign-in. Can be forced to B<https> with L<configuration settings|/CONFIGURATION>
 
 =back
 
-=head3 Yesh::Controller::321
+=head3 L<Yesh::Controller::321>
 
 =over 4
 
@@ -184,7 +184,7 @@ Sign-in. Can be forced to B<https> with L<configuration settings|/CONFIGURATION>
 
 =back
 
-=head3 Yesh::Controller::321
+=head3 L<Yesh::Controller::321>
 
 =over 4
 
@@ -192,7 +192,7 @@ Sign-in. Can be forced to B<https> with L<configuration settings|/CONFIGURATION>
 
 =back
 
-=head3 Yesh::Controller::321
+=head3 L<Yesh::Controller::321>
 
 =over 4
 
@@ -204,7 +204,7 @@ asdf
 
 =head2 View::
 
-=head3 Yesh::View::Alloy
+=head3 L<Yesh::View::Alloy>
 
 =head4 Macros
 
