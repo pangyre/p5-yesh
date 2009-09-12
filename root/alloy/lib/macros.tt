@@ -1,3 +1,5 @@
+[% site = yesh.config.site %]
+
 [%-MACRO obj_uri(thing) BLOCK-%]
 [%# yesh.uri_for_action( thing, "view", [thing.id]) %]
 [%-END-%]
@@ -44,9 +46,7 @@ class="[% class || "button" %]" href="[% article_uri(a).replace('/preview\z',"")
   <ul>[% real_list_dirs(file_dir) %]</ul>
 [%-END-%]
 
-
 [%-MACRO perldoc_link(module,text) BLOCK-%][% text ||= module %]
 <a rel="external" href="http://search.cpan.org/perldoc?[% module | html | uri %]" title="[% module | html %] on search.cpan.org">[% text | html %]</a>
 [%-END-%]
 
-[% site = yesh.config.site %]

@@ -54,11 +54,11 @@ This is automatically set to the date and time of the set up if using the web ba
 
 =item Model::DBIC
 
-This is the configuration for the site's main database. If you want to edit it manually, you will need to know L<DBIx::Class> and L<DBIx::Class::Schema>. You are configuring a Catalyst model--L<Catalyst::Model::DBIC::Schema>--to use the site's schema--L<Yesh::Schema>.
+This is the configuration for the site's main database. If you want to edit it manually, you will need to know L<DBIx::Class> and L<DBIx::Class::Schema>. You are configuring a Catalyst modelE<mdash>L<Catalyst::Model::DBIC::Schema>E<mdash>to use the site's schemaE<mdash>L<Yesh::Schema>.
 
-=item 321
+=item _321
 
-=item 321
+=item _321
 
 =back
 
@@ -140,7 +140,7 @@ Sign-in. Can be forced to B<https> with L<configuration settings|/CONFIGURATION>
 
 =over 4
 
-=item 321
+=item _321
 
 =back
 
@@ -148,7 +148,7 @@ Sign-in. Can be forced to B<https> with L<configuration settings|/CONFIGURATION>
 
 =over 4
 
-=item 321
+=item _321
 
 =back
 
@@ -156,7 +156,7 @@ Sign-in. Can be forced to B<https> with L<configuration settings|/CONFIGURATION>
 
 =over 4
 
-=item 321
+=item _321
 
 =back
 
@@ -164,7 +164,7 @@ Sign-in. Can be forced to B<https> with L<configuration settings|/CONFIGURATION>
 
 =over 4
 
-=item 321
+=item _321
 
 =back
 
@@ -172,7 +172,7 @@ Sign-in. Can be forced to B<https> with L<configuration settings|/CONFIGURATION>
 
 =over 4
 
-=item 321
+=item _321
 
 =back
 
@@ -180,7 +180,7 @@ Sign-in. Can be forced to B<https> with L<configuration settings|/CONFIGURATION>
 
 =over 4
 
-=item 321
+=item _321
 
 =back
 
@@ -188,7 +188,7 @@ Sign-in. Can be forced to B<https> with L<configuration settings|/CONFIGURATION>
 
 =over 4
 
-=item 321
+=item _321
 
 =back
 
@@ -196,11 +196,41 @@ Sign-in. Can be forced to B<https> with L<configuration settings|/CONFIGURATION>
 
 =over 4
 
-=item 321
+=item _321
+
+asdf
 
 =back
 
 =head2 View::
+
+=head3 Yesh::View::Alloy
+
+=head4 Macros
+
+=over 4
+
+=item _321
+
+asdf
+
+=back
+
+=head4 Variables
+
+=over 4
+
+=item _321
+
+=back
+
+=head4 Configuration
+
+=over 4
+
+=item _321
+
+=back
 
 =head1 SECURITY
 
