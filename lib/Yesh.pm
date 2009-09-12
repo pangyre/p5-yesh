@@ -59,7 +59,33 @@ __END__
 
 =head1 NAME
 
-Yesh - YACMS: multi-author, secure, modern, flexible, friendly, Catalyst-based.
+Yesh - YACMS: secure, multi-author, modern, flexible, friendly, L<Catalyst>-based.
+
+=over 4
+
+=item Secure
+
+Well, we take it seriously anyway. This is a new and unfinished application and may have security bugs; plus it is meant to be an easy to install, user-administered application which leaves file and basic system security in the hands of the user.
+
+That said, the passwords are stored as an expensive L<Crypt::Eksblowfish::Bcrypt> hash. The application supports forcing users to register and sign in under https. If configured correctly this will be among the most secure, if not the most, secure FOSS (free and open source software) personal publishing platform.
+
+=item Modern
+
+It is highly introspective: status, documentation, underlying software, and database information can be examined within the application.
+
+It follows modern software standards and uses modern kits: L<Catalyst>, L<DBIx::Class>, and L<Template> Toolkit drive Yesh.
+
+We will not call it 3.0 and ready for production until it has thorough test coverage and code documentation.
+
+=item Multi-author
+
+Content (articles) can be written by one or several users. Users can open their own content for collaboration or protect it. An editorial role can be given to a user who can then edit content of certain other users.
+
+=item Flexible
+
+Yesh should run on no less than three database enginesE<mdash>SQLite, MySQL, and PostgreSQLE<mdash>and may even run on others without changes. Yesh may be deployed to its native server (not recommended), modperl, and FastCGI (recommended) on any OS which can run L<Catalyst>.
+
+=back
 
 =head1 SYNOPSIS
 
