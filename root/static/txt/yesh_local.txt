@@ -1,0 +1,33 @@
+---
+# SITE SPECIFIC ------------------------------------------
+site:
+  name: <yesh />
+
+# APPLICATION --------------------------------------------
+# Probably there is nothing you should mess with here.
+
+# PLUGINS ------------------------------------------------
+
+
+# CONTROLLERS --------------------------------------------
+# Force https on login-
+Controller::Session:
+  secure_login: 1
+
+# Force https on registration-
+Controller::User:
+  secure_registration: 1
+
+
+# MODELS -------------------------------------------------
+Model::DBIC:
+  connect_info:
+    - Connection information should be provided in __path_to(yesh_local.yml)__
+    - ~
+    - ~
+    - RaiseError: 1
+      AutoCommit: 1
+      ChopBlanks: 1
+
+# VIEWS --------------------------------------------------
+

@@ -3,6 +3,7 @@ use strict;
 use warnings;
 use parent "Catalyst::Controller::HTML::FormFu";
 use YAML qw( LoadFile DumpFile );
+use Carp;
 
 # There should be a page block to make sure the user/admin has read
 # and understood that setting up after the config is already there is
@@ -103,15 +104,23 @@ sub _write_local_yaml : Private {
 
 sub admin : Local Args(0) {
     my ( $self, $c ) = @_;
+    # As a transaction if possible! 321
     $c->forward("/user/register");
     if ( $c->stash->{form}->submitted_and_valid )
     {
         # Give the new user admin roles.
         my $admin = $c->user;
-        my $admin_role = $c->model("DBIC::SiteRole")->search({ name => "admin" })->single;
+        my $admin_role = $c->model("DBIC::SiteRole")->search({ name => "admin" })->single
+            || croak "Admin role is not configured";
         $admin->add_to_site_roles($admin_role);
-        my $author_role = $c->model("DBIC::SiteRole")->search({ name => "author" })->single;
-        $admin->add_to_site_roles($author_role);
+
+        unless ( $admin->has_site_role("author") ) # Register might have done this already.
+        {
+            my $author_role = $c->model("DBIC::SiteRole")->search({ name => "author" })->single
+                || croak "Author role is not configured";
+            $admin->add_to_site_roles($author_role)
+        }
+
         $self->_write_local_yaml($c,
                                  { configured => join(" ",
                                                       $admin->created->ymd,
@@ -130,8 +139,8 @@ sub done : Local Args(0) {
 sub _load_baseline {
     my ( $self, $c ) = @_;
     my $baseline_file = $c->path_to("etc/baseline.yml");
-    my $baseline = LoadFile("$baseline_file");
-#        or die "Baseline data file '$baseline_file' is missing or broken";
+    my $baseline = LoadFile("$baseline_file")
+        or croak "Baseline data file '$baseline_file' is missing or broken";
     for my $result_class ( keys %{$baseline} )
     {
         my $rs = $c->model("DBIC::$result_class");
@@ -140,6 +149,7 @@ sub _load_baseline {
             $rs->create($row)->update;
         }
     }
+    1;
 }
 
 # sub end :ActionClass("RenderView") {}

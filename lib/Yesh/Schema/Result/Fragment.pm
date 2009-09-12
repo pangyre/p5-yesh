@@ -14,44 +14,34 @@ __PACKAGE__->load_components(
 __PACKAGE__->table("fragment");
 __PACKAGE__->add_columns(
   "id",
-  {
-    data_type => "INT",
-    default_value => undef,
-    extra => { unsigned => 1 },
-    is_auto_increment => 1,
-    is_nullable => 0,
-    size => 10,
-  },
+  { data_type => "INT", default_value => undef, is_nullable => 0, size => 10 },
   "uuid",
-  { data_type => "CHAR", default_value => "", is_nullable => 0, size => 36 },
+  { data_type => "CHAR", default_value => undef, is_nullable => 0, size => 36 },
   "author",
-  {
-    data_type => "INT",
-    default_value => "",
-    extra => { unsigned => 1 },
-    is_nullable => 0,
-    size => 10,
-  },
+  { data_type => "INT", default_value => undef, is_nullable => 0, size => 10 },
   "template",
-  {
-    data_type => "INT",
-    default_value => undef,
-    extra => { unsigned => 1 },
-    is_foreign_key => 1,
-    is_nullable => 1,
-    size => 10,
-  },
+  { data_type => "INT", default_value => undef, is_nullable => 1, size => 10 },
   "css_class",
-  { data_type => "TINYTEXT", default_value => "", is_nullable => 0, size => 255 },
+  {
+    data_type => "TINYTEXT",
+    default_value => undef,
+    is_nullable => 0,
+    size => 255,
+  },
   "body",
   {
     data_type => "MEDIUMTEXT",
-    default_value => "",
+    default_value => undef,
     is_nullable => 0,
     size => 16777215,
   },
   "created",
-  { data_type => "DATETIME", default_value => "", is_nullable => 0, size => 19 },
+  {
+    data_type => "DATETIME",
+    default_value => undef,
+    is_nullable => 0,
+    size => 19,
+  },
   "updated",
   {
     data_type => "TIMESTAMP",
@@ -70,7 +60,6 @@ __PACKAGE__->belongs_to(
   "template",
   "Yesh::Schema::Result::Template",
   { id => "template" },
-  { join_type => "LEFT OUTER" },
 );
 __PACKAGE__->has_many(
   "fragment_filters",
@@ -79,8 +68,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_06 @ 2009-03-14 13:01:40
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:aYs5UUYU/sAPLwGaEI2etQ
+# Created by DBIx::Class::Schema::Loader v0.04006 @ 2009-09-12 14:52:20
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:6RapLoOsDAFORBhWupEFog
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

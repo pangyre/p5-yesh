@@ -14,33 +14,18 @@ __PACKAGE__->load_components(
 __PACKAGE__->table("fragment_filter");
 __PACKAGE__->add_columns(
   "fragment",
-  {
-    data_type => "INT",
-    default_value => "",
-    extra => { unsigned => 1 },
-    is_foreign_key => 1,
-    is_nullable => 0,
-    size => 10,
-  },
+  { data_type => "INT", default_value => undef, is_nullable => 0, size => 10 },
   "filter",
-  {
-    data_type => "INT",
-    default_value => "",
-    extra => { unsigned => 1 },
-    is_foreign_key => 1,
-    is_nullable => 0,
-    size => 10,
-  },
+  { data_type => "INT", default_value => undef, is_nullable => 0, size => 10 },
   "priority",
-  {
-    data_type => "INT",
-    default_value => 1,
-    extra => { unsigned => 1 },
-    is_nullable => 0,
-    size => 2,
-  },
+  { data_type => "INT", default_value => 1, is_nullable => 0, size => 2 },
   "created",
-  { data_type => "DATETIME", default_value => "", is_nullable => 0, size => 19 },
+  {
+    data_type => "DATETIME",
+    default_value => undef,
+    is_nullable => 0,
+    size => 19,
+  },
   "updated",
   {
     data_type => "TIMESTAMP",
@@ -58,8 +43,8 @@ __PACKAGE__->belongs_to(
 __PACKAGE__->belongs_to("filter", "Yesh::Schema::Result::Filter", { id => "filter" });
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_06 @ 2009-03-14 13:01:40
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:oLshBLnq1Gd7vG4MTCYLeQ
+# Created by DBIx::Class::Schema::Loader v0.04006 @ 2009-09-12 14:52:20
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Ou01T6jAMuKH48tukOK3vQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

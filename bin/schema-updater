@@ -1,0 +1,72 @@
+#!/usr/bin/env perl
+#---------------------------------------------------------------------
+use strict;
+use warnings;
+use FindBin;
+use File::Spec;
+use File::Find::Rule;
+use DBIx::Class::Schema::Loader "make_schema_at";
+
+#  Program proper
+#---------------------------------------------------------------------
+
+die "Give DB connection args! E.g.:\n",
+    "     dbi:mysql:sage jinx \n",
+    "           'dbi:mysql:yesh3;mysql_read_default_file=~/.my.cnf'\n"
+     unless @ARGV;
+
+our ( $lib, $app_class );
+BEGIN {
+    my $abs_path = File::Spec->rel2abs( $0 );
+    my ( $volume, $directories, $file ) = File::Spec->splitpath( $abs_path );
+
+    $lib = File::Spec->rel2abs( File::Spec->catdir( $directories, "..", "lib" ) );
+
+    my ( $app_name ) =
+        File::Find::Rule->file()
+            ->prune(1)
+            ->name( '*.pm' )
+            ->in( $lib );
+
+    $app_class = $app_name;
+    $app_class =~ s,\A.*?lib/|\.pm\z,,g;
+    $app_class =~ s,/,::,g;
+}
+
+eval { use lib $lib; };
+
+if ( $@ ) {
+    die "Well, that wasn't particularly clever:\n\t$@";
+}
+
+my $schema_class = $app_class . "::Schema";
+#my $schema = $schema_class->connect( \@ARGV );
+#$schema->storage->sql_maker->quote_char("`");
+# __PACKAGE__->storage->sql_maker->quote_char('`');
+
+$ARGV[3] = { quote_char => "`",
+             quote_table_names => 1,
+             quote_field_names => 1, };
+
+print "Going to make $schema_class at $lib.\n\tOkay? (gotta say 'yes' if you want it) ";
+chomp ( my $yes_no = <STDIN> );
+
+exit unless $yes_no =~ /\byes\b/i;
+
+
+make_schema_at(
+               $schema_class,
+               {
+                   # NOTHING...? quote_table_names => 1,
+                   # quote_char => "`",
+                   components => [qw( Yesh::Default UTF8Columns InflateColumn::DateTime )],
+                   dump_directory => $lib,
+                   use_namespaces => 1,
+               },
+               \@ARGV
+              );
+
+exit 0;
+
+
+__END__

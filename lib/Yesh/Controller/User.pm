@@ -51,7 +51,6 @@ sub register : Local Args(0) Form {
         }
         else
         {
-
             my $author_role = $c->model("DBIC::SiteRole")
                 ->search({ name => "author" })->single;
 

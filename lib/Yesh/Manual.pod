@@ -51,6 +51,10 @@ Inside your local configuration file you can set several prominent variables und
  Controller::Article;
  __PACKAGE__->config( articles_per_page => 10 );
 
+            $user->add_to_site_roles($author_role)
+                if $self->{new_users_get_author_role};
+
+
 =over 4
 
 =item configured

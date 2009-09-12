@@ -14,29 +14,25 @@ __PACKAGE__->load_components(
 __PACKAGE__->table("display_group");
 __PACKAGE__->add_columns(
   "id",
-  {
-    data_type => "INT",
-    default_value => undef,
-    extra => { unsigned => 1 },
-    is_auto_increment => 1,
-    is_nullable => 0,
-    size => 10,
-  },
+  { data_type => "INT", default_value => undef, is_nullable => 0, size => 10 },
   "uuid",
-  { data_type => "CHAR", default_value => "", is_nullable => 0, size => 36 },
+  { data_type => "CHAR", default_value => undef, is_nullable => 0, size => 36 },
   "template",
-  {
-    data_type => "INT",
-    default_value => "",
-    extra => { unsigned => 1 },
-    is_foreign_key => 1,
-    is_nullable => 0,
-    size => 10,
-  },
+  { data_type => "INT", default_value => undef, is_nullable => 0, size => 10 },
   "name",
-  { data_type => "VARCHAR", default_value => "", is_nullable => 0, size => 255 },
+  {
+    data_type => "VARCHAR",
+    default_value => undef,
+    is_nullable => 0,
+    size => 255,
+  },
   "created",
-  { data_type => "DATETIME", default_value => "", is_nullable => 0, size => 19 },
+  {
+    data_type => "DATETIME",
+    default_value => undef,
+    is_nullable => 0,
+    size => 19,
+  },
   "updated",
   {
     data_type => "TIMESTAMP",
@@ -58,8 +54,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_06 @ 2009-03-14 13:01:40
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:5vMitSAkKtREOhMxpFBE2A
+# Created by DBIx::Class::Schema::Loader v0.04006 @ 2009-09-12 14:52:20
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:5BuUObPOMJ7M3QYS7ljfdw
 
 __PACKAGE__->many_to_many(articles => "article_display_groups", "article");
 
