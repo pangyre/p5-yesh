@@ -7,12 +7,12 @@
   <a href="[% yesh.uri_for("/db/schema") %]">Schema</a> · 
 [% END %]
 <a href="[% yesh.uri_for("/article") %]">Article</a>
-·
-<a href="[% yesh.uri_for("/article/create") %]">New article</a>
+(<a href="[% yesh.uri_for("/article/create") %]">new</a>)
 ·
 <a href="[% yesh.uri_for("/user") %]">User</a>
 ·
 <a href="[% yesh.uri_for("/man/perldoc") %]">Docs</a>
+(<a href="[% yesh.uri_for("/man/perldoc") %]?Yesh::Manual">manual</a>)
 ·
 <a href="[% yesh.uri_for("/logout") %]">Sign-out</a>
 
@@ -31,3 +31,10 @@ Action: [% yesh.action %]
 · [% END %]
 <a href="[% yesh.uri_for("/login") %]">Sign-in</a>
 [% END %]
+
+
+<b>Time</b>: [% elapsed_time | format("%.3f") %] secs ([% ( 1 /
+elapsed_time ) | format("%.1f") %]/s)
+
+
+

@@ -2,11 +2,11 @@
 
 L<Yesh> is distributed with third party software included.
 
-=head1 jQuery
+=head1 jQuery and jQuery UI
 
 While jQuery is easily accessible from public places like Google's public JS API, it is undesirable to rely its remote available. The files need to be available locally in case of firewall or connectivity blocks.
 
-This version of L<Yesh> comes with jQuery JavaScript Library v1.3.2 E<middot> L<http://jquery.com/>. It is distributed with L<Yesh> under the MIT license E<middot> L<http://docs.jquery.com/License>.
+This version of L<Yesh> comes with jQuery 1.3.2 E<middot> L<http://jquery.com/> and jQuery UI 1.7.2 E<middot> L<http://jqueryui.com/>. They are distributed with L<Yesh> under the MIT license E<middot> L<http://docs.jquery.com/License>.
 
 jQuery proper is in C<root/static/js> and its associated files and plugins are in C<root/static/js/jquery>.
 
