@@ -59,7 +59,7 @@ __END__
 
 =head1 NAME
 
-Yesh - yet another CMS.
+Yesh - YACMS: multi-author, secure, modern, flexible, friendly, Catalyst-based.
 
 =head1 SYNOPSIS
 
@@ -71,11 +71,17 @@ This is the technical and license doc. Normal end-users will want to read L<Yesh
 
 =head1 TO DO
 
-Support for setting L<Catalyst::Plugin::RequireSSL> on login and article edits?
+Tests.
 
-Pod viewer.
+Strategy for third party stuff like jQuery.
+
+Including third party licenses.
+
+Manual complete.
 
 Move C<config-E<gt>{configured}> to a third config file to separate it from direct user interaction?
+
+Move the entire auto-config to a third config file?
 
 =head1 CODE REPOSITORY
 
@@ -83,16 +89,18 @@ L<http://github.com/pangyre/p5-yesh>.
 
 =head1 SEE ALSO
 
-L<Yesh::Controller::Root>, L<Catalyst>.
+L<Yesh::Manual>, L<Catalyst>.
 
 =head1 AUTHOR
 
-Ashley Pond V, <ashley@cpan.org>.
+Ashley Pond V E<middot> ashley.pond.v@gmail.com E<middot> L<http://pangyresoft.com>.
 
 =head1 LICENSE
 
-This library is free software. You can redistribute and modify it
-under the same terms as Perl itself.
+The parts of this library which is Yesh specific is free software. You
+can redistribute and modify it under the same terms as Perl itself.
+
+Some third party software, e.g. jQuery, may also included in this distribution. Please see L<Yesh::ThirdParty> for more about that.
 
 =head1 DISCLAIMER OF WARRANTY
 

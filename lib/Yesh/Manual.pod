@@ -21,6 +21,13 @@
 
 There are two configuration files used by Yesh while a site is running live (in production). They are C<yesh.yml> and C<yesh_local.yml>. This is a L<Catalyst> convention for setting up sites with L<Catalyst::Plugin::ConfigLoader>.
 
+=begin html
+
+<a href="../../txt/yesh_local.txt">Sample configuration file</a>. Use JS to hide this? These should only be exposed on local/running installations. Could be a hook in the viewer to surface them.
+
+=end html
+
+
 =over 4
 
 =item yesh.yml
@@ -55,12 +62,11 @@ This is the configuration for the site's main database. If you want to edit it m
 
 =back
 
-=head1 YESH SPEC
-
-=head2 TECHNICAL DOCUMENTS
+=head1 TECHNICAL DOCUMENTS
 
 Please see the various documents for individual modules. E.g., L<Yesh::Schema>, L<Yesh::Controller::User>, L<Yesh::View::Alloy>, and so on.
 
+=head1 YESH SPEC
 
 =head2 Model::
 
@@ -86,6 +92,8 @@ Configured from exec/yesh in your webserverE<ndash>
       --> /admin
       --> Yesh::Controller::Admin->index
 
+Private paths, like C</default>, which cannot be called only internally, not by users via browsers, are listed in [brackets].
+
 =head3 Yesh::Controller::Root
 
 =over 4
@@ -94,7 +102,7 @@ Configured from exec/yesh in your webserverE<ndash>
 
 Home/root. Shows current top level content. In an unconfigured application, this will redirect to C</setup>.
 
-=item [404]
+=item [/default]
 
 Any requested URI which does not match a controllerE<mdash>e.g., C</this/is/not/valid>E<mdash>is sent to C<default> which is a 404 handler.
 
@@ -213,3 +221,4 @@ If these are set in your configuration,
 
 See L<Yesh>.
 
+=cut
