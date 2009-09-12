@@ -11,13 +11,13 @@
 
 =end html
 
-=head1 USER CONFIGURATION
+=head1 CONFIGURATION
 
 =head2 THEMES
 
 =head2 PLUGINS AND EXTENSIONS
 
-=head2 LOCAL CONFIGURATION FILE
+=head2 LOCAL CONFIGURATION
 
 There are two configuration files used by Yesh while a site is running live (in production). They are C<yesh.yml> and C<yesh_local.yml>. This is a L<Catalyst> convention for setting up sites with L<Catalyst::Plugin::ConfigLoader>.
 
@@ -55,8 +55,12 @@ This is the configuration for the site's main database. If you want to edit it m
 
 =back
 
-
 =head1 YESH SPEC
+
+=head2 TECHNICAL DOCUMENTS
+
+Please see the various documents for individual modules. E.g., L<Yesh::Schema>, L<Yesh::Controller::User>, L<Yesh::View::Alloy>, and so on.
+
 
 =head2 Model::
 
@@ -96,6 +100,34 @@ Any requested URI which does not match a controllerE<mdash>e.g., C</this/is/not/
 
 =back
 
+=head3 Yesh::Controller::User
+
+=over 4
+
+=item /user
+
+Index page for users.
+
+=item /user/id/*
+
+User's home page where * is the user's id.
+
+=item /user/id/*/atom
+
+The feed for the user. Yesh will only support Atom feeds.
+
+=back
+
+=head3 Yesh::Controller::Session
+
+=over 4
+
+=item /login
+
+Sign-in. Can be forced to B<https> with L<configuration settings|/CONFIGURATION>.
+
+=back
+
 =head3 Yesh::Controller::Article
 
 =over 4
@@ -129,22 +161,6 @@ Any requested URI which does not match a controllerE<mdash>e.g., C</this/is/not/
 =back
 
 =head3 Yesh::Controller::Search
-
-=over 4
-
-=item 321
-
-=back
-
-=head3 Yesh::Controller::Session
-
-=over 4
-
-=item 321
-
-=back
-
-=head3 Yesh::Controller::User
 
 =over 4
 
