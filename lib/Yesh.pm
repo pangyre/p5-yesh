@@ -73,10 +73,6 @@ This is the technical and license doc. Normal end-users will want to read L<Yesh
 
 Tests.
 
-Strategy for third party stuff like jQuery.
-
-Including third party licenses.
-
 Manual complete.
 
 Move C<config-E<gt>{configured}> to a third config file to separate it from direct user interaction?
@@ -100,7 +96,7 @@ Ashley Pond V E<middot> ashley.pond.v@gmail.com E<middot> L<http://pangyresoft.c
 The parts of this library which is Yesh specific is free software. You
 can redistribute and modify it under the same terms as Perl itself.
 
-Some third party software, e.g. jQuery, may also included in this distribution. Please see L<Yesh::ThirdParty> for more about that.
+Some third party software, e.g. jQuery, may also included in this distribution. Please see L<Yesh::Manual::ThirdParty> for more about that.
 
 =head1 DISCLAIMER OF WARRANTY
 
