@@ -41,9 +41,10 @@ requires "DateTime::Format::SQLite";
 
 requires "Catalyst::Plugin::RequireSSL";
 
+recommends "Catalyst::Manual";
 recommends "Pod::POM";
 recommends "Proc::ProcessTable";
-recommends "Catalyst::Manual";
+recommends "Schedule::At";
 #recommends "LWPx::ParanoidAgent";
 #recommends "Catalyst::Plugin::Authentication::Credential::OpenID";
 
