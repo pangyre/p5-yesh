@@ -26,7 +26,7 @@ sub auto : Private {
             and
             eval { $c->model("DBIC::User")->search->count == 0 } )
     {
-        my $config = $c->path_to("yesh_local.yml");
+        my $config = $c->path_to("conf/yesh_local.yml");
         $config->remove or
             die "Your site has a serious problem. Try deleting $config and then visiting /setup again";
     }
@@ -89,7 +89,7 @@ sub _deploy_sqlite : Private {
 
 sub _write_local_yaml : Private {
     my ( $self, $c, $data ) = @_;
-    my $config_file = $c->path_to("yesh_local.yml");
+    my $config_file = $c->path_to("conf/yesh_local.yml");
     my $config = LoadFile("$config_file") if -f $config_file;
 #    require Hash::Merge;
 #    $config = Hash::Merge::merge($config, $data);

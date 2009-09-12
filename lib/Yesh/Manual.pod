@@ -48,6 +48,9 @@ You are welcome to edit this file but if you don't know what you're doing, you a
 
 Inside your local configuration file you can set several prominent variables under the key C<site>.
 
+ Controller::Article;
+ __PACKAGE__->config( articles_per_page => 10 );
+
 =over 4
 
 =item configured

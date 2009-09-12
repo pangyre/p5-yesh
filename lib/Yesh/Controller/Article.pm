@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use parent 'Catalyst::Controller::HTML::FormFu';
 
-__PACKAGE__->config( articles_per_page => 25 );
+__PACKAGE__->config( articles_per_page => 10 );
 
 sub index :Path Args(0) {
     my ( $self, $c ) = @_;
@@ -15,6 +15,7 @@ sub index :Path Args(0) {
             ->live_rs({},
                       {
                        prefetch => [qw( license user )],
+                       join => [qw( license user )],
                        order_by => "golive DESC",
                        page => $page,
                        rows => $self->{articles_per_page}
