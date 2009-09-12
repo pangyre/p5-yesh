@@ -1,0 +1,6 @@
+[% META title = "at" %]
+
+<p>
+This does nothing yet. Experimental feature support for one off style actions
+like XML pinging for page updates.
+</p>

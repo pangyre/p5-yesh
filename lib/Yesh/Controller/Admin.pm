@@ -76,6 +76,8 @@ sub proc : Local {
 }
 
 sub at : Local {
+    eval "use Schedule::At; 1"
+        or die "RC_503: Schedule::At is not available: $@";
 
 }
 

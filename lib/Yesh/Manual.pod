@@ -19,7 +19,6 @@
 
 =head2 LOCAL CONFIGURATION FILE
 
-
 There are two configuration files used by Yesh while a site is running live (in production). They are C<yesh.yml> and C<yesh_local.yml>. This is a L<Catalyst> convention for setting up sites with L<Catalyst::Plugin::ConfigLoader>.
 
 =over 4
@@ -65,6 +64,49 @@ This is the configuration for the site's main database. If you want to edit it m
 =item 321
 
 =back
+
+
+=head1 YESH SPEC
+
+=head2 Model::
+
+=head3 Yesh::Model::DBIC
+
+=head2 Controller::
+
+This generally reflects the URI dispatch scheme. All URIs are relative to the application root. E.g., if you have Yesh configured at the top of your webserverE<ndash>
+
+ http://expample.com/
+      --> /
+      --> Yesh::Controller::Root->index
+ http://expample.com/admin
+      --> /admin
+      --> Yesh::Controller::Admin->index
+
+Configured from exec/yesh in your webserverE<ndash>
+
+ http://expample.com/exec/yesh/
+      --> /
+      --> Yesh::Controller::Root->index
+ http://expample.com/exec/yesh/admin
+      --> /admin
+      --> Yesh::Controller::Admin->index
+
+=head3 Yesh::Controller::Root
+
+=over 4
+
+=item /
+
+Home/root. Shows current top level content. In an unconfigured application, this will redirect to C</setup>.
+
+=item [404]
+
+Any requested URI which does not match a controllerE<mdash>e.g., C</this/is/not/valid>E<mdash>is sent to C<default> which is a 404 handler.
+
+=back
+
+=head2 View::
 
 =head1 SECURITY
 
