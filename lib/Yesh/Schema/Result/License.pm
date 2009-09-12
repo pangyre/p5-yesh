@@ -14,21 +14,18 @@ __PACKAGE__->load_components(
 __PACKAGE__->table("license");
 __PACKAGE__->add_columns(
   "id",
-  { data_type => "INT", default_value => undef, is_nullable => 0, size => 10 },
+  {
+    data_type => "INT",
+    default_value => undef,
+    extra => { unsigned => 1 },
+    is_auto_increment => 1,
+    is_nullable => 0,
+    size => 10,
+  },
   "title",
-  {
-    data_type => "VARCHAR",
-    default_value => undef,
-    is_nullable => 0,
-    size => 255,
-  },
+  { data_type => "VARCHAR", default_value => "", is_nullable => 0, size => 255 },
   "uri",
-  {
-    data_type => "VARCHAR",
-    default_value => undef,
-    is_nullable => 0,
-    size => 255,
-  },
+  { data_type => "VARCHAR", default_value => "", is_nullable => 0, size => 255 },
   "display",
   {
     data_type => "VARCHAR",
@@ -64,8 +61,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04006 @ 2009-09-12 14:52:20
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:slxoLMZyWlyYXIACNDVQ0w
+# Created by DBIx::Class::Schema::Loader v0.04999_06 @ 2009-09-12 16:40:22
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Osny0zKw8kyaPy9BwSShbw
 
 __PACKAGE__->utf8_columns( __PACKAGE__->columns );
 

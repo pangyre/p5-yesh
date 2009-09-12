@@ -14,25 +14,22 @@ __PACKAGE__->load_components(
 __PACKAGE__->table("filter");
 __PACKAGE__->add_columns(
   "id",
-  { data_type => "INT", default_value => undef, is_nullable => 0, size => 10 },
+  {
+    data_type => "INT",
+    default_value => undef,
+    extra => { unsigned => 1 },
+    is_auto_increment => 1,
+    is_nullable => 0,
+    size => 10,
+  },
   "uuid",
-  { data_type => "CHAR", default_value => undef, is_nullable => 0, size => 36 },
+  { data_type => "CHAR", default_value => "", is_nullable => 0, size => 36 },
   "author",
-  { data_type => "CHAR", default_value => undef, is_nullable => 0, size => 36 },
+  { data_type => "CHAR", default_value => "", is_nullable => 0, size => 36 },
   "name",
-  {
-    data_type => "TEXT",
-    default_value => undef,
-    is_nullable => 0,
-    size => 65535,
-  },
+  { data_type => "TEXT", default_value => "", is_nullable => 0, size => 65535 },
   "code",
-  {
-    data_type => "TEXT",
-    default_value => undef,
-    is_nullable => 0,
-    size => 65535,
-  },
+  { data_type => "TEXT", default_value => "", is_nullable => 0, size => 65535 },
   "description",
   {
     data_type => "TEXT",
@@ -41,16 +38,23 @@ __PACKAGE__->add_columns(
     size => 65535,
   },
   "description_type",
-  { data_type => "ENUM", default_value => "plain", is_nullable => 1, size => 8 },
-  "core",
-  { data_type => "ENUM", default_value => 0, is_nullable => 0, size => 1 },
-  "created",
   {
-    data_type => "DATETIME",
-    default_value => undef,
-    is_nullable => 0,
-    size => 19,
+    data_type => "ENUM",
+    default_value => "plain",
+    extra => { list => ["markdown", "pod", "plain", "xhtml"] },
+    is_nullable => 1,
+    size => 8,
   },
+  "core",
+  {
+    data_type => "ENUM",
+    default_value => 0,
+    extra => { list => [0, 1] },
+    is_nullable => 0,
+    size => 1,
+  },
+  "created",
+  { data_type => "DATETIME", default_value => "", is_nullable => 0, size => 19 },
   "updated",
   {
     data_type => "TIMESTAMP",
@@ -61,14 +65,14 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("id");
 __PACKAGE__->has_many(
-  "fragment_filters",
-  "Yesh::Schema::Result::FragmentFilter",
+  "article_filters",
+  "Yesh::Schema::Result::ArticleFilter",
   { "foreign.filter" => "self.id" },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04006 @ 2009-09-12 14:52:20
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:4D5Yz5C3WnyDt3sh3xYXKg
+# Created by DBIx::Class::Schema::Loader v0.04999_06 @ 2009-09-12 16:40:22
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:7kljUrj6at/yz+2tm10yAA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

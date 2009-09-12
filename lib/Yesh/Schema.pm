@@ -8,8 +8,8 @@ use base 'DBIx::Class::Schema';
 __PACKAGE__->load_namespaces;
 
 
-# Created by DBIx::Class::Schema::Loader v0.04006 @ 2009-09-12 14:52:20
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:6mGTjKIh48sTT/0pBYfGcQ
+# Created by DBIx::Class::Schema::Loader v0.04999_06 @ 2009-09-12 16:40:22
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:VRTJt0ZmNiE1NC3aH5SkQg
 
 our $VERSION = "3.00";
 

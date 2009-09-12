@@ -14,16 +14,26 @@ __PACKAGE__->load_components(
 __PACKAGE__->table("user_site_role");
 __PACKAGE__->add_columns(
   "user",
-  { data_type => "INT", default_value => undef, is_nullable => 0, size => 10 },
-  "site_role",
-  { data_type => "INT", default_value => undef, is_nullable => 0, size => 10 },
-  "created",
   {
-    data_type => "DATETIME",
+    data_type => "INT",
     default_value => undef,
+    extra => { unsigned => 1 },
+    is_auto_increment => 1,
+    is_foreign_key => 1,
     is_nullable => 0,
-    size => 19,
+    size => 10,
   },
+  "site_role",
+  {
+    data_type => "INT",
+    default_value => "",
+    extra => { unsigned => 1 },
+    is_foreign_key => 1,
+    is_nullable => 0,
+    size => 10,
+  },
+  "created",
+  { data_type => "DATETIME", default_value => "", is_nullable => 0, size => 19 },
   "updated",
   {
     data_type => "TIMESTAMP",
@@ -41,8 +51,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04006 @ 2009-09-12 14:52:20
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Yo8CtJRlHbrxBLrmQ6nKNg
+# Created by DBIx::Class::Schema::Loader v0.04999_06 @ 2009-09-12 16:40:22
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:f715qgrC8WCzFxrQC8VHaw
 
 
 

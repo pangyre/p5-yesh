@@ -14,28 +14,49 @@ __PACKAGE__->load_components(
 __PACKAGE__->table("article");
 __PACKAGE__->add_columns(
   "id",
-  { data_type => "INT", default_value => undef, is_nullable => 0, size => 10 },
-  "uuid",
-  { data_type => "CHAR", default_value => undef, is_nullable => 0, size => 36 },
-  "user",
-  { data_type => "INT", default_value => undef, is_nullable => 0, size => 10 },
-  "parent",
-  { data_type => "INT", default_value => undef, is_nullable => 1, size => 10 },
-  "template",
-  { data_type => "INT", default_value => undef, is_nullable => 1, size => 10 },
-  "license",
-  { data_type => "INT", default_value => undef, is_nullable => 0, size => 10 },
-  "title",
   {
-    data_type => "TEXT",
+    data_type => "INT",
     default_value => undef,
+    extra => { unsigned => 1 },
+    is_auto_increment => 1,
     is_nullable => 0,
-    size => 65535,
+    size => 10,
   },
+  "uuid",
+  { data_type => "CHAR", default_value => "", is_nullable => 0, size => 36 },
+  "parent",
+  {
+    data_type => "INT",
+    default_value => undef,
+    extra => { unsigned => 1 },
+    is_foreign_key => 1,
+    is_nullable => 1,
+    size => 10,
+  },
+  "template",
+  {
+    data_type => "INT",
+    default_value => undef,
+    extra => { unsigned => 1 },
+    is_foreign_key => 1,
+    is_nullable => 1,
+    size => 10,
+  },
+  "license",
+  {
+    data_type => "INT",
+    default_value => "",
+    extra => { unsigned => 1 },
+    is_foreign_key => 1,
+    is_nullable => 0,
+    size => 10,
+  },
+  "title",
+  { data_type => "TEXT", default_value => "", is_nullable => 0, size => 65535 },
   "body",
   {
     data_type => "MEDIUMTEXT",
-    default_value => undef,
+    default_value => "",
     is_nullable => 0,
     size => 16777215,
   },
@@ -46,19 +67,40 @@ __PACKAGE__->add_columns(
     is_nullable => 1,
     size => 65535,
   },
-  "status",
-  { data_type => "ENUM", default_value => "draft", is_nullable => 1, size => 8 },
-  "comment_flag",
-  { data_type => "ENUM", default_value => "on", is_nullable => 1, size => 6 },
-  "live_license",
-  { data_type => "INT", default_value => undef, is_nullable => 1, size => 10 },
-  "golive",
+  "teaser",
   {
-    data_type => "DATETIME",
+    data_type => "TEXT",
     default_value => undef,
-    is_nullable => 0,
-    size => 19,
+    is_nullable => 1,
+    size => 65535,
   },
+  "status",
+  {
+    data_type => "ENUM",
+    default_value => "draft",
+    extra => { list => ["draft", "publish", "resource", "manual", "deleted"] },
+    is_nullable => 0,
+    size => 8,
+  },
+  "comment_flag",
+  {
+    data_type => "ENUM",
+    default_value => "on",
+    extra => { list => ["on", "off", "closed", "hide"] },
+    is_nullable => 1,
+    size => 6,
+  },
+  "live_license",
+  {
+    data_type => "INT",
+    default_value => undef,
+    extra => { unsigned => 1 },
+    is_foreign_key => 1,
+    is_nullable => 1,
+    size => 10,
+  },
+  "golive",
+  { data_type => "DATETIME", default_value => "", is_nullable => 0, size => 19 },
   "takedown",
   {
     data_type => "DATETIME",
@@ -67,12 +109,7 @@ __PACKAGE__->add_columns(
     size => 19,
   },
   "created",
-  {
-    data_type => "DATETIME",
-    default_value => undef,
-    is_nullable => 0,
-    size => 19,
-  },
+  { data_type => "DATETIME", default_value => "", is_nullable => 0, size => 19 },
   "updated",
   {
     data_type => "TIMESTAMP",
@@ -82,8 +119,12 @@ __PACKAGE__->add_columns(
   },
 );
 __PACKAGE__->set_primary_key("id");
-__PACKAGE__->belongs_to("user", "Yesh::Schema::Result::User", { id => "user" });
-__PACKAGE__->belongs_to("parent", "Yesh::Schema::Result::Article", { id => "parent" });
+__PACKAGE__->belongs_to(
+  "parent",
+  "Yesh::Schema::Result::Article",
+  { id => "parent" },
+  { join_type => "LEFT OUTER" },
+);
 __PACKAGE__->has_many(
   "articles",
   "Yesh::Schema::Result::Article",
@@ -93,6 +134,7 @@ __PACKAGE__->belongs_to(
   "template",
   "Yesh::Schema::Result::Template",
   { id => "template" },
+  { join_type => "LEFT OUTER" },
 );
 __PACKAGE__->belongs_to(
   "license",
@@ -103,10 +145,21 @@ __PACKAGE__->belongs_to(
   "live_license",
   "Yesh::Schema::Result::License",
   { id => "live_license" },
+  { join_type => "LEFT OUTER" },
+);
+__PACKAGE__->has_many(
+  "article_authors",
+  "Yesh::Schema::Result::ArticleAuthor",
+  { "foreign.article" => "self.id" },
 );
 __PACKAGE__->has_many(
   "article_display_groups",
   "Yesh::Schema::Result::ArticleDisplayGroup",
+  { "foreign.article" => "self.id" },
+);
+__PACKAGE__->has_many(
+  "article_filters",
+  "Yesh::Schema::Result::ArticleFilter",
   { "foreign.article" => "self.id" },
 );
 __PACKAGE__->has_many(
@@ -131,8 +184,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04006 @ 2009-09-12 14:52:20
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:xicEx+S5F4dRq8nee+kDnQ
+# Created by DBIx::Class::Schema::Loader v0.04999_06 @ 2009-09-12 16:40:22
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:gi0iNesAZnv9BvICuEW1Vw
 
 # use Date::Calc ();
 use DateTime ();

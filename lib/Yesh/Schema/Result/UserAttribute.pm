@@ -14,13 +14,27 @@ __PACKAGE__->load_components(
 __PACKAGE__->table("user_attribute");
 __PACKAGE__->add_columns(
   "user",
-  { data_type => "INT", default_value => undef, is_nullable => 0, size => 10 },
+  {
+    data_type => "INT",
+    default_value => "",
+    extra => { unsigned => 1 },
+    is_foreign_key => 1,
+    is_nullable => 0,
+    size => 10,
+  },
   "attribute",
-  { data_type => "INT", default_value => undef, is_nullable => 0, size => 10 },
+  {
+    data_type => "INT",
+    default_value => "",
+    extra => { unsigned => 1 },
+    is_foreign_key => 1,
+    is_nullable => 0,
+    size => 10,
+  },
   "value",
   {
     data_type => "MEDIUMTEXT",
-    default_value => undef,
+    default_value => "",
     is_nullable => 0,
     size => 16777215,
   },
@@ -34,8 +48,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04006 @ 2009-09-12 14:52:20
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:GUix8PUzvxQrF2ME051rWw
+# Created by DBIx::Class::Schema::Loader v0.04999_06 @ 2009-09-12 16:40:22
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:L4cEFxHn9x5BQWK2GjbCrA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

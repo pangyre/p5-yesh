@@ -14,37 +14,32 @@ __PACKAGE__->load_components(
 __PACKAGE__->table("user");
 __PACKAGE__->add_columns(
   "id",
-  { data_type => "INT", default_value => undef, is_nullable => 0, size => 10 },
+  {
+    data_type => "INT",
+    default_value => undef,
+    extra => { unsigned => 1 },
+    is_auto_increment => 1,
+    is_nullable => 0,
+    size => 10,
+  },
   "uuid",
-  { data_type => "CHAR", default_value => undef, is_nullable => 0, size => 36 },
+  { data_type => "CHAR", default_value => "", is_nullable => 0, size => 36 },
   "username",
-  {
-    data_type => "VARCHAR",
-    default_value => undef,
-    is_nullable => 0,
-    size => 255,
-  },
+  { data_type => "VARCHAR", default_value => "", is_nullable => 0, size => 80 },
   "password",
-  {
-    data_type => "VARCHAR",
-    default_value => undef,
-    is_nullable => 1,
-    size => 40,
-  },
+  { data_type => "CHAR", default_value => undef, is_nullable => 1, size => 60 },
   "email",
+  { data_type => "VARCHAR", default_value => "", is_nullable => 0, size => 100 },
+  "status",
   {
-    data_type => "VARCHAR",
-    default_value => undef,
+    data_type => "ENUM",
+    default_value => "registered",
+    extra => { list => ["registered", "active", "blocked", "deleted"] },
     is_nullable => 0,
-    size => 100,
+    size => 10,
   },
   "created",
-  {
-    data_type => "DATETIME",
-    default_value => undef,
-    is_nullable => 0,
-    size => 19,
-  },
+  { data_type => "DATETIME", default_value => "", is_nullable => 0, size => 19 },
   "updated",
   {
     data_type => "TIMESTAMP",
@@ -57,9 +52,9 @@ __PACKAGE__->set_primary_key("id");
 __PACKAGE__->add_unique_constraint("email", ["email"]);
 __PACKAGE__->add_unique_constraint("username", ["username"]);
 __PACKAGE__->has_many(
-  "articles",
-  "Yesh::Schema::Result::Article",
-  { "foreign.user" => "self.id" },
+  "article_authors",
+  "Yesh::Schema::Result::ArticleAuthor",
+  { "foreign.author" => "self.id" },
 );
 __PACKAGE__->has_many(
   "comments",
@@ -83,8 +78,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04006 @ 2009-09-12 14:52:20
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:/nK4ak/1T5OPZ+KhVMXkSg
+# Created by DBIx::Class::Schema::Loader v0.04999_06 @ 2009-09-12 16:40:22
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:qs4Rd6p80JdSek0N79zZug
 
 use List::Util "first";
 use Scalar::Util "blessed";
