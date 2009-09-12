@@ -102,7 +102,7 @@ __PACKAGE__->add_columns(
         size        => 60,
         encode_class  => "Crypt::Eksblowfish::Bcrypt",
         encode_args   => { key_nul => 1,
-                           cost => 12 },
+                           cost => 10 },
         encode_check_method => "check_password",
     }); 
 
