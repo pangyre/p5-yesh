@@ -58,6 +58,7 @@ sub index : Path Args(0) {
                title => $title,
                name => $name,
                pod => Encode::decode_utf8(Yesh::Pod::POM::View::HTML->print($pom)),
+               warnings => [ $parser->warnings ],
         );
 }
 

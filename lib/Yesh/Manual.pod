@@ -35,7 +35,7 @@ You are welcome to edit this file but if you don't know what you're doing, you a
 
 =back
 
-=Head2 CONFIGURATION SETTINGS
+=head2 CONFIGURATION SETTINGS
 
 Inside your local configuration file you can set several prominent variables under the key C<site>.
 
@@ -48,16 +48,6 @@ This is automatically set to the date and time of the set up if using the web ba
 =item Model::DBIC
 
 This is the configuration for the site's main database. If you want to edit it manually, you will need to know L<DBIx::Class> and L<DBIx::Class::Schema>. You are configuring a Catalyst model--L<Catalyst::Model::DBIC::Schema>--to use the site's schema--L<Yesh::Schema>.
-
-=item 321
-
-=item 321
-
-=item 321
-
-=item 321
-
-=item 321
 
 =item 321
 
@@ -106,10 +96,97 @@ Any requested URI which does not match a controllerE<mdash>e.g., C</this/is/not/
 
 =back
 
+=head3 Yesh::Controller::Article
+
+=over 4
+
+=item 321
+
+=back
+
+=head3 Yesh::Controller::Admin
+
+=over 4
+
+=item 321
+
+=back
+
+=head3 Yesh::Controller::Error
+
+=over 4
+
+=item 321
+
+=back
+
+=head3 Yesh::Controller::Man
+
+=over 4
+
+=item 321
+
+=back
+
+=head3 Yesh::Controller::Search
+
+=over 4
+
+=item 321
+
+=back
+
+=head3 Yesh::Controller::Session
+
+=over 4
+
+=item 321
+
+=back
+
+=head3 Yesh::Controller::User
+
+=over 4
+
+=item 321
+
+=back
+
+=head3 Yesh::Controller::321
+
+=over 4
+
+=item 321
+
+=back
+
+=head3 Yesh::Controller::321
+
+=over 4
+
+=item 321
+
+=back
+
+=head3 Yesh::Controller::321
+
+=over 4
+
+=item 321
+
+=back
+
 =head2 View::
 
 =head1 SECURITY
 
+If these are set in your configuration, 
+
+ Controller::Session:
+   secure_login: 1
+
+ Controller::User:
+   secure_registration: 1
 
 
 =head1 TESTING
@@ -120,4 +197,3 @@ Any requested URI which does not match a controllerE<mdash>e.g., C</this/is/not/
 
 See L<Yesh>.
 
-=cut

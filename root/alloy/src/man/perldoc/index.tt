@@ -2,7 +2,17 @@
 <div style="float:right">
 [% perldoc_link( name ) %]
 </div>
+
+[% IF warnings.size %]
+<div class="alert">
+  [% FOR warning IN warnings %]
+  <p>[% warning | html %]</p>
+  [% END %]
+</div>
+[% END %]
+
 [% pod %]
+
 [% ELSIF name %]
 <p>
 No Pod found for [% name | html %].
