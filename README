@@ -1,27 +1,39 @@
 NAME
-    Yesh - yet another CMS.
+    Yesh - YACMS: multi-author, secure, modern, flexible, friendly,
+    Catalyst-based.
 
 SYNOPSIS
         script/yesh_server.pl
 
 DESCRIPTION
-    [enter the description here for me... or something]
+    This is the technical and license doc. Normal end-users will want to
+    read Yesh::Manual instead.
 
-TODO
-    The lot.
+TO DO
+    Tests.
 
-REPO
+    Manual complete.
+
+    Move "config->{configured}" to a third config file to separate it from
+    direct user interaction?
+
+    Move the entire auto-config to a third config file?
+
+CODE REPOSITORY
     <http://github.com/pangyre/p5-yesh>.
 
 SEE ALSO
-    Yesh::Controller::Root, Catalyst.
+    Yesh::Manual, Catalyst.
 
 AUTHOR
-    Ashley Pond V, <ashley@cpan.org>.
+    Ashley Pond V · ashley.pond.v@gmail.com · <http://pangyresoft.com>.
 
 LICENSE
-    This library is free software. You can redistribute and modify it under
-    the same terms as Perl itself.
+    The parts of this library which is Yesh specific is free software. You
+    can redistribute and modify it under the same terms as Perl itself.
+
+    Some third party software, e.g. jQuery, may also included in this
+    distribution. Please see Yesh::Manual::ThirdParty for more about that.
 
 DISCLAIMER OF WARRANTY
     Because this software is licensed free of charge, there is no warranty

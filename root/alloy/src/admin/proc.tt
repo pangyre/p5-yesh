@@ -8,8 +8,9 @@
 
 [% FOR entry IN process_table.table %]
 <tr>
+  [% bg = loop.count % 2 ? 'f3f6e0' : 'f3fff3' %]
   [% FOR field IN process_table.fields.reverse %]
-<td style="border:1px solid gray">[% entry.$field %]</td>
+<td style="background-color:#[% bg %];border:1px solid gray">[% entry.$field %]</td>
   [% END %]
 </tr>
 [% END %]

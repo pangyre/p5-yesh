@@ -23,6 +23,9 @@
 Path: [% yesh.request.path %]
 ·
 Action: [% yesh.action %]
+·
+Time [% elapsed_time | format("%.3f") %] secs ([% ( 1 /
+elapsed_time ) | format("%.1f") %]/s)
   [%-END %]
 
 [% ELSE %]
@@ -33,8 +36,6 @@ Action: [% yesh.action %]
 [% END %]
 
 
-<b>Time</b>: [% elapsed_time | format("%.3f") %] secs ([% ( 1 /
-elapsed_time ) | format("%.1f") %]/s)
 
 
 
