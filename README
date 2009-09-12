@@ -2,6 +2,11 @@ NAME
     Yesh - YACMS: secure, multi-author, modern, flexible, friendly,
     Catalyst-based (alpha software).
 
+DESCRIPTION
+    This is the technical and license doc. Normal end-users will want to
+    read Yesh::Manual instead. Yesh is yet another content management
+    system.
+
     Secure
         Well, we take it seriously anyway. This is an unfinished application
         and may have security bugs; plus it is meant to be an easy to
@@ -39,10 +44,6 @@ NAME
 
 SYNOPSIS
         script/yesh_server.pl
-
-DESCRIPTION
-    This is the technical and license doc. Normal end-users will want to
-    read Yesh::Manual instead.
 
 TO DO
     Tests.
