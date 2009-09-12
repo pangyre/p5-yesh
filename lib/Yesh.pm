@@ -5,7 +5,7 @@ use Catalyst::Runtime 5.80;
 use parent "Catalyst";
 use Catalyst qw(
                 Unicode
-                ConfigLoader
+                ConfigLoader::Multi
                 Static::Simple
                 Session
                 Session::Store::FastMmap
@@ -24,7 +24,8 @@ our $VERSION = "2.9016";
 __PACKAGE__->config
     ( name => "Yesh/$VERSION",
       #setup_components => { except => qr/[.\#]/ },
-      session => {
+      "Plugin::ConfigLoader" => { file => __PACKAGE__->path_to("conf") },
+      "Plugin::Session" => {
           # verify_address => 1,
           rewrite => 0,
           storage => __PACKAGE__->path_to("tmp/session-$<.fmp")->stringify,
@@ -61,6 +62,10 @@ __END__
 
 Yesh - YACMS: secure, multi-author, modern, flexible, friendly, L<Catalyst>-based (alpha software).
 
+=head1 DESCRIPTION
+
+This is the technical and license doc. Normal end-users will want to read B<L<Yesh::Manual>> instead. Yesh is yet another content management system.
+
 =over 4
 
 =item Secure
@@ -90,10 +95,6 @@ Yesh should run on no less than three database enginesE<mdash>SQLite, MySQL, and
 =head1 SYNOPSIS
 
     script/yesh_server.pl
-
-=head1 DESCRIPTION
-
-This is the technical and license doc. Normal end-users will want to read B<L<Yesh::Manual>> instead.
 
 =head1 TO DO
 

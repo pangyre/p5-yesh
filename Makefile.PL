@@ -6,6 +6,11 @@ all_from "lib/Yesh.pm";
 
 requires "Catalyst::Runtime" => "5.80007";
 requires "Catalyst::Plugin::ConfigLoader";
+
+build_requires "Pod::Spell";
+build_requires "Test::Spelling";
+requires "Catalyst::Plugin::ConfigLoader::Multi";
+
 requires "Catalyst::Plugin::Static::Simple";
 requires "Catalyst::Action::RenderView";
 requires "Catalyst::Controller::REST";
