@@ -1,5 +1,7 @@
 =head1 YESH, THE MANUAL
 
+L<Yesh> is...
+
 =head1 INSTALLATION
 
 
@@ -68,11 +70,11 @@ Please see the various documents for individual modules. E.g., L<Yesh::Schema>, 
 
 =head1 YESH SPEC
 
-=head2 Model::
+=head2 Models
 
-=head3 Yesh::Model::DBIC
+=head3 L<Yesh::Model::DBIC>
 
-=head2 Controller::
+=head2 Controllers
 
 This generally reflects the URI dispatch scheme. All URIs are relative to the application root. E.g., if you have Yesh configured at the top of your webserverE<ndash>
 
@@ -202,11 +204,13 @@ asdf
 
 =back
 
-=head2 View::
+=head2 Views
 
 =head3 L<Yesh::View::Alloy>
 
 =head4 Macros
+
+Within alloy templates you have a handful of macros available; see F<root/alloy/lib/macros.tt> for the code.
 
 =over 4
 
