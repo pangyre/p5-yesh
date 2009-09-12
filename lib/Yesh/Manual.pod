@@ -219,6 +219,6 @@ If these are set in your configuration,
 
 =head1 LICENSE, COPYRIGHT, AUTHOR
 
-See L<Yesh>.
+See L<Yesh> and L<Yesh::Manual::ThirdParty>.
 
 =cut
