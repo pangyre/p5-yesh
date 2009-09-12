@@ -249,6 +249,22 @@ If these are set in your configuration,
 
 =head1 TESTING
 
+=head1 TO DO (PLEASE SUBMIT PATCHES!)
+
+=head2 TUTORIALS
+
+=over 4
+
+=item Secure certificate / https setup.
+
+=item nginx.
+
+=item fastcgi service script and deployment.
+
+=item Apache + modperl.
+
+=back
+
 =head1 SUGGESTED READING
 
 =head1 LICENSE, COPYRIGHT, AUTHOR
