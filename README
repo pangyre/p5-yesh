@@ -2,6 +2,8 @@ NAME
     Yesh - YACMS: secure, multi-author, modern, flexible, friendly,
     Catalyst-based (alpha software).
 
+    2.9022
+
 DESCRIPTION
     This is the technical and license doc. Normal end-users will want to
     read Yesh::Manual instead. Yesh is yet another content management
@@ -65,6 +67,19 @@ TO DO
 
     Move the entire auto-config to a third config file?
 
+PHILOSOPHY
+    Release early and often. We will be responsive to feedback and bug
+    reports. Favor agile cycles over stability paranoia.
+
+    Favor correctness over backwards compatibility. Support migration where
+    backwards compatibility is broken.
+
+    REST where possible and sane.
+
+    Progressive enhancement.
+
+    Only jQuery JS in the core distribution.
+
 CODE REPOSITORY
     <http://github.com/pangyre/p5-yesh>.
 
@@ -102,4 +117,11 @@ DISCLAIMER OF WARRANTY
     failure of the software to operate with any other software), even if
     such holder or other party has been advised of the possibility of such
     damages.
+
+POD ERRORS
+    Hey! The above document had some coding errors, which are explained
+    below:
+
+    Around line 65:
+        Unknown directive: =HEAD1
 

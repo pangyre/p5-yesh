@@ -19,7 +19,7 @@ use Catalyst qw(
 use Moose;
 
 our $AUTHORITY = "cpan:ASHLEY";
-our $VERSION = "2.9022";
+our $VERSION = "2.9023";
 
 __PACKAGE__->config
     ( name => "Yesh/$VERSION",
@@ -61,6 +61,10 @@ __END__
 =head1 NAME
 
 Yesh - YACMS: secure, multi-author, modern, flexible, friendly, L<Catalyst>-based (alpha software).
+
+=HEAD1 VERSION
+
+2.9023
 
 =head1 DESCRIPTION
 
@@ -116,6 +120,18 @@ Move C<config-E<gt>{configured}> to a third config file to separate it from dire
 
 Move the entire auto-config to a third config file?
 
+=head1 PHILOSOPHY
+
+Release early and often. We will be responsive to feedback and bug reports. Favor agile cycles over stability paranoia.
+
+Favor correctness over backwards compatibility. Support migration where backwards compatibility is broken.
+
+REST where possible and sane.
+
+Progressive enhancement.
+
+Only jQuery JS in the core distribution.
+
 =head1 CODE REPOSITORY
 
 L<http://github.com/pangyre/p5-yesh>.
@@ -130,8 +146,7 @@ Ashley Pond V E<middot> ashley.pond.v@gmail.com E<middot> L<http://pangyresoft.c
 
 =head1 LICENSE
 
-The parts of this library which is Yesh specific is free software. You
-can redistribute and modify it under the same terms as Perl itself.
+The parts of this library which is Yesh specific is free software. You can redistribute and modify it under the same terms as Perl itself.
 
 Some third party software, e.g. jQuery, may also included in this distribution. Please see L<Yesh::Manual::ThirdParty> for more about that.
 
