@@ -124,7 +124,7 @@ Release early and often. Favor agile cycles over stability paranoia. We will be 
 
 Favor correctness over backwards compatibility. Support migration where backwards compatibility is broken.
 
-Strive for real world best practices in development: the application will have a specification, a test plan, documentation with complete coverage, full tests, a new test for any new bug, push-button deploymentE<hellip> uh, eventually.
+Strive for real world best practices in development: the application will have a specification, a test plan, documentation with complete coverage, publicly available revision controlled code repository, full tests, a new test for any new bug, push-button deploymentE<hellip> uh, eventually.
 
 REST where possible and sane.
 
