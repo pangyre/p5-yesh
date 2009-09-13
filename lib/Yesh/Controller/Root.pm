@@ -8,7 +8,7 @@ __PACKAGE__->config->{namespace} = "";
 sub auto :Private {
     my ( $self, $c ) = @_;
     unless ( $c->config->{configured}
-             or $c->action =~ m,\A(setup|admin)/, )
+             or $c->action =~ m,\A(setup|admin|man)/, )
     {
         $c->response->redirect($c->uri_for_action("setup/index"));
         return 0;

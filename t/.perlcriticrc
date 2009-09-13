@@ -5,7 +5,7 @@ verbose   = 4
 top       = 50
 theme     = bugs
 #theme     = (pbp + security) * bugs
-include   = BuiltinFunctions.+
+include   = BuiltinFunctions.+ ClassHierarchies.+ CodeLayout.+ ControlStuctures.+ Documentation.+
 #exclude   = Modules::RequirePackage
 #exclude   = Variables  Modules::RequirePackage
 
@@ -20,3 +20,6 @@ include   = BuiltinFunctions.+
 
 [TestingAndDebugging::RequireTestLabels]
   severity = harsh
+
+[Documentation::RequirePodSections]
+  lib_sections = NAME 
