@@ -16,7 +16,7 @@ DESCRIPTION
         That said, the passwords are stored as an expensive
         Crypt::Eksblowfish::Bcrypt hash. The application supports forcing
         users to register and sign in under https. If configured correctly
-        Yesh will be among the most secure, if not the most, secure FOSS
+        Yesh will be among the most secure, if not *the* most secure, FOSS
         (free and open source software) personal publishing platform.
 
     Modern
