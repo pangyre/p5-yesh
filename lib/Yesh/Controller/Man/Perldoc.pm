@@ -5,13 +5,13 @@ no warnings "uninitialized";
 use parent 'Catalyst::Controller';
 use Encode;
 
-my $All_Good = eval <<'';
+my $POM_AVAILABLE = eval <<'';
     require Pod::POM;
     1;
 
 sub auto : Private {
     my ( $self, $c ) = @_;
-    unless ( $All_Good )
+    unless ( $POM_AVAILABLE )
     {
         $c->blurb("dependency/pod_pom");
         die "Pod::POM is not installed :( No perldocs for you: $@\n";

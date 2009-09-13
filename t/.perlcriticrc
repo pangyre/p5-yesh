@@ -1,0 +1,22 @@
+severity  = harsh
+only      = 1
+force     = 0
+verbose   = 4
+top       = 50
+theme     = bugs
+#theme     = (pbp + security) * bugs
+include   = BuiltinFunctions.+
+#exclude   = Modules::RequirePackage
+#exclude   = Variables  Modules::RequirePackage
+
+#--------------------------------------------------------------
+
+[Variables::ProhibitPackageVars]
+
+[TestingAndDebugging::RequireUseStrict]
+    severity = 5
+[TestingAndDebugging::RequireUseWarnings]
+    severity = 2
+
+[TestingAndDebugging::RequireTestLabels]
+  severity = harsh

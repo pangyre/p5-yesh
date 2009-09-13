@@ -1,10 +1,11 @@
 package DBIx::Class::Yesh::Default;
+use warnings;
+no warnings "uninitialized";
 use parent "DBIx::Class::Row";
 use strict;
 use Data::UUID;
 use Digest::SHA1;
 use Date::Calc;
-no warnings "uninitialized";
 use DBIx::Class::Exception;
 use Encode;
 my $null = \'NULL'; # '

@@ -1,3 +1,4 @@
+conf/yesh_local.yml
 etc/.mysql.cnf
 tmp/
 META.yml

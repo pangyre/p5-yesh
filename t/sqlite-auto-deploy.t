@@ -28,7 +28,7 @@ is($mech->uri->path, "/setup", "Redirected to /setup");
 
 $mech->content_contains("Your site is not configured");
 
-$mech->content_contains("Simplistic set-up");
+$mech->content_contains("Simplistic set up");
 
 diag("Submitting auto deployment form") if $ENV{TEST_VERBOSE};
 
