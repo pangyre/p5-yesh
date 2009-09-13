@@ -253,12 +253,55 @@ sub validate {
     1;
 }
 
-# Deal with live_license here...? Set ONCE when it's live anyway.
-#sub update {
-#    my $self = shift;
-#    my %to_update = $self->get_dirty_columns;
-#    return $self->next::method(@_);
-#}
-
 
 1;
+
+__END__
+
+# Deal with live_license here...? Set ONCE when it's live anyway.
+sub update {
+    my $self = shift;
+    my %to_update = $self->get_dirty_columns;
+    if ( exists $to_update{parent} )
+    {
+        my 
+    }
+    return $self->next::method(@_);
+}
+
+sub insert {
+    my $self = shift;
+    my $position_column = $self->position_column;
+
+    unless ($self->get_column($position_column)) {
+        my $lsib_posval = $self->_last_sibling_posval;
+        $self->set_column(
+            $position_column => (defined $lsib_posval
+                ? $self->_next_position_value ( $lsib_posval )
+                : $self->_initial_position_value
+            )
+            );
+    }
+
+    return $self->next::method( @_ );
+}
+
+sub parents {
+    my $self = shift;
+    croak "parents is read only" if @_;
+    my @ids = split '\.', $self->path;
+    pop @ids; # remove self
+    return unless @ids;
+    return $self
+        ->search( { 'me.id' => { -in => \@ids } },
+                  { order_by => \"LENGTH me.path" } );
+}
+
+sub __parents {
+    my ( $self, @parents ) = @_;
+    my $parent = $self->parent;
+    return @parents unless $parent;
+    unshift @parents, $parent;
+    die "Unterminating lineage loop suspected!" if @parents > 50;
+    $parent->parents(@parents);
+}

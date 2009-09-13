@@ -21,7 +21,7 @@ L<Yesh> is...
 
 =head2 LOCAL CONFIGURATION
 
-There are two configuration files used by Yesh while a site is running live (in production). They are C<yesh.yml> and C<yesh_local.yml>. This is a L<Catalyst> convention for setting up sites with L<Catalyst::Plugin::ConfigLoader>.
+There are two configuration files used by Yesh while a site is running live (in production). They are F<yesh.yml> and F<yesh_local.yml>. This is a L<Catalyst> convention for setting up sites with L<Catalyst::Plugin::ConfigLoader>.
 
 =begin html
 
@@ -101,7 +101,7 @@ Configured from exec/yesh in your webserverE<ndash>
       --> /admin
       --> Yesh::Controller::Admin->index
 
-Private paths, like C</default>, which cannot be called only internally, not by users via browsers, are listed in [brackets].
+Private paths, like F</default>, which cannot be called only internally, not by users via browsers, are listed in [brackets].
 
 =head3 L<Yesh::Controller::Root>
 
@@ -109,11 +109,11 @@ Private paths, like C</default>, which cannot be called only internally, not by 
 
 =item /
 
-Home/root. Shows current top level content. In an unconfigured application, this will redirect to C</setup>.
+Home/root. Shows current top level content. In an unconfigured application, this will redirect to F</setup>.
 
 =item [/default]
 
-Any requested URI which does not match a controllerE<mdash>e.g., C</this/is/not/valid>E<mdash>is sent to C<default> which is a 404 handler.
+Any requested URI which does not match a controllerE<mdash>e.g., F</this/is/not/valid>E<mdash>is sent to C<default> which is a 404 handler.
 
 =back
 
@@ -131,7 +131,7 @@ User's home page where * is the user's id.
 
 =item /user/id/*/atom
 
-The feed for the user. Yesh will only support Atom feeds. B<Most> endpoints can be affixed with C</atom> to get a feed of that resource's content.
+The feed for the user. Yesh will only support Atom feeds. B<Most> endpoints can be affixed with F</atom> to get a feed of that resource's content.
 
 =back
 
@@ -158,6 +158,10 @@ Main content viewing and editing package.
 =item /a
 
 Index to articles. Represents current and featured content.
+
+=item /a/create
+
+Start a new article. POST/PUT to F</a> should achieve the same result.
 
 =item /a/atom
 

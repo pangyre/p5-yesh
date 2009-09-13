@@ -5,7 +5,7 @@ use Catalyst::Runtime 5.80;
 use parent "Catalyst";
 use Catalyst qw(
                 Unicode
-                ConfigLoader::Multi
+                ConfigLoader
                 Static::Simple
                 Session
                 Session::Store::FastMmap
@@ -101,6 +101,8 @@ Yesh should run on no less than three database enginesE<mdash>SQLite, MySQL, and
 Tests.
 
 Manual complete.
+
+Article revision views.
 
 Move C<config-E<gt>{configured}> to a third config file to separate it from direct user interaction?
 
