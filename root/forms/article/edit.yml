@@ -58,34 +58,22 @@ element:
     label: Article
     constraints:
       - Required
-
   - type: Textarea
     name: note
     label: Notes
-  - type: Text
+  - type: DateTime
     name: golive
-    label: Go Live Date
     add_attributes:
       class: date
+    label: Go Live Date
+    auto_inflate: Yes
     constraints:
       - Required
-      - type: DateTime
-        parser:
-          regex: !!perl/regexp '^(\d+)\D*(\d+)\D*(\d+)\D*(\d+)\D*(\d+)\D*(\d+)$'
-          params: [ year, month, day, hour, minute, second ]
-        message: "Invalid date, use this format: YYYY-MM-DDTHH:MM:SS"
   - type: Text
     name: takedown
     label: Take Down Date
     add_attributes:
       class: date
-    constraints:
-      - Required
-      - type: DateTime
-        parser:
-          regex: !!perl/regexp '^(\d+)\D*(\d+)\D*(\d+)\D*(\d+)\D*(\d+)\D*(\d+)$'
-          params: [ year, month, day, hour, minute, second ]
-        message: "Invalid date, use this format: YYYY-MM-DDTHH:MM:SS"
   - type: Submit
     name: x
     value: Update Article

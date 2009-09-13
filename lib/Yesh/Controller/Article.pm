@@ -2,6 +2,7 @@ package Yesh::Controller::Article;
 use strict;
 use warnings;
 use parent 'Catalyst::Controller::HTML::FormFu';
+use DateTime;
 
 __PACKAGE__->config( articles_per_page => 10 );
 
@@ -62,6 +63,9 @@ sub create :Local Args(0) FormConfig {
 
     my $form = $c->stash->{form};
     $form->constraints_from_dbic($c->model("DBIC::Article"));
+    $form->get_field({ name => "golive" })->default(DateTime->now);
+    $form->get_field({ name => "takedown" })
+        ->default(DateTime->new( year => 9999, month => 12, day => 31, hour => 0, minute => 0, second => 0 ));
     $form->render;
 
     if ( $form->submitted_and_valid ) {
@@ -104,6 +108,10 @@ sub edit :Chained("load") Args(0) FormConfig {
     {
         $form->default_values({ digest => $article->digest });
         $form->model->default_values( $article );
+    }
+    else
+    {
+#        use YAML;        die Dump($form);
     }
     $self->_load_related_form_data($c);
 }
@@ -204,3 +212,7 @@ sub create :Local {
     }
     $self->_load_related_form_data($c);
 }
+
+$form->get_field({ name => "takedown" })
+    ->default(DateTime->now()->add(years => 100) );
+

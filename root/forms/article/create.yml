@@ -54,11 +54,12 @@ element:
   - type: Textarea
     name: note
     label: Notes
-  - type: Text
+  - type: DateTime
     name: golive
-    label: Go Live Date
     add_attributes:
       class: date
+    label: Go Live Date
+    auto_inflate: Yes
   - type: Text
     name: takedown
     label: Take Down Date

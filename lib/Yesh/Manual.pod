@@ -171,7 +171,7 @@ Syndication feed of the article index.
 
 =item /a/id/*
 
-Individual article view.
+Individual article view where * is the article id.
 
 =item /a/id/*/atom
 
