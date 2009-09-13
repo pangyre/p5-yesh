@@ -112,7 +112,7 @@ Tests.
 
 Manual complete.
 
-Article revision views.
+Everything from the manual using it as a spec. E.g., article revision views and token previews.
 
 Move C<config-E<gt>{configured}> to a third config file to separate it from direct user interaction?
 
@@ -120,9 +120,11 @@ Move the entire auto-config to a third config file?
 
 =head1 PHILOSOPHY
 
-Release early and often. We will be responsive to feedback and bug reports. Favor agile cycles over stability paranoia.
+Release early and often. Favor agile cycles over stability paranoia. We will be responsive to feedback and bug reports. Make easy and reliable updating a priority so users are comfortable 
 
 Favor correctness over backwards compatibility. Support migration where backwards compatibility is broken.
+
+Strive for real world best practices in development: the application will have a specification, a test plan, push-button deploymentE<ellips> uh, eventually.
 
 REST where possible and sane.
 
