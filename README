@@ -47,6 +47,11 @@ DESCRIPTION
         feature requests. We want this code to be easy, bug-free, fun, and
         helpful.
 
+    i18n
+        This is "wish list" for now. It's a strong wish though. :) If you
+        are interested in contributing non-English documentation
+        translation, please let us know.
+
 SYNOPSIS
      script/yesh_server.pl
 
@@ -90,7 +95,7 @@ CODE REPOSITORY
     <http://github.com/pangyre/p5-yesh>.
 
 SEE ALSO
-    Yesh::Manual, Catalyst.
+    Yesh::Manual, Yesh::Manual::ReleaseNotes, Catalyst.
 
 AUTHOR
     Ashley Pond V · ashley.pond.v@gmail.com · <http://pangyresoft.com>.

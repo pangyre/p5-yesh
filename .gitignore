@@ -1,6 +1,10 @@
+ab
+*/ab
+pod-stub.pod
 conf/yesh_local.yml
 etc/.mysql.cnf
 tmp/
+MANIFEST
 META.yml
 .svn/
 .cvs/
@@ -20,6 +24,4 @@ dummy.sqlite
 etc/baseline.perl
 etc/testyesh.sqlite
 yesh.yml.hold
-commit-push
-
 inc/

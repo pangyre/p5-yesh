@@ -63,7 +63,9 @@ catalyst;
 if ( $Module::Install::AUTHOR )
 {
     system("pod2text lib/Yesh.pm > README") == 0
-        or die "Couldn't update the README";
+        or die "Couldn't update the README file";
+    system("pod2text lib/Yesh/Manual/ReleaseNotes.pod > Changes") == 0
+        or die "Couldn't update the Changes file";
 }
 
 install_script glob("script/*.pl");

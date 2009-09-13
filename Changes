@@ -1,0 +1,13 @@
+CHANGES AND RELEASE NOTES FOR YESH
+  RELEASES
+    NB: This document is not yet meaningful!
+
+   Version · date string
+    Short description
+        Long description of change/bugfix if germane.
+
+  Pre 3.0
+    No notes. See Yesh::Manual and Yesh for specifications. See the code
+    repository for history and comments ·
+    <http://github.com/pangyre/p5-yesh>.
+
