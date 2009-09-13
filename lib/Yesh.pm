@@ -19,7 +19,7 @@ use Catalyst qw(
 use Moose;
 
 our $AUTHORITY = "cpan:ASHLEY";
-our $VERSION = "2.9018";
+our $VERSION = "2.9019";
 
 __PACKAGE__->config
     ( name => "Yesh/$VERSION",
