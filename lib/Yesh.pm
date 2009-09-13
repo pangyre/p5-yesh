@@ -60,15 +60,13 @@ __END__
 
 =head1 NAME
 
-Yesh - YACMS: secure, multi-author, modern, flexible, friendly, L<Catalyst>-based (alpha software).
+Yesh - Yet another content management system: secure, multi-author, modern, flexible, friendly, L<Catalyst>-based (alpha software). Please see B<L<Yesh::Manual>> for usage and detailed description.
 
 =head1 VERSION
 
 2.9023
 
 =head1 DESCRIPTION
-
-This is the technical and license doc. Normal end-users will want to read B<L<Yesh::Manual>> instead. Yesh is yet another content management system.
 
 =over 4
 
