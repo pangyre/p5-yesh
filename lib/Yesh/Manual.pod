@@ -169,13 +169,27 @@ Start a new article. POST/PUT to F</a> should achieve the same result.
 
 Syndication feed of the article index.
 
-=item /a/id/*
+=item /a/id/*[/view]
 
 Individual article view where * is the article id.
 
 =item /a/id/*/atom
 
 Individual article feed. Updated for content updates, new discussion, new child resources no matter how deep.
+
+=item /a/id/*/preview
+
+For author and editors to see a piece in normal display context before it is live. If the article is live, the preview URI redirects to the plain view.
+
+=item /a/id/*/preview/[token]
+
+For preview of an article regardless of user/session. The token is ephemeralE<mdash>based on the content and status of the articleE<mdash>and hashed with a site secret so it can't be guessed or cracked. The point of this is to allow external users a chance to see the content before it is live for the general visitor.
+
+Token-based previews expire. Interface for setting this TBD.
+
+=item /a/id/*/rev/*
+
+Revisions. Sequential where the second * is the revision number: 1, 2, 3, et cetera.
 
 =back
 
