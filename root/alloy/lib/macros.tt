@@ -50,3 +50,7 @@ class="[% class || "button" %]" href="[% article_uri(a).replace('/preview\z',"")
 <a rel="external" href="http://search.cpan.org/perldoc?[% module | html | uri %]" title="[% module | html %] on search.cpan.org">[% text | html %]</a>
 [%-END-%]
 
+[%-MACRO local_perldoc_link(module,text) BLOCK-%][% text ||= module %]
+<a href="[% yesh.uri_for("/man/perldoc") %]?[% module | html %]" title="[% module | html %]">[% text | html %]</a>
+[%-END-%]
+

@@ -1,0 +1,22 @@
+=head1 CHANGES AND RELEASE NOTES FOR YESH
+
+=head2 RELEASES
+
+NB: This document is not yet meaningful!
+
+=head3 Version E<middot> date string
+
+=over 4
+
+=item Short description
+
+Long description of change/bugfix if germane.
+
+=back
+
+=head2 Pre 3.0
+
+No notes. See L<Yesh::Manual> and L<Yesh> for specifications. See the code repository for history and comments E<middot> L<http://github.com/pangyre/p5-yesh>.
+
+=cut
+

@@ -18,7 +18,11 @@
 <ol>
 [% FOR dep IN dependencies %]
 <li style="color:[% dep.result == "OK" ? "#071" : "#a00" %]">
+ [% IF dep.result == "OK" %]
+ [% local_perldoc_link(dep.module) %] [% perldoc_link(dep.module,"[search.cpan.org]") %]
+ [% ELSE %]
  [% perldoc_link(dep.module) %]
+ [% END %]
    <ul>
      [%-IF dep.version %]
      <li>Version: [% dep.version | html %]</li>

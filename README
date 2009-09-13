@@ -1,14 +1,12 @@
 NAME
-    Yesh - YACMS: secure, multi-author, modern, flexible, friendly,
-    Catalyst-based (alpha software).
+    Yesh - Yet another content management system: secure, multi-author,
+    modern, flexible, friendly, Catalyst-based (alpha software). Please see
+    Yesh::Manual for usage and detailed description.
 
-    2.9022
+VERSION
+    2.9023
 
 DESCRIPTION
-    This is the technical and license doc. Normal end-users will want to
-    read Yesh::Manual instead. Yesh is yet another content management
-    system.
-
     Secure
         Well, we take it seriously anyway. This is an unfinished application
         and may have security bugs; plus it is meant to be an easy to
@@ -60,7 +58,8 @@ TO DO
 
     Manual complete.
 
-    Article revision views.
+    Everything from the manual using it as a spec. E.g., article revision
+    views and token previews.
 
     Move "config->{configured}" to a third config file to separate it from
     direct user interaction?
@@ -68,11 +67,18 @@ TO DO
     Move the entire auto-config to a third config file?
 
 PHILOSOPHY
-    Release early and often. We will be responsive to feedback and bug
-    reports. Favor agile cycles over stability paranoia.
+    Release early and often. Favor agile cycles over stability paranoia. We
+    will be responsive to feedback and bug reports. Make easy and reliable
+    updating a priority so users are comfortable
 
     Favor correctness over backwards compatibility. Support migration where
     backwards compatibility is broken.
+
+    Strive for real world best practices in development: the application
+    will have a specification, a test plan, documentation with complete
+    coverage, publicly available revision controlled code repository, full
+    tests, a new test for any new bug, push-button deployment, release
+    notes… uh, eventually.
 
     REST where possible and sane.
 
@@ -117,11 +123,4 @@ DISCLAIMER OF WARRANTY
     failure of the software to operate with any other software), even if
     such holder or other party has been advised of the possibility of such
     damages.
-
-POD ERRORS
-    Hey! The above document had some coding errors, which are explained
-    below:
-
-    Around line 65:
-        Unknown directive: =HEAD1
 

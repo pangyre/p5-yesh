@@ -96,6 +96,10 @@ Yesh should run on no less than three database enginesE<mdash>SQLite, MySQL, and
 
 We are grateful for feedback, patches, themes, link-backs, and feature requests. We want this code to be easy, bug-free, fun, and helpful.
 
+=item i18n
+
+This is "wish list" for now. It's a strong wish though. :) If you are interested in contributing non-English documentation translation, please let us know.
+
 =back
 
 =head1 SYNOPSIS
@@ -124,7 +128,7 @@ Release early and often. Favor agile cycles over stability paranoia. We will be 
 
 Favor correctness over backwards compatibility. Support migration where backwards compatibility is broken.
 
-Strive for real world best practices in development: the application will have a specification, a test plan, documentation with complete coverage, publicly available revision controlled code repository, full tests, a new test for any new bug, push-button deploymentE<hellip> uh, eventually.
+Strive for real world best practices in development: the application will have a specification, a test plan, documentation with complete coverage, publicly available revision controlled code repository, full tests, a new test for any new bug, push-button deployment, release notesE<hellip> uh, eventually.
 
 REST where possible and sane.
 
@@ -138,7 +142,7 @@ L<http://github.com/pangyre/p5-yesh>.
 
 =head1 SEE ALSO
 
-L<Yesh::Manual>, L<Catalyst>.
+L<Yesh::Manual>, L<Yesh::Manual::ReleaseNotes>, L<Catalyst>.
 
 =head1 AUTHOR
 
