@@ -23,13 +23,28 @@ __PACKAGE__->add_columns(
     size => 10,
   },
   "uuid",
-  { data_type => "CHAR", default_value => "", is_nullable => 0, size => 36 },
+  { data_type => "CHAR", default_value => undef, is_nullable => 0, size => 36 },
   "name",
-  { data_type => "VARCHAR", default_value => "", is_nullable => 0, size => 40 },
+  {
+    data_type => "VARCHAR",
+    default_value => undef,
+    is_nullable => 0,
+    size => 40,
+  },
   "description",
-  { data_type => "TEXT", default_value => "", is_nullable => 0, size => 65535 },
+  {
+    data_type => "TEXT",
+    default_value => undef,
+    is_nullable => 0,
+    size => 65535,
+  },
   "created",
-  { data_type => "DATETIME", default_value => "", is_nullable => 0, size => 19 },
+  {
+    data_type => "DATETIME",
+    default_value => undef,
+    is_nullable => 0,
+    size => 19,
+  },
   "updated",
   {
     data_type => "TIMESTAMP",
@@ -47,8 +62,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_06 @ 2009-09-12 16:40:22
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:AFIUg301za/HFR5F9d9NzA
+# Created by DBIx::Class::Schema::Loader v0.04999_08 @ 2009-09-12 19:50:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:NXdw7iBB40hu8tYzs7GU5g
 
 # use overload q{""} => "name", fallback => 1;
 

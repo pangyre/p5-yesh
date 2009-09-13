@@ -23,11 +23,16 @@ __PACKAGE__->add_columns(
     size => 10,
   },
   "name",
-  { data_type => "VARCHAR", default_value => "", is_nullable => 0, size => 255 },
+  {
+    data_type => "VARCHAR",
+    default_value => undef,
+    is_nullable => 0,
+    size => 255,
+  },
 );
 __PACKAGE__->set_primary_key("id");
-__PACKAGE__->add_unique_constraint("attribute", ["name"]);
-__PACKAGE__->add_unique_constraint("name", ["name"]);
+#__PACKAGE__->add_unique_constraint("attribute", ["name"]);
+__PACKAGE__->add_unique_constraint(["name"]);
 __PACKAGE__->has_many(
   "user_attributes",
   "Yesh::Schema::Result::UserAttribute",
@@ -35,8 +40,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_06 @ 2009-09-12 16:40:22
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:n4P7lUeiXhmRCHHVN6OuHg
+# Created by DBIx::Class::Schema::Loader v0.04999_08 @ 2009-09-12 19:50:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:jRr5wJzzVSYXtGAqC6oQKw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

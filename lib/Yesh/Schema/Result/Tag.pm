@@ -23,13 +23,28 @@ __PACKAGE__->add_columns(
     size => 10,
   },
   "uuid",
-  { data_type => "CHAR", default_value => "", is_nullable => 0, size => 36 },
+  { data_type => "CHAR", default_value => undef, is_nullable => 0, size => 36 },
   "name",
-  { data_type => "VARCHAR", default_value => "", is_nullable => 0, size => 40 },
+  {
+    data_type => "VARCHAR",
+    default_value => undef,
+    is_nullable => 0,
+    size => 40,
+  },
   "description",
-  { data_type => "TEXT", default_value => "", is_nullable => 0, size => 65535 },
+  {
+    data_type => "TEXT",
+    default_value => undef,
+    is_nullable => 0,
+    size => 65535,
+  },
   "created",
-  { data_type => "DATETIME", default_value => "", is_nullable => 0, size => 19 },
+  {
+    data_type => "DATETIME",
+    default_value => undef,
+    is_nullable => 0,
+    size => 19,
+  },
   "updated",
   {
     data_type => "TIMESTAMP",
@@ -46,8 +61,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_06 @ 2009-09-12 16:40:22
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:XvJr+fx/vrqd7Bi5sYWvGg
+# Created by DBIx::Class::Schema::Loader v0.04999_08 @ 2009-09-12 19:50:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:G8M8rn7wK6o9p9AgFQ9wGw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -23,23 +23,35 @@ __PACKAGE__->add_columns(
     size => 10,
   },
   "uuid",
-  { data_type => "CHAR", default_value => "", is_nullable => 0, size => 36 },
+  { data_type => "CHAR", default_value => undef, is_nullable => 0, size => 36 },
   "username",
-  { data_type => "VARCHAR", default_value => "", is_nullable => 0, size => 80 },
-  "password",
-  { data_type => "CHAR", default_value => undef, is_nullable => 1, size => 60 },
-  "email",
-  { data_type => "VARCHAR", default_value => "", is_nullable => 0, size => 100 },
-  "status",
   {
-    data_type => "ENUM",
-    default_value => "registered",
-    extra => { list => ["registered", "active", "blocked", "deleted"] },
+    data_type => "VARCHAR",
+    default_value => undef,
     is_nullable => 0,
-    size => 10,
+    size => 255,
+  },
+  "password",
+  {
+    data_type => "VARCHAR",
+    default_value => undef,
+    is_nullable => 1,
+    size => 40,
+  },
+  "email",
+  {
+    data_type => "VARCHAR",
+    default_value => undef,
+    is_nullable => 0,
+    size => 100,
   },
   "created",
-  { data_type => "DATETIME", default_value => "", is_nullable => 0, size => 19 },
+  {
+    data_type => "DATETIME",
+    default_value => undef,
+    is_nullable => 0,
+    size => 19,
+  },
   "updated",
   {
     data_type => "TIMESTAMP",
@@ -52,9 +64,9 @@ __PACKAGE__->set_primary_key("id");
 __PACKAGE__->add_unique_constraint("email", ["email"]);
 __PACKAGE__->add_unique_constraint("username", ["username"]);
 __PACKAGE__->has_many(
-  "article_authors",
-  "Yesh::Schema::Result::ArticleAuthor",
-  { "foreign.author" => "self.id" },
+  "articles",
+  "Yesh::Schema::Result::Article",
+  { "foreign.user" => "self.id" },
 );
 __PACKAGE__->has_many(
   "comments",
@@ -78,8 +90,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_06 @ 2009-09-12 16:40:22
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:qs4Rd6p80JdSek0N79zZug
+# Created by DBIx::Class::Schema::Loader v0.04999_08 @ 2009-09-12 19:50:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:JiEJw63fg/SSij6AtFgI4g
 
 use List::Util "first";
 use Scalar::Util "blessed";

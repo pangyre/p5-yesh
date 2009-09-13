@@ -23,7 +23,16 @@ __PACKAGE__->add_columns(
     size => 10,
   },
   "uuid",
-  { data_type => "CHAR", default_value => "", is_nullable => 0, size => 36 },
+  { data_type => "CHAR", default_value => undef, is_nullable => 0, size => 36 },
+  "user",
+  {
+    data_type => "INT",
+    default_value => undef,
+    extra => { unsigned => 1 },
+    is_foreign_key => 1,
+    is_nullable => 0,
+    size => 10,
+  },
   "parent",
   {
     data_type => "INT",
@@ -45,29 +54,27 @@ __PACKAGE__->add_columns(
   "license",
   {
     data_type => "INT",
-    default_value => "",
+    default_value => undef,
     extra => { unsigned => 1 },
     is_foreign_key => 1,
     is_nullable => 0,
     size => 10,
   },
   "title",
-  { data_type => "TEXT", default_value => "", is_nullable => 0, size => 65535 },
+  {
+    data_type => "TEXT",
+    default_value => undef,
+    is_nullable => 0,
+    size => 65535,
+  },
   "body",
   {
     data_type => "MEDIUMTEXT",
-    default_value => "",
+    default_value => undef,
     is_nullable => 0,
     size => 16777215,
   },
   "note",
-  {
-    data_type => "TEXT",
-    default_value => undef,
-    is_nullable => 1,
-    size => 65535,
-  },
-  "teaser",
   {
     data_type => "TEXT",
     default_value => undef,
@@ -79,7 +86,7 @@ __PACKAGE__->add_columns(
     data_type => "ENUM",
     default_value => "draft",
     extra => { list => ["draft", "publish", "resource", "manual", "deleted"] },
-    is_nullable => 0,
+    is_nullable => 1,
     size => 8,
   },
   "comment_flag",
@@ -100,7 +107,12 @@ __PACKAGE__->add_columns(
     size => 10,
   },
   "golive",
-  { data_type => "DATETIME", default_value => "", is_nullable => 0, size => 19 },
+  {
+    data_type => "DATETIME",
+    default_value => undef,
+    is_nullable => 0,
+    size => 19,
+  },
   "takedown",
   {
     data_type => "DATETIME",
@@ -109,7 +121,12 @@ __PACKAGE__->add_columns(
     size => 19,
   },
   "created",
-  { data_type => "DATETIME", default_value => "", is_nullable => 0, size => 19 },
+  {
+    data_type => "DATETIME",
+    default_value => undef,
+    is_nullable => 0,
+    size => 19,
+  },
   "updated",
   {
     data_type => "TIMESTAMP",
@@ -119,73 +136,10 @@ __PACKAGE__->add_columns(
   },
 );
 __PACKAGE__->set_primary_key("id");
-__PACKAGE__->belongs_to(
-  "parent",
-  "Yesh::Schema::Result::Article",
-  { id => "parent" },
-  { join_type => "LEFT OUTER" },
-);
-__PACKAGE__->has_many(
-  "articles",
-  "Yesh::Schema::Result::Article",
-  { "foreign.parent" => "self.id" },
-);
-__PACKAGE__->belongs_to(
-  "template",
-  "Yesh::Schema::Result::Template",
-  { id => "template" },
-  { join_type => "LEFT OUTER" },
-);
-__PACKAGE__->belongs_to(
-  "license",
-  "Yesh::Schema::Result::License",
-  { id => "license" },
-);
-__PACKAGE__->belongs_to(
-  "live_license",
-  "Yesh::Schema::Result::License",
-  { id => "live_license" },
-  { join_type => "LEFT OUTER" },
-);
-__PACKAGE__->has_many(
-  "article_authors",
-  "Yesh::Schema::Result::ArticleAuthor",
-  { "foreign.article" => "self.id" },
-);
-__PACKAGE__->has_many(
-  "article_display_groups",
-  "Yesh::Schema::Result::ArticleDisplayGroup",
-  { "foreign.article" => "self.id" },
-);
-__PACKAGE__->has_many(
-  "article_filters",
-  "Yesh::Schema::Result::ArticleFilter",
-  { "foreign.article" => "self.id" },
-);
-__PACKAGE__->has_many(
-  "article_fragments",
-  "Yesh::Schema::Result::ArticleFragment",
-  { "foreign.article" => "self.id" },
-);
-__PACKAGE__->has_many(
-  "article_tags",
-  "Yesh::Schema::Result::ArticleTag",
-  { "foreign.article" => "self.id" },
-);
-__PACKAGE__->has_many(
-  "comment_articles",
-  "Yesh::Schema::Result::Comment",
-  { "foreign.article" => "self.id" },
-);
-__PACKAGE__->has_many(
-  "comment_parents",
-  "Yesh::Schema::Result::Comment",
-  { "foreign.parent" => "self.id" },
-);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_06 @ 2009-09-12 16:40:22
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:gi0iNesAZnv9BvICuEW1Vw
+# Created by DBIx::Class::Schema::Loader v0.04999_08 @ 2009-09-12 19:51:51
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:oq/5AneZVu9PQDIXg5Vgsg
 
 # use Date::Calc ();
 use DateTime ();

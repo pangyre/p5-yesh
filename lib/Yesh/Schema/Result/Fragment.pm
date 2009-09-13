@@ -23,11 +23,11 @@ __PACKAGE__->add_columns(
     size => 10,
   },
   "uuid",
-  { data_type => "CHAR", default_value => "", is_nullable => 0, size => 36 },
+  { data_type => "CHAR", default_value => undef, is_nullable => 0, size => 36 },
   "author",
   {
     data_type => "INT",
-    default_value => "",
+    default_value => undef,
     extra => { unsigned => 1 },
     is_nullable => 0,
     size => 10,
@@ -42,16 +42,26 @@ __PACKAGE__->add_columns(
     size => 10,
   },
   "css_class",
-  { data_type => "TINYTEXT", default_value => "", is_nullable => 0, size => 255 },
+  {
+    data_type => "TINYTEXT",
+    default_value => undef,
+    is_nullable => 0,
+    size => 255,
+  },
   "body",
   {
     data_type => "MEDIUMTEXT",
-    default_value => "",
+    default_value => undef,
     is_nullable => 0,
     size => 16777215,
   },
   "created",
-  { data_type => "DATETIME", default_value => "", is_nullable => 0, size => 19 },
+  {
+    data_type => "DATETIME",
+    default_value => undef,
+    is_nullable => 0,
+    size => 19,
+  },
   "updated",
   {
     data_type => "TIMESTAMP",
@@ -70,12 +80,17 @@ __PACKAGE__->belongs_to(
   "template",
   "Yesh::Schema::Result::Template",
   { id => "template" },
-  { join_type => "LEFT OUTER" },
+  { join_type => "LEFT" },
+);
+__PACKAGE__->has_many(
+  "fragment_filters",
+  "Yesh::Schema::Result::FragmentFilter",
+  { "foreign.fragment" => "self.id" },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_06 @ 2009-09-12 16:40:22
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:nCYwGhooYisckJrlV+7Izw
+# Created by DBIx::Class::Schema::Loader v0.04999_08 @ 2009-09-12 19:50:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:n2AHfgRHivoCByesP/P7Kw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

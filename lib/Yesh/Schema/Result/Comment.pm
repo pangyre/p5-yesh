@@ -23,11 +23,11 @@ __PACKAGE__->add_columns(
     size => 10,
   },
   "uuid",
-  { data_type => "CHAR", default_value => "", is_nullable => 0, size => 36 },
+  { data_type => "CHAR", default_value => undef, is_nullable => 0, size => 36 },
   "article",
   {
     data_type => "INT",
-    default_value => "",
+    default_value => undef,
     extra => { unsigned => 1 },
     is_foreign_key => 1,
     is_nullable => 0,
@@ -45,7 +45,7 @@ __PACKAGE__->add_columns(
   "user",
   {
     data_type => "INT",
-    default_value => "",
+    default_value => undef,
     extra => { unsigned => 1 },
     is_foreign_key => 1,
     is_nullable => 0,
@@ -54,14 +54,19 @@ __PACKAGE__->add_columns(
   "license",
   {
     data_type => "INT",
-    default_value => "",
+    default_value => undef,
     extra => { unsigned => 1 },
     is_foreign_key => 1,
     is_nullable => 0,
     size => 10,
   },
   "title",
-  { data_type => "VARCHAR", default_value => "", is_nullable => 0, size => 255 },
+  {
+    data_type => "VARCHAR",
+    default_value => undef,
+    is_nullable => 0,
+    size => 255,
+  },
   "body",
   {
     data_type => "TEXT",
@@ -92,7 +97,12 @@ __PACKAGE__->add_columns(
     size => 8,
   },
   "created",
-  { data_type => "DATETIME", default_value => "", is_nullable => 0, size => 19 },
+  {
+    data_type => "DATETIME",
+    default_value => undef,
+    is_nullable => 0,
+    size => 19,
+  },
   "updated",
   {
     data_type => "TIMESTAMP",
@@ -111,7 +121,7 @@ __PACKAGE__->belongs_to(
   "parent",
   "Yesh::Schema::Result::Article",
   { id => "parent" },
-  { join_type => "LEFT OUTER" },
+  { join_type => "LEFT" },
 );
 __PACKAGE__->belongs_to("user", "Yesh::Schema::Result::User", { id => "user" });
 __PACKAGE__->belongs_to(
@@ -121,8 +131,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_06 @ 2009-09-12 16:40:22
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:PzcF7qn/eeFhcQlzguIs2A
+# Created by DBIx::Class::Schema::Loader v0.04999_08 @ 2009-09-12 19:50:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:x7gHmM0WIniJDq3CKL/Rpw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
