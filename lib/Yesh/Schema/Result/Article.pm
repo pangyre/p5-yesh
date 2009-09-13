@@ -136,10 +136,64 @@ __PACKAGE__->add_columns(
   },
 );
 __PACKAGE__->set_primary_key("id");
+__PACKAGE__->belongs_to("user", "Yesh::Schema::Result::User", { id => "user" });
+__PACKAGE__->belongs_to(
+  "parent",
+  "Yesh::Schema::Result::Article",
+  { id => "parent" },
+  { join_type => "LEFT" },
+);
+__PACKAGE__->has_many(
+  "articles",
+  "Yesh::Schema::Result::Article",
+  { "foreign.parent" => "self.id" },
+);
+__PACKAGE__->belongs_to(
+  "template",
+  "Yesh::Schema::Result::Template",
+  { id => "template" },
+  { join_type => "LEFT" },
+);
+__PACKAGE__->belongs_to(
+  "license",
+  "Yesh::Schema::Result::License",
+  { id => "license" },
+);
+__PACKAGE__->belongs_to(
+  "live_license",
+  "Yesh::Schema::Result::License",
+  { id => "live_license" },
+  { join_type => "LEFT" },
+);
+__PACKAGE__->has_many(
+  "article_display_groups",
+  "Yesh::Schema::Result::ArticleDisplayGroup",
+  { "foreign.article" => "self.id" },
+);
+__PACKAGE__->has_many(
+  "article_fragments",
+  "Yesh::Schema::Result::ArticleFragment",
+  { "foreign.article" => "self.id" },
+);
+__PACKAGE__->has_many(
+  "article_tags",
+  "Yesh::Schema::Result::ArticleTag",
+  { "foreign.article" => "self.id" },
+);
+__PACKAGE__->has_many(
+  "comment_articles",
+  "Yesh::Schema::Result::Comment",
+  { "foreign.article" => "self.id" },
+);
+__PACKAGE__->has_many(
+  "comment_parents",
+  "Yesh::Schema::Result::Comment",
+  { "foreign.parent" => "self.id" },
+);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_08 @ 2009-09-12 19:51:51
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:oq/5AneZVu9PQDIXg5Vgsg
+# Created by DBIx::Class::Schema::Loader v0.04999_08 @ 2009-09-12 21:15:22
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Q/mAt+/zuKUnklCpM/koVQ
 
 # use Date::Calc ();
 use DateTime ();
@@ -203,7 +257,7 @@ sub validate {
 #sub update {
 #    my $self = shift;
 #    my %to_update = $self->get_dirty_columns;
-#    if ( $self->is_live and 
+#    return $self->next::method(@_);
 #}
 
 

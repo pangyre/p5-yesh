@@ -131,7 +131,7 @@ User's home page where * is the user's id.
 
 =item /user/id/*/atom
 
-The feed for the user. Yesh will only support Atom feeds.
+The feed for the user. Yesh will only support Atom feeds. B<Most> endpoints can be affixed with C</atom> to get a feed of that resource's content.
 
 =back
 
@@ -141,15 +141,35 @@ The feed for the user. Yesh will only support Atom feeds.
 
 =item /login
 
-Sign-in. Can be forced to B<https> with L<configuration settings|/CONFIGURATION>.
+Sign-in. Can be forced to B<https> with L<configuration settings|/CONFIGURATION>. Should redirect to referer if it's also a part of L<Yesh>.
+
+=item /logout
+
+Sign-out. Deletes session.
 
 =back
 
 =head3 L<Yesh::Controller::Article>
 
+Main content viewing and editing package.
+
 =over 4
 
-=item _321
+=item /a
+
+Index to articles. Represents current and featured content.
+
+=item /a/atom
+
+Syndication feed of the article index.
+
+=item /a/id/*
+
+Individual article view.
+
+=item /a/id/*/atom
+
+Individual article feed. Updated for content updates, new discussion, new child resources no matter how deep.
 
 =back
 

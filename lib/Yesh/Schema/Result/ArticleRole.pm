@@ -53,10 +53,15 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("id");
 __PACKAGE__->add_unique_constraint("name", ["name"]);
+__PACKAGE__->has_many(
+  "user_article_roles",
+  "Yesh::Schema::Result::UserArticleRole",
+  { "foreign.article_role" => "self.id" },
+);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_08 @ 2009-09-12 19:51:51
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Y3V/a4zMTcFnFlUwphxjvQ
+# Created by DBIx::Class::Schema::Loader v0.04999_08 @ 2009-09-12 21:15:22
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:vTXIYUq307r2/tUXTvJs7A
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

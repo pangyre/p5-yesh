@@ -15,7 +15,7 @@ sub index :Path Args(0) {
             ->live_rs({},
                       {
                        prefetch => [qw( license user )],
-                       join => [qw( license user )],
+#                      join => [qw( license user )],
                        order_by => "golive DESC",
                        page => $page,
                        rows => $self->{articles_per_page}

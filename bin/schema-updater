@@ -62,6 +62,7 @@ make_schema_at(
                    components => [qw( Yesh::Default UTF8Columns InflateColumn::DateTime )],
                    dump_directory => $lib,
                    use_namespaces => 1,
+                   relationships => 1,
                },
                \@ARGV
               );

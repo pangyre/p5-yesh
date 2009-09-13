@@ -71,8 +71,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_08 @ 2009-09-12 19:50:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:mQtrNuE5epYNcWSlEK7dAw
+# Created by DBIx::Class::Schema::Loader v0.04999_08 @ 2009-09-12 21:15:22
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:4SfY1EgtFTyTEJ+0MjfzMg
 
 __PACKAGE__->utf8_columns( __PACKAGE__->columns );
 

@@ -62,8 +62,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_08 @ 2009-09-12 19:50:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:NXdw7iBB40hu8tYzs7GU5g
+# Created by DBIx::Class::Schema::Loader v0.04999_08 @ 2009-09-12 21:15:22
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:mE/4eIWM8x6zSzXo/q22jQ
 
 # use overload q{""} => "name", fallback => 1;
 

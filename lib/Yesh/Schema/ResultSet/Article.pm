@@ -48,3 +48,17 @@ L</live> guaranteed to return a result set.
 L<Yesh::Manual>.
 
 =cut
+
+
+    ub ancestors_rs {
+        my $self = shift;
+        
+        my @ids = split /\./, $self->materialized_path;
+        pop @ids;   # remove self
+        if (!...@ids) {
+            @ids = ('NOSUCHID'); # XXX :(
+        }   
+        
+        return $self->_default_resultset('PCE')
+          ->search( { 'me.id' => { -in => \...@ids } } );
+    }

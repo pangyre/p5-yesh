@@ -47,10 +47,16 @@ __PACKAGE__->add_columns(
   },
 );
 __PACKAGE__->set_primary_key("tag", "article");
+__PACKAGE__->belongs_to("tag", "Yesh::Schema::Result::Tag", { id => "tag" });
+__PACKAGE__->belongs_to(
+  "article",
+  "Yesh::Schema::Result::Article",
+  { id => "article" },
+);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_08 @ 2009-09-12 19:51:51
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:aKeBX96G/8MHAvk6minlhQ
+# Created by DBIx::Class::Schema::Loader v0.04999_08 @ 2009-09-12 21:15:22
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:azr54aTD9+LaPSUf5jwQCg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

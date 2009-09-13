@@ -46,8 +46,8 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("article", "path");
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_08 @ 2009-09-12 19:50:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:x82Rxd+I0gcKyDX/LI72ZA
+# Created by DBIx::Class::Schema::Loader v0.04999_08 @ 2009-09-12 21:15:22
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:L/av/HsSANu3J6Ne1O0KPA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
