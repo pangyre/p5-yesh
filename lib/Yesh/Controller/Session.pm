@@ -57,8 +57,15 @@ sub logout :Global Args(0) {
     my ( $self, $c ) = @_;
     $c->delete_session("User manually signed-out");
     $c->logout();
-    $c->response->redirect( $c->uri_for("/") );
-    #$c->blurb("logout/success");
+
+    my $return_to = $c->request->referer
+        if $c->request->referer
+        and URI->new($c->request->referer)->host eq $c->request->uri->host
+        and $c->request->referer ne $c->request->uri->as_string;
+
+    $return_to ||= $c->uri_for("/")->as_string;
+    $c->response->redirect( $return_to );
+    $c->blurb("logout/success");
 }
 
 1;

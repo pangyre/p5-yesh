@@ -90,11 +90,19 @@ Content (articles) can be written by one or several users. Users can open their 
 
 Yesh should run on no less than three database enginesE<mdash>SQLite, MySQL, and PostgreSQLE<mdash>and may even run on others without changes. Yesh may be deployed to its native server (not recommended), modperl, and FastCGI (recommended) on any OS which can run L<Catalyst>.
 
+=item Friendly
+
+We are grateful for feedback, patches, themes, link-backs, and feature requests. We want this code to be easy, bug-free, fun, and helpful.
+
 =back
 
 =head1 SYNOPSIS
 
-    script/yesh_server.pl
+ script/yesh_server.pl
+
+=head1 HISTORY
+
+A prototype of this code has been in production since 2006.
 
 =head1 TO DO
 

@@ -80,6 +80,9 @@ sub edit :Chained("load") Args(0) FormConfig {
     my ( $self, $c ) = @_;
     my $article = $c->stash->{article};
 
+    die "RC_403" unless $c->user_exists
+        and $c->user->obj->id eq $article->user->id;
+
     my $form = $c->stash->{form};
     $form->constraints_from_dbic($c->model("DBIC::Article"));
     $form->render;

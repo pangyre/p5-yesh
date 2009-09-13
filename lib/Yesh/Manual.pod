@@ -54,6 +54,8 @@ Inside your local configuration file you can set several prominent variables und
             $user->add_to_site_roles($author_role)
                 if $self->{new_users_get_author_role};
 
+ site:
+  use_google_js
 
 =over 4
 
@@ -265,6 +267,7 @@ asdf
 
 =item _321
 
+
 =back
 
 =head1 SECURITY
@@ -276,6 +279,7 @@ If these are set in your configuration,
 
  Controller::User:
    secure_registration: 1
+
 
 
 =head1 TESTING

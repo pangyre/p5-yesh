@@ -2,6 +2,7 @@
 # SITE SPECIFIC ------------------------------------------
 site:
   name: <yesh />
+#  use_google_js: Yes
 
 # APPLICATION --------------------------------------------
 default_view: Alloy
