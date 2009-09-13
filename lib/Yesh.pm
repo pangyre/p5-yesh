@@ -62,7 +62,7 @@ __END__
 
 Yesh - YACMS: secure, multi-author, modern, flexible, friendly, L<Catalyst>-based (alpha software).
 
-=HEAD1 VERSION
+=head1 VERSION
 
 2.9023
 

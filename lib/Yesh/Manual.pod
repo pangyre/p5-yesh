@@ -255,6 +255,8 @@ asdf
 
 =head4 Variables
 
+Generally you should only mess with the values and settings in C<site>. That said, you have access to the L<Catalyst> context which makes your templates very powerful. Too powerful really so it's up to you to not abuse it. Your custom L<Yesh> files could quickly degenerate in something that looks like bad PHP if you start using the hooks...
+
 =over 4
 
 =item _321
