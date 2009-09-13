@@ -42,13 +42,23 @@ DESCRIPTION
         Yesh may be deployed to its native server (not recommended),
         modperl, and FastCGI (recommended) on any OS which can run Catalyst.
 
+    Friendly
+        We are grateful for feedback, patches, themes, link-backs, and
+        feature requests. We want this code to be easy, bug-free, fun, and
+        helpful.
+
 SYNOPSIS
-        script/yesh_server.pl
+     script/yesh_server.pl
+
+HISTORY
+    A prototype of this code has been in production since 2006.
 
 TO DO
     Tests.
 
     Manual complete.
+
+    Article revision views.
 
     Move "config->{configured}" to a third config file to separate it from
     direct user interaction?
