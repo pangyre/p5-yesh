@@ -54,6 +54,8 @@ Inside your local configuration file you can set several prominent variables und
             $user->add_to_site_roles($author_role)
                 if $self->{new_users_get_author_role};
 
+TIMEZONE
+
  site:
   use_google_js
 

@@ -29,7 +29,9 @@ currently designated database ([% yesh.model("DBIC").connect_info.dsn %]):</b>
 </div>
 [%-ELSE %]
 
-<p>Your site is not configured. Don’t panic but ain’t nothing gonna work till it is. You have three choices now. Pick <b>one</b>.</p>
+<p>Your site is not configured. Don’t panic but ain’t nothing gonna
+work till it is. Site documents are available here: [% local_perldoc_link("Yesh::Manual") %]. You have three choices now.
+Pick <b>one</b>.</p>
 
 [%-END %]
 

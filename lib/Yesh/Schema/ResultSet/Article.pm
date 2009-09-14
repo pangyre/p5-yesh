@@ -2,19 +2,30 @@ package Yesh::Schema::ResultSet::Article;
 use strict;
 use warnings;
 use parent "DBIx::Class::ResultSet";
-use Date::Calc qw( Today_and_Now );
+#use Date::Calc qw( Today_and_Now );
+#use DateTime;
+
+sub _formatter {
+    my $self = shift;
+    return $self->{_datetime_parser} if $self->{_datetime_parser};
+    $self->{_datetime_parser} = $self->result_source->schema->storage->datetime_parser;
+}
 
 sub live {
-    my $now = sprintf('%d-%02d-%02d %02d:%02d:%02d',
-                      Today_and_Now());
-    +shift->search({ %{+shift || {}},
-                     status   => 'publish',
-                     takedown => { ">" => $now },
-                     golive => { "<=" => $now },
-                    },
-                   { order_by => 'golive DESC',
-                     %{+shift || {}},
-                    });
+    my $self = shift;
+#    my $now = sprintf('%d-%02d-%02d %02d:%02d:%02d',
+#                      Today_and_Now());
+    #use YAML;    die $DATETIME_FORMATTER;
+    my $now = DateTime->now(formatter => $self->_formatter);
+
+    $self->search({ %{+shift || {}},
+                    status   => 'publish',
+                    takedown => { ">" => $now },
+                    golive => { "<=" => $now },
+                  },
+                  { order_by => 'golive DESC',
+                    %{+shift || {}},
+                  });
 }
 
 sub live_rs { scalar +shift->live(@_); }
@@ -50,7 +61,7 @@ L<Yesh::Manual>.
 =cut
 
 
-    ub ancestors_rs {
+    sub ancestors_rs {
         my $self = shift;
         
         my @ids = split /\./, $self->materialized_path;
