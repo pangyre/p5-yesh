@@ -29,12 +29,10 @@ No Pod found for [% name | html %].
  [% END %]
 </p>
 [% ELSE %]
-[% META title = "Internal Documentation" %]
+[% META title = "Internal Documentation (Pod viewer)" %]
 
 <p>
-<a href="?Yesh::Manual">Yesh::Manual</a> and <a href="?Yesh">Yesh</a>
-are probably all you really want. You can browse any application
-documents below.
+The <b><a href="?Yesh::Manual">Yesh::Manual</a></b> and <b><a href="?Yesh">Yesh</a></b> are probably all you really want. You can browse any application documents below.
 </p>
 
 [% PROCESS man/perldoc/list_docs.tt %]
