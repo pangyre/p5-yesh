@@ -135,6 +135,8 @@ User's home page where * is the user's id.
 
 The feed for the user. Yesh will only support Atom feeds. B<Most> endpoints can be affixed with F</atom> to get a feed of that resource's content.
 
+=item /user/id/*/edit
+
 =back
 
 =head3 L<Yesh::Controller::Session>
