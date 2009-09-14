@@ -1,4 +1,7 @@
-
+<div><img src="[% yesh.uri_for("/img/yesh/Yesh-Schema-2.9001-Diagram.png")
+%]" style="border:0; width:100%; padding:0; margin: 1ex 0"
+ alt="Schema Diagram"
+ class="schema"/></div>
 [% FOR source IN schema.sources.sort %]
 <div class="source" style="clear:left; margin-top: 1ex; float:left;width:100%">
 <h3 style="clear:left">[% source %]</h3>
@@ -24,4 +27,15 @@
 <script type="text/javascript">//<![CDATA[
   $(".column b").css({cursor:"pointer"}).click(function(){ $(this).siblings().slideToggle(); return false });
   $("h3").css({cursor:"pointer"}).bind("click", function(){ $(this).parent().children().find(".info").slideToggle() });
+/*
+  $("img.schema").hide();
+  var schemaImgLink = $("<a/>");
+  schemaImgLink.text( $("img.schema").attr("alt") );
+  $("img.schema").parent().append( schemaImgLink )
+        .children()
+        .each(function(){
+            $(this).click(function(){ $(this).toggle() });
+         });
+*/
 //]]> </script>
+

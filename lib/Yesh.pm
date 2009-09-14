@@ -74,7 +74,7 @@ Yesh - Yet another content management system: secure, multi-author, modern, flex
 
 Well, we take it seriously anyway. This is an unfinished application and may have security bugs; plus it is meant to be an easy to install, user-administered application which leaves file and basic system security in the hands of the user running the application.
 
-That said, the passwords are stored as an expensive L<Crypt::Eksblowfish::Bcrypt> hash. The application supports forcing users to register and sign in under https. If configured correctly Yesh will be among the most secure, if not I<the> most secure, FOSS (free and open source software) personal publishing platform.
+That said, the passwords are stored as an expensive L<Crypt::Eksblowfish::Bcrypt> hash. The application supports forcing users to register and sign in under https. If configured correctly Yesh will be among the most secure, if not I<the> most secure, FOSS (free and open source software) personal publishing application for the web.
 
 =item Modern
 
@@ -113,6 +113,8 @@ A prototype of this code has been in production since 2006.
 =head1 TO DO
 
 Tests.
+
+Remove license history / live thingy. Let revision track it.
 
 Manual complete.
 
