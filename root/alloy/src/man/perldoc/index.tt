@@ -23,7 +23,7 @@ more information.</p>
 
 [% ELSIF name %]
 <p>
-No Pod found for [% name | html %].
+Developer fail! No Pod found for [% name | html %].
  [% UNLESS name.match("Yesh") %]
    Try [% perldoc_link(name) %] instead.
  [% END %]
