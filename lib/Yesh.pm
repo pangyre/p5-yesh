@@ -23,7 +23,7 @@ our $VERSION = "2.9024";
 
 __PACKAGE__->config
     ( name => "Yesh/$VERSION",
-      #setup_components => { except => qr/[.\#]/ },
+      # setup_components => { except => qr/[.\#]/ },
       "Plugin::ConfigLoader" => { file => __PACKAGE__->path_to("conf") },
       "Plugin::Session" => {
           # verify_address => 1,

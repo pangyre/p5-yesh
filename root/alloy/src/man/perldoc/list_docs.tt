@@ -1,23 +1,22 @@
-[% root ||= yesh.path_to("lib") %]
+[%-root ||= yesh.path_to("lib") %]
 [%# THROW "blah blah" %]
 
 <ul>
-[% FOR kid IN root.children %]
-  [% IF ( kid.is_dir AND kid.children ) %]
-  <li><h3>[% kid.relative( yesh.path_to("lib") ) %]</h3>
-  [% INCLUDE man/perldoc/list_docs.tt root = kid %]</li>
-  [% END %]
-  [% IF kid.stringify.match('\.(pm|pod)\z') %]
-  [% name = kid.relative( yesh.path_to("lib") ).stringify.replace('\.(pm|pod)\z','').replace('/','::') %]
-  [%# name = kid.basename.replace('\.(pm|pod)\z','').replace('/','') %]
-  <li><a href="?[% name | html %]">[% name %]</a></li>
-  [% END %]
-[% NEXT %]
+[%-FOR kid IN root.children.sort() %]
+  [%-IF ( kid.is_dir AND kid.children ) %]
+    <li><h3>[% kid.relative( yesh.path_to("lib") ) %]</h3>
+    [%-INCLUDE man/perldoc/list_docs.tt root = kid %]</li>
+  [%-END %]
+  [%-NEXT IF ! kid.is_dir AND kid.basename.match('[^\w:.]') %]
+  [%-IF kid.stringify.match('\.(pm|pod)\z') %]
+    [%-name = kid.relative( yesh.path_to("lib") ).stringify.replace('\.(pm|pod)\z','').replace('/','::') %]
+    <li>[% local_perldoc_link(name) %]</li>
+  [%-END %]
+[%-NEXT %]
 <li>
-  [% IF kid.stringify.match('(pm|pod)\z') %]
+  [%-IF kid.stringify.match('(pm|pod)\z') %]
     [% kid.basename %]
-  [% END %]
-  [% INCLUDE man/perldoc/list_docs.tt root = kid %]
-  [% END %]
-
+  [%-END %]
+  [%-INCLUDE man/perldoc/list_docs.tt root = kid %]
+  [%-END %]
 </ul>

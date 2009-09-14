@@ -132,12 +132,6 @@ sub can_preview_article {
     return;
 }
 
-=item has_site_role
-
-Takes a role object, an id, or a name.
-
-=cut
-
 sub has_site_role : method {
     my $self = shift;
     my $role = shift || return;
@@ -157,11 +151,31 @@ sub has_site_role : method {
     return;
 }
 
-
 1;
 
 __END__
 
+=head1 NAME
+
+Yesh:: - 
+
+=head1 METHODS
+
+=over 4
+
+=item has_site_role
+
+Takes a role object, an id, or a name.
+
+=item 321
+
+=back
+
+=head1 LICENSE, AUTHOR, COPYRIGHT, SEE ALSO
+
+L<Yesh::Manual> and L<Yesh>.
+
+=cut
 
 
   sub _role_to_id {

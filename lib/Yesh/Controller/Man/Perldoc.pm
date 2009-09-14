@@ -23,6 +23,9 @@ sub index : Path Args(0) {
     my ( $self, $c ) = @_;
     my $name = $c->req->uri->query;
     ( my $path_part = $name ) =~ s,::,/,g;
+
+    return unless $path_part;
+
     my $parser = Pod::POM->new({});
 
     my ( $pom );
@@ -40,7 +43,7 @@ sub index : Path Args(0) {
             {
                 if ( -r "$path/$inc_key" )
                 {
-                    $pom = $parser->parse_file( "$path/$inc_key" );
+                    $pom = $parser->parse_file("$path/$inc_key");
                     last if "$pom";
                 }
             }
