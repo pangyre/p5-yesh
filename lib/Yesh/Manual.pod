@@ -318,6 +318,30 @@ If these are set in your configuration,
 
 =item Apache + modperl.
 
+=item How to submit translation documents.
+
+=back
+
+=head2 RESOURCES
+
+=head3 YESH
+
+=over 4
+
+=item Bug reports and feature requests: TBD
+
+=item Code repository L<http://github.com/pangyre/p5-yesh>
+
+=back
+
+=head3 CATALYST
+
+=over 4
+
+=item 
+
+=item 
+
 =back
 
 =head1 SUGGESTED READING

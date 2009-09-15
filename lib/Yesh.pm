@@ -26,7 +26,9 @@ __PACKAGE__->config
       # setup_components => { except => qr/[.\#]/ },
       "Plugin::ConfigLoader" => { file => __PACKAGE__->path_to("conf") },
       "Plugin::Session" => {
-          # verify_address => 1,
+          # verify_address => 1, # loses stuff on flash/login.
+          verify_user_agent => 1,
+          expires => 60 * 60 * 24 * 30 * 12,
           rewrite => 0,
           storage => __PACKAGE__->path_to("tmp/session-$<.fmp")->stringify,
       },
