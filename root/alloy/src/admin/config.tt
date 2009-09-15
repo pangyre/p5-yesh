@@ -1,6 +1,6 @@
 [% META title = "Application Configuration" %]
 <h4>Do it yourself</h4>
-<p>You can edit <var>[% yesh.path_to("yesh_local.yml") %]</var> to change these settings. If you make a mistake, you will break this site. You might need to read the documenations for [% perldoc_link("YAML") %] and [% perldoc_link("Catalyst") %].
+<p>You can edit <var>[% yesh.path_to("conf/yesh_local.yml") %]</var> to change these settings. If you make a mistake, you will break this site. You might need to read the documenations for [% perldoc_link("YAML") %] and [% perldoc_link("Catalyst") %].
 
 </p>
 <pre>[% DUMP yesh.config %]</pre>
