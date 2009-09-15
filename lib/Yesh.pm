@@ -112,6 +112,10 @@ A prototype of this code has been in production since 2006.
 
 =head1 TO DO
 
+Password reset.
+
+View of draft articles.
+
 Tests.
 
 Remove license history / live thingy. Let revision track it.
@@ -123,6 +127,20 @@ Everything from the manual using it as a spec. E.g., article revision views and 
 Move C<config-E<gt>{configured}> to a third config file to separate it from direct user interaction?
 
 Move the entire auto-config to a third config file?
+
+=head1 WISH LIST
+
+These are B<important> but not first priorities.
+
+=over 4
+
+=item i18n
+
+=item Image and media management tools built-in
+
+=item WYSIWYG preview for article edits
+
+=back
 
 =head1 PHILOSOPHY
 

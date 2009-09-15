@@ -3,9 +3,6 @@
 <b>[% user_link(yesh.user.obj) %]</b> · 
 [% END %]
 
-[% UNLESS yesh.action == 'admin/db/schema' %]
-  <a href="[% yesh.uri_for("/admin/db/schema") %]">Schema</a> · 
-[% END %]
 <a href="[% yesh.uri_for("/article") %]">Article</a>
 (<a href="[% yesh.uri_for("/article/create") %]">new</a>)
 ·
@@ -23,6 +20,9 @@
 Path: [% yesh.request.path %]
 ·
 Action: [% yesh.action %]
+[% UNLESS yesh.action == 'admin/db/schema' %]
+ · <a href="[% yesh.uri_for("/admin/db/schema") %]">Schema</a>
+[% END %]
   [%-END %]
 
 [% ELSE %]

@@ -1,3 +1,5 @@
+[% META title = "Database Schema" %]
+
 <div><img src="[% yesh.uri_for("/img/yesh/Yesh-Schema-2.9001-Diagram.png")
 %]" style="border:0; width:100%; padding:0; margin: 1ex 0"
  alt="Schema Diagram"
