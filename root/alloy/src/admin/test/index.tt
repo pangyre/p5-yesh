@@ -1,13 +1,14 @@
 [% MACRO show_kids(dir) BLOCK-%]
 <ul>
 [% FOR kid IN dir.children() %]
+[% root ||= dir %]
    [% IF kid.is_dir %]
-<h3>[% kid.relative(dir.parent).stringify %]</h3>
+<h3>[% kid.relative(dir).stringify %]</h3>
 [% show_kids(kid) %]
    [% ELSE %]
 [% NEXT UNLESS kid.basename.match('\.t\z') %]
 <li>
- <a href="">[% kid.relative(dir).stringify %]</a>
+ <a href="[% yesh.uri_for(".", kid.relative(root).stringify) %]">[% kid.relative(dir).stringify %]</a>
 </li>
    [% END %]
 [% END %]

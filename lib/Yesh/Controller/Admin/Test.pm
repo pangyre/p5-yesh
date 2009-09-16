@@ -4,8 +4,8 @@ use strict;
 use parent 'Catalyst::Controller';
 
 use File::Which;
-use IPC::Run qw( run timeout );
-
+use IPC::Run ();
+use Path::Class;
 use File::Find::Rule;
 
 sub auto :Private {
@@ -15,24 +15,54 @@ sub auto :Private {
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
 
-    my @tests = File::Find::Rule->file()
-                     ->name( '*.t' )
-                     ->in( $c->path_to("t") );
-
-    $c->stash( tests => \@tests,
-               test_dir => Path::Class::Dir->new( $c->path_to("t")->stringify )
+    $c->stash(
+               test_dir => Path::Class::Dir->new( $c->path_to("t/web")->stringify )
         );
-    return;
+}
 
-    my $test = $c->path_to("t/web/ok.t");
+sub run : Path {
+    my ( $self, $c, @path ) = @_;
+
+    my $test = $c->path_to("t/web",@path); # 321 verify no updir possible
     my $prove = which("prove");
 
-    my @cmd = ( $prove, "-l", "lib", "$test" );
+    my @cmd = ( $prove, "-v", "-l", "lib", "$test" );
     my ( $in, $out, $err );
-    IPC::Run::run \@cmd, \$in, \$out, \$err, timeout(10) or die "$?";
+
+#    $| = 1;
+#    IPC::Run::run \@cmd, \$in, \*STDOUT, \*STDERR, IPC::Run::timeout(30)
+#        or die join("\n", $in, $out, $err, $?);
+
+    IPC::Run::run \@cmd, \$in, \$out, \$err, IPC::Run::timeout(10)
+        or die join("\n", $in, $out, $err, $?);
 
     $c->response->content_type("text/plain");
     $c->response->body( join"\n", $out, $err);
+}
+
+1; # Problems running/forking against itself.
+
+__END__
+
+=head1 NAME
+
+Yesh::Controller::Admin::Test - Catalyst Controller
+
+=head1 METHODS
+
+=over 4
+
+=item 321
+
+=back
+
+=head1 LICENSE, AUTHOR, COPYRIGHT, SEE ALSO
+
+L<Yesh::Manual> and L<Yesh>.
+
+=cut
+
+
 
     return 1;
 
@@ -63,26 +93,8 @@ sub index :Path :Args(0) {
 
     $c->response->body( join"\n", @{$full_buf} );
 #    $c->response->body( join"\n", @tests );
-}
 
-1; # Problems running/forking against itself.
+    my @tests = File::Find::Rule->file()
+                     ->name( '*.t' )
+                     ->in( $c->path_to("t/web") );
 
-__END__
-
-=head1 NAME
-
-Yesh::Controller::Admin::Test - Catalyst Controller
-
-=head1 METHODS
-
-=over 4
-
-=item 321
-
-=back
-
-=head1 LICENSE, AUTHOR, COPYRIGHT, SEE ALSO
-
-L<Yesh::Manual> and L<Yesh>.
-
-=cut
