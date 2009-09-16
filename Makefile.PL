@@ -47,6 +47,8 @@ requires "DateTime::Format::SQLite";
 requires "Catalyst::Plugin::RequireSSL";
 
 recommends "Catalyst::Manual";
+recommends "IPC::Run";
+recommends "File::Find::Rule";
 recommends "Pod::POM";
 recommends "Proc::ProcessTable";
 recommends "Schedule::At";

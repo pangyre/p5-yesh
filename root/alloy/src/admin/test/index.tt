@@ -1,0 +1,18 @@
+[% MACRO show_kids(dir) BLOCK-%]
+<ul>
+[% FOR kid IN dir.children() %]
+   [% IF kid.is_dir %]
+<h3>[% kid.relative(dir.parent).stringify %]</h3>
+[% show_kids(kid) %]
+   [% ELSE %]
+[% NEXT UNLESS kid.basename.match('\.t\z') %]
+<li>
+ <a href="">[% kid.relative(dir).stringify %]</a>
+</li>
+   [% END %]
+[% END %]
+</ul>
+[% END %]
+
+<h2>t</h2>
+[% show_kids( test_dir ) %]

@@ -1,0 +1,88 @@
+package Yesh::Controller::Admin::Test;
+use warnings;
+use strict;
+use parent 'Catalyst::Controller';
+
+use File::Which;
+use IPC::Run qw( run timeout );
+
+use File::Find::Rule;
+
+sub auto :Private {
+    1;
+}
+
+sub index :Path :Args(0) {
+    my ( $self, $c ) = @_;
+
+    my @tests = File::Find::Rule->file()
+                     ->name( '*.t' )
+                     ->in( $c->path_to("t") );
+
+    $c->stash( tests => \@tests,
+               test_dir => Path::Class::Dir->new( $c->path_to("t")->stringify )
+        );
+    return;
+
+    my $test = $c->path_to("t/web/ok.t");
+    my $prove = which("prove");
+
+    my @cmd = ( $prove, "-l", "lib", "$test" );
+    my ( $in, $out, $err );
+    IPC::Run::run \@cmd, \$in, \$out, \$err, timeout(10) or die "$?";
+
+    $c->response->content_type("text/plain");
+    $c->response->body( join"\n", $out, $err);
+
+    return 1;
+
+    $c->model("SelfTest")->run( $c->path_to("t/web") );
+    $c->model("SelfTest")->run( $c->path_to("t/web/ok.t") );
+
+    $c->response->content_type("text/plain");
+    $c->response->body( join"\n", @tests );                                                         
+
+    return;
+    # Messing with this doesn't seem to help...?
+    local $SIG{CHLD} = "DEFAULT";
+#    use App::Prove;
+#    my $prove = App::Prove->new;
+#    #    die join" ", @args;
+#    eval {     $prove->process_args("-I" . $c->path_to("lib"), $tests[0] ) } or die join" ", "-I" . $c->path_to("lib"), $tests[0];
+#    $prove->run; # Handle failure somehow? This will return 1 or 0
+#    $c->response->content_type("text/plain");
+#    $c->response->body( "OK!" );
+#    return 1;
+    my $prove = IPC::Cmd::can_run("prove");
+
+    my ( $success, $error_code, $full_buf, $stdout_buf, $stderr_buf ) =
+        IPC::Cmd::run( command => [ $prove, "-I" . $c->path_to("lib"), $tests[0] ],
+                       timeout => 30,
+                       verbose => 0 );
+
+
+    $c->response->body( join"\n", @{$full_buf} );
+#    $c->response->body( join"\n", @tests );
+}
+
+1; # Problems running/forking against itself.
+
+__END__
+
+=head1 NAME
+
+Yesh::Controller::Admin::Test - Catalyst Controller
+
+=head1 METHODS
+
+=over 4
+
+=item 321
+
+=back
+
+=head1 LICENSE, AUTHOR, COPYRIGHT, SEE ALSO
+
+L<Yesh::Manual> and L<Yesh>.
+
+=cut

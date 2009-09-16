@@ -59,6 +59,10 @@ Model::DBIC:
       AutoCommit: 1
       ChopBlanks: 1
 
+Model::SelfTest:
+  lib: __path_to(lib)__
+
+
 # VIEWS --------------------------------------------------
 View::Alloy:
   INCLUDE_PATH:
