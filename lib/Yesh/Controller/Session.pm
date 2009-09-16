@@ -68,6 +68,26 @@ sub logout :Global Args(0) {
     $c->blurb("logout/success");
 }
 
+sub password_reset : Global {
+    my ( $self, $c, $token, @more ) = @_;
+    die "RC_404" if @more;
+  # $self->{reset_token_lives_for}
+    if ( $c->request->method eq "POST" )
+    {
+        # REQUESTING ONE, TOKEN IS SENT ONLY, GOOD FOR...
+    }
+    elsif ( $token and $c->request->method eq "GET" )
+    {
+        
+        # USING ONE
+    }
+    else
+    {
+        die "RC_405";
+    }
+}
+
+
 1;
 
 __END__

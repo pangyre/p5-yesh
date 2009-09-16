@@ -4,6 +4,52 @@ L<Yesh> is...
 
 =head1 INSTALLATION
 
+These instructions are *nix centric for now.
+
+There are quite a few Perl packages that must be installed. If everything is working right you should be able to download the distribution for Yesh, decompress it, and install it like any Perl package.
+
+=head2 NON-PERL DEPENDENCIES
+
+=over 4
+
+=item lbxml2
+
+L<XML::LibXML>. [Download link] 321
+
+=back
+
+=head2 INSTALL YESH
+
+=over 4
+
+=item # Download
+
+Either from CPAN where L<Yesh> may not be (yet) or from its github repo: L<http://github.com/pangyre/p5-yesh>.
+
+=item # Decompress it
+
+E.g.-
+  tar xpfvz Yesh-#.####.tar.gz
+
+=item # Intall it
+
+ cd Yesh-#.####
+ perl Makefile.PL
+ make && make test && make install
+
+You will be prompted to install missing dependencies. There are likely to be a lot of them.
+
+[dicussion of dependencies and end-user role in make it all work right]
+
+=back
+
+You should also be able to do all the above steps in one this way-
+
+ cpan Yesh
+
+The cpan command is a utility of the core module L<CPAN> which will facilitates installation. It will download and attempt to install L<Yesh> and its dependencies.
+
+To do: a Task::Yesh distribution? Without this sort of thing hosting companies may not be interested in picking up a package like this.
 
 =head1 WEB-BASED SET UP
 
@@ -152,6 +198,12 @@ Sign-in. Can be forced to B<https> with L<configuration settings|/CONFIGURATION>
 =item /logout
 
 Sign-out. Deletes session.
+
+=item /password_reset
+
+POST reqest with username and email? Sends a token URI to the user to return to the same page where-
+
+GET request with valid tokenE<mdash>they have a configurable expiration timeE<mdash>gives a reset form. Token is invalidated upon use? No action is taken until reset form is successfully submitted.
 
 =back
 

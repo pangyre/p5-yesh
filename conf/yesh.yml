@@ -38,6 +38,7 @@ Controller::Session:
 
 Controller::User:
   secure_registration: 1
+  reset_token_lives_for: ~
   model_stash:
     schema: DBIC
   new_users_get_author_role: 1

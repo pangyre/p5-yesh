@@ -114,21 +114,26 @@ A prototype of this code has been in production since 2006.
 
 =head1 TO DO
 
-Password reset.
+=over 4
 
-View of draft articles.
+=item Password reset.
 
-Tests.
+=item View of draft articles.
 
-Remove license history / live thingy. Let revision track it.
+=item Tests.
 
-Manual complete.
+=item Remove license history / live thingy. Let revision track it.
 
-Everything from the manual using it as a spec. E.g., article revision views and token previews.
+=item Manual complete.
 
-Move C<config-E<gt>{configured}> to a third config file to separate it from direct user interaction?
+=item Everything from the manual using it as a spec. E.g., article revision views and token previews.
 
-Move the entire auto-config to a third config file?
+=item Move C<config-E<gt>{configured}> to a third config file to separate it from direct user interaction?
+
+=item Move the entire auto-config to a third config file?
+
+=back
+
 
 =head1 WISH LIST
 
