@@ -398,6 +398,10 @@ If these are set in your configuration,
 
 =back
 
+=head1 A FEW WORDS ABOUT INTERNET EXPORER
+
+We will not support IE 6. All of the IE family is problematic but we will support newer versions because we have to do so. IE 6 is a turd that won't flush. Just pull the handle, everyone.
+
 =head1 SUGGESTED READING
 
 =head1 LICENSE, COPYRIGHT, AUTHOR

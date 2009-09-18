@@ -25,19 +25,17 @@ Yesh 1.0 has its own JS inserter/tool-bar for HTML editing. This is extremely ru
 
 =back
 
-=head1 REQUIREMENTS
+=head2 REQUIREMENTS
 
 =over 4
 
 =item JavaScript is enabled.
 
+=item Support for Firefox and Safari.
+
 =item User preferences.
 
 =item asdf
-
-
-=item User preferences.
-=item User preferences.
 
 =back
 
