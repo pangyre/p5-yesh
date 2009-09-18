@@ -362,6 +362,8 @@ If these are set in your configuration,
 
 =over 4
 
+=item Real icon/logo + iphone favicon
+
 =item Secure certificate / https setup.
 
 =item nginx.

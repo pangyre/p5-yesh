@@ -1,0 +1,48 @@
+=head1 NAME
+
+Yesh::Specification - where notes and half-baked tech specs live for now... See L<Yesh::Manual> for a more comprehensive treatment.
+
+=head1 TAGARAMA 2.0
+
+Yesh 1.0 has its own JS inserter/tool-bar for HTML editing. This is extremely rudimentary however and has no live preview or live-validation. Time to change that.
+
+
+=head2 FEATURES
+
+=over 4
+
+=item State of menu is persistent.
+
+=item Produces only valid XHTML.
+
+=item If an element is not specifically prohibited it can be added manually and will then populate the tool bar (picking up attribute prompts as well).
+
+=item Can round-trip for filtered-preview. Settable.
+
+=item 321
+
+=item 321
+
+=back
+
+=head1 REQUIREMENTS
+
+=over 4
+
+=item JavaScript is enabled.
+
+=item User preferences.
+
+=item asdf
+
+
+=item User preferences.
+=item User preferences.
+
+=back
+
+=head1 LICENSE, AUTHOR, COPYRIGHT, SEE ALSO
+
+L<Yesh::Manual> and L<Yesh>.
+
+=cut
