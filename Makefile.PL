@@ -23,6 +23,7 @@ requires "Catalyst::Authentication::Realm::SimpleDB"; # I think this is a BUG!
 requires "Catalyst::View::TT::Alloy";
 requires "HTML::FormFu::Model::DBIC";
 requires "FCGI::ProcManager";
+requires "DBIx::Class::ResultSet::HashRef";
 
 requires "Number::Format";
 requires "HTML::FormFu";
@@ -49,6 +50,7 @@ requires "Catalyst::Plugin::RequireSSL";
 recommends "Catalyst::Manual";
 recommends "IPC::Run";
 recommends "File::Find::Rule";
+recommends "File::Which"; # Right now it's a fatal without.
 recommends "Pod::POM";
 recommends "Proc::ProcessTable";
 recommends "Schedule::At";

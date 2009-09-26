@@ -37,23 +37,22 @@ Template::Alloy->define_vmethod
      );
 
 Template::Alloy->define_vmethod
-    ("LIST",
-     encode_json => sub {
-         my $rs = shift || return "[]";
-         warn "$rs is not a DBIx::Class::ResultSet reference" && return "[]"
-             unless blessed($rs) eq "DBIx::Class::ResultSet";
-         $rs->result_class("DBIx::Class::ResultClass::HashRefInflator");
-         JSON::XS::encode_json([$rs->all]);
-     });
-
-Template::Alloy->define_vmethod
     ("HASH",
      encode_json => sub {
-         my $rs = shift || return "{}";
-         warn "$rs is not a blessed DBIx::Class::ResultSet reference" and return "{}"
-             unless blessed($rs) eq "DBIx::Class::ResultSet";
-         $rs->result_class("DBIx::Class::ResultClass::HashRefInflator");
-         JSON::XS::encode_json({ map { $_->{id} => $_ } $rs->all });
+         my $hash = shift || return "{}";
+         if ( blessed($hash) eq "DBIx::Class::ResultSet" )
+         {
+             $hash->result_class("DBIx::Class::ResultClass::HashRefInflator");
+             JSON::XS::encode_json({ map { $_->{id} => $_ } $hash->all });
+         }
+         elsif ( ref($hash) eq "HASH" )
+         {
+             JSON::XS::encode_json($hash);
+         }
+         else
+         {
+             die "Don't know what to do with $hash";
+         }
      });
 
 sub _yesh_dumper {

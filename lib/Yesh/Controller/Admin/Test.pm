@@ -3,13 +3,13 @@ use warnings;
 use strict;
 use parent 'Catalyst::Controller';
 
-use File::Which;
+# use File::Which;
 use IPC::Run ();
 use Path::Class;
 use File::Find::Rule;
 
 sub auto :Private {
-    1;
+    0;
 }
 
 sub index :Path :Args(0) {
