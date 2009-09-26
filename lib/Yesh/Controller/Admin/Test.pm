@@ -3,8 +3,8 @@ use warnings;
 use strict;
 use parent 'Catalyst::Controller';
 
-require File::Which;
-require IPC::Run;
+#use File::Which;
+#use IPC::Run ();
 use Path::Class;
 use File::Find::Rule;
 
