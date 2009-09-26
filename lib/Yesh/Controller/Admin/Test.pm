@@ -3,14 +3,14 @@ use warnings;
 use strict;
 use parent 'Catalyst::Controller';
 
-# use File::Which;
-use IPC::Run ();
+require File::Which;
+require IPC::Run ();
 use Path::Class;
 use File::Find::Rule;
 
-sub auto :Private {
-    0;
-}
+#sub auto :Private {
+#    0;
+#}
 
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
@@ -19,6 +19,10 @@ sub index :Path :Args(0) {
                test_dir => Path::Class::Dir->new( $c->path_to("t/web")->stringify )
         );
 }
+
+1;
+
+__END__
 
 sub run : Path {
     my ( $self, $c, @path ) = @_;
