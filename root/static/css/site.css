@@ -2,6 +2,8 @@
 
 body {
  font: normal 16px/19px "Gill Sans", "Helvetica Neue", Helvettica, Arial, sans-serif;
+ background-color: white;
+/* background:white url(/img/yesh.png) no-repeat top left; */
 }
 div {
  border-collapse: collapse;
