@@ -16,6 +16,10 @@ sub auto : Private {
     return 1;
 }
 
+sub exit_yesh : Local {
+    exit 0;
+}
+
 sub index :Path :Args(0) {
 #    my ( $self, $c ) = @_;
 }
