@@ -18,11 +18,11 @@ sub dump : Local Args(0) {
     my $schema = $c->model("DBIC")->schema;
     for my $source ( $schema->sources )
     {
-        push @{$c->stash->{rows}}, eval {
+        eval {
             my $rs = $schema->resultset($source);
             $rs->result_class("DBIx::Class::ResultClass::HashRefInflator");
-            $rs->all();
-        } || $@;
+            push @{$c->stash->{rows}}, $rs->all();
+        };
     }
 }
 
