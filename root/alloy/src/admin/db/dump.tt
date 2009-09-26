@@ -1,0 +1,10 @@
+[% META title = "Dump a Database to a Dumpfile" %]
+
+
+[% FOR row IN rows %]
+[% row | encode_json %].<br/>
+[% END %]
+<script type="text/javascript">//<![CDATA[
+
+//]]> </script>
+

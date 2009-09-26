@@ -4,7 +4,7 @@ NAME
     Yesh::Manual for usage and detailed description.
 
 VERSION
-    2.9024
+    2.9025
 
 DESCRIPTION
     Secure
@@ -17,7 +17,8 @@ DESCRIPTION
         Crypt::Eksblowfish::Bcrypt hash. The application supports forcing
         users to register and sign in under https. If configured correctly
         Yesh will be among the most secure, if not *the* most secure, FOSS
-        (free and open source software) personal publishing platform.
+        (free and open source software) personal publishing application for
+        the web.
 
     Modern
         It is highly introspective: status, documentation, underlying
@@ -59,17 +60,27 @@ HISTORY
     A prototype of this code has been in production since 2006.
 
 TO DO
+    Password reset.
+    View of draft articles.
     Tests.
+    First occurrence of a link is bold.
+        This must be configurable. Or in a utilities JS which is part of a
+        theme.
 
+    Remove license history / live thingy. Let revision track it.
     Manual complete.
-
     Everything from the manual using it as a spec. E.g., article revision
     views and token previews.
-
     Move "config->{configured}" to a third config file to separate it from
     direct user interaction?
-
     Move the entire auto-config to a third config file?
+
+WISH LIST
+    These are important but not first priorities.
+
+    i18n
+    Image and media management tools built-in
+    WYSIWYG preview for article edits
 
 PHILOSOPHY
     Release early and often. Favor agile cycles over stability paranoia. We
