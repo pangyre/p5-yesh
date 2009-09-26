@@ -4,7 +4,7 @@ use strict;
 use parent 'Catalyst::Controller';
 
 require File::Which;
-require IPC::Run ();
+require IPC::Run;
 use Path::Class;
 use File::Find::Rule;
 
