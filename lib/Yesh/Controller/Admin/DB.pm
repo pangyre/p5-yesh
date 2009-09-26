@@ -16,6 +16,7 @@ sub schema : Local Args(0) {
 sub dump : Local Args(0) {
     my ( $self, $c ) = @_;
     my $schema = $c->model("DBIC")->schema;
+    $schema->storage->dbh->{unicode} = 1;
     for my $source ( $schema->sources )
     {
         eval {

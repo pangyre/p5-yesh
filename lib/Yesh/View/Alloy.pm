@@ -6,6 +6,7 @@ use parent "Catalyst::View::TT::Alloy";
 use Scalar::Util "blessed";
 use JSON::XS ();
 use Number::Format;
+use Encode;
 
 __PACKAGE__->config
     (
@@ -43,11 +44,11 @@ Template::Alloy->define_vmethod
          if ( blessed($hash) eq "DBIx::Class::ResultSet" )
          {
              $hash->result_class("DBIx::Class::ResultClass::HashRefInflator");
-             JSON::XS::encode_json({ map { $_->{id} => $_ } $hash->all });
+             Encode::decode_utf8(JSON::XS::encode_json({ map { $_->{id} => $_ } $hash->all }));
          }
          elsif ( ref($hash) eq "HASH" )
          {
-             JSON::XS::encode_json($hash);
+             Encode::decode_utf8(JSON::XS::encode_json($hash) );
          }
          else
          {
