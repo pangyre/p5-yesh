@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <title>[% PROCESS title.tt %]</title>
-<link rel="shortcut icon" href="[% yesh.uri_for("/img/yesh.png") %]" />
+<link rel="shortcut icon" href="[% yesh.uri_for("/img/yesh.gif") %]" />
 <link rel="stylesheet" media="screen" type="text/css" href="[% yesh.uri_for("/css/universal.css").path %]" />
 <link rel="stylesheet" media="screen" type="text/css" href="[% yesh.uri_for("/css/site.css") %]" />
 <link rel="stylesheet" media="screen" type="text/css" href="[% yesh.uri_for("/css/jquery/smoothness/ui.all.css") %]" />
