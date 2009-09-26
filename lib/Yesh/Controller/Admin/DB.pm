@@ -2,7 +2,6 @@ package Yesh::Controller::Admin::DB;
 use strict;
 use warnings;
 use parent "Catalyst::Controller";
-use DBIx::Class::ResultSet::HashRef;
 
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
