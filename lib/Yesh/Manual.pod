@@ -358,6 +358,8 @@ If these are set in your configuration,
 
 =head1 TO DO (PLEASE SUBMIT PATCHES!)
 
+Usernames need to be case insensitive or it causes too much confusion; e.g., Ashley ne ashley in the current scheme and you could register any number of permutations its casing.
+
 =head2 TUTORIALS
 
 =over 4

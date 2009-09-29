@@ -48,6 +48,7 @@ Template::Alloy->define_vmethod
          }
          elsif ( ref($hash) eq "HASH" )
          {
+             #return JSON::XS::encode_json($hash);
              Encode::decode_utf8(JSON::XS::encode_json($hash) );
          }
          else

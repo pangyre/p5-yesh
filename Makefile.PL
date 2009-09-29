@@ -3,6 +3,7 @@ use inc::Module::Install;
 
 name "Yesh";
 all_from "lib/Yesh.pm";
+repository "git://github.com/pangyre/p5-yesh";
 
 requires "Catalyst::Runtime" => "5.80007";
 requires "Catalyst::Plugin::ConfigLoader";

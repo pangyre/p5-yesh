@@ -16,10 +16,6 @@ sub auto : Private {
     return 1;
 }
 
-sub exit_yesh : Local {
-    exit 0;
-}
-
 sub index :Path :Args(0) {
 #    my ( $self, $c ) = @_;
 }
@@ -100,3 +96,19 @@ Catalyst Controller.
 =head1 METHODS
 
 =cut
+
+
+sub ab :Local {
+    die "+" . join(" ", $^X, $0, @ARGV);
+}
+
+sub restart_yesh : Local {
+    my ( $self, $c ) = @_;
+    if ( $c->engine eq "Catalyst::Engine::HTTP" )
+    {
+        my $config = $c->path_to("conf/yesh_local.yml");
+        system("touch", $config);
+        die;
+    }
+}
+
