@@ -5,7 +5,11 @@ elements:
   - type: Text
     name: username
     label: Username
-    constraints: 
+    attributes:
+      readonly: readonly
+    model_config:
+      read_only: 1
+    constraints:
       - Required
       - type: Length
         min: 1
