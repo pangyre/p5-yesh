@@ -1,6 +1,6 @@
 ---
 auto_fieldset:
-  legend: Create your account
+  legend: Edit your account
 elements:
   - type: Text
     name: username
@@ -22,17 +22,11 @@ elements:
         others: email2
       - type: Callback
         message: That email address is registered with an account already
-  - type: Text
-    name: email2
-    label: Verify email
-    constraints: 
-      - Required
   - type: Password
     name: password
     label: Password
-    render_value: 1
+    render_value: 0
     constraints:
-      - Required
       - type: Length
         min: 8
         max: 40

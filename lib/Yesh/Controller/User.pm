@@ -3,6 +3,8 @@ use strict;
 use warnings;
 use parent 'Catalyst::Controller::HTML::FormFu';
 
+use Digest::MD5;
+
 sub index :Path Args(0) {
     my ( $self, $c ) = @_;
     $c->stash( users => $c->model("DBIC::User")->search_rs() );
@@ -19,7 +21,24 @@ sub load :Chained("/") PathPart("user/id") CaptureArgs(1) {
 
 sub view :PathPart("") Chained("load") Args(0) {
     my ( $self, $c ) = @_;
-    $c->stash( title => $c->stash->{user}->username );
+}
+
+sub edit : Chained("load") Args(0) FormConfig {
+    my ( $self, $c ) = @_;
+    my $form = $c->stash->{form};
+    my $user = $c->stash->{user};
+    die "RC_403" unless $c->user_exists
+        and $user->id eq $c->user->id
+        or $c->check_user_roles("admin");
+
+    if ( $form->submitted_and_valid )
+    {
+        $form->model->update( $user );
+        $c->ressponse->redirect( $c->uri_for( "/user", $user->id ) );
+        $c->detach;
+    }
+    $form->model->default_values( $user )
+        unless $form->submitted;
 }
 
 sub register : Local Args(0) Form {
@@ -73,15 +92,20 @@ sub reset : Local Args(0) FormConfig {
     my $form = $c->stash->{form};
     if ( $form->submitted_and_valid )
     {
-        my $user = $c->model('DBIC::User')
-            ->search({ email => $form->param_value("email")})
-            ->single;
-        # Letting the user know if this worked or not is a security
-        # risk b/c it allows probing of accounts. Any successful
-        # submit is reported as successful.
         $c->blurb("user/reset");
         $c->flash_blurb(1);
         $c->response->redirect($c->uri_for("/"), 302);
+
+        # Letting the user know if this worked or not is a security
+        # risk b/c it allows probing of accounts. So any successful
+        # submit is reported as successful.
+
+        return unless my $user = $c->model('DBIC::User')
+            ->search({ email => $form->param_value("email")})
+            ->single;
+        my %data = $user->get_columns;
+        my $key = Digest::MD5::md5_hex(%data);
+        # my 
     }
 }
 

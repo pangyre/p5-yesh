@@ -4,3 +4,8 @@
   If you are a new user, you may <a href="[%
   yesh.uri_for("/user/register") %]">register here</a>.
 </p>
+<p>
+  If you have forgot your password, you may <a href="[%
+  yesh.uri_for("/user/reset") %]">reset your
+  account here</a> providing your email address is still valid.
+</p>
