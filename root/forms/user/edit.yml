@@ -18,8 +18,6 @@ elements:
     constraints: 
       - Required
       - Email
-      - type: Equal
-        others: email2
       - type: Callback
         message: That email address is registered with an account already
   - type: Password
@@ -36,8 +34,6 @@ elements:
     name: password2
     label: Re-type password
     render_value: 1
-    constraints:
-      - Required
   - type: Submit
     name: x
-    value: Create the Account
+    value: Update the account

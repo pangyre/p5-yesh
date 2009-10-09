@@ -17,6 +17,11 @@
 User has written [% ( article_count | commify ) || "no" %] article[% "s" UNLESS article_count == 1 %].
 </p>
 
+[% IF yesh.user_exists AND yesh.user.id == user.id %]
+<p><a href="[% yesh.uri_for("/user/id/", [ user.id ]) %]">Edit your account</a>.</p>
+[% END %]
+
+
 [% RETURN %]
 
 [% IF user.articles() %]

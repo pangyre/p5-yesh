@@ -33,9 +33,24 @@ sub edit : Chained("load") Args(0) FormConfig {
 
     if ( $form->submitted_and_valid )
     {
-        $form->model->update( $user );
-        $c->ressponse->redirect( $c->uri_for( "/user", $user->id ) );
-        $c->detach;
+        for my $valid ( $form->valid )
+        {
+            next unless $user->can($valid);
+            # Never "blank out" a password.
+            next if $valid eq "password" and not $form->param_value($valid);
+            $user->$valid( $form->param_value($valid) );
+        }
+
+        if ( $user->is_changed )
+        {
+            $user->update;
+            $c->response->redirect( $c->uri_for("/user/id", $user->id) );
+            $c->detach;
+        }
+        else
+        {
+            die "You didn't change anything...";
+        }
     }
     $form->model->default_values( $user )
         unless $form->submitted;
