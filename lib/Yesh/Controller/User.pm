@@ -44,7 +44,7 @@ sub edit : Chained("load") Args(0) FormConfig {
         if ( $user->is_changed )
         {
             $user->update;
-            $c->response->redirect( $c->uri_for("/user/id", $user->id) );
+            $c->response->redirect( $c->uri_for_action("user/view", [ $user->id ]) );
             $c->detach;
         }
         else
