@@ -1,0 +1,15 @@
+---
+auto_fieldset:
+  legend: Get an account reset token via email
+method: post
+element:
+  - type: Text
+    name: email
+    label: Email address
+    constraints:
+      - Required
+      - type: Callback
+        message: Password and username do not match.
+  - type: Submit
+    name: x
+    value: Send me a reset link

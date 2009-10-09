@@ -68,6 +68,24 @@ sub register : Local Args(0) Form {
     }
 }
 
+sub reset : Local Args(0) FormConfig {
+    my ( $self, $c ) = @_;
+    my $form = $c->stash->{form};
+    if ( $form->submitted_and_valid )
+    {
+        my $user = $c->model('DBIC::User')
+            ->search({ email => $form->param_value("email")})
+            ->single;
+        # Letting the user know if this worked or not is a security
+        # risk b/c it allows probing of accounts. Any successful
+        # submit is reported as successful.
+        $c->blurb("user/reset");
+        $c->flash_blurb(1);
+        $c->response->redirect($c->uri_for("/"), 302);
+    }
+}
+
+
 1;
 
 __END__
