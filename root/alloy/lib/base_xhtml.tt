@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-<title>[% PROCESS title.tt %]</title>
+<title>[% PROCESS lib/title.tt %]</title>
 <link rel="shortcut icon" href="[% yesh.uri_for("/img/yesh.png") %]" />
 <link rel="stylesheet" media="screen" type="text/css" href="[% yesh.uri_for("/css/universal.css").path %]" />
 <link rel="stylesheet" media="screen" type="text/css" href="[% yesh.uri_for("/css/site.css") %]" />
@@ -40,11 +40,11 @@ jQuery(function($) {
 [% END %]
   </div>
   <div id="primary_nav">
-[% PROCESS primary_nav.tt IF yesh.config.configured %]
+[% PROCESS lib/primary_nav.tt IF yesh.config.configured %]
   </div>
   <div id="content">
 <h1 id="pageTitle">[% title | html %]</h1>
-[% PROCESS blurbs.tt IF yesh.blurb %]
+[% PROCESS lib/blurbs.tt IF yesh.blurb %]
 [% content %]
     <div id="content_footer">
     </div>
@@ -54,7 +54,7 @@ jQuery(function($) {
   <div id="secondary_nav">
   </div>
   <div id="footer">
-[% PROCESS footer.tt %]
+[% PROCESS lib/footer.tt %]
   </div>
 </div>
 </body>

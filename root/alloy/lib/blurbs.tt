@@ -1,5 +1,5 @@
 <div id="blurbs">
 [% FOR blurb IN yesh.blurb %]
-   [% PROCESS "blurb/${blurb.id}" %]
+   [% PROCESS "lib/blurb/${blurb.id}" %]
 [% END %]
 </div>

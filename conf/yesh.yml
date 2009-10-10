@@ -67,11 +67,11 @@ Model::SelfTest:
 View::Alloy:
   INCLUDE_PATH:
     - __path_to(root/alloy/src)__
-    - __path_to(root/alloy/lib)__
+    - __path_to(root/alloy)__
   PRE_PROCESS:
-    - macros.tt
+    - lib/macros.tt
   TEMPLATE_EXTENSION: .tt
   CATALYST_VAR: yesh
-  WRAPPER: base_page.tt
+  WRAPPER: lib/wrapper.tt
   TRIM: 1
   COLLAPSE: 1

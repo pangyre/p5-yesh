@@ -113,14 +113,20 @@ sub reset : Local Args(0) FormConfig {
 
         # Letting the user know if this worked or not is a security
         # risk b/c it allows probing of accounts. So any successful
-        # submit is reported as successful.
+        # submit is reported to the user the same way.
 
         return unless my $user = $c->model('DBIC::User')
             ->search({ email => $form->param_value("email")})
             ->single;
+
         my %data = $user->get_columns;
         my $key = Digest::MD5::md5_hex(%data);
-        # my 
+        my $reset_uri = $c->uri_for_action("user/edit", [ $user->id, $key ]);
+        my $output = $c->view("Alloy")
+            ->render($c, "user/reset_email.tt",
+                     { reset_uri => $reset_uri });
+
+        $c->response->body($output . " !@# ");
     }
 }
 

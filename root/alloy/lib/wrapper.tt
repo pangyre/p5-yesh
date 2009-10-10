@@ -1,0 +1,5 @@
+[%-IF no_wrapper-%]
+[%-content-%]
+[%-ELSE-%]
+[%-content WRAPPER lib/base_xhtml.tt %]
+[%-END-%]
