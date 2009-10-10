@@ -1,5 +1,5 @@
 [% IF yesh.user_exists %]
-[% IF yesh.uri_for_action("user/view", [user.id] ).as_string != yesh.request.uri.as_string %]
+[% IF yesh.uri_for_action("user/view", [yesh.user.id] ).as_string != yesh.request.uri.as_string %]
 <b>[% user_link(yesh.user.obj) %]</b> · 
 [% END %]
 
