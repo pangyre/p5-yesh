@@ -26,7 +26,8 @@ sub view :PathPart("") Chained("load") Args(0) {
 
 sub reset_edit : PathPart("edit") Chained("load") Args(1) {
     my ( $self, $c, $token ) = @_;
-
+    # LOOK UP USER from token, etc.
+    $c->go("/user/edit", []);
 }
 
 sub edit : Chained("load") Args(0) FormConfig {

@@ -79,8 +79,12 @@ sub generic :Private {
 
 sub no_template :Private {
     my ( $self, $c, $exception ) = @_;
-    $c->response->status(404);
-    $c->stash( error => "The template was not found: @{$exception->{matches}}" );
+    my $status = 404;
+    $c->response->status($status);
+    $c->stash(
+        title => join(" \x{b7} ", $status, "Missing template file" ),
+        status => $status,
+        error => "The template was not found: @{$exception->{matches}}" );
 }
 
 sub no_db :Private {
