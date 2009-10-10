@@ -317,7 +317,9 @@ Within alloy templates you have a handful of macros available; see F<root/alloy/
 
 =over 4
 
-=item _321
+=item article_link($article_object)
+
+Returns an anchor tag with the title as the attribute and the text content. Optional second argument is hash reference of attributes; e.g., style, title override, rel.
 
 asdf
 

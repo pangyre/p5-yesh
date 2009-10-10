@@ -1,11 +1,11 @@
 [% META title = "Articles" %]
 
 <p class="center">
-This is page [% articles.pager.current_page | commify %]
+This is page [% articles.pager.current_page | format_number %]
  of
- [% articles.pager.last_page | commify %] page[%-"s" UNLESS articles.pager.last_page == 1 %].
+ [% articles.pager.last_page | format_number %] page[%-"s" UNLESS articles.pager.last_page == 1 %].
 
- [% articles.pager.total_entries | commify %]
+ [% articles.pager.total_entries | format_number %]
  article[%-"s" UNLESS articles.pager.total_entries == 1 %] total.
 <br />
 [%-IF articles.pager.previous_page %]

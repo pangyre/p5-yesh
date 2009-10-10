@@ -26,6 +26,7 @@ requires "HTML::FormFu::Model::DBIC";
 requires "FCGI::ProcManager";
 requires "DBIx::Class::ResultSet::HashRef";
 
+requires "Lingua::EN::Numbers";
 requires "Number::Format";
 requires "HTML::FormFu";
 requires "Catalyst::Controller::HTML::FormFu";

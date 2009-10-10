@@ -10,11 +10,14 @@
 <p>None.</p>
 [% END %]
 
+[% articles = user.search_related_rs("articles",{},{rows=>50,page=>1}).live_rs() %]
+[% pager = articles.pager %]
+
 <h3>Articles</h3>
 
-[% article_count = user.search_related_rs("articles").live_rs.count %]
+[% article_count = pager.total_entries %]
 <p>
-User has written [% ( article_count | commify ) || "no" %] article[% "s" UNLESS article_count == 1 %].
+User has written [% ( article_count | format_number ) || "no" %] article[% "s" UNLESS article_count == 1 %]. Here [% pager.entries_on_this_page == 1 ? "is" : "are" %] the first [% pager.entries_on_this_page | num2en %].
 </p>
 
 [% IF yesh.user_exists AND yesh.user.id == user.id %]
@@ -22,14 +25,10 @@ User has written [% ( article_count | commify ) || "no" %] article[% "s" UNLESS 
 [% END %]
 
 
-[% RETURN %]
+[%# RETURN %]
 
-[% IF user.articles() %]
 <ul>
-[%-FOR article IN user.articles() %]
+[%-FOR article IN articles.all %]
 <li>[% article_link(article) %]</li>
 [% END %]
 </ul>
-[% ELSE %]
-Nopers...
-[% END %]

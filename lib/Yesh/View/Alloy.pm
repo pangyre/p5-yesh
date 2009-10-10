@@ -5,7 +5,6 @@ no warnings "uninitialized";
 use parent "Catalyst::View::TT::Alloy";
 use Scalar::Util "blessed";
 use JSON::XS ();
-use Number::Format;
 use Encode;
 
 __PACKAGE__->config
@@ -13,8 +12,13 @@ __PACKAGE__->config
      ENCODING => 'UTF-8',
      RECURSION => 1,
      FILTERS => {
-         commify => sub {
-             return Number::Format::format_number(shift);
+         format_number => sub {
+             require Number::Format;
+             Number::Format::format_number(shift);
+         },
+         num2en => sub {
+             require Lingua::EN::Numbers;
+             Lingua::EN::Numbers::num2en(shift);
          },
      },
      DUMP => {

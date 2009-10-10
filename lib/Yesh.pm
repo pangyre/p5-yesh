@@ -138,6 +138,8 @@ This must be configurable. Or in a utilities JS which is part of a theme.
 
 =item Move the entire auto-config to a third config file?
 
+=item Provide for bulk editing via tag, author, date, parent, etc.
+
 =back
 
 
