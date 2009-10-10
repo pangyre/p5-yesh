@@ -122,6 +122,8 @@ A prototype of this code has been in production since 2006.
 
 =item Tests.
 
+=item Flash blurbs will not stack up.
+
 =item First occurrence of a link is bold.
 
 This must be configurable. Or in a utilities JS which is part of a theme.

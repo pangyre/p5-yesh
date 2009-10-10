@@ -4,6 +4,7 @@ use warnings;
 use parent 'Catalyst::Controller::HTML::FormFu';
 
 use Digest::MD5;
+use MIME::Lite;
 
 sub index :Path Args(0) {
     my ( $self, $c ) = @_;
@@ -21,6 +22,11 @@ sub load :Chained("/") PathPart("user/id") CaptureArgs(1) {
 
 sub view :PathPart("") Chained("load") Args(0) {
     my ( $self, $c ) = @_;
+}
+
+sub reset_edit : PathPart("edit") Chained("load") Args(1) {
+    my ( $self, $c, $token ) = @_;
+
 }
 
 sub edit : Chained("load") Args(0) FormConfig {
@@ -102,6 +108,10 @@ sub register : Local Args(0) Form {
     }
 }
 
+# This is mildly more hackable than directly working on passwords
+# because it lacks the Eks cost. Needs to have a cache key or
+# something instead. It'll be self-expiring too so that's even better.
+
 sub reset : Local Args(0) FormConfig {
     my ( $self, $c ) = @_;
     my $form = $c->stash->{form};
@@ -120,13 +130,33 @@ sub reset : Local Args(0) FormConfig {
             ->single;
 
         my %data = $user->get_columns;
-        my $key = Digest::MD5::md5_hex(%data);
-        my $reset_uri = $c->uri_for_action("user/edit", [ $user->id, $key ]);
+        my $token = Digest::MD5::md5_hex(%data);
+        # This, or some variety, really should work...
+        #my $reset_uri = $c->uri_for_action("user/reset_edit", $token, [ $user->id ]);
+        my $reset_uri = $c->uri_for("/user/id", $user->id, "edit", $token );
         my $output = $c->view("Alloy")
             ->render($c, "user/reset_email.tt",
                      { reset_uri => $reset_uri });
 
-        $c->response->body($output . " !@# ");
+        my $host = $c->request->uri->host;
+        my $msg = MIME::Lite->new
+            (
+             From    => "do-not-reply\@$host",
+             To      => $user->email,
+             Subject => "OH HAI",
+             Data    => "Message for you: $reset_uri",
+            );
+        $msg->attr("content-type"         => "text/plain");
+        $msg->attr("content-type.charset" => "utf-8");
+        
+        if ( $host =~ /\blocal/ )
+        {
+            die $msg->as_string;
+        }
+        else
+        {
+            $msg->send or $c->log->error("Couldn't send mail!");
+        }
     }
 }
 

@@ -1,1 +1,2 @@
+[% TEMPLATE no_wrapper = 1 %]
 <h1>[% reset_uri %]</h1>

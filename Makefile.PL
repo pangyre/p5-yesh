@@ -30,6 +30,8 @@ requires "Number::Format";
 requires "HTML::FormFu";
 requires "Catalyst::Controller::HTML::FormFu";
 
+requires "MIME::Lite";
+
 requires "Data::UUID";
 requires "DBIx::Class::EncodedColumn";
 
