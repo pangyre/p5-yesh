@@ -4,7 +4,7 @@ NAME
     Yesh::Manual for usage and detailed description.
 
 VERSION
-    2.9027
+    2.9028
 
 DESCRIPTION
     Secure
@@ -63,6 +63,7 @@ TO DO
     Password reset.
     View of draft articles.
     Tests.
+    Flash blurbs will not stack up.
     First occurrence of a link is bold.
         This must be configurable. Or in a utilities JS which is part of a
         theme.
