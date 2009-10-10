@@ -1,6 +1,4 @@
 <h3>Resource [% yesh.request.uri %]</h3>
-[%-IF yesh.debug OR yesh.check_any_user_role("admin","owner","editor")
-   OR NOT yesh.config.configured %]
 
 [%-UNLESS yesh.config.configured %]
 <h4><a href="[% yesh.uri_for_action("admin/dependencies") %]">Check dependencies</a></h4>
@@ -9,4 +7,9 @@
 <blockquote class="alert">
 [% error | html | html_para %]
 </blockquote>
+
+[% RETURN %]
+[%-IF yesh.debug OR yesh.check_any_user_role("admin","owner","editor")
+   OR NOT yesh.config.configured %]
+
 [%-END %]

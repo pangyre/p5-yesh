@@ -13,22 +13,39 @@ sub _formatter {
 
 sub live {
     my $self = shift;
-#    my $now = sprintf('%d-%02d-%02d %02d:%02d:%02d',
+#    my $now = sprintf("%d-%02d-%02d %02d:%02d:%02d",
 #                      Today_and_Now());
     #use YAML;    die $DATETIME_FORMATTER;
     my $now = DateTime->now(formatter => $self->_formatter);
 
     $self->search({ %{+shift || {}},
-                    status   => 'publish',
+                    status   => "publish",
                     takedown => { ">" => $now },
                     golive => { "<=" => $now },
                   },
-                  { order_by => 'golive DESC',
+                  { order_by => "golive DESC",
+                    %{+shift || {}},
+                  });
+}
+
+sub not_live {
+    my $self = shift;
+    my $now = DateTime->now(formatter => $self->_formatter);
+
+    $self->search({ %{+shift || {}},
+                    -or => [
+                            status   => { "!=" => "publish" },
+                            takedown => { "<" => $now },
+                            golive => { ">=" => $now },
+                            ]
+                  },
+                  { order_by => "golive DESC",
                     %{+shift || {}},
                   });
 }
 
 sub live_rs { scalar +shift->live(@_); }
+sub not_live_rs { scalar +shift->not_live(@_); }
 
 1;
 
@@ -59,17 +76,3 @@ L</live> guaranteed to return a result set.
 L<Yesh::Manual>.
 
 =cut
-
-
-    sub ancestors_rs {
-        my $self = shift;
-        
-        my @ids = split /\./, $self->materialized_path;
-        pop @ids;   # remove self
-        if (!...@ids) {
-            @ids = ('NOSUCHID'); # XXX :(
-        }   
-        
-        return $self->_default_resultset('PCE')
-          ->search( { 'me.id' => { -in => \...@ids } } );
-    }
