@@ -90,7 +90,7 @@ sub no_db :Private {
     $c->stash( error => join(", ", @message),
                template => "error/no_db.tt",
                status => 503,
-               title => join(" ", 503, HTTP::Status::status_message(503) ),
+               title => join(" \x{b7} ", 503, HTTP::Status::status_message(503) ),
         );
 }
 
