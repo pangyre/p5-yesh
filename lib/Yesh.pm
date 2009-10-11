@@ -19,7 +19,7 @@ use Catalyst qw(
 use Moose;
 
 our $AUTHORITY = "cpan:ASHLEY";
-our $VERSION = "2.9029";
+our $VERSION = "2.9030";
 
 __PACKAGE__->config
     ( name => "Yesh/$VERSION",
@@ -66,7 +66,7 @@ Yesh - Yet another content management system: secure, multi-author, modern, flex
 
 =head1 VERSION
 
-2.9029
+2.9030
 
 =head1 DESCRIPTION
 

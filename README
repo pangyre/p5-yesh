@@ -4,7 +4,7 @@ NAME
     Yesh::Manual for usage and detailed description.
 
 VERSION
-    2.9028
+    2.9029
 
 DESCRIPTION
     Secure
@@ -75,6 +75,7 @@ TO DO
     Move "config->{configured}" to a third config file to separate it from
     direct user interaction?
     Move the entire auto-config to a third config file?
+    Provide for bulk editing via tag, author, date, parent, etc.
 
 WISH LIST
     These are important but not first priorities.
