@@ -117,7 +117,10 @@ a:hover {
 }
 
 #secondary_nav {
-
+ font-size: .75em; /* 12/16=0.75 */
+ clear:both;
+ margin: 1em auto 0 auto;
+ text-align:center;
 }
 
 #footer {

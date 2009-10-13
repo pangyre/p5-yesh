@@ -1,5 +1,4 @@
 <div class="article" id="article_[% article.id %]">
-[% IF article.is_live %] LIVE [% END %]
 [% IF articles.count %]
   <h3 class="title">[% article_link(article) %]</h3>
 [% ELSE %]

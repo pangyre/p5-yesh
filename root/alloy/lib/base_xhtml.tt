@@ -52,6 +52,7 @@ jQuery(function($) {
   <div id="sidebar">
   </div>
   <div id="secondary_nav">
+[% PROCESS lib/secondary_nav.tt %]
   </div>
   <div id="footer">
 [% PROCESS lib/footer.tt %]

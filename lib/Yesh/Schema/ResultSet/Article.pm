@@ -11,6 +11,8 @@ sub _formatter {
     $self->{_datetime_parser} = $self->result_source->schema->storage->datetime_parser;
 }
 
+# It would be nice to cache this in instance data so that is_live can
+# be short circuited if the record came from here...?
 sub live {
     my $self = shift;
 #    my $now = sprintf("%d-%02d-%02d %02d:%02d:%02d",

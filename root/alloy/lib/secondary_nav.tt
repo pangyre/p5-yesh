@@ -1,17 +1,14 @@
 [% IF yesh.user_exists %]
-[% IF yesh.uri_for_action("user/view", [yesh.user.id] ).as_string != yesh.request.uri.as_string %]
-<b>[% user_link(yesh.user.obj) %]</b> · 
-[% END %]
 
 <a href="[% yesh.uri_for("/article") %]">Article</a>
 (<a href="[% yesh.uri_for("/article/create") %]">new</a>)
 ·
-<a href="[% yesh.uri_for("/user") %]">Users</a>
+<a href="[% yesh.uri_for("/user") %]">User</a>
 ·
+[% END %]
+
 <a href="[% yesh.uri_for("/man/perldoc") %]">Docs</a>
 (<a href="[% yesh.uri_for("/man/perldoc") %]?Yesh::Manual">manual</a>)
-·
-<a href="[% yesh.uri_for("/logout") %]">Sign-out</a>
 
   [%-IF yesh.check_any_user_role("admin","owner") %]
 <br />
@@ -23,19 +20,9 @@ Action: [% yesh.action %]
 [% UNLESS yesh.action == 'admin/db/schema' %]
  · <a href="[% yesh.uri_for("/admin/db/schema") %]">Schema</a>
 [% END %]
-  [%-END %]
 
-[% ELSE %]
-<a href="[% yesh.uri_for("/man/perldoc") %]">Docs</a>
-(<a href="[% yesh.uri_for("/man/perldoc") %]?Yesh::Manual">manual</a>)
-·
 [% IF yesh.action != "user/register" %]
 <a href="[% yesh.uri_for_action("/user/register") %]">Register</a>
 · [% END %]
 <a href="[% yesh.uri_for("/login") %]">Sign-in</a>
 [% END %]
-
-
-
-
-
