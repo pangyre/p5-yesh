@@ -145,7 +145,7 @@ sub reset : Local Args(0) FormConfig {
 
         my $token = lc Data::UUID->new->create_str;
         $c->model("CHI")->set("reset" . $user->id, $token,
-                              "1 minute");
+                              $self->{reset_token_lives_for} || "1 hour");
 
         # This, or some variety, really should work...
         #my $reset_uri = $c->uri_for_action("user/reset_edit", $token, [ $user->id ]);

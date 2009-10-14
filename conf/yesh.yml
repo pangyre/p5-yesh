@@ -35,10 +35,10 @@ Plugin::Authentication:
 # CONTROLLERS --------------------------------------------
 Controller::Session:
   secure_login: 1
-  reset_token_lives_for: ~
 
 Controller::User:
   secure_edit: 1
+  reset_token_lives_for: 1 hour
   secure_registration: 1
   model_stash:
     schema: DBIC
