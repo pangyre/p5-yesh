@@ -63,7 +63,9 @@ sub edit : Chained("load") Args(0) FormConfig {
         }
         else
         {
-            die "You didn't change anything...";
+            # 321 blurb
+            $c->blurb("user/no_change");
+            # die "You didn't change anything...";
         }
     }
     $form->model->default_values( $user )
