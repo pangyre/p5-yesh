@@ -1,7 +1,7 @@
 ---
 # SITE SPECIFIC ------------------------------------------
 site:
-  name: <yesh />
+  name: <yesh/>
 #  use_google_js: Yes
 
 # APPLICATION --------------------------------------------
