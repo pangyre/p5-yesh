@@ -135,7 +135,10 @@ sub reset : Local Args(0) FormConfig {
             ->search({ email => $form->param_value("email")})
             ->single;
 
-        my $token = Data::UUID->new->create_str;
+        # Prevent abuse and confusion by only doing one at a time.
+        $c->detach() if $c->model("CHI")->get("reset" . $user->id);
+
+        my $token = lc Data::UUID->new->create_str;
         $c->model("CHI")->set("reset" . $user->id, $token);
 
         # This, or some variety, really should work...
