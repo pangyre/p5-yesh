@@ -5,6 +5,7 @@ use parent 'Catalyst::Controller::HTML::FormFu';
 
 use Digest::MD5;
 use MIME::Lite;
+use Data::UUID;
 
 sub index :Path Args(0) {
     my ( $self, $c ) = @_;
@@ -14,7 +15,7 @@ sub index :Path Args(0) {
 sub load :Chained("/") PathPart("user/id") CaptureArgs(1) {
     my ( $self, $c, $id ) = @_;
     $id ||= $c->request->arguments->[0]; # for forwards
-    $c->stash->{user} = $c->model("DBIC::User")->find($id)
+    $c->stash->{user} ||= $c->model("DBIC::User")->find($id)
         or die "RC_404: No such user";
 
 # forward to search with it?
@@ -26,8 +27,11 @@ sub view :PathPart("") Chained("load") Args(0) {
 
 sub reset_edit : PathPart("edit") Chained("load") Args(1) {
     my ( $self, $c, $token ) = @_;
-    # LOOK UP USER from token, etc.
-    $c->go("/user/edit", []);
+    my $check = $c->model("CHI")->get("reset" . $c->stash->{user}->id);
+    $check or die "RC_404";
+    $check eq $token or die "RC_403";
+    $c->stash(token_ok => 1);
+    $c->go("/user/edit");
 }
 
 sub edit : Chained("load") Args(0) FormConfig {
@@ -36,6 +40,7 @@ sub edit : Chained("load") Args(0) FormConfig {
     my $user = $c->stash->{user};
     die "RC_403" unless $c->user_exists
         and $user->id eq $c->user->id
+        or $c->stash->{token_ok}
         or $c->check_user_roles("admin");
 
     if ( $form->submitted_and_valid )
@@ -130,8 +135,9 @@ sub reset : Local Args(0) FormConfig {
             ->search({ email => $form->param_value("email")})
             ->single;
 
-        my %data = $user->get_columns;
-        my $token = Digest::MD5::md5_hex(%data);
+        my $token = Data::UUID->new->create_str;
+        $c->model("CHI")->set("reset" . $user->id, $token);
+
         # This, or some variety, really should work...
         #my $reset_uri = $c->uri_for_action("user/reset_edit", $token, [ $user->id ]);
         my $reset_uri = $c->uri_for("/user/id", $user->id, "edit", $token );

@@ -62,6 +62,10 @@ Model::DBIC:
 Model::SelfTest:
   lib: __path_to(lib)__
 
+Model::CHI:
+  class: CHI
+  args:
+    driver: File
 
 # VIEWS --------------------------------------------------
 View::Alloy:
