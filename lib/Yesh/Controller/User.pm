@@ -27,6 +27,7 @@ sub view :PathPart("") Chained("load") Args(0) {
 
 sub reset_edit : PathPart("edit") Chained("load") Args(1) {
     my ( $self, $c, $token ) = @_;
+    $c->require_ssl if $self->{secure_login};
     my $check = $c->model("CHI")->get("reset" . $c->stash->{user}->id);    
     $check or die "RC_404";
     $check eq $token or die "RC_403";
