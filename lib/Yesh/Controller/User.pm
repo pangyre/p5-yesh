@@ -30,7 +30,6 @@ sub reset_edit : PathPart("edit") Chained("load") Args(1) {
     my $check = $c->model("CHI")->get("reset" . $c->stash->{user}->id);    
     $check or die "RC_404";
     $check eq $token or die "RC_403";
-    $c->model("CHI")->remove("reset" . $c->stash->{user}->id);
     $c->stash(token_ok => 1);
     $c->go("/user/edit");
 }
@@ -58,6 +57,8 @@ sub edit : Chained("load") Args(0) FormConfig {
         {
             $user->update;
             $c->response->redirect( $c->uri_for_action("user/view", [ $user->id ]) );
+            $c->model("CHI")->remove("reset" . $c->stash->{user}->id)
+                if $c->stash->{token_ok};
             $c->detach;
         }
         else
