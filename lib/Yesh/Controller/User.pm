@@ -27,10 +27,10 @@ sub view :PathPart("") Chained("load") Args(0) {
 
 sub reset_edit : PathPart("edit") Chained("load") Args(1) {
     my ( $self, $c, $token ) = @_;
-    my $check = $c->model("CHI")->remove("reset" . $c->stash->{user}->id);
-    
+    my $check = $c->model("CHI")->get("reset" . $c->stash->{user}->id);    
     $check or die "RC_404";
     $check eq $token or die "RC_403";
+    $c->model("CHI")->remove("reset" . $c->stash->{user}->id);
     $c->stash(token_ok => 1);
     $c->go("/user/edit");
 }
