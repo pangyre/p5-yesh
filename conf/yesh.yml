@@ -38,6 +38,7 @@ Controller::Session:
   reset_token_lives_for: ~
 
 Controller::User:
+  secure_edit: 1
   secure_registration: 1
   model_stash:
     schema: DBIC
