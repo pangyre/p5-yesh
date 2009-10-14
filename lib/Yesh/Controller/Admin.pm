@@ -20,8 +20,7 @@ sub index :Path :Args(0) {
 #    my ( $self, $c ) = @_;
 }
 
-sub config : Local {
-}
+sub yesh_config : Path("config") Args(0) {}
 
 sub env : Local {
     my ( $self, $c ) = @_;
