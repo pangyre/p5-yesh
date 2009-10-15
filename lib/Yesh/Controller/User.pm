@@ -164,7 +164,7 @@ sub reset : Local Args(0) FormConfig {
             );
         $msg->attr("content-type"         => "text/plain");
         $msg->attr("content-type.charset" => "utf-8");
-        
+
         if ( $host =~ /\blocal/ )
         {
             die $msg->as_string;

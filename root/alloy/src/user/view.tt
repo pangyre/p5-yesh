@@ -15,12 +15,11 @@
 
 [% IF yesh.user_exists AND yesh.user.id == user.id %]
 <p><a href="[% yesh.uri_for_action("user/edit", [ user.id ]) %]">Edit your account</a>.</p>
-[% END %]
 
 [% not_live = user.search_related_rs("articles",{},{rows=>50,page=>1}).not_live_rs() %]
 [% pager = not_live.pager %]
 
-<h3>Not Live</h3>
+<h3>Unpublished Articles</h3>
 
 [% article_count = pager.total_entries %]
 <p>
@@ -33,6 +32,8 @@ User has [% ( article_count | format_number ) || "no" %] article[% "s" UNLESS ar
 <li>[% article_link(article) %]</li>
 [% END %]
 </ul>
+
+[% END %]
 
 
 [% articles = user.search_related_rs("articles",{},{rows=>50,page=>1}).live_rs() %]
