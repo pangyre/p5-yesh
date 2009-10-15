@@ -1,3 +1,6 @@
+[% TEMPLATE
+   title = user.username %]
+
 <h3>Site Roles</h3>
 
 [%-IF user.site_roles() %]
@@ -32,7 +35,6 @@ User has [% ( article_count | format_number ) || "no" %] article[% "s" UNLESS ar
 </ul>
 
 
-
 [% articles = user.search_related_rs("articles",{},{rows=>50,page=>1}).live_rs() %]
 [% pager = articles.pager %]
 
@@ -42,9 +44,6 @@ User has [% ( article_count | format_number ) || "no" %] article[% "s" UNLESS ar
 <p>
 User has [% ( article_count | format_number ) || "no" %] article[% "s" UNLESS article_count == 1 %] published. Here [% pager.entries_on_this_page == 1 ? "is" : "are" %] the first [% pager.entries_on_this_page | num2en %].
 </p>
-
-
-
 
 
 [%# RETURN %]
