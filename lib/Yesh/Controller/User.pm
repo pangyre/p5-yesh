@@ -109,7 +109,8 @@ sub register : Local Args(0) Form {
                 if $self->{new_users_get_author_role};
 
             $c->authenticate({ username => $user->username,
-                               password => $user->password }) or die "Could not auto-sign-in";
+                               password => $form->param_value("password") })
+                or die "Could not auto-sign-in";
             $c->response->redirect($c->uri_for("/"));
         }
     }

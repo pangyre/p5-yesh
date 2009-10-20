@@ -81,8 +81,7 @@ sub _deploy_sqlite : Private {
     # Update config file here.
     my $model_config = $c->config->{"Model::DBIC"};
     $model_config->{connect_info}->[0] = $dsn_config;
-    # $c->config->{"Model::DBIC"} = $model_config;
-    # $c->model("DBIC")->schema->connect_info( @{ $model_config->{connect_info} } );
+    $model_config->{connect_info}->[3]->{unicode} = 1;
     $self->_load_baseline($c, $schema);
     $self->_write_local_yaml($c, { "Model::DBIC" => $model_config });
     $c->response->redirect($c->uri_for_action("setup/admin"));
@@ -109,7 +108,7 @@ sub admin : Local Args(0) {
     if ( $c->stash->{form}->submitted_and_valid )
     {
         # Give the new user admin roles.
-        my $admin = $c->user;
+        my $admin = $c->user or die "No user is in the context";
         my $admin_role = $c->model("DBIC::SiteRole")->search({ name => "admin" })->single
             || croak "Admin role is not configured";
         $admin->add_to_site_roles($admin_role);
