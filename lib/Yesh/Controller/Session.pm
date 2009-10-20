@@ -31,11 +31,10 @@ sub login :Global FormConfig {
     {
         my $username = $form->param_value("username");
         my $password = $form->param_value("password");
-        my $user = $c->model("DBIC::User")->search( username => $username )->single;
-        if ( $user and $user->check_password($password) )
+
+        if ( $c->authenticate({ username => $username, password => $password }) )
         {
             $c->clear_flash;
-            $c->authenticate({ username => $username, password => $user->password }) or die;
             $c->response->redirect( $return_to );
             $c->detach;
         }

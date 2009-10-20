@@ -10,26 +10,13 @@ default_view: Alloy
 
 # PLUGINS ------------------------------------------------
 Plugin::Authentication:
-# This not actually "clear." It’s bcrypted in the DB and compared on the fly with a new bcrypt. This is not the way it’s supposed to work but I haven’t solved the proble
   realms:
     default:
       class: SimpleDB
       user_model: DBIC::User
-      password_type: clear
-      #      password_type: self_check
-#      class: DBIx::Class
-      user_class: DBIC::User
+      password_type: self_check
       role_relation: site_roles
       role_field: name
-    openid:
-      credential:
-        user_model: DBIC::User
-        password_type: self_check
-      store:
-        class: DBIx::Class
-        user_class: DBIC::User
-        role_relation: site_roles
-        role_field: name
 
 
 # CONTROLLERS --------------------------------------------
