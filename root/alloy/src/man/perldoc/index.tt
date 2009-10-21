@@ -1,42 +1,42 @@
-[% IF pom %]
+[%-IF pom %]
+  [%-UNLESS name.match('\AYesh\b') %]
 <div style="float:right">
 [% perldoc_link( name ) %]
 </div>
+  [%-END %]
 
-[% IF warnings.size %]
+[%-IF warnings.size %]
 <div class="alert">
 <p>The Pod generated warnings. Please see the end of this page for
 more information.</p>
 </div>
-[% END %]
+[%-END %]
 
-[% pod %]
+[%-pod %]
 
-[% IF warnings.size %]
+[%-IF warnings.size %]
 <div class="alert">
   <h3>Warnings for this Pod document from [% perldoc_link("Pod::POM") %]</h3>
   [% FOR warning IN warnings %]
   <p>[% warning | html %]</p>
   [% END %]
 </div>
-[% END %]
+[%-END %]
 
-[% ELSIF name %]
+[%-ELSIF name %]
 <p>
 Developer fail! No Pod found for [% name | html %].
  [% UNLESS name.match("Yesh") %]
    Try [% perldoc_link(name) %] instead.
  [% END %]
 </p>
-[% ELSE %]
+[%-ELSE %]
 [% META title = "Internal Documentation (Pod viewer)" %]
 
 <p>
 The <b><a href="?Yesh::Manual">Yesh::Manual</a></b> and <b><a href="?Yesh">Yesh</a></b> are probably all you really want. You can browse any application documents below.
 </p>
 
-[% PROCESS man/perldoc/list_docs.tt %]
+[%-PROCESS man/perldoc/list_docs.tt %]
 
 [% END %]
-
-
