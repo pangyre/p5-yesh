@@ -1,8 +1,10 @@
+=pod
+
 =head1 YESH, THIRD PARTY ELEMENTS
 
 L<Yesh> is distributed with third party software included.
 
-=head1 jQuery and jQuery UI
+=head1 jQuery 1.3.2 and jQuery UI 1.7.2
 
 While jQuery is easily accessible from public places like Google's public JS API, it is undesirable to rely its remote available. The files need to be available locally in case of firewall or connectivity blocks.
 
@@ -10,10 +12,14 @@ This version of L<Yesh> comes with jQuery 1.3.2 E<middot> L<http://jquery.com/> 
 
 jQuery proper is in C<root/static/js> and its associated files and plugins are in C<root/static/js/jquery>.
 
+=head1 qTip 1.0.0-rc3
+
+L<http://craigsworks.com/projects/qtip/>.
+
+Copyright © 2009 Craig Thompson. Licensed under MIT; L<http://www.opensource.org/licenses/mit-license.php>.
+
 =head1 SEE ALSO
 
 L<Yesh> and L<Yesh::Manual>.
 
 =cut
-
-
