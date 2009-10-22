@@ -1,5 +1,5 @@
-package Yesh::Controller::User::Test;
-use parent qw(Yesh::Test);
+package Test::Yesh::Controller::User;
+use parent qw(Test::Yesh);
 
 sub create : Tests {
     my $self = shift;

@@ -1,5 +1,5 @@
-package Yesh::Controller::Setup::Test;
-use parent qw(Yesh::Test);
+package Test::Yesh::Controller::Setup;
+use parent qw(Test::Yesh);
 use Test::More;
 
 sub create : Tests {
