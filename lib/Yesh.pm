@@ -65,7 +65,7 @@ __PACKAGE__->setup();
 
 __PACKAGE__->meta->make_immutable( replace_constructor => 1 );
 
-13;
+1;
 
 __END__
 
@@ -223,4 +223,4 @@ such damages.
 
 =cut
 
-1;
+
