@@ -35,6 +35,8 @@ no Moose;
 
 __END__
 
+perl -Ilib -It/lib -MYesh::Test -le "Yesh::Test->runtests"
+
 my @connection = @{ $c->config->{"Model::DBIC"}->{connect_info} };
 my ( $file ) = $connection[0] =~ /SQLite:(.+)/;
 my $schema = $c->model("DBIC")->schema;
