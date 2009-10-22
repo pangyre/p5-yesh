@@ -201,7 +201,7 @@ use DBIx::Class::Exception ();
 
 __PACKAGE__->many_to_many(display_groups => "article_display_groups", "display_group");
 
-__PACKAGE__->utf8_columns( __PACKAGE__->columns );
+# __PACKAGE__->utf8_columns( __PACKAGE__->columns );
 
 sub is_live {
     my $self = shift;

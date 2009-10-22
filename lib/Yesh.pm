@@ -17,6 +17,7 @@ use Catalyst qw(
                 RequireSSL
              );
 use Moose;
+use File::Temp;
 
 our $AUTHORITY = "cpan:ASHLEY";
 our $VERSION = "2.9033";
@@ -24,7 +25,15 @@ our $VERSION = "2.9033";
 __PACKAGE__->config
     ( name => "Yesh/$VERSION",
       # setup_components => { except => qr/[.\#]/ },
-      "Plugin::ConfigLoader" => { file => __PACKAGE__->path_to("conf") },
+      "Plugin::ConfigLoader" => {
+          file => __PACKAGE__->path_to("conf"),
+          substitutions => {
+              TMP_FILE => sub {
+                  [ File::Temp::tempfile( TMPDIR => 1,
+                                          SUFFIX => '.sqlite') ]->[1];
+              },
+          },
+      },
       "Plugin::Session" => {
           # verify_address => 1, # loses stuff on flash/login.
           verify_user_agent => 1,

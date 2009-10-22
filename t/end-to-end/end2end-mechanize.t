@@ -1,4 +1,4 @@
-BEGIN {
+zBEGIN {
     $ENV{YESH_CONFIG_LOCAL_SUFFIX} = "test";
 }
 use strict;
@@ -14,9 +14,8 @@ eval {
     $c->config->{is_test_config} or BAIL_OUT("This does not appear to be the test configuration!");
     my @connection = @{ $c->config->{"Model::DBIC"}->{connect_info} };
     my ( $file ) = $connection[0] =~ /SQLite:(.+)/;
-#    unlink $file;
-#    my $schema = $c->model("DBIC")->schema;
-#    $schema->deploy();
+    my $schema = $c->model("DBIC")->schema;
+    $schema->deploy();
     1;
 } || BAIL_OUT($@);
 
