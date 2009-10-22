@@ -1,4 +1,4 @@
-zBEGIN {
+BEGIN {
     $ENV{YESH_CONFIG_LOCAL_SUFFIX} = "test";
 }
 use strict;
