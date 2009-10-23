@@ -7,7 +7,7 @@ use utf8;
 # setenv TEST_VERBOSE 1 ; k ; perl -Ilib -It/lib -MTest::Yesh::Controller::Setup -le "Test::Yesh::Controller::Setup->runtests"
 
 sub startup : Test(startup) {
-    $ENV{YESH_CONFIG_LOCAL_SUFFIX} = "test_sqlite_setup";
+    $ENV{YESH_CONFIG_LOCAL_SUFFIX} = "setup";
     my $self = shift;
     $self->SUPER::startup;
 }
@@ -34,9 +34,12 @@ sub landing_issues : Tests {
     $mech->get_ok("/man/perldoc");
     $mech->content_contains("Documentation",
                             "Docs are visible before setup");
+    $mech->get("/setup/done");
+    is( $mech->status, 404,
+        "/setup/done is 404" );
 }
 
-sub sqlite_setup : Tests {
+sub auto_setup : Tests {
     my $self = shift;
     my $mech = $self->mech;
     $mech->click_ok("auto",
@@ -44,6 +47,7 @@ sub sqlite_setup : Tests {
 
     $mech->content_contains("Your database is set up",
                             "DB setup confirmed");
+
     $mech->content_contains("Create your account",
                             "Looks like admin account creation form is there");
 
@@ -57,14 +61,38 @@ sub sqlite_setup : Tests {
         or diag($mech->content);
 }
 
-sub mysql_setup : Test(1) {
+sub sqlite_setup : Test(1) {
+    my $self = shift;
+    local $TODO = "Currently unimplemented";
+    ok(0);
+}
+
+sub mysql_setup : Test(9) {
     my $self = shift;
     local $TODO = "Currently unimplemented";
     eval { require DBD::mysql; 1; }
         or return "MySQL is not available";
     my $mech = $self->mech;
-#    local $TODO = "Currently unimplemented";
-    ok(0);
+
+    $mech->submit_form_ok({
+                           fields => $self->c->config->{postgres_form}
+                          },
+                          "Submitting normal-esque form with PostgreSQL DSN");
+
+    $mech->content_contains("Your database is set up",
+                            "DB setup confirmed");
+
+    $mech->content_contains("Create your account",
+                            "Looks like admin account creation form is there");
+
+    $mech->submit_form_ok({
+                           fields => $self->c->config->{admin_data}
+                          },
+                          "Submitting registration form");
+
+    $mech->content_contains("You’re done!",
+                            "Success")
+        or diag($mech->content);
 }
 
 sub postgres_setup : Test(1) {

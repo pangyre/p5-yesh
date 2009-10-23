@@ -37,6 +37,43 @@ sub startup : Test(startup) {
 
 # __PACKAGE__->meta->make_immutable;
 
+sub config {
+    {
+        is_test_config => 1,
+        sqlite_form => {
+                        'db_name' => 'yesh_test',
+                        'password' => undef,
+                        'user' => undef,
+                        'port' => undef,
+                        'dbd' => 'SQLite',
+                        'host' => 'localhost'
+                       },
+        admin_data => {
+                       email => 'fluffy@example.com',
+                       password2 => 'S00p3rs3Kr372',
+                       'password' => 'S00p3rs3Kr372',
+                       'email2' => 'fluffy@example.com',
+                       'username' => 'Ashley'
+                      },
+        postgres_form => {
+                          'db_name' => 'yesh_test',
+                          'password' => undef,
+                          'user' => undef,
+                          'port' => undef,
+                          'dbd' => 'Pg',
+                          'host' => 'localhost'
+                         },
+         mysql_form => {
+                       'db_name' => 'yesh_test',
+                       'password' => undef,
+                       'user' => undef,
+                       'port' => undef,
+                       'dbd' => 'mysql',
+                       'host' => 'localhost'
+                      }
+  };
+}
+
 no Moose;
 
 1;

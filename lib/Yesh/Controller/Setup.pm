@@ -3,6 +3,7 @@ use strict;
 use warnings;
 use parent "Catalyst::Controller::HTML::FormFu";
 use YAML qw( LoadFile DumpFile );
+use Data::UUID;
 use Carp;
 
 # There should be a page block to make sure the user/admin has read
@@ -64,7 +65,8 @@ sub create_administrator : Private {
 sub _deploy_sqlite : Private {
     my ( $self, $c ) = @_;
     # Ensure uniqueness?
-    my $db_name = "dummy.sqlite";
+    my $name = lc Data::UUID->new->create_str;
+    my $db_name = "etc/$name";
     my $db = $c->path_to($db_name);
     $db->remove and $c->log->info("Removed sqlite db: $db");
 
@@ -89,7 +91,8 @@ sub _deploy_sqlite : Private {
 
 sub _write_local_yaml : Private {
     my ( $self, $c, $data ) = @_;
-    my $config_file = $c->path_to("conf/yesh_local.yml");
+    my $suffix = $ENV{YESH_CONFIG_LOCAL_SUFFIX} || "local";
+    my $config_file = $c->path_to("conf/yesh_$suffix.yml");
     my $config = LoadFile("$config_file") if -f $config_file;
 #    require Hash::Merge;
 #    $config = Hash::Merge::merge($config, $data);
@@ -133,6 +136,9 @@ sub admin : Local Args(0) {
 
 sub done : Local Args(0) {
     my ( $self, $c ) = @_;
+    die "RC_404"
+        unless $c->config->{configured};
+    # 321 this should be a blurb to the homepage instead?
 }
 
 sub _load_baseline {
