@@ -73,7 +73,7 @@ Are you feeling lucky? This will deploy your site database to <a href"http://www
 
 <p>If you know <a href="http://www.catalystframework.org/">Catalyst</a>, are a competent programmer, or someone with some spare hours to spend learning some really great stuff, you can edit the following <acronym title="YAML Ain’t Markup Language">YAML</acronym> configuration file directly.</p>
 
-<blockquote><code>[% yesh.path_to("yesh_local.yml") %]</code></blockquote>
+<blockquote><code>[% yesh.path_to("conf/yesh_local.yml") %]</code></blockquote>
 
 <p>That configuration file is specific to <i>your</i> changes and will override things in the main configuration file—<code>[% yesh.path_to("yesh.yml") %]</code>—which you should never touch.
 </p>

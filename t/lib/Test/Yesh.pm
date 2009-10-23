@@ -9,30 +9,26 @@ has "mech" =>
     isa => "Test::WWW::Mechanize::Catalyst",
     is => "ro",
     required => 1,
-    writer => "_mech",
+    # writer => "_mech",
     lazy => 1,
     default => sub { Test::WWW::Mechanize::Catalyst->new(catalyst_app => "Yesh") },
     ;
 
-BEGIN {
+has "c" =>
+    isa => "Yesh",
+    is => "ro",
+    writer => "_c",
+    ;
+
+sub startup : Test(startup) {
+    my $self = shift;
     $ENV{YESH_CONFIG_LOCAL_SUFFIX} ||= "test";
-
     eval q{ use Catalyst::Test "Yesh"; 1; }
-        or BAIL_OUT($@||"...don't know why...");
-
-    # Dummy, it's already in here *Yesh::Test::ctx_request = sub { ctx_request(@_) };
-
+        or BAIL_OUT($@ || "...don't know why...");
     my ( $res, $c ) = ctx_request("/");
     $c->config->{is_test_config}
         or BAIL_OUT("This does not appear to be the test configuration!");
-}
-
-sub _setup : Test(startup) {
-    my $self = shift;
-
-    # Maybe do the deployment here...? Why would we want to test
-    # set-up every time? Maybe then this could just be run with the
-    # suffix to set which DB to deploy too?
+    $self->_c($c);
     1;
 }
 

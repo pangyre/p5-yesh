@@ -2,44 +2,55 @@ package Test::Yesh::Controller::Setup;
 use parent qw(Test::Yesh);
 use Test::More;
 
-sub create : Tests {
+# setenv TEST_VERBOSE 1 ; k ; perl -Ilib -It/lib -MTest::Yesh::Controller::Setup -le "Test::Yesh::Controller::Setup->runtests"
+
+sub startup : Test(startup) {
+    $ENV{YESH_CONFIG_LOCAL_SUFFIX} = "test_sqlite_setup";
+    my $self = shift;
+    $self->SUPER::startup;    
+}
+
+sub start_clean : Test(setup) {
+    my $self = shift;
+
+}
+
+sub sqlite_setup : Tests {
+    my $self = shift;
+    $mech = $self->mech;
+    $mech->get_ok("/"); 
+    like( $mech->uri, qr{/setup\z},
+          "/ redirects to /setup" );
+    my $one = $mech->content;
+    $mech->get_ok("/user");
+    like( $mech->uri, qr{/setup\z},
+          "/user redirects to /setup" );
+    my $two = $mech->content;
+    is( $one, $two,
+        "Setup landing content is the same from /user and /");
+    $mech->get_ok("/man/perldoc");
+    $mech->content_contains("Documentation",
+                            "Docs are visible before setup");
+
+    $mech->get_ok("/setup");
+    $mech->click_ok("auto",
+                    "Clicking simplistic set up");
+}
+
+sub mysql_setup : Tests {
     my $self = shift;
     local $TODO = "Currently unimplemented";
 }
 
-# Custom startup method here to reset test DB, fresh mech, etc.
+sub postgres_setup : Tests {
+    my $self = shift;
+    local $TODO = "Currently unimplemented";
+}
 
 1;
 
 __END__
 
-sub auto : Private {
-    my ( $self, $c ) = @_;
-
-    if ( $c->config->{configured}
-         and
-         $c->user_exists
-         and
-         $c->check_user_roles("admin")
-        )
-    {
-        #$c->stash( blurb ...
-        $c->stash( warning => 1 );
-    }
-    elsif ( $c->config->{configured}
-            and
-            eval { $c->model("DBIC::User")->search->count == 0 } )
-    {
-        my $config = $c->path_to("conf/yesh_local.yml");
-        $config->remove or
-            die "Your site has a serious problem. Try deleting $config and then visiting /setup again";
-    }
-    elsif ( $c->config->{configured} )
-    {
-        die "RC_403: Site is configured already.\n";
-    }
-    return 1;
-}
 
 sub index : Path Args(0) FormConfig {
     my ( $self, $c ) = @_;

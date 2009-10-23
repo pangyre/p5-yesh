@@ -2,7 +2,6 @@
 # perl -MYesh::Schema -le '$s = Yesh::Schema->connect("dbi:SQLite:./etc/testyesh.sqlite");'
 configured: ~
 is_test_config: 1
-sqlite_db: __path_to(tmp/testyesh.sqlite)__
 Model::DBIC:
   connect_info:
     - dbi:SQLite:__TMP_FILE__
