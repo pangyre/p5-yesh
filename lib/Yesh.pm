@@ -30,6 +30,7 @@ __PACKAGE__->config
           substitutions => {
               TMP_FILE => sub {
                   [ File::Temp::tempfile( TMPDIR => 1,
+                                          EXLOCK => 0,
                                           SUFFIX => '.sqlite') ]->[1];
               },
           },

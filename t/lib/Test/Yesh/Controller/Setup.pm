@@ -1,7 +1,9 @@
 package Test::Yesh::Controller::Setup;
+use warnings;
+use strict;
 use parent qw(Test::Yesh);
 use Test::More;
-
+use utf8;
 # setenv TEST_VERBOSE 1 ; k ; perl -Ilib -It/lib -MTest::Yesh::Controller::Setup -le "Test::Yesh::Controller::Setup->runtests"
 
 sub startup : Test(startup) {
@@ -17,7 +19,7 @@ sub start_clean : Test(setup) {
 
 sub sqlite_setup : Tests {
     my $self = shift;
-    $mech = $self->mech;
+    my $mech = $self->mech;
     $mech->get_ok("/"); 
     like( $mech->uri, qr{/setup\z},
           "/ redirects to /setup" );
@@ -35,6 +37,22 @@ sub sqlite_setup : Tests {
     $mech->get_ok("/setup");
     $mech->click_ok("auto",
                     "Clicking simplistic set up");
+
+    $mech->content_contains("Your database is set up",
+                            "DB setup confirmed");
+    $mech->content_contains("Create your account",
+                            "Looks like admin account creation form is there");
+
+#    use YAML; die YAML::Dump $self->c->config->{admin_data};
+
+    $mech->submit_form_ok({
+                           fields => $self->c->config->{admin_data}
+                          },
+                          "Submitting registration form");
+
+    $mech->content_contains("You’re done!",
+                            "Success")
+        or diag($mech->content);
 }
 
 sub mysql_setup : Tests {
