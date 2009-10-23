@@ -1,24 +1,66 @@
 package Test::Yesh::Controller::Setup;
-use warnings;
-use strict;
 use parent qw(Test::Yesh);
+use Moose;
 use Test::More;
+use File::Temp qw( tempfile );
+use FindBin;
 use utf8;
+use Symbol qw( delete_package );
+
 # setenv TEST_VERBOSE 1 ; k ; perl -Ilib -It/lib -MTest::Yesh::Controller::Setup -le "Test::Yesh::Controller::Setup->runtests"
 
-sub startup : Test(startup) {
-    $ENV{YESH_CONFIG_LOCAL_SUFFIX} = "setup";
-    my $self = shift;
-    $self->SUPER::startup;
+has "local_config" =>
+    is => "ro",
+    writer => "_local_config",
+#    isa => "Path::Class::File",
+    isa => "Str",
+    ;
+
+
+sub shutdown : Test(shutdown) {
+    unlink +shift->local_config;
 }
 
 sub setup : Test(setup) {
     my $self = shift;
-    $self->_mech( Test::WWW::Mechanize::Catalyst->new(catalyst_app => "Yesh") );
-    $self->mech->get_ok("/setup");
+    undef $self->{mech};
+    my $filename = [ tempfile("yesh_setup_XXXXXXXX",
+                              DIR => "$FindBin::Bin/../conf",
+                              SUFFIX => ".yml") ]->[1];
+
+    ( $ENV{YESH_CONFIG_LOCAL_SUFFIX} ) = $filename =~ /yesh_setup_([^.]+)/;
+
+    diag("Config file: " . $filename);
+    $self->_local_config($filename);
+
+#    for my $y ( grep /\A(Yesh\b.*)/, keys %INC )
+    for my $path ( keys %INC )
+    {
+        next unless $path =~ /\AYesh/;
+        my $module = $path;
+        $module =~ s,/,::,g;
+        $module =~ s,\.pm,,;
+#        $module .= ".pm";
+        diag($module);
+
+#        delete_package($module);  # remove the Module::To::Reload namespace.
+        delete $INC{$path} or die;       # delete the filename from the "loaded" list.
+        # eval "use $module" or die $@;
+    }
+#    BAIL_OUT();
+#    delete_package("Yesh");
+#    delete $INC{"Yesh.pm"};
+
+#    delete_package("Test::WWW::Mechanize::Catalyst::Test");
+    delete $INC{"Test/WWW/Mechanize/Catalyst/Test.pm"};
+    eval { require Test::WWW::Mechanize::Catalyst::Test };
+    my $mech = Test::WWW::Mechanize::Catalyst->new(catalyst_app => "Yesh")
+        or die "Couldn't create a Yesh Test::WWW::Mechanize::Catalyst object";
+    $self->_mech( $mech );
+    $self->mech->get("/setup");
 }
 
-sub landing_issues : Tests {
+sub _landing_issues : Tests {
     my $self = shift;
     my $mech = $self->mech;
     $mech->get_ok("/");
@@ -52,7 +94,7 @@ sub auto_setup : Tests {
                             "Looks like admin account creation form is there");
 
     $mech->submit_form_ok({
-                           fields => $self->c->config->{admin_data}
+                           fields => $self->config->{admin_data}
                           },
                           "Submitting registration form");
 
@@ -70,14 +112,17 @@ sub sqlite_setup : Test(1) {
 sub mysql_setup : Test(9) {
     my $self = shift;
     local $TODO = "Currently unimplemented";
+    return;
     eval { require DBD::mysql; 1; }
         or return "MySQL is not available";
     my $mech = $self->mech;
 
+    #use YAML; die YAML::Dump($self->config->{mysql_form});
+
     $mech->submit_form_ok({
-                           fields => $self->c->config->{postgres_form}
+                           fields => $self->config->{mysql_form}
                           },
-                          "Submitting normal-esque form with PostgreSQL DSN");
+                          "Submitting normal-esque form with MySQL DSN");
 
     $mech->content_contains("Your database is set up",
                             "DB setup confirmed");
@@ -85,8 +130,9 @@ sub mysql_setup : Test(9) {
     $mech->content_contains("Create your account",
                             "Looks like admin account creation form is there");
 
+    # use YAML;    die YAML::Dump($self->config->{admin_data});
     $mech->submit_form_ok({
-                           fields => $self->c->config->{admin_data}
+                           fields => $self->config->{admin_data}
                           },
                           "Submitting registration form");
 
@@ -253,3 +299,17 @@ my $dsn = join(":",
 There is no standard for the text following the driver name. Each driver is free to use whatever syntax it wants. The only requirement the DBI makes is that all the information is supplied in a single string. You must consult the documentation for the drivers you are using for a description of the syntax they require.
 
 
+
+sub startup : Test(startup) {
+    my $self = shift;
+    my $filename = [ tempfile("yesh_setup_XXXXXXXX",
+                              DIR => "$FindBin::Bin/../conf",
+                              SUFFIX => ".yml") ]->[1];
+
+    ( $ENV{YESH_CONFIG_LOCAL_SUFFIX} ) = $filename =~ /yesh_setup_([^.]+)/;
+
+    diag($filename);
+    $self->SUPER::startup;
+    # my $local_config = $self->c->path_to($filename);
+    $self->_local_config($filename);
+}

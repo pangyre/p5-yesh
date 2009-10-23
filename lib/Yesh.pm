@@ -57,6 +57,13 @@ sub version : method {
     $VERSION;
 }
 
+sub local_config_file {
+    my $c = shift;
+    my $suffix = $ENV{YESH_CONFIG_LOCAL_SUFFIX} || "local";
+    my $dir = $c->config->{"Plugin::ConfigLoader"}->{file};
+    Path::Class::File->new($dir, "yesh_$suffix.yml");
+}
+
 has "repository" => 
     is => "ro",
     isa => "Str",

@@ -23,12 +23,10 @@ has "c" =>
 sub startup : Test(startup) {
     my $self = shift;
     $ENV{YESH_CONFIG_LOCAL_SUFFIX} ||= "test";
-    eval q{ use Catalyst::Test "Yesh"; 1; }
-        or $self->BAIL_OUT($@ || "...don't know why...");
-    my ( $res, $c ) = ctx_request("/");
-    $c->config->{is_test_config}
-        or $self->BAIL_OUT("This does not appear to be the test configuration!");
-    $self->_c($c);
+#    eval q{ use Catalyst::Test "Yesh"; 1; }
+#        or BAIL_OUT($@ || "...don't know why...");
+#    my ( $res, $c ) = ctx_request("/");
+#    $self->_c($c);
     1;
 }
 
@@ -39,37 +37,38 @@ sub startup : Test(startup) {
 
 sub config {
     {
+        local_suffix => "setup",
         is_test_config => 1,
         sqlite_form => {
-                        'db_name' => 'yesh_test',
-                        'password' => undef,
-                        'user' => undef,
-                        'port' => undef,
-                        'dbd' => 'SQLite',
-                        'host' => 'localhost'
+                        db_name => 'yesh_test',
+                        password => undef,
+                        user => undef,
+                        port => undef,
+                        dbd => 'SQLite',
+                        host => 'localhost'
                        },
         admin_data => {
                        email => 'fluffy@example.com',
                        password2 => 'S00p3rs3Kr372',
-                       'password' => 'S00p3rs3Kr372',
-                       'email2' => 'fluffy@example.com',
-                       'username' => 'Ashley'
+                       password => 'S00p3rs3Kr372',
+                       email2 => 'fluffy@example.com',
+                       username => 'Ashley'
                       },
         postgres_form => {
-                          'db_name' => 'yesh_test',
-                          'password' => undef,
-                          'user' => undef,
-                          'port' => undef,
-                          'dbd' => 'Pg',
-                          'host' => 'localhost'
+                          db_name => 'yesh_test',
+                          password => undef,
+                          user => undef,
+                          port => undef,
+                          dbd => 'Pg',
+                          host => 'localhost'
                          },
          mysql_form => {
-                       'db_name' => 'yesh_test',
-                       'password' => undef,
-                       'user' => undef,
-                       'port' => undef,
-                       'dbd' => 'mysql',
-                       'host' => 'localhost'
+                       db_name => 'yesh_test',
+                       password => undef,
+                       user => undef,
+                       port => undef,
+                       dbd => 'mysql',
+                       host => 'localhost'
                       }
   };
 }
