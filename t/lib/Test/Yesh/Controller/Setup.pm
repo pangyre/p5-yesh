@@ -9,18 +9,19 @@ use utf8;
 sub startup : Test(startup) {
     $ENV{YESH_CONFIG_LOCAL_SUFFIX} = "test_sqlite_setup";
     my $self = shift;
-    $self->SUPER::startup;    
+    $self->SUPER::startup;
 }
 
-sub start_clean : Test(setup) {
+sub setup : Test(setup) {
     my $self = shift;
-
+    $self->_mech( Test::WWW::Mechanize::Catalyst->new(catalyst_app => "Yesh") );
+    $self->mech->get_ok("/setup");
 }
 
-sub sqlite_setup : Tests {
+sub landing_issues : Tests {
     my $self = shift;
     my $mech = $self->mech;
-    $mech->get_ok("/"); 
+    $mech->get_ok("/");
     like( $mech->uri, qr{/setup\z},
           "/ redirects to /setup" );
     my $one = $mech->content;
@@ -33,8 +34,11 @@ sub sqlite_setup : Tests {
     $mech->get_ok("/man/perldoc");
     $mech->content_contains("Documentation",
                             "Docs are visible before setup");
+}
 
-    $mech->get_ok("/setup");
+sub sqlite_setup : Tests {
+    my $self = shift;
+    my $mech = $self->mech;
     $mech->click_ok("auto",
                     "Clicking simplistic set up");
 
@@ -42,8 +46,6 @@ sub sqlite_setup : Tests {
                             "DB setup confirmed");
     $mech->content_contains("Create your account",
                             "Looks like admin account creation form is there");
-
-#    use YAML; die YAML::Dump $self->c->config->{admin_data};
 
     $mech->submit_form_ok({
                            fields => $self->c->config->{admin_data}
@@ -55,14 +57,23 @@ sub sqlite_setup : Tests {
         or diag($mech->content);
 }
 
-sub mysql_setup : Tests {
+sub mysql_setup : Test(1) {
     my $self = shift;
     local $TODO = "Currently unimplemented";
+    eval { require DBD::mysql; 1; }
+        or return "MySQL is not available";
+    my $mech = $self->mech;
+#    local $TODO = "Currently unimplemented";
+    ok(0);
 }
 
-sub postgres_setup : Tests {
+sub postgres_setup : Test(1) {
     my $self = shift;
     local $TODO = "Currently unimplemented";
+    eval { require DBD::Pg; 1; }
+        or return "PostgreSQL is not available";
+    my $mech = $self->mech;
+    ok(0);
 }
 
 1;
@@ -214,14 +225,3 @@ my $dsn = join(":",
 There is no standard for the text following the driver name. Each driver is free to use whatever syntax it wants. The only requirement the DBI makes is that all the information is supplied in a single string. You must consult the documentation for the drivers you are using for a description of the syntax they require.
 
 
-    if ( 
-         and not $c->check_user_roles("admin") )
-    {
-        die "Already configured, cowboy";
-    }
-    
-
-
-1;
-
-__END__
