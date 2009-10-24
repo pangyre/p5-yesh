@@ -28,10 +28,12 @@ __PACKAGE__->config
       "Plugin::ConfigLoader" => {
           file => __PACKAGE__->path_to("conf"),
           substitutions => {
-              TMP_FILE => sub {
+              tmp_file => sub {
+                  my $suffix = shift || ".tmp";
                   [ File::Temp::tempfile( TMPDIR => 1,
                                           EXLOCK => 0,
-                                          SUFFIX => '.sqlite') ]->[1];
+                                          UNLINK => 1,
+                                          SUFFIX => $suffix ) ]->[1];
               },
           },
       },

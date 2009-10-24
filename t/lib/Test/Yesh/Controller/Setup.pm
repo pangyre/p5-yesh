@@ -17,8 +17,10 @@ has "local_config" =>
     ;
 
 
-sub shutdown : Test(shutdown) {
-    unlink +shift->local_config;
+sub teardown : Test(teardown) {
+    my $self = shift;
+    unlink $self->local_config
+        or die "Couldn't unlink ", $self->local_config, ": $!";
 }
 
 sub setup : Test(setup) {
@@ -26,6 +28,7 @@ sub setup : Test(setup) {
     undef $self->{mech};
     my $filename = [ tempfile("yesh_setup_XXXXXXXX",
                               DIR => "$FindBin::Bin/../conf",
+                              UNLINK => 1,
                               SUFFIX => ".yml") ]->[1];
 
     ( $ENV{YESH_CONFIG_LOCAL_SUFFIX} ) = $filename =~ /yesh_setup_([^.]+)/;
@@ -45,11 +48,16 @@ sub setup : Test(setup) {
 
 #        delete_package($module);  # remove the Module::To::Reload namespace.
         delete $INC{$path} or die;       # delete the filename from the "loaded" list.
-        # eval "use $module" or die $@;
+#        eval "use $module" or die $@;
     }
 #    BAIL_OUT();
 #    delete_package("Yesh");
 #    delete $INC{"Yesh.pm"};
+#    delete_package("Yesh");
+#    delete $INC{"Catalyst/Runtime.pm"};
+#    delete_package("Catalyst::Runtime");
+    delete $INC{"Catalyst.pm"};
+#    delete_package("Catalyst");
 
 #    delete_package("Test::WWW::Mechanize::Catalyst::Test");
     delete $INC{"Test/WWW/Mechanize/Catalyst/Test.pm"};
@@ -105,14 +113,37 @@ sub auto_setup : Tests {
 
 sub sqlite_setup : Test(1) {
     my $self = shift;
-    local $TODO = "Currently unimplemented";
-    ok(0);
+    my $mech = $self->mech;
+
+    # local $TODO = "Currently unimplemented";
+    #use YAML; die YAML::Dump($self->config->{mysql_form});
+
+    $mech->submit_form_ok({
+                           fields => $self->config->{sqlite_form}
+                          },
+                          "Submitting normal-esque form with SQLite DSN");
+
+    $mech->content_contains("Your database is set up",
+                            "DB setup confirmed");
+
+    $mech->content_contains("Create your account",
+                            "Looks like admin account creation form is there");
+
+    # use YAML;    die YAML::Dump($self->config->{admin_data});
+    $mech->submit_form_ok({
+                           fields => $self->config->{admin_data}
+                          },
+                          "Submitting registration form");
+
+    $mech->content_contains("You’re done!",
+                            "Success")
+        or diag($mech->content);
+
 }
 
 sub mysql_setup : Test(9) {
     my $self = shift;
     local $TODO = "Currently unimplemented";
-    return;
     eval { require DBD::mysql; 1; }
         or return "MySQL is not available";
     my $mech = $self->mech;

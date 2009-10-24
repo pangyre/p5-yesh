@@ -5,6 +5,12 @@ jQuery(function($){
     $(".option1").click(function(){ $("#option1").slideToggle("slow"); });
     $(".option2").click(function(){ $("#option2").slideToggle("slow"); });
     $(".option3").click(function(){ $("#option3").slideToggle("slow"); });
+    var options = { '#option1':true,'#option2':true,'#option3':true };
+    if ( options[window.location.hash] )
+    {
+        $(window.location.hash).show().siblings().hide();
+    }
+
 });
 //]]> </script>
 

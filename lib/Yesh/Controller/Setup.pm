@@ -32,9 +32,16 @@ sub auto : Private {
         $config->remove or
             die "Your site has a serious problem. Try deleting $config and then visiting /setup again";
     }
+    elsif ( $c->config->{configured}
+            and not -e $c->local_config_file
+        )
+    {
+        # Warn? No-op? $c->config
+    }
     elsif ( $c->config->{configured} )
     {
         die "RC_403: Site is configured already.\n";
+        $c->go("Error",[403]);
     }
     return 1;
 }
@@ -46,16 +53,26 @@ sub index : Path Args(0) FormConfig {
                user => scalar getpwuid($> || $<),
                can_auto => $can_auto,
              );
+
+    my $form = $c->stash->{form};
+    $form->action( $c->request->uri->rel( $c->request->base ) );
+
     if ( $c->request->param("auto") )
     {
         $c->delete_session("Deploying DB");
         $c->config->{configured} = undef;
         $c->detach("_deploy_sqlite");
     }
+    elsif ( $c->request->param("normal")
+            and $form->submitted_and_valid )
+    {
+        $self->deploy_db;
+    }
 }
 
 sub deploy_db : Private {
     my ( $self, $c ) = @_;
+    die "LDJKFL:SDKFJ:LDSKFJ";
 }
 
 sub create_administrator : Private {
@@ -66,7 +83,7 @@ sub _deploy_sqlite : Private {
     my ( $self, $c ) = @_;
     # Ensure uniqueness?
     my $name = lc Data::UUID->new->create_str;
-    my $db_name = "etc/$name";
+    my $db_name = "etc/$name.sqlite";
     my $db = $c->path_to($db_name);
     $db->remove and $c->log->info("Removed sqlite db: $db");
 

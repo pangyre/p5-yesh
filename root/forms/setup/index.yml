@@ -26,6 +26,9 @@ elements:
     label: Port on host
     constraints: 
       - Integer
+  - type: Hidden
+    default: normal
+    name: normal
   - type: Select
     label: Database type
     name: dbd

@@ -5,4 +5,6 @@ use FindBin;
 use lib "$FindBin::Bin/lib";
 use Test::Yesh::Controller::Setup;
 
+# Test::Yesh::Controller::Setup->runtests;
+
 Test::Yesh::Controller::Setup->runtests;
