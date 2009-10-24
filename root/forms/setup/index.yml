@@ -14,7 +14,12 @@ elements:
     name: user
     label: Database user
     constraints: 
-      - Required
+      - type: Required
+        message: User is required for DBs other than SQLite
+        when:
+          field: dbd
+          values: [ 'SQLite' ]
+          not: 1
   - type: Text
     name: password
     label: Password
@@ -31,6 +36,7 @@ elements:
     name: normal
   - type: Select
     label: Database type
+    constraint: Required
     name: dbd
     options:
       - [ '', 'Select your DB engine' ]
