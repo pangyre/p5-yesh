@@ -50,6 +50,7 @@ form div {
 
 form div.select label,
 form div.textarea label,
+form div.password label,
 form div.text label {
  display: block;
  padding: 0;

@@ -1,7 +1,14 @@
 ---
+id: setup
+auto_id: %f_%n
 auto_fieldset:
   legend: Configure the database
 elements:
+  - type: Block
+    tag: div
+    attributes:
+      id: dns_preview
+      style: "float:right;width:auto;"
   - type: Text
     name: db_name
     label: Database name
@@ -20,7 +27,7 @@ elements:
           field: dbd
           values: [ 'SQLite' ]
           not: 1
-  - type: Text
+  - type: Password
     name: password
     label: Password
   - type: Text
@@ -74,4 +81,11 @@ elements:
               $("input[name='mysql_read_default_file']").parent().fadeIn() :
               $("input[name='mysql_read_default_file']").parent().fadeOut();
            });
+        $("form#setup").bind("keypress",function(){
+            var dns = new Array();
+            dns.push("dbi");
+            if ( $("*[name='dbd']").val() ) dns.push($("*[name='dbd']").val());
+            if ( $("input[name='db_name']").val() ) dns.push($("input[name='db_name']").val());
+           // ROUND OUT LATER $("#dns_preview").text(dns.join(":"));
+        });
       //]]>

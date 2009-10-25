@@ -35,6 +35,13 @@ Controller::HTML::FormFu:
   default_action_use_path: 1
   model_stash:
     schema: DBIC
+  constructor:
+    default_args:
+      elements:
+        Radiogroup:
+          auto_id: $f_%n_%c
+        Checkboxgroup:
+          auto_id: %f_%n_%c
 
 
 # MODELS -------------------------------------------------

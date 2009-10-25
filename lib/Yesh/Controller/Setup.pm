@@ -66,18 +66,18 @@ sub index : Path Args(0) FormConfig {
     elsif ( $c->request->param("normal")
             and $form->submitted_and_valid )
     {
-        $self->deploy_db;
+        $c->forward("deploy_db");
     }
 }
 
 sub deploy_db : Private {
     my ( $self, $c ) = @_;
-321
+    $c->detach("_deploy_mysql") if $c->request->body_params->{dbd} eq "mysql";
 }
 
-sub create_administrator : Private {
-    my ( $self, $c ) = @_;
-}
+#sub create_administrator : Private {
+#    my ( $self, $c ) = @_;
+#}
 
 sub _deploy_sqlite : Private {
     my ( $self, $c ) = @_;
@@ -111,31 +111,46 @@ sub _deploy_mysql : Private {
     # Check for presence of db?
     my $params = $c->request->body_params;
 
-    # Formfu screens this. If it got through it's a real error.
+    # Formfu screens this. It's the absolute minimum. If it got
+    # through it's a real error.
     $c->go("Error",[500]) # blurb dictionary for errors?
         unless $params->{user} and $params->{db_name};
 
-=pod
+    my $dsn = join(":",
+                   "dbi",
+                   $params->{dbd},
+                   join("=", "database", $params->{db_name}) );
 
-    my $dsn_config = "dbi:mysql:";
-    my $dsn_real = "dbi:SQLite:$db";
+    $dsn .= join("=",
+                 ";host",
+                 $params->{host}) if $params->{host};
+    $dsn .= join("=",
+                 ";port",
+                 $params->{port}) if $params->{port};
+    $dsn .= join("=",
+                 ";mysql_read_default_file",
+                 $params->{mysql_read_default_file}) if $params->{mysql_read_default_file};
+
+    $c->log->info("DNS: $dsn") if $c->debug;
+
     my $schema = $c->model("DBIC")
         ->schema
-        ->connect($dsn_real);
+        ->connect($dsn, $params->{user}, $params->{password});
 
     $c->model("DBIC")->schema($schema);
 
     eval { $schema->deploy() };
+
     die "Caught error in schema deployment: $@" if $@;
     # Update config file here.
     my $model_config = $c->config->{"Model::DBIC"};
-    $model_config->{connect_info}->[0] = $dsn_config;
-    $model_config->{connect_info}->[3]->{unicode} = 1;
+    $model_config->{connect_info}->[0] = $dsn;
+    $model_config->{connect_info}->[1] = $params->{user};
+    $model_config->{connect_info}->[2] = $params->{password};
+    $model_config->{connect_info}->[3]->{mysql_enable_utf8} = 1;
     $self->_load_baseline($c, $schema);
     $self->_write_local_yaml($c, { "Model::DBIC" => $model_config });
     $c->response->redirect($c->uri_for_action("setup/admin"));
-
-=cut
 
 }
 
