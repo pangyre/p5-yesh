@@ -129,7 +129,7 @@ This is "wish list" for now. It's a strong wish though. :) If you are interested
 
 =head1 HISTORY
 
-A prototype of this code has been in production since 2006 at L<http://sedition.com> and serves. The site contains mature content (no pornography but probably NSFW).
+A prototype of this code has been in production since 2006 at L<http://sedition.com>. The site contains mature content (no pornography but probably NSFW).
 
 =head1 TO DO
 

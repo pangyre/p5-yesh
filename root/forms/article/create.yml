@@ -60,11 +60,12 @@ element:
       class: date
     label: Go Live Date
     auto_inflate: Yes
-  - type: Text
+  - type: DateTime
     name: takedown
     label: Take Down Date
     add_attributes:
       class: date
+    auto_inflate: Yes
   - type: Submit
     name: x
     value: Update Article

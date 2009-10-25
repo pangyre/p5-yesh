@@ -65,10 +65,12 @@ sub create :Local Args(0) FormConfig {
     $form->constraints_from_dbic($c->model("DBIC::Article"));
     $form->get_field({ name => "golive" })->default(DateTime->now);
     $form->get_field({ name => "takedown" })
-        ->default(DateTime->new( year => 9999, month => 12, day => 31, hour => 0, minute => 0, second => 0 ));
+        ->default(DateTime->new( year => 3000, month => 1, day => 1, hour => 0, minute => 0, second => 0 ));
     $form->render;
 
-    if ( $form->submitted_and_valid ) {
+    if ( $form->submitted_and_valid )
+    {
+        # use YAML;  die Dump($form);
         $form->add_valid(user => $c->user->id);
         my $article = $form->model->create({resultset => 'Article'});
         $c->flash_blurb(1);

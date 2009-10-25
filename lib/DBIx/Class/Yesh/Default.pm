@@ -20,7 +20,7 @@ sub insert {
         if $self->has_column("created") and not $self->created;
     $self->golive($now)
         if $self->has_column("golive") and not $self->golive;
-    $self->takedown("9999-01-01 00:00:01") # "Never"
+    $self->takedown("3000-01-01 00:00:00") # "Never"
         if $self->has_column("takedown") and not $self->takedown;
 
     $self->updated($now)

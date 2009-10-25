@@ -27,8 +27,6 @@ Controller::User:
   secure_edit: 1
   reset_token_lives_for: 1 hour
   secure_registration: 1
-  model_stash:
-    schema: DBIC
   new_users_get_author_role: 1
 
 Controller::HTML::FormFu:

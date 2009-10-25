@@ -31,7 +31,7 @@ div.article div.meta {
 /* .license | .author are beneath */
 
 form div textarea {
-  width: 85%;
+  width: 78%;
 }
 form div textarea[name="body"] {
   height: 21em;
