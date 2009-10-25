@@ -137,13 +137,13 @@ A prototype of this code has been in production since 2006 at L<http://sedition.
 
 =item Tests.
 
-=item MySQL + Pg date formatter
-
-Date formatter needs to come from the DBD somehow. Y::S::RS::Article->_formatter knows the right thing. Getting it to FormFu is the trick.
-
 =item MySQL setup + mysql_read_default_file
 
 MySQL config creates a local mysql_read_default_file instead of putting the user/pass etc into the config. Chmods it to 400 or something.
+
+=item Admine should have DB interface?
+
+=item Setup under SSL if desired
 
 =item Flash blurbs will not stack up. Perhaps time to finally write the cache-key/expires/views version.
 
