@@ -2,9 +2,12 @@ package Yesh::Controller::Setup;
 use strict;
 use warnings;
 use parent "Catalyst::Controller::HTML::FormFu";
-use YAML qw( LoadFile DumpFile );
-use Data::UUID;
+use YAML::Syck qw( LoadFile DumpFile );
+$YAML::Syck::ImplicitUnicode = 1;
+$YAML::Syck::ImplicitTyping = 1;
+
 use DBI;
+use Data::UUID;
 use Carp;
 
 # There should be a page block to make sure the user/admin has read
@@ -147,7 +150,11 @@ sub _deploy_mysql : Private {
 
     my $schema = $c->model("DBIC")
         ->schema
-        ->connect($dsn, $params->{user}, $params->{password});
+        ->connect($dsn, $params->{user}, $params->{password},
+                  { RaiseError => 1,
+                    AutoCommit => 1,
+                    mysql_enable_utf8 => 1,
+                  });
 
     $c->model("DBIC")->schema($schema);
 
@@ -220,6 +227,7 @@ sub done : Local Args(0) {
 sub _load_baseline {
     my ( $self, $c ) = @_;
     my $baseline_file = $c->path_to("etc/baseline.yml");
+    # The utf8 is messed up in this pipeline.
     my $baseline = LoadFile("$baseline_file")
         or croak "Baseline data file '$baseline_file' is missing or broken";
     for my $result_class ( keys %{$baseline} )
@@ -232,8 +240,6 @@ sub _load_baseline {
     }
     1;
 }
-
-# sub end :ActionClass("RenderView") {}
 
 1;
 

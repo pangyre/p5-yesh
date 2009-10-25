@@ -40,7 +40,7 @@ requires "DBIx::Class::EncodedColumn";
 requires "Class::MOP" => 0.92;
 requires "Moose" => 0.89;
 requires "parent";
-requires "YAML";
+requires "YAML::Syck";
 requires "DBIx::Class" => 0.081;
 requires "DBIx::Class::EncodedColumn";
 requires "Crypt::Eksblowfish::Bcrypt";
