@@ -10,6 +10,12 @@ jQuery(function($){
     {
         $(window.location.hash).show().siblings().hide();
     }
+    $("form").each(function(){
+       var myForm = $(this);
+       $("input[type='text']", myForm).each(function(){
+          if ( $(this).val() ) $(this).parents(".box").show(); return true;
+       });
+    });
 
 });
 //]]> </script>
@@ -19,7 +25,7 @@ jQuery(function($){
 <h2 class="alert">Warning!</h2>
 
 <p>Your configuration is already set up. You can keep going since you
-are an admin user but <b class="alert">you are probably making a huge mistake</b>.
+are an admin user but <b class="alert">you are probably making a mistake</b>.
 </p>
 
 [%-IF ( tables = yesh.model("DBIC").storage.dbh.tables() ) %]

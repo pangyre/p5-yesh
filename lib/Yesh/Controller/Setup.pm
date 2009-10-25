@@ -72,7 +72,7 @@ sub index : Path Args(0) FormConfig {
 
 sub deploy_db : Private {
     my ( $self, $c ) = @_;
-    die "LDJKFL:SDKFJ:LDSKFJ";
+321
 }
 
 sub create_administrator : Private {
@@ -82,7 +82,7 @@ sub create_administrator : Private {
 sub _deploy_sqlite : Private {
     my ( $self, $c ) = @_;
     # Ensure uniqueness?
-    my $name = lc Data::UUID->new->create_str;
+    my $name = lc(Data::UUID->new->create_str);
     my $db_name = "etc/$name.sqlite";
     my $db = $c->path_to($db_name);
     $db->remove and $c->log->info("Removed sqlite db: $db");
@@ -104,6 +104,39 @@ sub _deploy_sqlite : Private {
     $self->_load_baseline($c, $schema);
     $self->_write_local_yaml($c, { "Model::DBIC" => $model_config });
     $c->response->redirect($c->uri_for_action("setup/admin"));
+}
+
+sub _deploy_mysql : Private {
+    my ( $self, $c ) = @_;
+    # Check for presence of db?
+    my $params = $c->request->body_params;
+
+    # Formfu screens this. If it got through it's a real error.
+    $c->go("Error",[500]) # blurb dictionary for errors?
+        unless $params->{user} and $params->{db_name};
+
+=pod
+
+    my $dsn_config = "dbi:mysql:";
+    my $dsn_real = "dbi:SQLite:$db";
+    my $schema = $c->model("DBIC")
+        ->schema
+        ->connect($dsn_real);
+
+    $c->model("DBIC")->schema($schema);
+
+    eval { $schema->deploy() };
+    die "Caught error in schema deployment: $@" if $@;
+    # Update config file here.
+    my $model_config = $c->config->{"Model::DBIC"};
+    $model_config->{connect_info}->[0] = $dsn_config;
+    $model_config->{connect_info}->[3]->{unicode} = 1;
+    $self->_load_baseline($c, $schema);
+    $self->_write_local_yaml($c, { "Model::DBIC" => $model_config });
+    $c->response->redirect($c->uri_for_action("setup/admin"));
+
+=cut
+
 }
 
 sub _write_local_yaml : Private {

@@ -25,12 +25,23 @@ elements:
     label: Password
   - type: Text
     name: host
-    label: Database Host
+    label: Database host
+    constraints:
+      - type: Regex
+        regex: '\A((?<=\A)|(?<=\w))\w(?:\w|\.\w)*((?=\w)|(?=\z))\z'
+        message: Hostname looks malformed
   - type: Text
     name: port
     label: Port on host
     constraints: 
       - Integer
+      - type: MaxRange
+        max: 65535
+      - type: MinRange
+        min: 1
+        message: Invalid port number
+    attributes:
+      style: "width:4em;"
   - type: Hidden
     default: normal
     name: normal
@@ -43,6 +54,24 @@ elements:
       - [ 'Pg', 'PostgreSQL' ]
       - [ 'mysql', 'MySQL' ]
       - [ 'SQLite', 'SQLite' ]
+  - type: Text
+    name: mysql_read_default_file
+    label: MySQL default file
+    attributes:
+      style: "width:50%;"
   - type: Submit
     name: x
     value: Set-up the configuration
+  - type: Block
+    tag: script
+    attributes:
+      type: "text/javascript"
+    content_xml: |
+      //<![CDATA[
+        $("*[name='dbd']").bind("change", function(){
+          // alert(("input[name='mysql_read_default_file']").parent().text());
+           $(this).val() == "mysql" ?
+              $("input[name='mysql_read_default_file']").parent().fadeIn() :
+              $("input[name='mysql_read_default_file']").parent().fadeOut();
+           });
+      //]]>
