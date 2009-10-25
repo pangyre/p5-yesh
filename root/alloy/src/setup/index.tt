@@ -91,6 +91,13 @@ Are you feeling lucky? This will deploy your site database to <a href"http://www
 </p>
 
 <p>
+There is <b>one key which is required</b> in the local
+configuration: <var>configured</var>. Without it, your site will not
+run normally. It can have any true value. E.g.,&ndash;
+<pre>    configured: I did this manually, updated YYYY-MM-DD</pre>
+</p>
+
+<p>
 You will need to know <acronym title="YAML Ain’t Markup Language"><a
 href="http://www.yaml.org/">YAML</a></acronym> and exactly how to set up a database connection for [%perldoc_link("DBI")%] via [%perldoc_link("DBIx::Class::Schema")%].
 </p>

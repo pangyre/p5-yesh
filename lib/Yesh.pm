@@ -129,19 +129,19 @@ This is "wish list" for now. It's a strong wish though. :) If you are interested
 
 =head1 HISTORY
 
-A prototype of this code has been in production since 2006.
+A prototype of this code has been in production since 2006 at L<http://sedition.com>. The site contains mature content (no pornography but probably NSFW).
 
 =head1 TO DO
 
 =over 4
 
-=item Password reset.
-
-=item View of draft articles.
-
 =item Tests.
 
-=item Flash blurbs will not stack up.
+=item MySQL setup + mysql_read_default_file
+
+MySQL config creates a local mysql_read_default_file instead of putting the user/pass etc into the config. Chmods it to 400 or something.
+
+=item Flash blurbs will not stack up. Perhaps time to finally write the cache-key/expires/views version.
 
 =item First occurrence of a link is bold.
 

@@ -4,6 +4,7 @@ use warnings;
 use parent "Catalyst::Controller::HTML::FormFu";
 use YAML qw( LoadFile DumpFile );
 use Data::UUID;
+use DBI;
 use Carp;
 
 # There should be a page block to make sure the user/admin has read
@@ -132,6 +133,17 @@ sub _deploy_mysql : Private {
                  $params->{mysql_read_default_file}) if $params->{mysql_read_default_file};
 
     $c->log->info("DNS: $dsn") if $c->debug;
+
+    my $drh = DBI->install_driver("mysql");
+    my $rc = $drh->func("createdb",
+                        $params->{db_name},
+                        $params->{host},
+                        $params->{user},
+                        $params->{password},
+                        "admin");
+
+    # THIS SHOULD MANAGE ITS OWN mysql_read_default_file I think...
+    # with the $< etc. Safer than leaving it bare in the config.
 
     my $schema = $c->model("DBIC")
         ->schema
