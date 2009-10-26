@@ -12,7 +12,10 @@ more information.</p>
 </div>
 [%-END %]
 
-[%-pod_index %]
+<div style="border:1px solid #cc9; width:33%; font-size:90%; margin: -2em 0 0 1ex; float:right; ">
+[% pod_index %]
+</div>
+
 [%-pod %]
 
 [%-IF warnings.size %]
