@@ -66,6 +66,9 @@ element:
     add_attributes:
       class: date
     auto_inflate: Yes
+    year:
+      less: 0
+      plus: 1000
   - type: Submit
     name: x
     value: Update Article

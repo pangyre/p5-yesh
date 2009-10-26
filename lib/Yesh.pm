@@ -41,7 +41,6 @@ __PACKAGE__->config
           # verify_address => 1, # loses stuff on flash/login.
           verify_user_agent => 1,
           expires => 60 * 60 * 24 * 30 * 12,
-          # storage => "/tmp/session.$>.fmp",
       },
       static => {
           include_path => [ __PACKAGE__->path_to('root', 'static') ],
