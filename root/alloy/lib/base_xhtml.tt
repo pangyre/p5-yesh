@@ -19,6 +19,7 @@
 <script type="text/javascript" src="[% yesh.uri_for("/js/jquery.min.js") %]"></script>
 <script type="text/javascript" src="[% yesh.uri_for("/js/jquery/jquery-ui.min.js") %]"></script>
 [%-END %]
+<script type="text/javascript" src="[% yesh.uri_for("/js/site/presentation.js") %]"></script>
 <script type="text/javascript">//<![CDATA[
 jQuery(function($) {
    $("#blurbs .alert").dialog({ dialogClass: "alert", title: "Notice" });

@@ -1,6 +1,12 @@
 =head1 YESH, THE MANUAL
 
-L<Yesh> is...
+=begin html
+
+<img src="../../img/yesh.png" style="float:left;border:0" alt="Yesh"/>
+
+=end html
+
+L<Yesh> is a multi-author web-based content management package written in Perl, with JavaScript for progressive enhancements, on the Catalyst framework.
 
 =head1 INSTALLATION
 
@@ -12,7 +18,7 @@ There are quite a few Perl packages that must be installed. If everything is wor
 
 =over 4
 
-=item lbxml2
+=item libxml2
 
 L<XML::LibXML>. [Download link] 321
 
@@ -24,14 +30,14 @@ L<XML::LibXML>. [Download link] 321
 
 =item # Download
 
-Either from CPAN where L<Yesh> may not be (yet) or from its github repo: L<http://github.com/pangyre/p5-yesh>.
+Either from the CPAN where L<Yesh> may not be (yet) or from its github repo: L<http://github.com/pangyre/p5-yesh>. If taking it from github, consider pulling down the most recent code often. Bugs may be numerous and improvements will be frequent until stable releases start to hit the CPAN.
 
 =item # Decompress it
 
 E.g.-
   tar xpfvz Yesh-#.####.tar.gz
 
-=item # Intall it
+=item # Install it
 
  cd Yesh-#.####
  perl Makefile.PL
@@ -39,7 +45,7 @@ E.g.-
 
 You will be prompted to install missing dependencies. There are likely to be a lot of them.
 
-[dicussion of dependencies and end-user role in make it all work right]
+[discussion of dependencies and end-user role in make it all work right]
 
 =back
 
@@ -114,8 +120,6 @@ This is automatically set to the date and time of the set up if using the web ba
 =item Model::DBIC
 
 This is the configuration for the site's main database. If you want to edit it manually, you will need to know L<DBIx::Class> and L<DBIx::Class::Schema>. You are configuring a Catalyst modelE<mdash>L<Catalyst::Model::DBIC::Schema>E<mdash>to use the site's schemaE<mdash>L<Yesh::Schema>.
-
-=item _321
 
 =item _321
 
@@ -201,7 +205,7 @@ Sign-out. Deletes session.
 
 =item /password_reset
 
-POST reqest with username and email? Sends a token URI to the user to return to the same page where-
+POST request with username and email? Sends a token URI to the user to return to the same page where-
 
 GET request with valid tokenE<mdash>they have a configurable expiration timeE<mdash>gives a reset form. Token is invalidated upon use? No action is taken until reset form is successfully submitted.
 
@@ -355,7 +359,6 @@ If these are set in your configuration,
    secure_registration: 1
 
 
-
 =head1 TESTING
 
 =head1 TO DO (PLEASE SUBMIT PATCHES!)
@@ -366,7 +369,7 @@ Usernames need to be case insensitive or it causes too much confusion; e.g., Ash
 
 =over 4
 
-=item Real icon/logo + iphone favicon
+=item Real icon/logo + iPhone favicon
 
 =item Secure certificate / https setup.
 
@@ -402,7 +405,7 @@ Usernames need to be case insensitive or it causes too much confusion; e.g., Ash
 
 =back
 
-=head1 A FEW WORDS ABOUT INTERNET EXPORER
+=head1 A FEW WORDS ABOUT INTERNET EXPLORER 6
 
 We will not support IE 6. All of the IE family is problematic but we will support newer versions because we have to do so. IE 6 is a turd that won't flush. Just pull the handle, everyone.
 
