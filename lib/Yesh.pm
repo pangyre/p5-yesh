@@ -20,7 +20,7 @@ use Moose;
 use File::Temp;
 
 our $AUTHORITY = "cpan:ASHLEY";
-our $VERSION = "2.9039";
+our $VERSION = "2.9040";
 
 __PACKAGE__->config
     ( name => "Yesh/$VERSION",
@@ -83,7 +83,7 @@ Yesh - Yet another content management system: secure, multi-author, modern, flex
 
 =head1 VERSION
 
-2.9039
+2.9040
 
 =head1 DESCRIPTION
 

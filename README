@@ -4,7 +4,7 @@ NAME
     Yesh::Manual for usage and detailed description.
 
 VERSION
-    2.9038
+    2.9039
 
 DESCRIPTION
     Secure
@@ -62,20 +62,19 @@ HISTORY
     but probably NSFW).
 
 TO DO
-    Tests.
+    Tests
+    Revision control on articles
+    Pod viewer TOC with links
+    Audit trail for some|most|all actions
     MySQL setup + mysql_read_default_file
         MySQL config creates a local mysql_read_default_file instead of
         putting the user/pass etc into the config. Chmods it to 400 or
         something.
 
-    Admine should have DB interface?
+    Admin should have DB interface?
     Setup under SSL if desired
     Flash blurbs will not stack up. Perhaps time to finally write the
     cache-key/expires/views version.
-    First occurrence of a link is bold.
-        This must be configurable. Or in a utilities JS which is part of a
-        theme.
-
     Remove license history / live thingy. Let revision track it.
     Manual complete.
     Everything from the manual using it as a spec. E.g., article revision
