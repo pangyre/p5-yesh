@@ -37,8 +37,7 @@ __PACKAGE__->config
               },
           },
       },
-      #"Plugin::Session" => {
-      "session" => { # experiment
+      "Plugin::Session" => {
           # verify_address => 1, # loses stuff on flash/login.
           verify_user_agent => 1,
           expires => 60 * 60 * 24 * 30 * 12,
