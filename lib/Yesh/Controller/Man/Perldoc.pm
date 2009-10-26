@@ -71,11 +71,11 @@ sub index : Path Args(0) {
         # push @head1, $part->title if $part->type eq 'head1';
         # LATER, STUPID push @{$head2[@head1]}, $part->title if $part->type eq 'head2';
     }
-
+    my $pod_index = @head1 > 1 ? "<ul>" . join("\n", @head1) . "</ul>" : "";
     $c->stash( pom => "$pom" ? $pom : "",
                title => $title,
                name => $name,
-               pod_index => "<ul>" . join("\n", @head1) . "</ul>",
+               pod_index => $pod_index,
                pod => Encode::decode_utf8(Yesh::Pod::POM::View::HTML->print($pom)),
                warnings => [ $parser->warnings ],
         );

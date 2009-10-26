@@ -137,8 +137,6 @@ A prototype of this code has been in production since 2006 at L<http://sedition.
 
 =item Revision control on articles
 
-=item Pod viewer TOC with links
-
 =item Audit trail for some|most|all actions
 
 =item MySQL setup + mysql_read_default_file
