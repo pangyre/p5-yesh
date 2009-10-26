@@ -1,0 +1,76 @@
+---
+#load_config_file:
+#  - user_username.yml
+#  - user_edit.yml
+
+element:
+  - type: Hidden
+    name: digest
+  - type: Text
+    name: title
+    label: Title
+    constraints:
+      - Required
+  - type: Text
+    name: parent
+    label: Parent
+  - type: Text
+    name: uuid
+    label: UUID
+    add_attributes:
+      readonly: readonly
+    model_config:
+      read_only: 1
+  - type: Select
+    name: template
+    label: Template
+    model_config:
+      resultset: Template
+  - type: Radiogroup
+    label: Display Groups
+    name: display_groups
+    model_config:
+      resultset: DisplayGroup
+  - type: Radiogroup
+    label: Status
+    name: status
+    options:
+      - [ "draft", "Draft" ]
+      - [ 'publish', "Published" ]
+      - [ 'manual', "Manual" ]
+      - [ 'deleted', "Deleted" ]
+
+  - type: Select
+    name: license
+    label: License
+    model_config:
+      resultset: License
+    constraints:
+      - Required
+  - type: Textarea
+    name: body
+    label: Article
+    constraints:
+      - Required
+  - type: Textarea
+    name: note
+    label: Notes
+  - type: DateTime
+    name: golive
+    add_attributes:
+      class: date
+    label: Go Live Date
+    auto_inflate: Yes
+    constraints:
+      - Required
+  - type: DateTime
+    name: takedown
+    label: Take Down Date
+    add_attributes:
+      class: date
+    auto_inflate: Yes
+    year:
+      less: 0
+      plus: 1000
+    auto_inflate: Yes
+
