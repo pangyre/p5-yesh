@@ -345,8 +345,13 @@ Generally you should only mess with the values and settings in C<site>. That sai
 
 =item _321
 
-
 =back
+
+=head2 SITE JAVASCRIPT
+
+ js/site/presentation.js
+
+First occurrence of a link (within a paragraph) in a page is bold.
 
 =head1 SECURITY
 

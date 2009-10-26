@@ -1,3 +1,4 @@
+[% PROCESS man/perldocs/make_pom_index.tt %]
 [% FOR part IN pom.content %]
 [% loop.count %]: [% part.type %]<br/>
   [% IF part.type == "head1" %]

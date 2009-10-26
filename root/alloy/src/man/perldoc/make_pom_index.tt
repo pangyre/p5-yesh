@@ -1,0 +1,12 @@
+<ul>
+[% FOR part IN pom.content %]
+[% loop.count %]: [% part.type %]<br/>
+<li>
+  [% IF part.type == "head1" %]
+     [% part.title %]
+  [% ELSIF part.type == "head2" %]
+     [% part.title %]
+  [% END %]
+</li>
+[% END %]
+</ul>

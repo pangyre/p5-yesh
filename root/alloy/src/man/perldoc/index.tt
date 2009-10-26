@@ -12,6 +12,7 @@ more information.</p>
 </div>
 [%-END %]
 
+[%-pod_index %]
 [%-pod %]
 
 [%-IF warnings.size %]
