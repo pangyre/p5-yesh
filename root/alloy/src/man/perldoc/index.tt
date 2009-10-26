@@ -13,7 +13,7 @@ more information.</p>
 [%-END %]
 
 [%-IF pod_index %]
-<div style="background-color:#fffef9; border:1px solid #dd9; width:33%; font-size:85%; margin: -1ex 0 0 1ex; float:right; ">
+<div style="background-color:#fffef9; border:1px solid #dd9; width:33%; font-size:85%; margin: -1em 0 0 1ex; float:right; ">
 [% pod_index %]
 </div>
 [% END %]
