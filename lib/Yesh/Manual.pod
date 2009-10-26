@@ -2,7 +2,7 @@
 
 =begin html
 
-<img src="../../img/yesh.png" style="float:left;border:0" alt="Yesh"/>
+<img src="http://pangyresoft.com/img/yesh.png" style="float:left;border:0" alt="Yesh"/>
 
 =end html
 
@@ -12,7 +12,7 @@ L<Yesh> is a multi-author web-based content management package written in Perl, 
 
 These instructions are *nix centric for now.
 
-There are quite a few Perl packages that must be installed. If everything is working right you should be able to download the distribution for Yesh, decompress it, and install it like any Perl package.
+There are quite a few Perl packages that must be installed. If everything is working right you should be able to download the distribution for Yesh, decompress it, and install it like any Perl package. If you have not installed Catalyst and Moose before, the installation list will be quite long.
 
 =head2 NON-PERL DEPENDENCIES
 
