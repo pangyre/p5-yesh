@@ -417,7 +417,7 @@ We will not support IE 6. All of the IE family is problematic but we will suppor
 
 =head1 More Yesh Documents
 
-L<Yesh::Manual::ReleaseNotes>, L<Yesh::Manual::SampleSetups>.
+L<Yesh>, L<Yesh::Manual::ReleaseNotes>, L<Yesh::Manual::SampleSetups>.
 
 =head1 License, Copyright, Author
 
