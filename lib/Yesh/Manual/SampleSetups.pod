@@ -1,0 +1,22 @@
+=head1 Yesh Manual: Sample Setups
+
+=begin html
+
+<img src="http://pangyresoft.com/img/yesh.png" style="float:left;border:0" alt="Yesh"/>
+
+=end html
+
+=head2 FastCGI + nginx
+
+
+=head2 FastCGI + Apache
+
+=head1 Call to Contributors
+
+Please contribute your favorite Catalyst deployment scheme!
+
+=head1 See Also
+
+See L<Yesh> and L<Yesh::Manual>.
+
+=cut

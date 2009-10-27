@@ -1,4 +1,4 @@
-=head1 YESH, THE MANUAL
+=head1 Yesh, the Manual
 
 =begin html
 
@@ -8,13 +8,13 @@
 
 L<Yesh> is a multi-author web-based content management package written in Perl, with JavaScript for progressive enhancements, on the Catalyst framework.
 
-=head1 INSTALLATION
+=head1 Installation
 
 These instructions are *nix centric for now.
 
 There are quite a few Perl packages that must be installed. If everything is working right you should be able to download the distribution for Yesh, decompress it, and install it like any Perl package. If you have not installed Catalyst and Moose before, the installation list will be quite long.
 
-=head2 NON-PERL DEPENDENCIES
+=head2 Non-Perl Dependencies
 
 =over 4
 
@@ -24,13 +24,13 @@ L<XML::LibXML>. [Download link] 321
 
 =back
 
-=head2 INSTALL YESH
+=head2 Install Yesh
 
 =over 4
 
 =item # Download
 
-Either from the CPAN where L<Yesh> may not be (yet) or from its github repo: L<http://github.com/pangyre/p5-yesh>. If taking it from github, consider pulling down the most recent code often. Bugs may be numerous and improvements will be frequent until stable releases start to hit the CPAN.
+Either from the CPAN where L<Yesh> may not be (yet) Or from its github repo: L<http://github.com/pangyre/p5-yesh>. If taking it from github, consider pulling down the most recent code often. Bugs may be numerous and improvements will be frequent until stable releases start to hit the CPAN.
 
 =item # Decompress it
 
@@ -57,7 +57,7 @@ The cpan command is a utility of the core module L<CPAN> which will facilitates 
 
 To do: a Task::Yesh distribution? Without this sort of thing hosting companies may not be interested in picking up a package like this.
 
-=head1 WEB-BASED SET UP
+=head1 Web-based Setup
 
 =begin html
 
@@ -65,13 +65,13 @@ To do: a Task::Yesh distribution? Without this sort of thing hosting companies m
 
 =end html
 
-=head1 CONFIGURATION
+=head1 Configuration
 
-=head2 THEMES
+=head2 Themes
 
-=head2 PLUGINS AND EXTENSIONS
+=head2 Plugins and Extensions
 
-=head2 LOCAL CONFIGURATION
+=head2 Local Configuration
 
 There are two configuration files used by Yesh while a site is running live (in production). They are F<yesh.yml> and F<yesh_local.yml>. This is a L<Catalyst> convention for setting up sites with L<Catalyst::Plugin::ConfigLoader>.
 
@@ -80,7 +80,6 @@ There are two configuration files used by Yesh while a site is running live (in 
 <a href="../../txt/yesh_local.txt">Sample configuration file</a>. Use JS to hide this? These should only be exposed on local/running installations. Could be a hook in the viewer to surface them.
 
 =end html
-
 
 =over 4
 
@@ -96,7 +95,7 @@ You are welcome to edit this file but if you don't know what you're doing, you a
 
 =back
 
-=head2 CONFIGURATION SETTINGS
+=head2 Configuration Settings
 
 Inside your local configuration file you can set several prominent variables under the key C<site>.
 
@@ -125,11 +124,11 @@ This is the configuration for the site's main database. If you want to edit it m
 
 =back
 
-=head1 TECHNICAL DOCUMENTS
+=head1 Technical Documents
 
 Please see the various documents for individual modules. E.g., L<Yesh::Schema>, L<Yesh::Controller::User>, L<Yesh::View::Alloy>, and so on.
 
-=head1 YESH SPEC
+=head1 Yesh Specification
 
 =head2 Models
 
@@ -347,13 +346,13 @@ Generally you should only mess with the values and settings in C<site>. That sai
 
 =back
 
-=head2 SITE JAVASCRIPT
+=head2 Site JavaScript
 
  js/site/presentation.js
 
 First occurrence of a link (within a paragraph) in a page is bold.
 
-=head1 SECURITY
+=head1 Security
 
 If these are set in your configuration, 
 
@@ -364,13 +363,13 @@ If these are set in your configuration,
    secure_registration: 1
 
 
-=head1 TESTING
+=head1 Testing
 
-=head1 TO DO (PLEASE SUBMIT PATCHES!)
+=head1 To Do (please submit patches!)
 
 Usernames need to be case insensitive or it causes too much confusion; e.g., Ashley ne ashley in the current scheme and you could register any number of permutations its casing.
 
-=head2 TUTORIALS
+=head2 Tutorials
 
 =over 4
 
@@ -388,9 +387,9 @@ Usernames need to be case insensitive or it causes too much confusion; e.g., Ash
 
 =back
 
-=head2 RESOURCES
+=head2 Resources
 
-=head3 YESH
+=head3 Yesh
 
 =over 4
 
@@ -400,7 +399,7 @@ Usernames need to be case insensitive or it causes too much confusion; e.g., Ash
 
 =back
 
-=head3 CATALYST
+=head3 Catalyst
 
 =over 4
 
@@ -410,13 +409,17 @@ Usernames need to be case insensitive or it causes too much confusion; e.g., Ash
 
 =back
 
-=head1 A FEW WORDS ABOUT INTERNET EXPLORER 6
+=head1 A Few Words about Internet Explorer 6
 
 We will not support IE 6. All of the IE family is problematic but we will support newer versions because we have to do so. IE 6 is a turd that won't flush. Just pull the handle, everyone.
 
-=head1 SUGGESTED READING
+=head1 Suggested Reading
 
-=head1 LICENSE, COPYRIGHT, AUTHOR
+=head1 More Yesh Documents
+
+L<Yesh::Manual::ReleaseNotes>, L<Yesh::Manual::SampleSetups>.
+
+=head1 License, Copyright, Author
 
 See L<Yesh> and L<Yesh::Manual::ThirdParty>.
 
