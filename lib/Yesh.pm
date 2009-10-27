@@ -77,15 +77,15 @@ __PACKAGE__->meta->make_immutable( replace_constructor => 1 );
 
 __END__
 
-=head1 NAME
+=head1 Name
 
 Yesh - Yet another content management system: secure, multi-author, modern, flexible, friendly, L<Catalyst>-based (alpha software). Please see B<L<Yesh::Manual>> for usage and detailed description.
 
-=head1 VERSION
+=head1 Version
 
 2.9040
 
-=head1 DESCRIPTION
+=head1 Description
 
 =over 4
 
@@ -121,15 +121,15 @@ This is "wish list" for now. It's a strong wish though. :) If you are interested
 
 =back
 
-=head1 SYNOPSIS
+=head1 Synopsis
 
  script/yesh_server.pl
 
-=head1 HISTORY
+=head1 History
 
 A prototype of this code has been in production since 2006 at L<http://sedition.com>. The site contains mature content (no pornography but probably NSFW).
 
-=head1 TO DO
+=head1 To Do
 
 =over 4
 
@@ -161,10 +161,13 @@ MySQL config creates a local mysql_read_default_file instead of putting the user
 
 =item Provide for bulk editing via tag, author, date, parent, etc.
 
+=item Sample setups
+
+Write out at least one sample setup, L<Yesh::Manual::SampleSetups>.
+
 =back
 
-
-=head1 WISH LIST
+=head1 Wish List
 
 These are B<important> but not first priorities.
 
@@ -178,7 +181,7 @@ These are B<important> but not first priorities.
 
 =back
 
-=head1 PHILOSOPHY
+=head1 Philosophy
 
 Release early and often. Favor agile cycles over stability paranoia. We will be responsive to feedback and bug reports. Make easy and reliable updating a priority so users are comfortable 
 
@@ -192,25 +195,25 @@ Progressive enhancement.
 
 Only jQuery JS in the core distribution.
 
-=head1 CODE REPOSITORY
+=head1 Code Repository
 
 L<http://github.com/pangyre/p5-yesh>.
 
-=head1 SEE ALSO
+=head1 See Also
 
 L<Yesh::Manual>, L<Yesh::Manual::ReleaseNotes>, L<Catalyst>.
 
-=head1 AUTHOR
+=head1 Author
 
 Ashley Pond V E<middot> ashley.pond.v@gmail.com E<middot> L<http://pangyresoft.com>.
 
-=head1 LICENSE
+=head1 License
 
 The parts of this library which is Yesh specific is free software. You can redistribute and modify it under the same terms as Perl itself.
 
 Some third party software, e.g. jQuery, may also included in this distribution. Please see L<Yesh::Manual::ThirdParty> for more about that.
 
-=head1 DISCLAIMER OF WARRANTY
+=head1 Disclaimer of Warranty
 
 Because this software is licensed free of charge, there is no warranty
 for the software, to the extent permitted by applicable law. Except when
