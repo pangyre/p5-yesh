@@ -104,7 +104,8 @@ sub _deploy_sqlite : Private {
     # Update config file here.
     my $model_config = $c->config->{"Model::DBIC"};
     $model_config->{connect_info}->[0] = $dsn_config;
-    $model_config->{connect_info}->[3]->{unicode} = 1;
+    $model_config->{connect_info}->[3]->{unicode} = 1; # For now. Deprecated in favor of-
+    $model_config->{connect_info}->[3]->{sqlite_unicode} = 1;
     $self->_load_baseline($c, $schema);
     $self->_write_local_yaml($c, { "Model::DBIC" => $model_config });
     $c->response->redirect($c->uri_for_action("setup/admin"));
