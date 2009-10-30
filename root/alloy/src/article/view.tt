@@ -8,7 +8,7 @@
 [% article.golive.ymd() %]
   </div>
   <div class="body">
-[% article.rendered || article.body %]
+[% article.rendered || article.body.enpara %]
   </div>
   <div class="meta">
     <div class="author">

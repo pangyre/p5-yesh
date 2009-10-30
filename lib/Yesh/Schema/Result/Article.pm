@@ -203,6 +203,17 @@ __PACKAGE__->many_to_many(display_groups => "article_display_groups", "display_g
 
 # __PACKAGE__->utf8_columns( __PACKAGE__->columns );
 
+use XHTML::Util;
+__PACKAGE__->inflate_column( body => {
+    inflate => sub {
+        my $body = Encode::decode_utf8(shift);
+        XHTML::Util->new(\$body)
+    },
+    deflate => sub {
+        +shift->as_string();
+    },
+                             });
+
 sub is_live {
     my $self = shift;
     return unless ref $self;
@@ -305,3 +316,4 @@ sub __parents {
     die "Unterminating lineage loop suspected!" if @parents > 50;
     $parent->parents(@parents);
 }
+
