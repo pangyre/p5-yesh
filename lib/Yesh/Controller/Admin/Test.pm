@@ -35,7 +35,7 @@ sub run : Path {
 #    IPC::Run::run \@cmd, \$in, \*STDOUT, \*STDERR, IPC::Run::timeout(30)
 #        or die join("\n", $in, $out, $err, $?);
 
-    IPC::Run::run \@cmd, \$in, \$out, \$err, IPC::Run::timeout(10);
+    IPC::Run::run( \@cmd, \$in, \$out, \$err, IPC::Run::timeout(10) );
     # or die join("\n", $in, $out, $err, $?);
 
     # $c->response->content_type("text/plain");
