@@ -67,6 +67,28 @@ sub logout :Global Args(0) {
     $c->blurb("logout/success");
 }
 
+
+1;
+
+__END__
+
+=pod
+
+=head1 Name
+
+Yesh::Controller::Session - Session related actions for L<Yesh>.
+
+=head1 Methods
+
+=head2 login
+
+=head2 logout
+
+Attempt to render a view, if needed.
+
+=cut
+
+
 sub password_reset : Global {
     my ( $self, $c, $token, @more ) = @_;
     die "RC_404" if @more;
@@ -85,14 +107,4 @@ sub password_reset : Global {
         die "RC_405";
     }
 }
-
-
-1;
-
-__END__
-
-    my $username = $c->req->param("username");
-    my $password = $c->req->param("password") if $c->req->method eq "POST";
-
-    #$c->log->debug( $user->check_password($password) ? "YES!!!!!" : "nope :(" );
 

@@ -146,7 +146,7 @@ sub reset : Local Args(0) FormConfig {
 
         my $token = lc Data::UUID->new->create_str;
         $c->model("CHI")->set("reset" . $user->id, $token,
-                              $self->{reset_token_lives_for} || "1 hour");
+                              $self->{reset_token_lives_for} || "15 minutes");
 
         # This, or some variety, really should work...
         #my $reset_uri = $c->uri_for_action("user/reset_edit", $token, [ $user->id ]);
@@ -263,15 +263,15 @@ sub register : Local Args(0) Form {
 
 __END__
 
-=head1 NAME
+=head1 Name
 
-Yesh::Controller::User - Catalyst Controller
+Yesh::Controller::User - Catalyst Controller.
 
-=head1 DESCRIPTION
+=head1 Description
 
 Catalyst Controller.
 
-=head1 METHODS
+=head1 Methods
 
 =head2 index
 

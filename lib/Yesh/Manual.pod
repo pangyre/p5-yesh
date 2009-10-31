@@ -188,6 +188,14 @@ The feed for the user. Yesh will only support Atom feeds. B<Most> endpoints can 
 
 =item /user/id/*/edit
 
+=item /user/id/*/reset
+
+Request a reset token (a URI+UUID) be mailed to the account's email address.
+
+=item /user/id/*/reset_edit
+
+Visit with the reset token. It allows access to the edit form. The reset token has a limited life span to prevent it from getting left lying around or intercepted.
+
 =back
 
 =head3 L<Yesh::Controller::Session>
@@ -201,12 +209,6 @@ Sign-in. Can be forced to B<https> with L<configuration settings|/CONFIGURATION>
 =item /logout
 
 Sign-out. Deletes session.
-
-=item /password_reset
-
-POST request with username and email? Sends a token URI to the user to return to the same page where-
-
-GET request with valid tokenE<mdash>they have a configurable expiration timeE<mdash>gives a reset form. Token is invalidated upon use? No action is taken until reset form is successfully submitted.
 
 =back
 
