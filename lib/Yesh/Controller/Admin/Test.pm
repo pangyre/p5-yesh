@@ -3,32 +3,30 @@ use warnings;
 use strict;
 use parent 'Catalyst::Controller';
 
-#use File::Which;
-#use IPC::Run ();
-use Path::Class;
-use File::Find::Rule;
-
-#sub auto :Private {
-#    0;
-#}
+sub auto :Private {
+    eval qq{
+       use File::Which;
+       use IPC::Run ();
+       use Path::Class;
+       use File::Find::Rule;
+       1;
+    };
+}
 
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
 
     $c->stash(
-               test_dir => Path::Class::Dir->new( $c->path_to("t/web")->stringify )
+               test_dir => Path::Class::Dir->new( $c->path_to("t")->stringify )
         );
 }
 
-1;
-
-__END__
-
 sub run : Path {
     my ( $self, $c, @path ) = @_;
-
-    my $test = $c->path_to("t/web",@path); # 321 verify no updir possible
-    my $prove = which("prove");
+    die "Not a good idea...";
+ #   my $test = $c->path_to("t/web",@path); # 321 verify no updir possible
+    my $test = $c->path_to("t",@path); # 321 verify no updir possible
+    my $prove = File::Which::which("prove");
 
     my @cmd = ( $prove, "-v", "-l", "lib", "$test" );
     my ( $in, $out, $err );
@@ -37,12 +35,21 @@ sub run : Path {
 #    IPC::Run::run \@cmd, \$in, \*STDOUT, \*STDERR, IPC::Run::timeout(30)
 #        or die join("\n", $in, $out, $err, $?);
 
-    IPC::Run::run \@cmd, \$in, \$out, \$err, IPC::Run::timeout(10)
-        or die join("\n", $in, $out, $err, $?);
+    IPC::Run::run \@cmd, \$in, \$out, \$err, IPC::Run::timeout(10);
+    # or die join("\n", $in, $out, $err, $?);
 
-    $c->response->content_type("text/plain");
-    $c->response->body( join"\n", $out, $err);
+    # $c->response->content_type("text/plain");
+    # $c->response->body( join"\n", $out, $err);
+    $c->stash( in  => $in,
+               cmd => join(" ", @cmd),
+               err => $err,
+               out => $out );
 }
+
+1;
+
+__END__
+
 
 1; # Problems running/forking against itself.
 

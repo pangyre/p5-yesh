@@ -151,3 +151,11 @@ a[rel="external"] {
   background:transparent url(/img/icon/external-link.jpg) no-repeat scroll 99% 50%;
   padding-right:15px;
 }
+
+.alert {
+ color: #a00;
+}
+
+.good {
+ color: #062;
+}
