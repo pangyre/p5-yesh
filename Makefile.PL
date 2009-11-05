@@ -55,6 +55,7 @@ requires "DateTime::Format::SQLite";
 requires "Catalyst::Plugin::RequireSSL";
 
 recommends "Catalyst::Manual";
+recommends "Archive::Zip";
 recommends "IPC::Run";
 recommends "File::Find::Rule";
 recommends "File::Which"; # Right now it's a fatal without.
@@ -64,7 +65,6 @@ recommends "IPC::Run";
 recommends "Schedule::At";
 #recommends "LWPx::ParanoidAgent";
 #recommends "Catalyst::Plugin::Authentication::Credential::OpenID";
-
 
 # requires "URI::QueryParam";
 

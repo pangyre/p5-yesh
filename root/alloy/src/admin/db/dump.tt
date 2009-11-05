@@ -1,8 +1,9 @@
 [% META title = "Dump a Database to a Dumpfile" %]
 
-
-[% FOR row IN rows %]
-[% row | encode_json %].<br/>
+[% FOR row IN rows.slice(0,50) %]
+<p>
+[% row | encode_json | html %]
+</p>
 [% END %]
 <script type="text/javascript">//<![CDATA[
 

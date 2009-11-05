@@ -17,7 +17,7 @@ sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
 
     $c->stash(
-               test_dir => Path::Class::Dir->new( $c->path_to("t")->stringify )
+        test_dir => Path::Class::Dir->new( $c->path_to("t")->stringify )
         );
 }
 

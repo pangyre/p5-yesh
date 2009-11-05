@@ -2,6 +2,7 @@ package Yesh::Controller::Admin::DB;
 use strict;
 use warnings;
 use parent "Catalyst::Controller";
+use JSON::XS;
 
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
@@ -15,15 +16,45 @@ sub schema : Local Args(0) {
 
 sub dump : Local Args(0) {
     my ( $self, $c ) = @_;
+
+    my $ok = eval {
+        use Archive::Zip ();
+        1;
+    };
+
+    unless ( $ok == 1 )
+    {
+        die "No Archive::Zip";
+    }
+    my $zip = Archive::Zip->new();
+
     my $schema = $c->model("DBIC")->schema;
     for my $source ( $schema->sources )
     {
         eval {
             my $rs = $schema->resultset($source);
             $rs->result_class("DBIx::Class::ResultClass::HashRefInflator");
-            push @{$c->stash->{rows}}, $rs->all();
+            my $member = $zip->addString(encode_json([$rs->all]),
+                                         "$source.json" );
+            $member->desiredCompressionMethod(8);
+
+#            push @{$c->stash->{rows}}, $rs->all();
         };
     }
+
+    use IO::Scalar;
+    my $body = "";
+    my $fh = IO::Scalar->new(\$body);
+    unless ( $zip->writeToFileHandle( $fh ) == 0 ) {
+        die "asdfasdfasdf";
+    }
+
+    $c->response->content_type("application/zip");
+    my $filename = $c->name . ".zip";
+    $filename =~ s/"/\\"/g;
+    $c->response->header('Content-Disposition' => qq[attachment; filename="$filename"]);
+#    $c->response->content_type("text/plain");
+    $c->response->write($body);
 }
 
 sub load : Local Args(0) {
