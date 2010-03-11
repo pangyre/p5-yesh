@@ -1,10 +1,9 @@
 package Yesh::Controller::Admin;
-use strict;
-use warnings;
-use parent 'Catalyst::Controller';
+use Moose;
+use namespace::autoclean;
+BEGIN { extends "Catalyst::Controller" }
 
 use List::MoreUtils qw( natatime );
-use Scalar::Util qw( blessed );
 
 sub auto : Private {
     my ( $self, $c ) = @_;

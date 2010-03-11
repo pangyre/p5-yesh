@@ -1,7 +1,8 @@
 package Yesh::Controller::Admin::DB;
-use strict;
-use warnings;
-use parent "Catalyst::Controller";
+use Moose;
+use namespace::autoclean;
+BEGIN { extends "Catalyst::Controller" }
+
 use JSON::XS;
 
 sub index :Path :Args(0) {

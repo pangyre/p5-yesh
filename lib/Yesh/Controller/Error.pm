@@ -1,7 +1,8 @@
 package Yesh::Controller::Error;
-use strict;
-use warnings;
-use parent 'Catalyst::Controller';
+use Moose;
+use namespace::autoclean;
+BEGIN { extends "Catalyst::Controller" }
+
 use HTTP::Status;
 use YAML;
 

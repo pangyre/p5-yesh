@@ -1,7 +1,8 @@
 package Yesh::Controller::Setup;
-use strict;
-use warnings;
-use parent "Catalyst::Controller::HTML::FormFu";
+use Moose;
+use namespace::autoclean;
+BEGIN { extends "Catalyst::Controller::HTML::FormFu" }
+
 use YAML::Syck qw( LoadFile DumpFile );
 $YAML::Syck::ImplicitUnicode = 1;
 $YAML::Syck::ImplicitTyping = 1;

@@ -1,8 +1,9 @@
 package Yesh;
-use strict;
-use warnings;
+use Moose;
+use namespace::autoclean;
+
 use Catalyst::Runtime 5.80;
-use parent "Catalyst";
+
 use Catalyst qw(
                 Unicode
                 ConfigLoader
@@ -16,8 +17,9 @@ use Catalyst qw(
 
                 RequireSSL
              );
-use Moose;
+
 use File::Temp;
+extends "Catalyst";
 
 our $AUTHORITY = "cpan:ASHLEY";
 our $VERSION = "2.9040";
@@ -48,12 +50,12 @@ __PACKAGE__->config
       },
     );
 
-sub name : method {
+sub name {
     my $c = shift;
     $c->{name} ||= $c->config->{name};
 }
 
-sub version : method {
+sub version {
     $VERSION;
 }
 

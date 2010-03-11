@@ -1,7 +1,8 @@
 package Yesh::Controller::Session;
-use strict;
-use warnings;
-use parent 'Catalyst::Controller::HTML::FormFu';
+use Moose;
+use namespace::autoclean;
+BEGIN { extends "Catalyst::Controller::HTML::FormFu" }
+
 use URI;
 
 #sub index :Path :Args(0) {

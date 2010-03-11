@@ -1,7 +1,7 @@
 ---
 # SITE SPECIFIC ------------------------------------------
 site:
-  name: <yesh/>
+  name: "<yesh/>"
 #  use_google_js: Yes
 
 # APPLICATION --------------------------------------------
@@ -37,9 +37,9 @@ Controller::HTML::FormFu:
     default_args:
       elements:
         Radiogroup:
-          auto_id: $f_%n_%c
+          auto_id: "%f_%n_%c"
         Checkboxgroup:
-          auto_id: %f_%n_%c
+          auto_id: "%f_%n_%c"
 
 
 # MODELS -------------------------------------------------

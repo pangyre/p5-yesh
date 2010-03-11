@@ -1,7 +1,7 @@
 package Yesh::Controller::Root;
-use strict;
-use warnings;
-use parent "Catalyst::Controller";
+use Moose;
+use namespace::autoclean;
+BEGIN { extends "Catalyst::Controller" }
 
 __PACKAGE__->config->{namespace} = "";
 

@@ -1,7 +1,7 @@
 package Yesh::Controller::Admin::Test;
-use warnings;
-use strict;
-use parent 'Catalyst::Controller';
+use Moose;
+use namespace::autoclean;
+BEGIN { extends "Catalyst::Controller" }
 
 sub auto :Private {
     eval qq{

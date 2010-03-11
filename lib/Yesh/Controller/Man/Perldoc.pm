@@ -1,8 +1,9 @@
 package Yesh::Controller::Man::Perldoc;
-use strict;
-use warnings;
+use Moose;
+use namespace::autoclean;
+BEGIN { extends "Catalyst::Controller" }
 no warnings "uninitialized";
-use parent 'Catalyst::Controller';
+
 use Encode;
 use HTML::Entities;
 use URI::Escape;

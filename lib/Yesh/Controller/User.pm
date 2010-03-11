@@ -1,7 +1,8 @@
 package Yesh::Controller::User;
-use strict;
-use warnings;
-use parent 'Catalyst::Controller::HTML::FormFu';
+use Moose;
+use namespace::autoclean;
+BEGIN { extends "Catalyst::Controller::HTML::FormFu" }
+
 
 use Digest::MD5;
 use MIME::Lite;

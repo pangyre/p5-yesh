@@ -1,7 +1,8 @@
 package Yesh::Controller::Article;
-use strict;
-use warnings;
-use parent 'Catalyst::Controller::HTML::FormFu';
+use Moose;
+use namespace::autoclean;
+BEGIN { extends "Catalyst::Controller::HTML::FormFu" }
+
 use DateTime;
 
 __PACKAGE__->config( articles_per_page => 10 );
