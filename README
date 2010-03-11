@@ -1,12 +1,12 @@
-NAME
+Name
     Yesh - Yet another content management system: secure, multi-author,
     modern, flexible, friendly, Catalyst-based (alpha software). Please see
     Yesh::Manual for usage and detailed description.
 
-VERSION
-    2.9039
+Version
+    2.9040
 
-DESCRIPTION
+Description
     Secure
         Well, we take it seriously anyway. This is an unfinished application
         and may have security bugs; plus it is meant to be an easy to
@@ -53,18 +53,17 @@ DESCRIPTION
         are interested in contributing non-English documentation
         translation, please let us know.
 
-SYNOPSIS
+Synopsis
      script/yesh_server.pl
 
-HISTORY
+History
     A prototype of this code has been in production since 2006 at
     <http://sedition.com>. The site contains mature content (no pornography
     but probably NSFW).
 
-TO DO
+To Do
     Tests
     Revision control on articles
-    Pod viewer TOC with links
     Audit trail for some|most|all actions
     MySQL setup + mysql_read_default_file
         MySQL config creates a local mysql_read_default_file instead of
@@ -83,15 +82,17 @@ TO DO
     direct user interaction?
     Move the entire auto-config to a third config file?
     Provide for bulk editing via tag, author, date, parent, etc.
+    Sample setups
+        Write out at least one sample setup, Yesh::Manual::SampleSetups.
 
-WISH LIST
+Wish List
     These are important but not first priorities.
 
     i18n
     Image and media management tools built-in
     WYSIWYG preview for article edits
 
-PHILOSOPHY
+Philosophy
     Release early and often. Favor agile cycles over stability paranoia. We
     will be responsive to feedback and bug reports. Make easy and reliable
     updating a priority so users are comfortable
@@ -111,23 +112,23 @@ PHILOSOPHY
 
     Only jQuery JS in the core distribution.
 
-CODE REPOSITORY
+Code Repository
     <http://github.com/pangyre/p5-yesh>.
 
-SEE ALSO
+See Also
     Yesh::Manual, Yesh::Manual::ReleaseNotes, Catalyst.
 
-AUTHOR
+Author
     Ashley Pond V · ashley.pond.v@gmail.com · <http://pangyresoft.com>.
 
-LICENSE
+License
     The parts of this library which is Yesh specific is free software. You
     can redistribute and modify it under the same terms as Perl itself.
 
     Some third party software, e.g. jQuery, may also included in this
     distribution. Please see Yesh::Manual::ThirdParty for more about that.
 
-DISCLAIMER OF WARRANTY
+Disclaimer of Warranty
     Because this software is licensed free of charge, there is no warranty
     for the software, to the extent permitted by applicable law. Except when
     otherwise stated in writing the copyright holders and other parties
