@@ -19,9 +19,6 @@ sub index :Path :Args(0) {
 #    my ( $self, $c ) = @_;
 }
 
-sub config : Local {
-}
-
 sub env : Local {
     my ( $self, $c ) = @_;
     $c->stash( env => $c->engine->env,
