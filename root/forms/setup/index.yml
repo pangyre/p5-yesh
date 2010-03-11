@@ -1,6 +1,6 @@
 ---
 id: setup
-auto_id: %f_%n
+auto_id: "%f_%n"
 auto_fieldset:
   legend: Configure the database
 elements:

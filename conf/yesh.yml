@@ -5,7 +5,7 @@ site:
 #  use_google_js: Yes
 
 # APPLICATION --------------------------------------------
-default_view: Alloy
+default_view: "Alloy"
 
 
 # PLUGINS ------------------------------------------------
