@@ -348,6 +348,20 @@ Generally you should only mess with the values and settings in C<site>. That sai
 
 =back
 
+=head4 Filters
+
+Every filter will be L<XHTML::Util> based at its top level. There will
+be a path for including what are ostensibly plain filters from other
+kits by passing all #text nodes to it... This must be all phrase level
+nodes instead or else something like "# Oh <b>hai</b> der!" will break
+expectations with things like L<Text::Markdown>.
+
+=over 4
+
+=item _321
+
+=back
+
 =head2 Site JavaScript
 
  js/site/presentation.js
@@ -371,11 +385,19 @@ If these are set in your configuration,
 
 Usernames need to be case insensitive or it causes too much confusion; e.g., Ashley ne ashley in the current scheme and you could register any number of permutations its casing.
 
+=head1 How to
+
+=head2 Make a snicker-snack
+
+Describe itE<hellip>
+
 =head2 Tutorials
 
 =over 4
 
-=item Real icon/logo + iPhone favicon
+=item Minimal iPhone/iPad app.
+
+=item Real icon/logo + iPhone favicon.
 
 =item Secure certificate / https setup.
 

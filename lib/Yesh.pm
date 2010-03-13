@@ -241,3 +241,5 @@ such damages.
 =cut
 
 
+
+filters that hook other packages by passing the text nodes to them.

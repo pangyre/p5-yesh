@@ -63,10 +63,10 @@ recommends "Pod::POM";
 recommends "Proc::ProcessTable";
 recommends "IPC::Run";
 recommends "Schedule::At";
-#recommends "LWPx::ParanoidAgent";
+recommends "LWPx::ParanoidAgent";
 #recommends "Catalyst::Plugin::Authentication::Credential::OpenID";
 
-# requires "URI::QueryParam";
+#requires "URI::QueryParam";
 
 test_requires "HTTP::Request::Common";
 
@@ -79,6 +79,8 @@ if ( $Module::Install::AUTHOR )
     system("pod2text lib/Yesh/Manual/ReleaseNotes.pod > Changes") == 0
         or die "Couldn't update the Changes file";
 }
+
+# Create dirs qw( etc var...? )
 
 install_script glob("script/*.pl");
 auto_install;
