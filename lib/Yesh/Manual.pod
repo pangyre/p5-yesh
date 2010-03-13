@@ -353,8 +353,8 @@ Generally you should only mess with the values and settings in C<site>. That sai
 Every filter will be L<XHTML::Util> based at its top level. There will
 be a path for including what are ostensibly plain filters from other
 kits by passing all #text nodes to it... This must be all phrase level
-nodes instead or else something like "# Oh <b>hai</b> der!" will break
-expectations with things like L<Text::Markdown>.
+nodes instead or else something like "# Oh E<lt>bE<gt>haiE<lt>/bE<gt>
+der!" will break expectations with things like L<Text::Markdown>.
 
 =over 4
 
