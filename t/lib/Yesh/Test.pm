@@ -1,5 +1,6 @@
 package Yesh::Test;
 use parent qw( Test::Class );
+our $TODO;
 use Moose;
 BEGIN { $ENV{YESH_CONFIG_LOCAL_SUFFIX} ||= "test" }
 
@@ -24,3 +25,6 @@ Yesh::Test - L<Test::Class> subclass to use as master for all tests.
 See L<Yesh>.
 
 =cut
+
+
+  TODO: { "Currently unimplemented" };
