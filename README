@@ -4,7 +4,7 @@ Name
     Yesh::Manual for usage and detailed description.
 
 Version
-    2.9040
+    2.9041
 
 Description
     Secure
@@ -16,7 +16,7 @@ Description
         That said, the passwords are stored as an expensive
         Crypt::Eksblowfish::Bcrypt hash. The application supports forcing
         users to register and sign in under https. If configured correctly
-        Yesh will be among the most secure, if not *the* most secure, FOSS
+        Yesh will be among the most secure, if not the most secure, FOSS
         (free and open source software) personal publishing application for
         the web.
 
@@ -26,7 +26,7 @@ Description
         application.
 
         It follows modern software standards and uses modern kits: Catalyst,
-        DBIx::Class, and Template Toolkit drive Yesh.
+        Moose, DBIx::Class, and Template Toolkit drive Yesh.
 
         We will not call it 3.0 and ready for production until it has
         thorough test coverage and code documentation.
@@ -59,7 +59,7 @@ Synopsis
 History
     A prototype of this code has been in production since 2006 at
     <http://sedition.com>. The site contains mature content (no pornography
-    but probably NSFW).
+    but NSFW).
 
 To Do
     Tests

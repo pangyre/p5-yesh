@@ -22,7 +22,7 @@ use File::Temp;
 extends "Catalyst";
 
 our $AUTHORITY = "cpan:ASHLEY";
-our $VERSION = "2.9041";
+our $VERSION = "2.9042";
 
 __PACKAGE__->config
     ( name => "Yesh/$VERSION",
@@ -86,7 +86,7 @@ Yesh - Yet another content management system: secure, multi-author, modern, flex
 
 =head1 Version
 
-2.9041
+2.9042
 
 =head1 Description
 
