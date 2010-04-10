@@ -1,0 +1,22 @@
+<h2>TAP output</h2>
+<h4>[% cmd %]</h4>
+<p>
+<pre>
+[%-FOR line IN out.split('\n') %]
+[%-IF line.match('\A(not ok|\s*Failed)|Result: FAIL') %]
+<span class="alert">[% line %]</span>
+[%-ELSIF line.match('\Aok') %]
+<span class="good">[% line %]</span>
+[%-ELSE %]
+[% line %]
+[%-END %]
+[%-END %]
+</pre>
+</p>
+
+[% IF err %]
+<h3>STDERR</h3>
+<p>
+<pre class="alert">[%~err~%]</pre>
+</p>
+[% END %]
