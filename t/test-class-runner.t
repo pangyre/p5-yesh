@@ -1,10 +1,7 @@
 #!/usr/bin/env perl
 use warnings;
 use strict;
-use FindBin;
-use lib "$FindBin::Bin/lib";
-use Test::Yesh::Controller::Setup;
+use Test::Class::Load qw( t/lib );
+Test::Class->runtests;
 
-# Test::Yesh::Controller::Setup->runtests;
-
-Test::Yesh::Controller::Setup->runtests;
+__END__
