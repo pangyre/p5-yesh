@@ -10,13 +10,14 @@ with qw( Yesh::MechCat );
 #    die;
 #}
 
-sub home : Test(4) {
+sub application_root : Test(5) {
     my $self = shift;
     $self->get_ok("/", "Get /");
     $self->title_like(qr/Articles.+?Yesh/, "Page title looks good");
     $self->content_like(qr/(log|sign).?in/i, "Sign-in is present");
     # $self->content_like(qr/Copyright\D+\d{4}/, "Copyright appears in page");
-    $self->content_like(qr/License.+?Artistic 2.0/s, "License appears in page");
+    $self->text_like(qr/License.+?Artistic 2.0/s, "License appears in page");
+    # $self->page_links_ok('Check all links');
 }
 
 #sub moo : Test(teardown) {

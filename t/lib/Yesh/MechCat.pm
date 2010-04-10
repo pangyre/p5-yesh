@@ -21,8 +21,9 @@ has "mech" =>
                    text_like
                    text_contains
                    follow_link_ok
+                   page_links_ok
                    host
-                   )],   
+                   )],
     ;
 
 # This SHOULD BE an auxiliary method for Test::WWW::Mechanize. Send patch to Andy.

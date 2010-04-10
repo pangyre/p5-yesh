@@ -70,6 +70,7 @@ recommends "LWPx::ParanoidAgent";
 #requires "URI::QueryParam";
 
 test_requires "HTTP::Request::Common";
+test_requires "Test::WWW::Mechanize::Catalyst";
 
 catalyst;
 
@@ -81,11 +82,13 @@ if ( $Module::Install::AUTHOR )
         or die "Couldn't update the Changes file";
 }
 
-# Create dirs qw( etc var...? )
+#Create dirs qw( etc var...? )
 
-install_script glob("script/*.pl");
-auto_install;
-WriteAll;
+#install_script glob("script/*.pl");
+
+#auto_install;
+
+#WriteAll;
 
 __END__
 
