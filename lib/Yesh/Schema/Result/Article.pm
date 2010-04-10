@@ -1,17 +1,153 @@
 package Yesh::Schema::Result::Article;
 
+# Created by DBIx::Class::Schema::Loader
+# DO NOT MODIFY THE FIRST PART OF THIS FILE
+
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base 'DBIx::Class::Core';
 
-__PACKAGE__->load_components(
-  "Yesh::Default",
-  "UTF8Columns",
-  "InflateColumn::DateTime",
-  "Core",
-);
+__PACKAGE__->load_components("Yesh::Default", "InflateColumn::DateTime");
+
+=head1 NAME
+
+Yesh::Schema::Result::Article
+
+=cut
+
 __PACKAGE__->table("article");
+
+=head1 ACCESSORS
+
+=head2 id
+
+  data_type: INT
+  default_value: undef
+  extra: HASH(0xa20de0)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 10
+
+=head2 uuid
+
+  data_type: CHAR
+  default_value: undef
+  is_nullable: 0
+  size: 36
+
+=head2 user
+
+  data_type: INT
+  default_value: undef
+  extra: HASH(0xa1de90)
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 10
+
+=head2 parent
+
+  data_type: INT
+  default_value: undef
+  extra: HASH(0xa20e90)
+  is_foreign_key: 1
+  is_nullable: 1
+  size: 10
+
+=head2 template
+
+  data_type: INT
+  default_value: undef
+  extra: HASH(0xa21130)
+  is_foreign_key: 1
+  is_nullable: 1
+  size: 10
+
+=head2 license
+
+  data_type: INT
+  default_value: undef
+  extra: HASH(0xa21910)
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 10
+
+=head2 title
+
+  data_type: TEXT
+  default_value: undef
+  is_nullable: 0
+  size: 65535
+
+=head2 body
+
+  data_type: MEDIUMTEXT
+  default_value: undef
+  is_nullable: 0
+  size: 16777215
+
+=head2 note
+
+  data_type: TEXT
+  default_value: undef
+  is_nullable: 1
+  size: 65535
+
+=head2 status
+
+  data_type: ENUM
+  default_value: draft
+  extra: HASH(0xa1ae80)
+  is_nullable: 1
+  size: 8
+
+=head2 comment_flag
+
+  data_type: ENUM
+  default_value: on
+  extra: HASH(0xa1d6b0)
+  is_nullable: 1
+  size: 6
+
+=head2 live_license
+
+  data_type: INT
+  default_value: undef
+  extra: HASH(0xa22110)
+  is_foreign_key: 1
+  is_nullable: 1
+  size: 10
+
+=head2 golive
+
+  data_type: DATETIME
+  default_value: undef
+  is_nullable: 0
+  size: 19
+
+=head2 takedown
+
+  data_type: DATETIME
+  default_value: 9999-12-31 00:00:00
+  is_nullable: 0
+  size: 19
+
+=head2 created
+
+  data_type: DATETIME
+  default_value: undef
+  is_nullable: 0
+  size: 19
+
+=head2 updated
+
+  data_type: TIMESTAMP
+  default_value: undef
+  is_nullable: 1
+  size: 14
+
+=cut
+
 __PACKAGE__->add_columns(
   "id",
   {
@@ -136,55 +272,157 @@ __PACKAGE__->add_columns(
   },
 );
 __PACKAGE__->set_primary_key("id");
-__PACKAGE__->belongs_to("user", "Yesh::Schema::Result::User", { id => "user" });
+
+=head1 RELATIONS
+
+=head2 user
+
+Type: belongs_to
+
+Related object: L<Yesh::Schema::Result::User>
+
+=cut
+
+__PACKAGE__->belongs_to("user", "Yesh::Schema::Result::User", { id => "user" }, {});
+
+=head2 parent
+
+Type: belongs_to
+
+Related object: L<Yesh::Schema::Result::Article>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "parent",
   "Yesh::Schema::Result::Article",
   { id => "parent" },
   { join_type => "LEFT" },
 );
+
+=head2 articles
+
+Type: has_many
+
+Related object: L<Yesh::Schema::Result::Article>
+
+=cut
+
 __PACKAGE__->has_many(
   "articles",
   "Yesh::Schema::Result::Article",
   { "foreign.parent" => "self.id" },
 );
+
+=head2 template
+
+Type: belongs_to
+
+Related object: L<Yesh::Schema::Result::Template>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "template",
   "Yesh::Schema::Result::Template",
   { id => "template" },
   { join_type => "LEFT" },
 );
+
+=head2 license
+
+Type: belongs_to
+
+Related object: L<Yesh::Schema::Result::License>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "license",
   "Yesh::Schema::Result::License",
   { id => "license" },
+  {},
 );
+
+=head2 live_license
+
+Type: belongs_to
+
+Related object: L<Yesh::Schema::Result::License>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "live_license",
   "Yesh::Schema::Result::License",
   { id => "live_license" },
   { join_type => "LEFT" },
 );
+
+=head2 article_display_groups
+
+Type: has_many
+
+Related object: L<Yesh::Schema::Result::ArticleDisplayGroup>
+
+=cut
+
 __PACKAGE__->has_many(
   "article_display_groups",
   "Yesh::Schema::Result::ArticleDisplayGroup",
   { "foreign.article" => "self.id" },
 );
+
+=head2 article_fragments
+
+Type: has_many
+
+Related object: L<Yesh::Schema::Result::ArticleFragment>
+
+=cut
+
 __PACKAGE__->has_many(
   "article_fragments",
   "Yesh::Schema::Result::ArticleFragment",
   { "foreign.article" => "self.id" },
 );
+
+=head2 article_tags
+
+Type: has_many
+
+Related object: L<Yesh::Schema::Result::ArticleTag>
+
+=cut
+
 __PACKAGE__->has_many(
   "article_tags",
   "Yesh::Schema::Result::ArticleTag",
   { "foreign.article" => "self.id" },
 );
+
+=head2 comment_articles
+
+Type: has_many
+
+Related object: L<Yesh::Schema::Result::Comment>
+
+=cut
+
 __PACKAGE__->has_many(
   "comment_articles",
   "Yesh::Schema::Result::Comment",
   { "foreign.article" => "self.id" },
 );
+
+=head2 comment_parents
+
+Type: has_many
+
+Related object: L<Yesh::Schema::Result::Comment>
+
+=cut
+
 __PACKAGE__->has_many(
   "comment_parents",
   "Yesh::Schema::Result::Comment",
@@ -192,8 +430,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_08 @ 2009-09-12 21:15:22
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Q/mAt+/zuKUnklCpM/koVQ
+# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-03-17 21:06:59
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ZQDT6162rN2EXwyuywgPIA
 
 # use Date::Calc ();
 use DateTime ();

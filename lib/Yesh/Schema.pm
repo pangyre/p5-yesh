@@ -1,15 +1,20 @@
 package Yesh::Schema;
 
+# Created by DBIx::Class::Schema::Loader
+# DO NOT MODIFY THE FIRST PART OF THIS FILE
+
 use strict;
 use warnings;
 
 use base 'DBIx::Class::Schema';
 
-__PACKAGE__->load_namespaces;
+__PACKAGE__->load_namespaces(
+    result_namespace => 'Result',
+);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_08 @ 2009-09-12 21:15:22
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Z4U9lTrm3jypRjGPnu8hxQ
+# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-03-17 21:06:59
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:32nw6OL8HHaJPuUJH8DkuQ
 
 our $VERSION = "2.9001";
 

@@ -2,7 +2,7 @@ package Yesh;
 use Moose;
 use namespace::autoclean;
 
-use Catalyst::Runtime 5.80;
+use Catalyst::Runtime 5.8;
 
 use Catalyst qw(
                 Unicode
@@ -66,14 +66,18 @@ sub local_config_file {
     Path::Class::File->new($dir, "yesh_$suffix.yml");
 }
 
+sub rsepository {
+    "bingo";
+}
+
 has "repository" => 
     is => "ro",
-    isa => "Str",
-    default => "http://github.com/pangyre/p5-yesh";
+    isa => "URI",
+    default => sub { URI->new("http://github.com/pangyre/p5-yesh") };
 
 __PACKAGE__->setup();
 
-__PACKAGE__->meta->make_immutable( replace_constructor => 1 );
+#__PACKAGE__->meta->make_immutable( replace_constructor => 1 );
 
 1;
 
@@ -95,13 +99,13 @@ Yesh - Yet another content management system: secure, multi-author, modern, flex
 
 Well, we take it seriously anyway. This is an unfinished application and may have security bugs; plus it is meant to be an easy to install, user-administered application which leaves file and basic system security in the hands of the user running the application.
 
-That said, the passwords are stored as an expensive L<Crypt::Eksblowfish::Bcrypt> hash. The application supports forcing users to register and sign in under https. If configured correctly Yesh will be among the most secure, if not I<the> most secure, FOSS (free and open source software) personal publishing application for the web.
+That said, the passwords are stored as an expensive L<Crypt::Eksblowfish::Bcrypt> hash. The application supports forcing users to register and sign in under https. If configured correctly Yesh will be among the most secure, if not the most secure, FOSS (free and open source software) personal publishing application for the web.
 
 =item Modern
 
 It is highly introspective: status, documentation, underlying software, and database information can be examined within the application.
 
-It follows modern software standards and uses modern kits: L<Catalyst>, L<DBIx::Class>, and L<Template> Toolkit drive Yesh.
+It follows modern software standards and uses modern kits: L<Catalyst>, L<Moose>, L<DBIx::Class>, and L<Template> Toolkit drive Yesh.
 
 We will not call it 3.0 and ready for production until it has thorough test coverage and code documentation.
 
@@ -129,7 +133,7 @@ This is "wish list" for now. It's a strong wish though. :) If you are interested
 
 =head1 History
 
-A prototype of this code has been in production since 2006 at L<http://sedition.com>. The site contains mature content (no pornography but probably NSFW).
+A prototype of this code has been in production since 2006 at L<http://sedition.com>. The site contains mature content (no pornography but NSFW).
 
 =head1 To Do
 

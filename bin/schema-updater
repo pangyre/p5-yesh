@@ -59,7 +59,7 @@ make_schema_at(
                {
                    # NOTHING...? quote_table_names => 1,
                    # quote_char => "`",
-                   components => [qw( Yesh::Default UTF8Columns InflateColumn::DateTime )],
+                   components => [qw( Yesh::Default InflateColumn::DateTime )],
                    dump_directory => $lib,
                    use_namespaces => 1,
                    relationships => 1,
