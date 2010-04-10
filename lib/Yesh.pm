@@ -66,13 +66,10 @@ sub local_config_file {
     Path::Class::File->new($dir, "yesh_$suffix.yml");
 }
 
-sub rsepository {
-    "bingo";
-}
-
 has "repository" => 
     is => "ro",
     isa => "URI",
+    lazy => 1,
     default => sub { URI->new("http://github.com/pangyre/p5-yesh") };
 
 __PACKAGE__->setup();
