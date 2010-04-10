@@ -3,13 +3,6 @@ use parent "Yesh::Test";
 use Moose;
 with qw( Yesh::MechCat );
 
-#sub oh_hai : Test(startup) {
-#}
-
-#sub per_test : Test(setup) {
-#    die;
-#}
-
 sub article : Test(1) {
     my $self = shift;
     $self->get_ok("/a", "Get /a");
