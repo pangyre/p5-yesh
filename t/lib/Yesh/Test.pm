@@ -1,14 +1,9 @@
 package Yesh::Test;
 use parent qw( Test::Class );
-use Moose;
 BEGIN { $ENV{YESH_CONFIG_LOCAL_SUFFIX} ||= "test" }
-#use Carp qw( confess cluck );
-#use Test::More ();
+use Carp qw( confess cluck );
+use Test::More ();
 use Path::Class ();
-#use User::pwent ();
-#use YAML ();
-
-no Moose;
 
 sub verbose {
     my $self = shift;
@@ -44,7 +39,9 @@ sub dir {
     Path::Class::dir->new(@path);
 }
 
-__PACKAGE__->meta->make_immutable( inline_constructor => 0 );
+# __PACKAGE__->meta->make_immutable( inline_constructor => 0 );
+
+1;
 
 __END__
 
@@ -142,7 +139,7 @@ sub config {
   };
 }
 
-no Moose;
+# no Moose;
 
 1;
 
