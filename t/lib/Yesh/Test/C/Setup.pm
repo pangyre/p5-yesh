@@ -1,5 +1,6 @@
 package Yesh::Test::C::Setup;
 use parent "Yesh::Test";
+use Test::More;
 use Moose;
 with qw( Yesh::MechCat );
 
@@ -9,15 +10,26 @@ sub prepare_setup_env : Test(startup) {
 }
 
 #sub per_test : Test(setup) {
-#    die;
+#    die;mech
 #}
 
-sub setup : Test {
+sub setup : Tests() {
     my $self = shift;
-    $self->get_ok("/");
+    $self->get_ok("/", "Request to / succeeds");
+    
+    is( $self->uri->path, "/setup",
+          "/ redirects to /setup" );
 
-    $self->diag( $self->uri );
+    $self->get_ok("/user", "Request to /user succeeds");
+    is( $self->uri->path, "/setup",
+        "/user redirects to /setup" );
 
+    $self->get_ok("/man/perldoc");
+    $self->content_contains("Documentation",
+                            "Docs are visible before setup");
+    $self->get("/setup/done");
+    is( $self->status, 404,
+        "/setup/done is 404" );
 }
 
 #sub moo : Test(teardown) {

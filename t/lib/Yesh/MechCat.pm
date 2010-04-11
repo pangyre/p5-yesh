@@ -12,6 +12,7 @@ has "mech" =>
         Test::WWW::Mechanize::Catalyst->new(catalyst_app => "Yesh");
     },
     handles => [qw(
+                   get
                    get_ok
                    ct
                    title_is
@@ -23,6 +24,7 @@ has "mech" =>
                    follow_link_ok
                    page_links_ok
                    uri
+                   status
                    host
                    )],
     ;

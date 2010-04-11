@@ -39,8 +39,6 @@ sub dir {
     Path::Class::dir->new(@path);
 }
 
-# __PACKAGE__->meta->make_immutable( inline_constructor => 0 );
-
 1;
 
 __END__
@@ -155,3 +153,6 @@ $schema->deploy();
 
 use utf8;
 my $korean = "닛곰다가 살ㅂ고사서";
+
+# __PACKAGE__->meta->make_immutable( inline_constructor => 0 );
+
