@@ -22,6 +22,7 @@ has "mech" =>
                    text_contains
                    follow_link_ok
                    page_links_ok
+                   uri
                    host
                    )],
     ;

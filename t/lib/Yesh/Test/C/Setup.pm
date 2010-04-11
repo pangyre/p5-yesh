@@ -3,11 +3,29 @@ use parent "Yesh::Test";
 use Moose;
 with qw( Yesh::MechCat );
 
+sub prepare_setup_env : Test(startup) {
+    my $self = shift;
+    $ENV{YESH_CONFIG_LOCAL_SUFFIX} = "setup";
+}
+
+#sub per_test : Test(setup) {
+#    die;
+#}
+
 sub setup : Test {
     my $self = shift;
-  TODO: { "Currently unimplemented" };
+    $self->get_ok("/");
+
+    $self->diag( $self->uri );
 
 }
+
+#sub moo : Test(teardown) {
+#}
+
+#sub goo : Test(shutdown) {
+#}
+
 
 1;
 
@@ -367,3 +385,12 @@ sub startup : Test(startup) {
     # my $local_config = $self->c->path_to($filename);
     $self->_local_config($filename);
 }
+
+321
+#    $self->builder->skip("OH HAI");
+    use Test::More;
+    local $TODO = "live currently unimplemented";
+    Test::More::ok(0);
+
+#  TODO: { "Currently unimplemented" };
+

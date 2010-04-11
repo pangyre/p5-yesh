@@ -1,0 +1,26 @@
+--- 
+# SITE SPECIFIC ------------------------------------------
+site:
+  name: '<yesh run="setup"/>'
+#  use_google_js: Yes
+
+# APPLICATION --------------------------------------------
+configured: ~
+
+# PLUGINS ------------------------------------------------
+
+# CONTROLLERS --------------------------------------------
+
+# MODELS -------------------------------------------------
+Model::DBIC: 
+  connect_info: 
+    - dbi:SQLite:__path_to(tmp/disposable_setup_test.sqlite)__
+    - ~
+    - ~
+    - 
+      AutoCommit: 1
+      ChopBlanks: 1
+      RaiseError: 1
+      sqlite_unicode: 1
+
+# VIEWS --------------------------------------------------

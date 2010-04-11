@@ -2,8 +2,47 @@ package Yesh::Test;
 use parent qw( Test::Class );
 use Moose;
 BEGIN { $ENV{YESH_CONFIG_LOCAL_SUFFIX} ||= "test" }
+#use Carp qw( confess cluck );
+#use Test::More ();
+use Path::Class ();
+#use User::pwent ();
+#use YAML ();
 
 no Moose;
+
+sub verbose {
+    my $self = shift;
+    $ENV{TEST_VERBOSE} = shift if @_;
+    $ENV{TEST_VERBOSE} || 0;
+}
+
+sub dump {
+    my $self = shift;
+    my @dump = @_ ? @_ : ( $self );
+    Test::More::diag( YAML::Dump(@dump) );
+}
+
+sub diag {
+    my $self = shift;
+    my $output = shift;
+    cluck("Useless call to debug") and return
+        unless defined $output;
+    Test::More::diag( $output );
+}
+
+sub file {
+    my $self = shift;
+    my @path = @_;
+    @path || confess("No file arguments given");
+    Path::Class::File->new(@path);
+}
+
+sub dir {
+    my $self = shift;
+    my @path = @_;
+    @path || confess("No dir arguments given");
+    Path::Class::dir->new(@path);
+}
 
 __PACKAGE__->meta->make_immutable( inline_constructor => 0 );
 
