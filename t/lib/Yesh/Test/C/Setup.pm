@@ -21,13 +21,6 @@ __END__
 
 =cut
 
-Consider putting a teardown in *every* test class to check for disclaimer?
-
-
-
-
-
-
 
 package Test::Yesh::Controller::Setup;
 use parent qw(Test::Yesh);
@@ -359,7 +352,6 @@ my $dsn = join(":",
                dbi:DriverName:database=database_name;host=hostname;port=port
 
 There is no standard for the text following the driver name. Each driver is free to use whatever syntax it wants. The only requirement the DBI makes is that all the information is supplied in a single string. You must consult the documentation for the drivers you are using for a description of the syntax they require.
-
 
 
 sub startup : Test(startup) {
