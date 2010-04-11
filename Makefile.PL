@@ -86,9 +86,9 @@ if ( $Module::Install::AUTHOR )
 
 #install_script glob("script/*.pl");
 
-#auto_install;
+auto_install;
 
-#WriteAll;
+WriteAll;
 
 __END__
 

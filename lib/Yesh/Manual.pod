@@ -12,7 +12,15 @@ L<Yesh> is a multi-author web-based content management package written in Perl, 
 
 These instructions are *nix centric for now.
 
-There are quite a few Perl packages that must be installed. If everything is working right you should be able to download the distribution for Yesh, decompress it, and install it like any Perl package. If you have not installed Catalyst and Moose before, the installation list will be quite long.
+There are quite a few Perl packages that must be installed. If everything is working right you should be able to download the distribution for Yesh, or pull it with C<git>, decompress it, and install it like any Perl package. If you have not installed Catalyst and Moose before, the installation list will be quite long.
+
+=head2 Synopsis
+
+ git clone git://github.com/pangyre/p5-yesh.git
+ cd p5-yesh/
+ perl Makefile.PL
+ make
+ ./script/yesh_server.pl -r -d -p 3333
 
 =head2 Non-Perl Dependencies
 
