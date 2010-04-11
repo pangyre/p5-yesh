@@ -63,7 +63,7 @@ elements:
       - [ 'SQLite', 'SQLite' ]
   - type: Text
     name: mysql_read_default_file
-    label: MySQL default file
+    label: MySQL --defaults-file
     attributes:
       style: "width:50%;"
   - type: Submit
@@ -76,11 +76,12 @@ elements:
     content_xml: |
       //<![CDATA[
         $("*[name='dbd']").bind("change", function(){
-          // alert(("input[name='mysql_read_default_file']").parent().text());
            $(this).val() == "mysql" ?
-              $("input[name='mysql_read_default_file']").parent().fadeIn() :
-              $("input[name='mysql_read_default_file']").parent().fadeOut();
+              $("input[name='mysql_read_default_file']").parent().slideDown() :
+              $("input[name='mysql_read_default_file']").parent().slideUp();
            });
+        $("*[name='dbd']").trigger("change");
+
         $("form#setup").bind("keypress",function(){
             var dns = new Array();
             dns.push("dbi");

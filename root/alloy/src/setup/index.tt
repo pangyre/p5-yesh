@@ -12,11 +12,10 @@ jQuery(function($){
     }
     $("form").each(function(){
        var myForm = $(this);
-       $("input[type='text']", myForm).each(function(){
+       $("input[name='setup_db_name']", myForm).each(function(){
           if ( $(this).val() ) $(this).parents(".box").show(); return true;
        });
     });
-
 });
 //]]> </script>
 
