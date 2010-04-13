@@ -3,9 +3,10 @@ use Moose;
 use namespace::autoclean;
 BEGIN { extends "Catalyst::Controller::HTML::FormFu" }
 
-use YAML::Syck qw( LoadFile DumpFile );
-$YAML::Syck::ImplicitUnicode = 1;
-$YAML::Syck::ImplicitTyping = 1;
+use YAML qw( LoadFile DumpFile );
+#use YAML::Syck qw( LoadFile DumpFile );
+#$YAML::Syck::ImplicitUnicode = 1;
+#$YAML::Syck::ImplicitTyping = 1;
 
 use DBI;
 use Data::UUID;
@@ -105,7 +106,7 @@ sub _deploy_sqlite : Private {
     # Update config file here.
     my $model_config = $c->config->{"Model::DBIC"};
     $model_config->{connect_info}->[0] = $dsn_config;
-    $model_config->{connect_info}->[3]->{unicode} = 1; # For now. Deprecated in favor of-
+    # $model_config->{connect_info}->[3]->{unicode} = 1; # For now. Deprecated in favor of-
     $model_config->{connect_info}->[3]->{sqlite_unicode} = 1;
     $self->_load_baseline($c, $schema);
     $self->_write_local_yaml($c, { "Model::DBIC" => $model_config });

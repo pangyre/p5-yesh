@@ -4,13 +4,14 @@ use Test::More;
 use Moose;
 with qw( Yesh::MechCat );
 
+#Yesh::Test::C::Setup->SKIP_CLASS("Only...");
+
 sub prepare_setup_env : Test(startup) {
     my $self = shift;
     $ENV{YESH_CONFIG_LOCAL_SUFFIX} = "setup";
 }
 
 #sub per_test : Test(setup) {
-#    die;mech
 #}
 
 sub setup : Tests() {
@@ -19,6 +20,10 @@ sub setup : Tests() {
     
     is( $self->uri->path, "/setup",
           "/ redirects to /setup" );
+
+    $self->text_contains('<yesh run="setup"/>',
+                         "Correct config file was loaded")
+        or $self->BAILOUT("Inappropriate configuration. It is dangerous to proceed.");
 
     $self->get_ok("/user", "Request to /user succeeds");
     is( $self->uri->path, "/setup",
