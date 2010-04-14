@@ -103,11 +103,13 @@ sub register : Local Args(0) Form {
         }
         else
         {
-            my $author_role = $c->model("DBIC::SiteRole")
-                ->search({ name => "author" })->single;
-
-            $user->add_to_site_roles($author_role)
-                if $self->{new_users_get_author_role};
+            if ( $self->{new_users_get_author_role} )
+            {
+                my $author_role = $c->model("DBIC::SiteRole")
+                    ->search({ name => "author" })->single
+                    || confess("Author role is not configured");
+                $user->add_to_site_roles($author_role);
+            }
 
             $c->authenticate({ username => $user->username,
                                password => $form->param_value("password") })
