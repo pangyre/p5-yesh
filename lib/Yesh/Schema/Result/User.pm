@@ -36,7 +36,7 @@ __PACKAGE__->add_columns(
     data_type => "VARCHAR",
     default_value => undef,
     is_nullable => 1,
-    size => 40,
+    size => 60,
   },
   "email",
   {
